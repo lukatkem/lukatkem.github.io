@@ -4,122 +4,165 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dental Sector — სტომატოლოგიური კლინიკა თბილისში | 5.0★ 174 შეფასება</title>
-<meta name="description" content="Dental Sector — თანამედროვე სტომატოლოგიური კლინიკა თბილისში. იმპლანტაცია, ორთოდონტია, გათეთრება, ჰიგიენა. 5.0 ვარსკვლავი 174 რეალური შეფასებით.">
+<meta name="description" content="Dental Sector — თანამედროვე სტომატოლოგიური კლინიკა თბილისში. იმპლანტაცია, ორთოდონტია, გათეთრება. 5.0 ვარსკვლავი 174 რეალური შეფასებით.">
 <meta property="og:title" content="Dental Sector — სტომატოლოგიური კლინიკა თბილისში">
 <meta property="og:description" content="თანამედროვე ტექნოლოგიები, პროფესიონალი ექიმები. 5.0★ — 174 Google შეფასება.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;800&family=Kanit:wght@500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;800&family=Kanit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <style>
   :root{
-    --teal:#14E0C0; --teal-dim:#0FBFA4; --ice:#D9FFF8;
-    --bg:#070B0A; --bg2:#0B1211; --card:rgba(255,255,255,.035);
-    --line:rgba(20,224,192,.14); --txt:#EAF6F3; --mut:#7FA39C;
+    --teal:#16E6C4; --teal2:#7CF5DF; --teal-dim:#0FBFA4;
+    --bg:#060908; --bg2:#0A100F; --card:rgba(255,255,255,.03);
+    --line:rgba(22,230,196,.13); --txt:#EAF6F3; --mut:#7FA39C;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scrollbar-width:thin;scrollbar-color:rgba(22,230,196,.35) #0A100F}
+  ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:#0A100F}
+  ::-webkit-scrollbar-thumb{background:rgba(22,230,196,.3);border-radius:8px}
+  ::selection{background:rgba(22,230,196,.35);color:#fff}
   body{font-family:'Noto Sans Georgian',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;overflow-x:clip}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
   .disp{font-family:'Kanit',sans-serif}
-  ::selection{background:rgba(20,224,192,.3)}
+  .grad{background:linear-gradient(94deg,var(--teal) 5%,var(--teal2) 50%,#F2FDFF 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kicker{font-family:'Kanit';color:var(--teal);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.34em}
+  .rv-line{display:block}
 
-  /* NAV */
-  nav{position:sticky;top:0;z-index:60;background:rgba(7,11,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+  /* noise overlay */
+  .noise{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
+
+  /* cursor */
+  #cur,#curRing{position:fixed;top:0;left:0;pointer-events:none;z-index:120;border-radius:50%;transform:translate(-50%,-50%)}
+  #cur{width:7px;height:7px;background:var(--teal);box-shadow:0 0 14px var(--teal)}
+  #curRing{width:38px;height:38px;border:1.5px solid rgba(22,230,196,.4);transition:width .25s,height .25s,border-color .25s}
+  #curRing.big{width:64px;height:64px;border-color:rgba(22,230,196,.8)}
+  @media(hover:none){#cur,#curRing{display:none}}
+
+  /* progress */
+  #prog{position:fixed;top:0;left:0;height:2.5px;width:0;background:linear-gradient(90deg,var(--teal-dim),var(--teal2));z-index:110;box-shadow:0 0 12px rgba(22,230,196,.7)}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+  nav.solid{background:rgba(6,9,8,.78);backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
   .logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--txt)}
-  .logo svg{width:34px;height:34px}
-  .logo b{font-family:'Kanit';font-size:19px;font-weight:700;letter-spacing:.02em}
-  .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{color:var(--mut);text-decoration:none;font-size:14.5px;font-weight:500;transition:.2s}
+  .logo svg{width:36px;height:36px}
+  .logo b{font-family:'Kanit';font-size:20px;font-weight:700;letter-spacing:.02em}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{color:var(--mut);text-decoration:none;font-size:14px;font-weight:500;position:relative;transition:color .25s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--teal);transition:width .3s}
   .nav-links a:hover{color:var(--teal)}
-  .btn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(100deg,var(--teal-dim),var(--teal));color:#04110E;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;font-size:15px;font-family:'Noto Sans Georgian';transition:.25s;box-shadow:0 8px 30px -8px rgba(20,224,192,.5)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px -8px rgba(20,224,192,.65)}
-  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ice);box-shadow:none}
-  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
-  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px}
-  .burger span{display:block;width:24px;height:2.5px;background:var(--txt);margin:5px 0;border-radius:2px}
+  .nav-links a:hover::after{width:100%}
+  .btn{position:relative;display:inline-flex;align-items:center;gap:9px;background:linear-gradient(100deg,var(--teal-dim),var(--teal));color:#04110E;font-weight:700;padding:14px 28px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;font-size:15px;font-family:'Noto Sans Georgian';transition:box-shadow .3s;overflow:hidden;will-change:transform}
+  .btn:hover{box-shadow:0 16px 44px -8px rgba(22,230,196,.6)}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--txt);box-shadow:none!important}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;z-index:2}
+  .burger span{display:block;width:25px;height:2.5px;background:var(--txt);margin:5.5px 0;border-radius:2px;transition:.3s}
 
   /* HERO */
-  .hero{position:relative;overflow:hidden;padding:64px 0 40px}
-  .orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
-  .orb1{width:560px;height:560px;background:rgba(20,224,192,.14);top:-140px;right:-80px;animation:drift 11s ease-in-out infinite alternate}
-  .orb2{width:420px;height:420px;background:rgba(15,191,164,.10);bottom:-160px;left:-120px;animation:drift 13s ease-in-out infinite alternate-reverse}
-  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(40px,26px)}}
-  .hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center}
-  .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--card);color:var(--teal);font-weight:600;font-size:13.5px;padding:8px 17px;border-radius:999px;margin-bottom:24px}
-  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite;box-shadow:0 0 12px var(--teal)}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  h1{font-family:'Kanit';font-size:clamp(36px,5.4vw,62px);line-height:1.08;font-weight:800;letter-spacing:.005em}
-  .grad{background:linear-gradient(92deg,var(--teal) 10%,#7CF5DF 55%,#F2FDFF);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.lead{margin:22px 0 32px;color:var(--mut);font-size:17.5px;max-width:520px}
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:clip;padding:130px 0 40px}
+  .hero-bg{position:absolute;inset:0;pointer-events:none}
+  .orb{position:absolute;border-radius:50%;filter:blur(100px)}
+  .orb1{width:640px;height:640px;background:rgba(22,230,196,.13);top:-180px;right:-100px}
+  .orb2{width:460px;height:460px;background:rgba(15,191,164,.09);bottom:-180px;left:-140px}
+  .grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(22,230,196,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(22,230,196,.04) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 30%,transparent 75%)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;width:100%}
+  .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--card);color:var(--teal);font-weight:600;font-size:13px;padding:9px 18px;border-radius:999px;margin-bottom:26px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  h1{font-family:'Kanit';font-size:clamp(40px,6vw,74px);line-height:1.04;font-weight:800;letter-spacing:.005em}
+  h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+  h1 .w>span{display:inline-block;transform:translateY(110%)}
+  .hero p.lead{margin:24px 0 36px;color:var(--mut);font-size:17px;max-width:500px}
+  .hero-ctas{display:flex;gap:15px;flex-wrap:wrap}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--mut);font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .scroll-hint i{display:block;width:1.5px;height:44px;background:linear-gradient(var(--teal),transparent);animation:drip 1.8s ease-in-out infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
   /* tooth stage */
-  .stage{position:relative;height:520px;display:flex;align-items:center;justify-content:center}
-  .stage .halo{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(20,224,192,.22),rgba(20,224,192,.05) 55%,transparent 72%);filter:blur(6px);animation:halo 5s ease-in-out infinite alternate}
-  @keyframes halo{from{transform:scale(1);opacity:.9}to{transform:scale(1.12);opacity:1}}
-  .stage .ring{position:absolute;width:430px;height:430px;border-radius:50%;border:1px dashed rgba(20,224,192,.25);animation:spin 26s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  model-viewer{position:relative;width:min(400px,80vw);height:460px;--poster-color:transparent}
-  .float-card{position:absolute;background:rgba(11,18,17,.82);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:13px 17px;font-size:13.5px;box-shadow:0 18px 44px -18px rgba(0,0,0,.6);animation:floaty 6s ease-in-out infinite alternate}
-  .float-card b{display:block;font-family:'Sora';color:var(--teal);font-size:17px}
+  .stage{position:relative;height:min(78vh,640px);display:flex;align-items:center;justify-content:center}
+  .stage .halo{position:absolute;width:min(430px,70vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(22,230,196,.2),rgba(22,230,196,.04) 55%,transparent 72%);filter:blur(8px)}
+  .stage .ring{position:absolute;width:min(500px,80vw);aspect-ratio:1;border-radius:50%;border:1px dashed rgba(22,230,196,.22)}
+  .stage .ring2{position:absolute;width:min(560px,88vw);aspect-ratio:1;border-radius:50%;border:1px solid rgba(22,230,196,.08)}
+  model-viewer{position:relative;width:min(430px,78vw);height:min(500px,60vh);--poster-color:transparent}
+  .float-card{position:absolute;background:rgba(10,16,15,.8);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:13px;box-shadow:0 18px 44px -18px rgba(0,0,0,.65);will-change:transform}
+  .float-card b{display:block;font-family:'Kanit';color:var(--teal);font-size:18px;font-weight:700}
   .float-card span{color:var(--mut)}
-  .fc1{top:8%;left:-2%}
-  .fc2{bottom:12%;right:-2%;animation-delay:1.6s}
-  @keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-13px)}}
+  .fc1{top:9%;left:-3%}
+  .fc2{bottom:11%;right:-3%}
+
+  /* MARQUEE */
+  .marquee{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(22,230,196,.03)}
+  .mq-track{display:flex;gap:0;width:max-content;animation:mq 26s linear infinite;will-change:transform}
+  .marquee:hover .mq-track{animation-play-state:paused}
+  .mq-track span{font-family:'Kanit';font-size:clamp(20px,2.6vw,30px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:0 26px;color:transparent;-webkit-text-stroke:1px rgba(22,230,196,.55);white-space:nowrap}
+  .mq-track span i{color:var(--teal);-webkit-text-stroke:0;font-style:normal;padding-right:52px}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  section{padding:110px 0;position:relative}
+  h2{font-family:'Kanit';font-size:clamp(30px,4.2vw,52px);font-weight:800;margin:14px 0 16px;line-height:1.1}
+  .sub{color:var(--mut);max-width:620px;font-size:16px}
 
   /* stats */
-  .stats{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px auto 0;max-width:1000px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:19px;text-align:center;backdrop-filter:blur(6px)}
-  .stat b{display:block;font-family:'Sora';font-size:24px;color:var(--teal)}
-  .stat span{font-size:12.5px;color:var(--mut)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+  .stat{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 20px;text-align:center;overflow:hidden}
+  .stat::before{content:"";position:absolute;inset:0;background:radial-gradient(220px 90px at 50% 0%,rgba(22,230,196,.09),transparent 70%)}
+  .stat b{position:relative;display:block;font-family:'Kanit';font-size:44px;font-weight:800;color:var(--teal);line-height:1}
+  .stat b small{font-size:24px}
+  .stat span{position:relative;font-size:13px;color:var(--mut)}
 
-  section{padding:84px 0}
-  .kicker{font-family:'Sora';color:var(--teal);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.22em}
-  h2{font-family:'Kanit';font-size:clamp(27px,3.6vw,40px);font-weight:700;margin:12px 0 14px}
-  .sub{color:var(--mut);max-width:640px;font-size:16px}
-
-  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-  .svc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;transition:.3s;overflow:hidden}
-  .svc::before{content:"";position:absolute;inset:0;background:radial-gradient(320px 120px at 20% 0%,rgba(20,224,192,.10),transparent 65%);opacity:0;transition:.3s}
-  .svc:hover{transform:translateY(-5px);border-color:rgba(20,224,192,.4)}
-  .svc:hover::before{opacity:1}
-  .svc .ic{width:50px;height:50px;border-radius:14px;background:rgba(20,224,192,.1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-  .svc .ic svg{width:26px;height:26px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .svc h3{font-size:17px;margin-bottom:8px;font-weight:700}
-  .svc p{font-size:14px;color:var(--mut)}
+  /* services */
+  .svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+  .svc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:32px 28px;overflow:hidden;transition:border-color .35s,transform .35s}
+  .svc:hover{border-color:rgba(22,230,196,.5)}
+  .svc::after{content:"";position:absolute;inset:0;background:radial-gradient(340px 160px at 25% 0%,rgba(22,230,196,.12),transparent 65%);opacity:0;transition:opacity .35s}
+  .svc:hover::after{opacity:1}
+  .svc .num{position:absolute;top:22px;right:26px;font-family:'Kanit';font-size:15px;color:rgba(22,230,196,.4);font-weight:600}
+  .svc .ic{width:54px;height:54px;border-radius:15px;background:rgba(22,230,196,.09);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:transform .35s}
+  .svc:hover .ic{transform:rotate(-8deg) scale(1.08)}
+  .svc .ic svg{width:27px;height:27px;stroke:var(--teal);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .svc h3{position:relative;font-size:17.5px;margin-bottom:9px;font-weight:700}
+  .svc p{position:relative;font-size:14px;color:var(--mut)}
 
   /* why */
-  .why{background:linear-gradient(180deg,transparent,rgba(20,224,192,.035),transparent)}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .feat{display:flex;gap:16px;padding:19px 0;border-bottom:1px solid var(--line)}
+  .why{background:linear-gradient(180deg,transparent,rgba(22,230,196,.045),transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .feat{display:flex;gap:18px;padding:24px 0;border-bottom:1px solid var(--line);align-items:flex-start}
   .feat:last-child{border-bottom:none}
-  .feat .n{flex:0 0 42px;height:42px;border-radius:13px;background:rgba(20,224,192,.12);border:1px solid var(--line);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Sora'}
-  .feat h4{font-size:16px;margin-bottom:5px}
+  .feat .n{flex:0 0 46px;height:46px;border-radius:14px;background:rgba(22,230,196,.1);border:1px solid var(--line);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Kanit';font-size:15px}
+  .feat h4{font-size:17px;margin-bottom:6px}
   .feat p{font-size:14px;color:var(--mut)}
 
-  /* quotes */
-  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-  .q{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;transition:.3s}
-  .q:hover{border-color:rgba(20,224,192,.4);transform:translateY(-4px)}
-  .q .stars{color:#F5C542;font-size:14px;letter-spacing:2px;margin-bottom:12px}
+  /* reviews */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
+  .q:hover{border-color:rgba(22,230,196,.5);transform:translateY(-6px)}
+  .q .gmark{font-family:'Kanit';font-size:13px;color:var(--mut);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .q .gmark i{width:20px;height:20px;border-radius:50%;background:conic-gradient(#4285F4,#34A853,#FBBC05,#EA4335,#4285F4);-webkit-mask:radial-gradient(circle 5px at 50% 50%,transparent 98%,#000);mask:radial-gradient(circle 5px at 50% 50%,transparent 98%,#000)}
+  .q .stars{color:#F5C542;font-size:14px;letter-spacing:3px;margin-bottom:13px}
   .q p{font-size:14.5px;color:#B9D2CC;flex:1;font-style:italic}
-  .q .who{display:flex;align-items:center;gap:11px;margin-top:18px}
-  .q .who .av{width:37px;height:37px;border-radius:50%;background:linear-gradient(135deg,var(--teal-dim),var(--teal));color:#04110E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .q .who{display:flex;align-items:center;gap:11px;margin-top:20px}
+  .q .who .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--teal-dim),var(--teal));color:#04110E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
   .q .who b{font-size:13.5px;display:block}
   .q .who span{font-size:11.5px;color:var(--mut)}
 
   /* CTA band */
-  .band{position:relative;overflow:hidden;background:linear-gradient(115deg,#0D5C4F,#0FBFA4 130%);border-radius:26px;padding:54px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:0 30px 80px -30px rgba(20,224,192,.45)}
-  .band h2{color:#fff;margin:0 0 8px}
-  .band p{color:rgba(255,255,255,.88)}
-  .btn-white{background:#fff;color:#0B5C4E;box-shadow:none}
-  .btn-white:hover{box-shadow:0 14px 34px -10px rgba(0,0,0,.4)}
+  .band{position:relative;overflow:hidden;background:linear-gradient(115deg,#0D5C4F,#0FBFA4 135%);border-radius:28px;padding:60px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:0 30px 90px -30px rgba(22,230,196,.5)}
+  .band h2{color:#fff;margin:0 0 10px}
+  .band p{color:rgba(255,255,255,.9)}
+  .btn-white{background:#fff;color:#0B5C4E;box-shadow:none!important}
+  .band .bglow{position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.14);filter:blur(70px);top:-160px;right:-80px}
 
   /* contact */
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px}
-  .cbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:52px}
+  .cbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px;transition:border-color .3s}
+  .cbox:hover{border-color:rgba(22,230,196,.45)}
   .cbox h3{display:flex;align-items:center;gap:10px;font-size:16px;margin-bottom:10px}
   .cbox p{color:var(--mut);font-size:14.5px}
   .cbox a{color:var(--teal);font-weight:700;text-decoration:none}
@@ -127,139 +170,158 @@
   .hours-t td{padding:8px 0;border-bottom:1px dashed rgba(127,163,156,.2)}
   .hours-t td:last-child{text-align:right;color:var(--mut)}
 
-  footer{padding:38px 0 46px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:13px}
+  footer{padding:44px 0 50px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:13px}
   footer a{color:var(--teal);text-decoration:none;font-weight:600}
-  footer .cred{margin-top:8px;font-size:11.5px;opacity:.7}
+  footer .cred{margin-top:8px;font-size:11.5px;opacity:.65}
 
-  .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
-  .rv.on{opacity:1;transform:none}
-
-  @media(max-width:960px){
+  @media(max-width:980px){
     .hero-grid,.grid-2{grid-template-columns:1fr}
     .grid-3,.quotes,.stats{grid-template-columns:1fr 1fr}
-    .stage{height:420px;order:-1}
+    .stage{height:56vh;order:-1}
     .nav-links{display:none}
     .burger{display:block}
-    .nav-links.open{display:flex;position:absolute;top:70px;left:0;right:0;background:var(--bg2);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line)}
+    .nav-links.open{display:flex;position:fixed;inset:0;background:var(--bg2);flex-direction:column;justify-content:center;padding:40px;gap:26px;font-size:20px;z-index:1}
     .fc1{left:0}.fc2{right:0}
+    .scroll-hint{display:none}
+    section{padding:80px 0}
   }
-  @media(max-width:560px){.grid-3,.quotes,.stats{grid-template-columns:1fr}.band{padding:38px}}
+  @media(max-width:560px){.grid-3,.quotes,.stats{grid-template-columns:1fr}.band{padding:40px}}
 </style>
 </head>
 <body>
 
-<nav>
+<div class="noise"></div>
+<div id="cur"></div><div id="curRing"></div>
+<div id="prog"></div>
+
+<nav id="nav">
   <div class="wrap nav-in">
     <a class="logo" href="#">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4.5 4.8 4.5 8.6c0 2.6 1.2 4.4 2 6.6.7 2 .9 4.4 1.6 5.6.5.9 1.9.9 2.3-.1.5-1.3.6-3.5 1.6-3.5s1.1 2.2 1.6 3.5c.4 1 1.8 1 2.3.1.7-1.2.9-3.6 1.6-5.6.8-2.2 2-4 2-6.6C19.5 4.8 16 2 12 2z" fill="url(#lg)"/><defs><linearGradient id="lg" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#14E0C0"/><stop offset="1" stop-color="#7CF5DF"/></linearGradient></defs></svg>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4.5 4.8 4.5 8.6c0 2.6 1.2 4.4 2 6.6.7 2 .9 4.4 1.6 5.6.5.9 1.9.9 2.3-.1.5-1.3.6-3.5 1.6-3.5s1.1 2.2 1.6 3.5c.4 1 1.8 1 2.3.1.7-1.2.9-3.6 1.6-5.6.8-2.2 2-4 2-6.6C19.5 4.8 16 2 12 2z" fill="url(#lg)"/><defs><linearGradient id="lg" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#16E6C4"/><stop offset="1" stop-color="#7CF5DF"/></linearGradient></defs></svg>
       <b>Dental Sector</b>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#services">მომსახურება</a>
-      <a href="#why">ჩვენ შესახებ</a>
-      <a href="#reviews">შეფასებები</a>
-      <a href="#contact">კონტაქტი</a>
-      <a class="btn" href="tel:+995510100220" style="padding:10px 20px">📞 510 10 02 20</a>
+      <a href="#services" data-mag>მომსახურება</a>
+      <a href="#why" data-mag>ჩვენ შესახებ</a>
+      <a href="#reviews" data-mag>შეფასებები</a>
+      <a href="#contact" data-mag>კონტაქტი</a>
+      <a class="btn" href="tel:+995510100220" data-mag style="padding:11px 22px">📞 510 10 02 20</a>
     </div>
     <button class="burger" id="burger" aria-label="მენიუ"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="orb orb1"></div><div class="orb orb2"></div>
+  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="grid-lines"></div></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="pill"><span class="dot"></span> თბილისი · პავლე ასლანიძის ქ. 12</span>
-      <h1>თქვენი ღიმილი — <span class="grad">Dental Sector</span></h1>
-      <p class="lead">თანამედროვე ტექნოლოგიები, პროფესიონალი ექიმები და მშვიდი, კომფორტული გარემო — ის, რასაც ჩვენი პაციენტები ყველაზე ხშირად ახსენებენ შეფასებებში.</p>
-      <div class="hero-ctas">
-        <a class="btn" href="tel:+995510100220">დაჯავშნე ვიზიტი</a>
-        <a class="btn btn-ghost" href="#services">სერვისების ნახვა</a>
+      <span class="pill" data-hero><span class="dot"></span> თბილისი · პავლე ასლანიძის ქ. 12</span>
+      <h1 id="heroTitle" class="disp">თქვენი ღიმილი — <span class="grad">Dental Sector</span></h1>
+      <p class="lead" data-hero>თანამედროვე ტექნოლოგიები, პროფესიონალი ექიმები და მშვიდი, კომფორტული გარემო — ის, რასაც ჩვენი პაციენტები ყველაზე ხშირად ახსენებენ შეფასებებში.</p>
+      <div class="hero-ctas" data-hero>
+        <a class="btn" href="tel:+995510100220" data-mag>დაჯავშნე ვიზიტი</a>
+        <a class="btn btn-ghost" href="#services" data-mag>სერვისების ნახვა</a>
       </div>
     </div>
-    <div class="stage">
+    <div class="stage" id="stage">
       <div class="halo"></div>
       <div class="ring"></div>
-      <model-viewer id="tooth" src="tooth.glb" alt="3D tooth" camera-orbit="14deg 78deg auto" interaction-prompt="none" environment-image="neutral" exposure="1.15" shadow-intensity="0.6" style="color:transparent"></model-viewer>
+      <div class="ring2"></div>
+      <model-viewer id="tooth" src="tooth.glb" alt="3D tooth" camera-orbit="14deg 76deg auto" interaction-prompt="none" environment-image="neutral" exposure="1.15" shadow-intensity="0.5" style="color:transparent"></model-viewer>
       <div class="float-card fc1"><b>5.0 ★★★★★</b><span>174 Google შეფასება</span></div>
       <div class="float-card fc2"><b>100% სტერილურობა</b><span>საერთაშორისო სტანდარტები</span></div>
     </div>
   </div>
-  <div class="wrap">
-    <div class="stats rv">
-      <div class="stat"><b>5.0★</b><span>Google რეიტინგი</span></div>
-      <div class="stat"><b>174</b><span>პაციენტის შეფასება</span></div>
-      <div class="stat"><b>100%</b><span>სტერილური სტანდარტები</span></div>
-      <div class="stat"><b>ცენტრში</b><span>პავლე ასლანიდის ქ. 12</span></div>
-    </div>
-  </div>
+  <div class="scroll-hint">სქროლე<i></i></div>
 </header>
 
-<section id="services">
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track" id="mqTrack">
+    <span>იმპლანტაცია <i>✦</i></span><span>ორთოდონტია <i>✦</i></span><span>გათეთრება <i>✦</i></span><span>ჰიგიენა <i>✦</i></span><span>ქირურგია <i>✦</i></span><span>საბავშვო სტომატოლოგია <i>✦</i></span>
+  </div>
+</div>
+
+<section id="stats-sec" style="padding-top:90px">
   <div class="wrap">
-    <span class="kicker">მომსახურება</span>
-    <h2>ყველაფერი თქვენი სტომატოლოგიური <span class="grad">ჯანმრთელობისთვის</span></h2>
-    <p class="sub">თერაპიული, ქირურგიული და ესთეტიკური სტომატოლოგია ერთ სივრცეში — თანამედროვე აღჭურვილობით.</p>
+    <div class="stats">
+      <div class="stat" data-reveal><b><span class="count" data-to="5.0" data-dec="1">0</span><small>★</small></b><span>Google რეიტინგი</span></div>
+      <div class="stat" data-reveal><b><span class="count" data-to="174">0</span></b><span>პაციენტის შეფასება</span></div>
+      <div class="stat" data-reveal><b><span class="count" data-to="100">0</span><small>%</small></b><span>სტერილური სტანდარტები</span></div>
+      <div class="stat" data-reveal><b>24<small>/7</small></b><span>ხელმისაწვდომობა გადაუდებელ შემთხვევაში</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <span class="kicker" data-reveal>მომსახურება</span>
+        <h2 data-reveal>ყველაფერი თქვენი <span class="grad">ღიმილისთვის</span></h2>
+        <p class="sub" data-reveal>თერაპიული, ქირურგიული და ესთეტიკური სტომატოლოგია ერთ სივრცეში — თანამედროვე აღჭურვილობით.</p>
+      </div>
+    </div>
     <div class="grid-3">
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4C8.5 4 6 6.5 6 9.5c0 2 .8 3.2 1.4 4.8.6 1.7.8 3.5 1.3 4.4.4.8 1.6.8 1.9-.1.4-1 .4-2.6 1.4-2.6s1 1.6 1.4 2.6c.3.9 1.5.9 1.9.1.5-.9.7-2.7 1.3-4.4.6-1.6 1.4-2.8 1.4-4.8C18 6.5 15.5 4 12 4z"/></svg></div><h3>თერაპიული სტომატოლოგია</h3><p>კარიესის მკურნალობა, ბეჭდვები და კოსმეტიკური აღდგენა უმტკივნეულოდ.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 3 10 2.5-5H20"/></svg></div><h3>იმპლანტოლოგია</h3><p>კბილის აღდგენა იმპლანტებით — საიმედო და ესთეტიკური შედეგი წლების განმავლობაში.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div><h3>ორთოდონტია</h3><p>ბრეკეტები და კბილების სწორება როგორც მოზრდილებისთვის, ასევე ბავშვებისთვის.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.2 5 9a5 5 0 11-10 0c0-2.8 2-5.5 5-9z"/></svg></div><h3>გათეთრება</h3><p>უსაფრთხო პროფესიული გათეთრება შესამჩნევი შედეგით პირველივე ვიზიტზე.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20c3-1 5-3 6-6M8 4l12 12M14 4l6 6"/></svg></div><h3>ქირურგია</h3><p>რთული ამოღება, სიბრძნის კბილი და მცირე ქირურგიული ჩარევები.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M15.5 15.5c2.5 0 5.5 1.5 5.5 4.5"/></svg></div><h3>საბავშვო სტომატოლოგია</h3><p>მშვიდი და მეგობრული მიდგომა ყველაზე პატარა პაციენტებისთვის — ოჯახისთვის.</p></div>
+      <div class="svc" data-reveal><span class="num">01</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4C8.5 4 6 6.5 6 9.5c0 2 .8 3.2 1.4 4.8.6 1.7.8 3.5 1.3 4.4.4.8 1.6.8 1.9-.1.4-1 .4-2.6 1.4-2.6s1 1.6 1.4 2.6c.3.9 1.5.9 1.9.1.5-.9.7-2.7 1.3-4.4.6-1.6 1.4-2.8 1.4-4.8C18 6.5 15.5 4 12 4z"/></svg></div><h3>თერაპიული სტომატოლოგია</h3><p>კარიესის მკურნალობა, ბეჭდვები და კოსმეტიკური აღდგენა უმტკივნეულოდ.</p></div>
+      <div class="svc" data-reveal><span class="num">02</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 3 10 2.5-5H20"/></svg></div><h3>იმპლანტოლოგია</h3><p>კბილის აღდგენა იმპლანტებით — საიმედო და ესთეტიკური შედეგი წლების განმავლობაში.</p></div>
+      <div class="svc" data-reveal><span class="num">03</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div><h3>ორთოდონტია</h3><p>ბრეკეტები და კბილების სწორება როგორც მოზრდილებისთვის, ასევე ბავშვებისთვის.</p></div>
+      <div class="svc" data-reveal><span class="num">04</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.2 5 9a5 5 0 11-10 0c0-2.8 2-5.5 5-9z"/></svg></div><h3>გათეთრება</h3><p>უსაფრთხო პროფესიული გათეთრება შესამჩნევი შედეგით პირველივე ვიზიტზე.</p></div>
+      <div class="svc" data-reveal><span class="num">05</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20c3-1 5-3 6-6M8 4l12 12M14 4l6 6"/></svg></div><h3>ქირურგია</h3><p>რთული ამოღება, სიბრძნის კბილი და მცირე ქირურგიული ჩარევები.</p></div>
+      <div class="svc" data-reveal><span class="num">06</span><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M15.5 15.5c2.5 0 5.5 1.5 5.5 4.5"/></svg></div><h3>საბავშვო სტომატოლოგია</h3><p>მშვიდი და მეგობრული მიდგომა ყველაზე პატარა პაციენტებისთვის — ოჯახისთვის.</p></div>
     </div>
   </div>
 </section>
 
 <section class="why" id="why">
   <div class="wrap grid-2">
-    <div class="rv">
-      <span class="kicker">რატომ Dental Sector</span>
-      <h2>ასე ახასიათებენ ჩვენს კლინიკას <span class="grad">პაციენტები</span></h2>
-      <p class="sub">174 შეფასებიდან ყველაზე ხშირად გამეორებადი სიტყვები: სტანდარტები, თანამედროვე ტექნოლოგიები, პროფესიონალი ექიმები.</p>
+    <div>
+      <span class="kicker" data-reveal>რატომ Dental Sector</span>
+      <h2 data-reveal>ასე ახასიათებენ ჩვენს კლინიკას <span class="grad">პაციენტები</span></h2>
+      <p class="sub" data-reveal>174 შეფასებიდან ყველაზე ხშირად გამეორებადი სიტყვები: სტანდარტები, თანამედროვე ტექნოლოგიები, პროფესიონალი ექიმები.</p>
     </div>
     <div>
-      <div class="feat rv"><span class="n">01</span><div><h4>თანამედროვე ტექნოლოგიები</h4><p>ახალი თაობის აღჭურვილობა და ციფრული დიაგნოსტიკა ზუსტი და სწრაფი მკურნალობისთვის.</p></div></div>
-      <div class="feat rv"><span class="n">02</span><div><h4>საერთაშორისო სტანდარტები</h4><p>სტერილიზაციისა და უსაფრთხოების პროტოკოლები — ყოველ პაციენტთან, ყოველ ვიზიტზე.</p></div></div>
-      <div class="feat rv"><span class="n">03</span><div><h4>პროფესიონალი ექიმები</h4><p>გამოცდილი გუნდი, რომელსაც ოჯახები წლების განმავლობაში ენდობიან.</p></div></div>
+      <div class="feat" data-reveal><span class="n">01</span><div><h4>თანამედროვე ტექნოლოგიები</h4><p>ახალი თაობის აღჭურვილობა და ციფრული დიაგნოსტიკა ზუსტი და სწრაფი მკურნალობისთვის.</p></div></div>
+      <div class="feat" data-reveal><span class="n">02</span><div><h4>საერთაშორისო სტანდარტები</h4><p>სტერილიზაციისა და უსაფრთხოების პროტოკოლები — ყოველ პაციენტთან, ყოველ ვიზიტზე.</p></div></div>
+      <div class="feat" data-reveal><span class="n">03</span><div><h4>პროფესიონალი ექიმები</h4><p>გამოცდილი გუნდი, რომელსაც ოჯახები წლების განმავლობაში ენდობიან.</p></div></div>
     </div>
   </div>
 </section>
 
 <section id="reviews">
   <div class="wrap">
-    <span class="kicker">შეფასებები</span>
-    <h2>რას ამბობენ ჩვენი <span class="grad">პაციენტები</span></h2>
-    <p class="sub">რეალური შეფასებები Google-იდან — მაქსიმალური 5.0 ბალი, 174 მიმოხილვით.</p>
+    <span class="kicker" data-reveal>შეფასებები</span>
+    <h2 data-reveal>რას ამბობენ ჩვენი <span class="grad">პაციენტები</span></h2>
+    <p class="sub" data-reveal>რეალური შეფასებები Google-იდან — მაქსიმალური 5.0 ბალი, 174 მიმოხილვით.</p>
     <div class="quotes">
-      <div class="q rv"><div class="stars">★★★★★</div><p>"It's a very comfortable and pleasant environment, and the doctors are highly qualified. My family and I have been patients there for years."</p><div class="who"><span class="av">S</span><div><b>სალომე ოსეფაშვილი</b><span>Google შეფასება</span></div></div></div>
-      <div class="q rv"><div class="stars">★★★★★</div><p>"The only person I completely trust in this world is my dentist here... also the clinic itself is super tidy and pleasant!"</p><div class="who"><span class="av">E</span><div><b>ელენე გოგოძე</b><span>Google შეფასება</span></div></div></div>
-      <div class="q rv"><div class="stars">★★★★★</div><p>"Amazing experience! The doctors are very knowledgeable and made me feel comfortable throughout the treatment."</p><div class="who"><span class="av">G</span><div><b>Greenity</b><span>Google შეფასება</span></div></div></div>
+      <div class="q" data-reveal><div class="gmark"><i></i>Google Review</div><div class="stars">★★★★★</div><p>"It's a very comfortable and pleasant environment, and the doctors are highly qualified. My family and I have been patients there for years."</p><div class="who"><span class="av">S</span><div><b>სალომე ოსეფაშვილი</b><span>Google შეფასება</span></div></div></div>
+      <div class="q" data-reveal><div class="gmark"><i></i>Google Review</div><div class="stars">★★★★★</div><p>"The only person I completely trust in this world is my dentist here... also the clinic itself is super tidy and pleasant!"</p><div class="who"><span class="av">E</span><div><b>ელენე გოგოძე</b><span>Google შეფასება</span></div></div></div>
+      <div class="q" data-reveal><div class="gmark"><i></i>Google Review</div><div class="stars">★★★★★</div><p>"Amazing experience! The doctors are very knowledgeable and made me feel comfortable throughout the treatment."</p><div class="who"><span class="av">G</span><div><b>Greenity</b><span>Google შეფასება</span></div></div></div>
     </div>
   </div>
 </section>
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="band rv">
-      <div>
+    <div class="band" data-reveal>
+      <div class="bglow"></div>
+      <div style="position:relative">
         <h2>მზად ხართ ღიმილისთვის?</h2>
         <p>დაგვირეკეთ და ჩავგეგმავთ ვიზიტს თქვენთვის ხელსაყრელ დროს.</p>
       </div>
-      <a class="btn btn-white disp" href="tel:+995510100220">📞 510 10 02 20</a>
+      <a class="btn btn-white disp" href="tel:+995510100220" data-mag style="position:relative;font-size:19px;padding:18px 34px">📞 510 10 02 20</a>
     </div>
   </div>
 </section>
 
 <section id="contact" style="padding-top:0">
   <div class="wrap">
-    <span class="kicker">კონტაქტი</span>
-    <h2>მოგვმართეთ</h2>
+    <span class="kicker" data-reveal>კონტაქტი</span>
+    <h2 data-reveal>მოგვმართეთ</h2>
     <div class="contact-grid">
-      <div class="cbox rv"><h3>📍 მისამართი</h3><p>პავლე ასლანიძის ქ. 12, თბილისი 0160</p><p style="margin-top:8px"><a href="https://maps.google.com/?q=Dental+Sector+Tbilisi" target="_blank" rel="noopener">Google Maps-ზე ნახვა →</a></p></div>
-      <div class="cbox rv"><h3>📞 ტელეფონი</h3><p><a href="tel:+995510100220" class="disp">510 10 02 20</a></p><p style="margin-top:8px">დარეკვა ან SMS — ვპასუხობთ სწრაფად</p></div>
-      <div class="cbox rv"><h3>🕒 სამუშაო საათები</h3><table class="hours-t"><tr><td>ორშაბათი – პარასკევი</td><td>10:00 – 20:00</td></tr><tr><td>შაბათი</td><td>10:00 – 20:00</td></tr><tr><td>კვირა</td><td>დასვენება</td></tr></table></div>
-      <div class="cbox rv"><h3>💬 პირველი კონსულტაცია</h3><p>პირველი გამოცდა და მკურნალობის გეგმა — მშვიდ, კომფორტულ გარემოში. ჩამოდით ან დაგვირეკეთ.</p></div>
+      <div class="cbox" data-reveal><h3>📍 მისამართი</h3><p>პავლე ასლანიძის ქ. 12, თბილისი 0160</p><p style="margin-top:8px"><a href="https://maps.google.com/?q=Dental+Sector+Tbilisi" target="_blank" rel="noopener">Google Maps-ზე ნახვა →</a></p></div>
+      <div class="cbox" data-reveal><h3>📞 ტელეფონი</h3><p><a href="tel:+995510100220" class="disp" style="font-size:18px">510 10 02 20</a></p><p style="margin-top:8px">დარეკვა ან SMS — ვპასუხობთ სწრაფად</p></div>
+      <div class="cbox" data-reveal><h3>🕒 სამუშაო საათები</h3><table class="hours-t"><tr><td>ორშაბათი – პარასკევი</td><td>10:00 – 20:00</td></tr><tr><td>შაბათი</td><td>10:00 – 20:00</td></tr><tr><td>კვირა</td><td>დასვენება</td></tr></table></div>
+      <div class="cbox" data-reveal><h3>💬 პირველი კონსულტაცია</h3><p>პირველი გამოცდა და მკურნალობის გეგმა — მშვიდ, კომფორტულ გარემოში. ჩამოდით ან დაგვირეკეთ.</p></div>
     </div>
   </div>
 </section>
@@ -273,28 +335,156 @@
 </footer>
 
 <script>
-  document.getElementById('burger').addEventListener('click',function(){
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+window.__errors = [];
+window.addEventListener('error', function(e){ window.__errors.push(String(e.message).slice(0,80)); });
 
-  /* slow spin + mouse-follow tilt in one loop (portfolio head pattern) */
-  (function(){
-    var mv = document.getElementById('tooth');
-    if (!mv) return;
-    var base = 14, tx = 0, cx = 0;
-    document.addEventListener('mousemove', function(e){
-      tx = (e.clientX / window.innerWidth - .5) * 26; /* ±13° */
-    });
-    setInterval(function(){
-      base = (base + 0.09) % 360;              /* slow continuous turn */
-      cx += (tx - cx) * 0.07;                  /* eased tilt toward cursor */
-      try { mv.setAttribute('camera-orbit', (base + cx) + 'deg 78deg auto'); mv.jumpCameraToGoal && mv.jumpCameraToGoal(); } catch(e){}
-    }, 16);
-  })();
+/* ---------- Lenis smooth scroll + GSAP sync ---------- */
+var lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+gsap.ticker.lagSmoothing(0);
+window.__lenisOk = true;
+
+/* anchor links through lenis */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -70 }); }
+  });
+});
+
+/* ---------- nav solid on scroll + progress ---------- */
+var nav = document.getElementById('nav');
+ScrollTrigger.create({ start: 60, onUpdate: function(){}, onToggle: function(s){ nav.classList.toggle('solid', s.isActive); } });
+gsap.to('#prog', { width: '100%', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+/* ---------- HERO intro ---------- */
+/* split h1 into words for staggered rise */
+(function(){
+  var h = document.getElementById('heroTitle');
+  var nodes = [];
+  h.childNodes.forEach(function(n){
+    if (n.nodeType === 3) {
+      n.textContent.split(/\s+/).forEach(function(w){
+        if (w.trim()) nodes.push({ w: w, grad: false });
+      });
+    } else if (n.nodeType === 1) {
+      n.textContent.split(/\s+/).forEach(function(w){
+        if (w.trim()) nodes.push({ w: w, grad: true });
+      });
+    }
+  });
+  h.innerHTML = nodes.map(function(o){
+    return '<span class="w"><span' + (o.grad ? ' class="grad"' : '') + '>' + o.w + '</span></span>';
+  }).join(' ');
+})();
+var intro = gsap.timeline();
+intro.from('nav', { y: -70, opacity: 0, duration: .9, ease: 'power3.out' })
+  .from('.pill', { y: 24, opacity: 0, duration: .6, ease: 'power2.out' }, .2)
+  .to('#heroTitle .w > span', { y: 0, duration: 1.0, stagger: .09, ease: 'power4.out' }, .35)
+  .from('[data-hero]:not(.pill)', { y: 30, opacity: 0, duration: .8, stagger: .12, ease: 'power3.out' }, .7)
+  .from('#stage', { scale: .85, opacity: 0, duration: 1.3, ease: 'power3.out' }, .5)
+  .from('.fc1', { x: -40, opacity: 0, duration: .7, ease: 'back.out(1.6)' }, 1.2)
+  .from('.fc2', { x: 40, opacity: 0, duration: .7, ease: 'back.out(1.6)' }, 1.35)
+  .from('.scroll-hint', { opacity: 0, duration: .8 }, 1.6);
+
+/* ---------- TOOTH: mouse tilt + slow spin + scroll-linked ---------- */
+(function(){
+  var mv = document.getElementById('tooth');
+  var stage = document.getElementById('stage');
+  var tx = 0, ty = 0, cx = 0, cy = 0, base = 14;
+  document.addEventListener('mousemove', function(e){
+    tx = (e.clientX / window.innerWidth - .5) * 30;   /* ±15° yaw */
+    ty = (e.clientY / window.innerHeight - .5) * 12;  /* ±6° pitch */
+  });
+  setInterval(function(){
+    base = (base + 0.09) % 360;
+    cx += (tx - cx) * 0.06;
+    cy += (ty - cy) * 0.06;
+    try {
+      mv.setAttribute('camera-orbit', (base + cx) + 'deg ' + (76 + cy) + 'deg auto');
+      mv.jumpCameraToGoal && mv.jumpCameraToGoal();
+    } catch(e){}
+  }, 16);
+
+  /* scroll: whole stage gently rotates & scales while leaving hero */
+  gsap.to(stage, {
+    rotation: 14, scale: .92, y: -60, opacity: .25, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 }
+  });
+  gsap.to('.hero-grid > div:first-child', {
+    y: -90, opacity: .1, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 }
+  });
+  /* floating cards: gentle parallax drift */
+  gsap.to('.fc1', { y: -18, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  gsap.to('.fc2', { y: 16, duration: 3.6, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: .5 });
+})();
+
+/* ---------- scroll reveals ---------- */
+gsap.utils.toArray('[data-reveal]').forEach(function(el, i){
+  gsap.from(el, {
+    y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 88%' }
+  });
+});
+/* services & quotes stagger */
+gsap.utils.toArray('.grid-3, .quotes, .contact-grid').forEach(function(grid){
+  gsap.from(grid.children, {
+    y: 70, opacity: 0, duration: .9, stagger: .12, ease: 'power3.out',
+    scrollTrigger: { trigger: grid, start: 'top 85%' }
+  });
+});
+
+/* ---------- counters ---------- */
+document.querySelectorAll('.count').forEach(function(c){
+  var to = parseFloat(c.dataset.to), dec = parseInt(c.dataset.dec || 0);
+  ScrollTrigger.create({
+    trigger: c, start: 'top 90%', once: true,
+    onEnter: function(){
+      gsap.to({ v: 0 }, { v: to, duration: 1.8, ease: 'power2.out', onUpdate: function(){
+        c.textContent = this.targets()[0].v.toFixed(dec);
+      }});
+    }
+  });
+});
+
+/* ---------- magnetic buttons ---------- */
+document.querySelectorAll('[data-mag]').forEach(function(el){
+  el.addEventListener('mousemove', function(e){
+    var r = el.getBoundingClientRect();
+    gsap.to(el, { x: (e.clientX - r.left - r.width/2) * .3, y: (e.clientY - r.top - r.height/2) * .4, duration: .4 });
+  });
+  el.addEventListener('mouseleave', function(){
+    gsap.to(el, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.4)' });
+  });
+});
+
+/* ---------- custom cursor ---------- */
+(function(){
+  var cur = document.getElementById('cur'), ring = document.getElementById('curRing');
+  var mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+  gsap.ticker.add(function(){
+    rx += (mx - rx) * .16; ry += (my - ry) * .16;
+    cur.style.transform = 'translate(' + (mx-3.5) + 'px,' + (my-3.5) + 'px)';
+    ring.style.transform = 'translate(' + (rx-19) + 'px,' + (ry-19) + 'px)';
+  });
+  document.querySelectorAll('a, button, .svc, .q, .stat').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ ring.classList.add('big'); });
+    el.addEventListener('mouseleave', function(){ ring.classList.remove('big'); });
+  });
+})();
+
+/* ---------- mobile burger ---------- */
+document.getElementById('burger').addEventListener('click', function(){
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(function(a){
+  a.addEventListener('click', function(){ document.getElementById('navLinks').classList.remove('open'); });
+});
+
+window.__v3ready = true;
 </script>
 </body>
 </html>
