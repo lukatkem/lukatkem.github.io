@@ -90,24 +90,28 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
-/* x-ray interactive section — fullscreen video with services text overlaid */
+/* x-ray interactive section — animation box in center, service cards on sides */
 .xsec{position:relative;overflow:hidden;background:#0B2C4E;padding:0}
-.xframe{position:absolute;inset:0;background:#1E90E0;cursor:crosshair;touch-action:pan-y}
-.xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.xframe::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,43,78,.72) 0%,rgba(11,43,78,.5) 30%,rgba(11,43,78,.52) 62%,rgba(11,43,78,.75) 100%);pointer-events:none;z-index:1}
-.xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;z-index:2}
-.xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
-.xspot img.on{opacity:1}
-.xwrap{position:relative;z-index:3;width:min(1060px,86%);padding:110px 0 90px;text-align:center;pointer-events:none}
+.xwrap{position:relative;z-index:3;width:min(1280px,94%);padding:96px 0 90px;text-align:center;pointer-events:none}
 .xwrap .kicker{color:#fff;text-shadow:0 2px 12px rgba(8,26,48,.55)}
 .xwrap h2{color:#fff;text-shadow:0 4px 22px rgba(8,26,48,.6)}
 .xwrap h2 .accent{color:var(--gold)}
 .xwrap .sub{color:rgba(255,255,255,.92);margin:0 auto;text-shadow:0 2px 14px rgba(8,26,48,.6)}
-.xwrap .svc{pointer-events:auto;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:transparent;box-shadow:0 20px 50px rgba(6,20,40,.45)}
-.xwrap .svc:nth-child(3n+1){margin-top:-26px}
-.xwrap .svc:nth-child(3n){margin-top:26px}
-@media(max-width:1020px){.xwrap .svc{margin-top:0}}
-@media(max-width:760px){.xwrap{padding:72px 0 64px}.xwrap .svc{background:rgba(255,255,255,.96)}}
+.xlayout{display:grid;grid-template-columns:minmax(225px,1fr) minmax(320px,1.45fr) minmax(225px,1fr);gap:22px;align-items:center;margin-top:46px;text-align:left}
+.xcol{display:flex;flex-direction:column;gap:20px}
+.xcol .svc{pointer-events:auto;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:transparent;box-shadow:0 20px 50px rgba(6,20,40,.45);padding:22px 20px}
+.xcol .svc .ic{width:44px;height:44px;border-radius:13px;font-size:20px;margin-bottom:12px;box-shadow:0 8px 18px rgba(66,135,224,.32)}
+.xcol .svc h3{font-size:16.5px;margin-bottom:6px}
+.xcol .svc p{font-size:13px}
+.xframe{position:relative;width:100%;aspect-ratio:16/11;border-radius:26px;overflow:hidden;background:#1E90E0;box-shadow:0 40px 90px rgba(6,20,40,.6),0 0 0 9px rgba(255,255,255,.09);cursor:crosshair;touch-action:pan-y;pointer-events:auto}
+.xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.xframe::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,43,78,.2),rgba(11,43,78,0) 35%,rgba(11,43,78,0) 65%,rgba(11,43,78,.25));pointer-events:none;z-index:1}
+.xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;z-index:2}
+.xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
+.xspot img.on{opacity:1}
+@media(max-width:1020px){.xlayout{grid-template-columns:1fr}.xframe{order:-1;aspect-ratio:16/9}.xcol{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}}
+@media(max-width:620px){.xcol{grid-template-columns:1fr}}
+@media(max-width:760px){.xwrap{padding:64px 0 56px}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -317,21 +321,25 @@ footer .cred a{color:var(--gold)}
 
 <section class="xsec" id="xray">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.4784 2.6314 -2.6314 0 133"/></filter></svg>
-  <div class="xframe" id="xframe">
-    <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
-    <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
-  </div>
   <div class="wrap xwrap" id="services">
     <span class="kicker" data-reveal>სერვისები</span>
     <h2 data-reveal>ყველაფერი შენი <span class="accent">ღიმილისთვის</span></h2>
     <p class="sub" data-reveal>სრული სპექტრის სტომატოლოგიური მომსახურება — ერთ თანამედროვე სივრცეში.</p>
-    <div class="svcgrid">
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🦷</div><h3>თერაპიული სტომატოლოგია</h3><p>კარიესის მკურნალობა, ენდოდონტია და ზუსტი თერაპია — ტკივილგარეშე.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">⚙️</div><h3>იმპლანტოლოგია</h3><p>პრემიუმ იმპლანტები — დაკარგული კბილების სრული აღდგენა და საიმედო შედეგი.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">😁</div><h3>ორთოდონტია</h3><p>ბრეკეტ-სისტემები და გამჭვირვალე კაპები — ნებისმიერი ასაკისთვის.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">✨</div><h3>პროფესიული გათეთრება</h3><p>უსაფრთხო და სწრაფი გათეთრება — შესამჩნევი ცვლილება ერთ ვიზიტში.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🔬</div><h3>ქირურგია</h3><p>სიბძნის კბილების ამოღება და ქირურგიული ჩარევები — მაქსიმალური კომფორტი.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🧸</div><h3>საბავშვო სტომატოლოგია</h3><p>მშვიდი და მეგობრული გარემო პატარებისთვის — პირველი ვიზიტი სიამოვნებად.</p></div>
+    <div class="xlayout">
+      <div class="xcol">
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">✨</div><h3>პროფესიული გათეთრება</h3><p>უსაფრთხო და სწრაფი გათეთრება — შესამჩნევი ცვლილება ერთ ვიზიტში.</p></div>
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🧸</div><h3>საბავშვო სტომატოლოგია</h3><p>მშვიდი და მეგობრული გარემო პატარებისთვის — პირველი ვიზიტი სიამოვნებად.</p></div>
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🔬</div><h3>ქირურგია</h3><p>სიბძნის კბილების ამოღება და ქირურგიული ჩარევები — მაქსიმალური კომფორტი.</p></div>
+      </div>
+      <div class="xframe" id="xframe">
+        <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
+        <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
+      </div>
+      <div class="xcol">
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🦷</div><h3>თერაპიული სტომატოლოგია</h3><p>კარიესის მკურნალობა, ენდოდონტია და ზუსტი თერაპია — ტკივილგარეშე.</p></div>
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">😁</div><h3>ორთოდონტია</h3><p>ბრეკეტ-სისტემები და გამჭვირვალე კაპები — ნებისმიერი ასაკისთვის.</p></div>
+        <div class="svc" data-reveal><span class="go">↗</span><div class="ic">⚙️</div><h3>იმპლანტოლოგია</h3><p>პრემიუმ იმპლანტები — დაკარგული კბილების სრული აღდგენა და საიმედო შედეგი.</p></div>
+      </div>
     </div>
   </div>
 </section>
