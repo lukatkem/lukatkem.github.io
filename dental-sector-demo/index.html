@@ -112,6 +112,26 @@ h1 .gold{color:var(--gold)}
 @media(max-width:1020px){.xlayout{grid-template-columns:1fr}.xgap{display:none}.xcol{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}}
 @media(max-width:620px){.xcol{grid-template-columns:1fr}}
 @media(max-width:760px){.xwrap{padding:64px 0 56px}}
+/* first visit steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.step{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 24px;position:relative;transition:.35s}
+.step:hover{transform:translateY(-7px);box-shadow:0 26px 54px rgba(13,43,78,.12);border-color:transparent}
+.step .sn{position:absolute;top:24px;right:26px;font-family:'Kanit';font-weight:800;font-size:14px;color:var(--gold);letter-spacing:.08em}
+.step .sic{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--blue2));display:grid;place-items:center;font-size:24px;margin-bottom:18px;box-shadow:0 10px 24px rgba(66,135,224,.35)}
+.step h3{font-size:18px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.step p{color:var(--mut);font-size:14px}
+@media(max-width:1020px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.steps{grid-template-columns:1fr}}
+/* patient FAQ accordion */
+.faqsec{background:linear-gradient(180deg,#E3EFFF,#F3F9FF)}
+.faqlist{max-width:820px;margin:40px auto 0;text-align:left}
+.faq{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:.3s}
+.faq.open{box-shadow:0 18px 40px rgba(13,43,78,.1);border-color:transparent}
+.fq{width:100%;background:none;border:0;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 24px;font-family:'Kanit';font-size:16.5px;font-weight:600;color:var(--deep);cursor:pointer;text-align:left}
+.fi{width:30px;height:30px;border-radius:50%;background:rgba(66,135,224,.12);color:var(--blue);display:grid;place-items:center;font-size:19px;flex:none;transition:.3s;font-family:'Noto Sans Georgian',sans-serif}
+.faq.open .fi{transform:rotate(45deg);background:var(--blue);color:#fff}
+.fa{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.fa p{padding:0 24px 20px;color:var(--mut);font-size:14.5px;line-height:1.75;margin:0}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -341,6 +361,36 @@ footer .cred a{color:var(--gold)}
         <div class="svc" data-reveal><span class="go">↗</span><div class="ic">😁</div><h3>ორთოდონტია</h3><p>ბრეკეტ-სისტემები და გამჭვირვალე კაპები — ნებისმიერი ასაკისთვის.</p></div>
         <div class="svc" data-reveal><span class="go">↗</span><div class="ic">⚙️</div><h3>იმპლანტოლოგია</h3><p>პრემიუმ იმპლანტები — დაკარგული კბილების სრული აღდგენა და საიმედო შედეგი.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="visitsec" id="first-visit">
+  <div class="wrap">
+    <p class="kicker" data-reveal>როგორ მუშაობს</p>
+    <h2 data-reveal>პირველი <span class="accent">ვიზიტი</span> — 4 მარტივი ნაბიჯი</h2>
+    <p class="sub" data-reveal>პირველი ვიზიტიდან მზა ღიმილამდე — ყველაფერი მკაფიოდ და სტრესის გარეშე.</p>
+    <div class="steps">
+      <div class="step" data-reveal><span class="sn">01</span><div class="sic">📅</div><h3>დაჯავშნე ვიზიტი</h3><p>დაგვირეკე ან მოგვწერე WhatsApp-ზე — შევთანხმდებით შენთვის მოსახერხებელ დროს.</p></div>
+      <div class="step" data-reveal><span class="sn">02</span><div class="sic">🩺</div><h3>კონსულტაცია და გამოკვლევა</h3><p>ექიმი დაგიწყებს ყურადღებით შემოწმებას და უპასუხებს ყველა შენს კითხვას.</p></div>
+      <div class="step" data-reveal><span class="sn">03</span><div class="sic">📋</div><h3>მკურნალობის გეგმა</h3><p>მიიღებ მკაფიო გეგმას ვადებითა და ღირებულებით — ყოველგვარი სიურპრიზის გარეშე.</p></div>
+      <div class="step" data-reveal><span class="sn">04</span><div class="sic">✨</div><h3>მკურნალობა და შედეგი</h3><p>მკურნალობა კომფორტულ გარემოში — და შედეგი, რომლითაც ისიამოვნებ ღიმილით.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faqsec" id="faq">
+  <div class="wrap">
+    <p class="kicker" data-reveal>პაციენტის კუთხე</p>
+    <h2 data-reveal>რა უნდა იცოდე <span class="accent">ვიზიტამდე</span></h2>
+    <p class="sub" data-reveal>ყველაზე ხშირი კითხვები — პასუხები მარტივად.</p>
+    <div class="faqlist" id="faqlist">
+      <div class="faq" data-reveal><button class="fq" type="button">როგორ ჩავიწერო ვიზიტი?<span class="fi">+</span></button><div class="fa"><p>დაგვირეკე 510 10 02 20-ზე ან მოგვწერე WhatsApp-ზე. ვმუშაობთ ორშაბათიდან შაბათამდე, 10:00–20:00-მდე.</p></div></div>
+      <div class="faq" data-reveal><button class="fq" type="button">ტკივილგარეშეა მკურნალობა?<span class="fi">+</span></button><div class="fa"><p>კი. ვიყენებთ თანამედროვე გაუტკივარების მეთოდებს, ამიტომ პროცედურები მშვიდი და კომფორტულია. თუ შფოთვა გაქვს, ექიმს წინასწარ აუწყე — ყველაფერს ნელა და მარტივად აგიხსნის.</p></div></div>
+      <div class="faq" data-reveal><button class="fq" type="button">როგორ ხშირად უნდა მივდივარ შემოწმებაზე?<span class="fi">+</span></button><div class="fa"><p>იდეალურ შემთხვევაში — წელიწადში ორჯერ, ყოველ 6 თვეში. პროფილაქტიკური ვიზიტი პრობლემებს ადრეულ ეტაპზე ავლენს და მკურნალობას უფრო მარტივს და ხელმისაწვდომს ხდის.</p></div></div>
+      <div class="faq" data-reveal><button class="fq" type="button">როგორია ბავშვის პირველი ვიზიტი?<span class="fi">+</span></button><div class="fa"><p>მშვიდობიანი გაცნობა: პატარა დაათვალიერებს კაბინეტს, ვუყურებთ კბილებს თამაშით და არაფერს ვაკეთებთ იძულებით. პირველი ვიზიტი უნდა დარჩეს სასიამოვნო მოგონებად.</p></div></div>
+      <div class="faq" data-reveal><button class="fq" type="button">უსაფრთხოა თუ არა რენტგენი?<span class="fi">+</span></button><div class="fa"><p>კი — ციფრული აპარატურა მინიმალურ დასხივებას იყენებს და გამოვიყენებთ მხოლოდ მაშინ, როცა ეს მკურნალობისთვის აუცილებელია.</p></div></div>
+      <div class="faq" data-reveal><button class="fq" type="button">რა მჭირდება პირველ ვიზიტზე?<span class="fi">+</span></button><div class="fa"><p>არაფერი სპეციალური — უბრალოდ მოდი. თუ გაქვს წინა გამოკვლევები ან რენტგენის სურათები, წამოიღე — დაგვეხმარება ზუსტი გეგმის შედგენაში.</p></div></div>
     </div>
   </div>
 </section>
@@ -628,6 +678,20 @@ function tick(now){
   requestAnimationFrame(tick);
 }
 requestAnimationFrame(tick);
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('#faqlist .faq').forEach(function(item){
+    var btn=item.querySelector('.fq'),panel=item.querySelector('.fa');
+    btn.addEventListener('click',function(){
+      var isOpen=item.classList.contains('open');
+      document.querySelectorAll('#faqlist .faq.open').forEach(function(o){
+        o.classList.remove('open');o.querySelector('.fa').style.maxHeight='0px';
+      });
+      if(!isOpen){item.classList.add('open');panel.style.maxHeight=panel.scrollHeight+'px';}
+    });
+  });
 })();
 </script>
 </body>
