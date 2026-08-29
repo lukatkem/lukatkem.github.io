@@ -176,6 +176,36 @@ h2 .accent{color:var(--blue)}
 .hours-t td{padding:8px 0;border-bottom:1px dashed var(--line)}
 .hours-t td:last-child{text-align:right;color:var(--mut);font-weight:600}
 
+/* socials + map + booking modal */
+.socials{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.socials a{width:44px;height:44px;border-radius:13px;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;transition:.3s}
+.socials a:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 22px rgba(66,135,224,.35)}
+.socials a svg{width:20px;height:20px;fill:var(--blue);transition:.3s}
+.socials a:hover svg{fill:#fff}
+.socials .slbl{font-size:12.5px;font-weight:700;color:var(--mut);width:100%;margin-bottom:-2px}
+.mapbox{border-radius:18px;overflow:hidden;margin-top:16px;border:1px solid var(--line);line-height:0}
+.mapbox iframe{width:100%;height:240px;border:0;display:block}
+#mwrap{position:fixed;inset:0;z-index:1100;display:none;align-items:center;justify-content:center;padding:20px}
+#mwrap.open{display:flex}
+.mback{position:absolute;inset:0;background:rgba(9,30,56,.62);backdrop-filter:blur(6px)}
+.mcard{position:relative;background:#fff;border-radius:26px;padding:34px 30px;width:min(460px,94%);box-shadow:0 40px 90px rgba(9,38,66,.4);max-height:92vh;overflow:auto;animation:mpop .35s cubic-bezier(.2,1.2,.4,1)}
+@keyframes mpop{from{transform:translateY(26px) scale(.96);opacity:0}}
+.mcard h3{font-size:24px;color:var(--deep);font-weight:800}
+.mcard .msub{color:var(--mut);font-size:14px;margin:6px 0 18px}
+.mfield{margin-bottom:12px}
+.mfield label{display:block;font-size:12.5px;font-weight:700;color:var(--deep);margin-bottom:5px}
+.mfield input,.mfield select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;font-size:14.5px;color:var(--ink);background:#fff;outline:none;transition:.25s}
+.mfield input:focus,.mfield select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(66,135,224,.12)}
+.mbtns{display:flex;gap:10px;margin-top:18px;flex-direction:column}
+.msend{background:linear-gradient(135deg,#25D366,#1FB855);color:#fff;border:0;border-radius:99px;padding:15px;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:.3s;font-family:inherit}
+.msend:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(37,211,102,.4)}
+.mtel{background:var(--paper);border:1.5px solid var(--line);color:var(--deep);border-radius:99px;padding:13px;font-weight:700;font-size:14px;text-align:center}
+.mclose{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--paper);border:0;font-size:16px;cursor:pointer;color:var(--mut)}
+footer .fsoc{display:flex;gap:12px;justify-content:center;margin:14px 0 6px}
+footer .fsoc a{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.3s}
+footer .fsoc a:hover{background:var(--blue);transform:translateY(-3px)}
+footer .fsoc svg{width:18px;height:18px;fill:#fff}
+
 /* footer */
 footer{background:var(--deep);color:#9FB6D4;padding:46px 0;text-align:center;font-size:13.5px}
 footer .flogo{font-family:'Kanit';font-weight:800;font-size:20px;color:#fff;margin-bottom:10px}
@@ -235,7 +265,7 @@ footer .cred a{color:var(--gold)}
       <h1 id="hl">აღადგინე შენი <span class="gold">ნამდვილი</span> ღიმილი</h1>
       <p class="hsub" data-hero>თანამედროვე სტომატოლოგიური კლინიკა, სადაც ყველა ღიმილი ზუსტად არის დაგეგმილი — იმპლანტებიდან საბავშვო სტომატოლოგიამდე.</p>
       <div class="hcta" data-hero>
-        <a class="btn btn-w magnetic" href="tel:+995510100220">მიიღე კონსულტაცია</a>
+        <button class="btn btn-w magnetic" id="bookBtn">📅 დაჯავშნე ვიზიტი</button>
         <a class="btn btn-g magnetic" href="#services">სერვისების ნახვა</a>
       </div>
       <div class="hstats" data-hero>
@@ -307,7 +337,8 @@ footer .cred a{color:var(--gold)}
     <div class="ctab" data-reveal>
       <h2>მზად ხართ ღიმილისთვის?</h2>
       <p>დაგვირეკეთ და ჩაეწერეთ კონსულტაციაზე — პირველი გამოცდა და მკურნალობის გეგმა კომფორტულ გარემოში.</p>
-      <a class="btn btn-w magnetic" href="tel:+995510100220">📞 დარეკე ახლავე — 510 10 02 20</a>
+      <button class="btn btn-w magnetic" id="bookBtn2" style="margin-right:12px">📅 დაჯავშნე ვიზიტი</button>
+      <a class="btn btn-g magnetic" href="tel:+995510100220" style="margin-top:26px;display:inline-flex">📞 510 10 02 20</a>
     </div>
   </div>
 </section>
@@ -317,8 +348,15 @@ footer .cred a{color:var(--gold)}
     <span class="kicker" data-reveal>კონტაქტი</span>
     <h2 data-reveal>გვინახულე <span class="accent">თბილისში</span></h2>
     <div class="cgrid">
-      <div class="cbox" data-reveal><h3>📍 მისამართი</h3><p>პავლე ასლანიძის ქუჩა 12, თბილისი</p><p style="margin-top:10px"><a href="https://maps.google.com/?q=Dental+Sector+Tbilisi" target="_blank" style="color:var(--blue);font-weight:700">Google Maps-ზე გახსნა ↗</a></p></div>
-      <div class="cbox" data-reveal><h3>📞 დაგვირეკეთ</h3><a class="tel" href="tel:+995510100220">510 10 02 20</a><p style="margin-top:10px">ან მოგვწერეთ <a href="https://wa.me/995510100220" target="_blank" style="color:var(--blue);font-weight:700">WhatsApp-ში ↗</a></p></div>
+      <div class="cbox" data-reveal><h3>📍 მისამართი</h3><p>პავლე ასლანიძის ქუჩა 12, თბილისი</p>
+        <div class="mapbox"><iframe title="Dental Sector — Google Maps" src="https://maps.google.com/maps?q=Dental+Sector,+Pavle+Aslanidi+St+12,+Tbilisi&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <p style="margin-top:12px"><a href="https://maps.google.com/?q=Dental+Sector+Tbilisi" target="_blank" style="color:var(--blue);font-weight:700">Google Maps-ზე გახსნა ↗</a></p></div>
+      <div class="cbox" data-reveal><h3>📞 დაგვირეკეთ</h3><a class="tel" href="tel:+995510100220">510 10 02 20</a>
+        <div class="socials"><span class="slbl">გამოგვყევით:</span>
+          <a href="https://www.facebook.com/61586035323985" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.4 21v-8.2h2.8l.4-3.2h-3.2V7.6c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.2v3.2H10V21h3.4z"/></svg></a>
+          <a href="https://wa.me/995510100220" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.1 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.2.1.4 0 .6-.1.2-.2.4-.3.6l-.5.6c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2l2 1c.3.1.5.2.6.4 0 .1 0 .6-.3 1.2z"/></svg></a>
+          <a href="https://maps.google.com/?q=Dental+Sector+Tbilisi" target="_blank" aria-label="Google Maps"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></a>
+        </div></div>
       <div class="cbox" data-reveal><h3>🕒 სამუშაო საათები</h3><table class="hours-t"><tr><td>ორშაბათი – პარასკევი</td><td>10:00 – 20:00</td></tr><tr><td>შაბათი</td><td>10:00 – 20:00</td></tr><tr><td>კვირა</td><td>დასვენება</td></tr></table></div>
     </div>
   </div>
@@ -327,10 +365,32 @@ footer .cred a{color:var(--gold)}
 <footer>
   <div class="wrap">
     <div class="flogo"><img src="logo.svg" alt="" style="height:32px;width:auto;display:inline-block;vertical-align:-9px;margin-right:9px">DENTAL SECTOR</div>
+    <div class="fsoc">
+      <a href="https://www.facebook.com/61586035323985" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.4 21v-8.2h2.8l.4-3.2h-3.2V7.6c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.2v3.2H10V21h3.4z"/></svg></a>
+      <a href="https://wa.me/995510100220" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.1 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.2.1.4 0 .6-.1.2-.2.4-.3.6l-.5.6c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2l2 1c.3.1.5.2.6.4 0 .1 0 .6-.3 1.2z"/></svg></a>
+      <a href="tel:+995510100220" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a>
+    </div>
     <p>© 2026 Dental Sector — დენტალ სექტორი · თბილისი</p>
     <p class="cred">Site crafted by <a href="https://lukatkem.github.io" target="_blank">Luka Tkemaladze</a></p>
   </div>
 </footer>
+
+<div id="mwrap">
+  <div class="mback" id="mback"></div>
+  <div class="mcard">
+    <button class="mclose" id="mclose" aria-label="close">✕</button>
+    <h3>დაჯავშნე ვიზიტი</h3>
+    <p class="msub">შეავსე ფორმა და ჩვენ დავადასტურებთ დროს WhatsApp-ზე.</p>
+    <div class="mfield"><label>სახელი</label><input id="bName" placeholder="შენი სახელი"></div>
+    <div class="mfield"><label>ტელეფონი</label><input id="bPhone" type="tel" placeholder="5__ __ __ __"></div>
+    <div class="mfield"><label>სერვისი</label><select id="bSvc"><option>კონსულტაცია</option><option>თერაპიული სტომატოლოგია</option><option>იმპლანტაცია</option><option>ბრეკეტები</option><option>გათეთრება</option><option>ქირურგია</option><option>საბავშვო სტომატოლოგია</option><option>სხვა</option></select></div>
+    <div class="mfield"><label>სასურველი თარიღი</label><input id="bDate" type="date"></div>
+    <div class="mbtns">
+      <button class="msend" id="bSend">გაგზავნა WhatsApp-ით →</button>
+      <a class="mtel" href="tel:+995510100220">ან დაგვირეკეთ: 510 10 02 20</a>
+    </div>
+  </div>
+</div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -338,6 +398,27 @@ footer .cred a{color:var(--gold)}
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var isTouch = matchMedia('(hover:none)').matches;
+
+/* booking modal */
+var mw=document.getElementById('mwrap');
+function openM(){mw.classList.add('open');document.body.style.overflow='hidden'}
+function closeM(){mw.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('bookBtn').onclick=openM;
+document.getElementById('bookBtn2').onclick=openM;
+document.getElementById('mclose').onclick=closeM;
+document.getElementById('mback').onclick=closeM;
+addEventListener('keydown',function(e){if(e.key==='Escape')closeM()});
+document.getElementById('bDate').min=new Date().toISOString().slice(0,10);
+document.getElementById('bSend').onclick=function(){
+  var n=document.getElementById('bName').value.trim(),
+      p=document.getElementById('bPhone').value.trim(),
+      s=document.getElementById('bSvc').value,
+      d=document.getElementById('bDate').value;
+  if(!n||!p){alert('გთხოვ შეავსე სახელი და ტელეფონი');return}
+  var t='გამარჯობა! მინდა დავინიშნო ვიზიტი Dental Sector-ში.\nსახელი: '+n+'\nტელეფონი: '+p+'\nსერვისი: '+s+(d?'\nთარიღი: '+d:'');
+  window.open('https://wa.me/995510100220?text='+encodeURIComponent(t),'_blank');
+  closeM();
+};
 
 /* video auto-resume */
 document.addEventListener('visibilitychange',function(){if(!document.hidden){var v=document.querySelector('video');if(v&&v.paused)v.play().catch(function(e){})}});
