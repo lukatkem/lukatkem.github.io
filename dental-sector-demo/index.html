@@ -90,6 +90,8 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
+.chip3{top:-20px;left:-14px;animation:float1 7.5s ease-in-out infinite;text-decoration:none;cursor:pointer}
+.chip3:hover{transform:translateY(-3px)}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -226,7 +228,7 @@ footer .cred a{color:var(--gold)}
 @media(max-width:620px){
   section{padding:70px 0}
   .svcgrid,.qgrid,.cgrid{grid-template-columns:1fr}
-  .chip1{right:0}.chip2{left:0}
+  .chip1{right:0}.chip2{left:0}.chip3{left:0}
   .badge98{left:6px;padding:12px 15px}
   h1{font-size:clamp(38px,11vw,52px)}
   .mqwrap{margin:-26px 0 -6px}
@@ -282,6 +284,7 @@ footer .cred a{color:var(--gold)}
       </div>
       <div class="chip chip1"><span class="big"><span class="star">★</span>5.0</span><small>174 Google შეფასება</small></div>
       <div class="chip chip2"><span class="big"><img src="logo.svg" alt="" style="height:19px;width:auto"> ოჯახის კლინიკა</span><small>თბილისი, პ. ასლანიძის ქ. 12</small></div>
+      <a class="chip chip3" href="xray.html" target="_blank" rel="noopener"><span class="big">🦷 X-Ray ხედი</span><small>ნახე კბილი შიგნიდან</small></a>
     </div>
   </div>
 </header>
