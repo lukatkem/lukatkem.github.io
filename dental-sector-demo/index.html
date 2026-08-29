@@ -98,6 +98,7 @@ h1 .gold{color:var(--gold)}
 .xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
+.xspot img.on{opacity:1}
 .xhint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;color:#fff;font-weight:600;font-size:13.5px;background:rgba(10,30,60,.45);border:1px solid rgba(255,255,255,.3);padding:10px 16px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .8s;white-space:nowrap;pointer-events:none}
 .xhint.off{opacity:0}
 @media(max-width:760px){.xframe{aspect-ratio:4/3;border-radius:20px;box-shadow:0 24px 60px rgba(9,38,66,.3),0 0 0 7px rgba(255,255,255,.9)}.xhint{font-size:12px;padding:9px 13px}}
@@ -586,6 +587,7 @@ addEventListener('resize',layout);
 let mx=-9e3,my=-9e3,sx=0,sy=0,sr=0,op=0,present=false,have=false,roamed=false;
 const wake=()=>{if(!roamed){roamed=true;hint.classList.add('off')}};
 frame.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;present=true;wake()},{passive:true});
+frame.addEventListener('pointerenter',()=>{if(vid.paused)vid.play().catch(()=>{})});
 frame.addEventListener('pointerdown',e=>{mx=e.clientX;my=e.clientY;present=true;wake()});
 frame.addEventListener('pointerleave',()=>present=false);
 frame.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')present=false});
