@@ -90,27 +90,21 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
-/* x-ray interactive section — centered box + cool side decor */
-.xsec{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,#0B2C4E,#081F38);padding:56px 24px}
-.xsec::before,.xsec::after{content:'';position:absolute;width:440px;height:440px;border-radius:50%;filter:blur(90px);pointer-events:none}
-.xsec::before{background:rgba(66,135,224,.35);top:-130px;left:-110px}
-.xsec::after{background:rgba(217,164,65,.2);bottom:-150px;right:-100px}
-.xframe{position:relative;width:min(1040px,92vw);aspect-ratio:16/9;border-radius:26px;overflow:hidden;background:#1E90E0;box-shadow:0 40px 90px rgba(6,20,40,.6),0 0 0 9px rgba(255,255,255,.09),0 0 70px rgba(66,135,224,.25);cursor:crosshair;touch-action:pan-y;z-index:2}
+/* x-ray interactive section — fullscreen video with services text overlaid */
+.xsec{position:relative;overflow:hidden;background:#0B2C4E;padding:0}
+.xframe{position:absolute;inset:0;background:#1E90E0;cursor:crosshair;touch-action:pan-y}
 .xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.xframe::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,43,78,.6) 0%,rgba(11,43,78,.15) 26%,rgba(11,43,78,.16) 60%,rgba(11,43,78,.66) 100%);pointer-events:none;z-index:1}
 .xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;z-index:2}
 .xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
 .xspot img.on{opacity:1}
-.xside{position:absolute;top:50%;transform:translateY(-50%);z-index:3;pointer-events:none;display:flex;flex-direction:column;gap:22px}
-.xside-l{left:max(14px,4.2vw)}
-.xside-r{right:max(14px,4.2vw)}
-.xorb{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.07);border:1px solid rgba(217,164,65,.45);box-shadow:0 0 34px rgba(217,164,65,.25),inset 0 0 20px rgba(217,164,65,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:xfloat 5.5s ease-in-out infinite}
-.xside-r .xorb{border-color:rgba(111,169,236,.55);box-shadow:0 0 34px rgba(66,135,224,.35),inset 0 0 20px rgba(66,135,224,.14);animation-delay:-2.7s}
-.xring{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:2px dashed rgba(255,255,255,.35);animation:xspin 22s linear infinite;margin:0 auto}
-.xring i{font-style:normal;font-size:24px}
-@keyframes xfloat{50%{transform:translateY(-14px)}}
-@keyframes xspin{to{transform:rotate(360deg)}}
-@media(max-width:900px){.xside{display:none}}
-@media(max-width:760px){.xsec{padding:36px 14px}.xframe{border-radius:18px;box-shadow:0 24px 60px rgba(6,20,40,.5),0 0 0 6px rgba(255,255,255,.09)}}
+.xwrap{position:relative;z-index:3;padding:110px 0 90px;text-align:center;pointer-events:none}
+.xwrap .kicker{color:#fff;text-shadow:0 2px 12px rgba(8,26,48,.55)}
+.xwrap h2{color:#fff;text-shadow:0 4px 22px rgba(8,26,48,.6)}
+.xwrap h2 .accent{color:var(--gold)}
+.xwrap .sub{color:rgba(255,255,255,.92);margin:0 auto;text-shadow:0 2px 14px rgba(8,26,48,.6)}
+.xwrap .svc{pointer-events:auto;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:transparent;box-shadow:0 20px 50px rgba(6,20,40,.45)}
+@media(max-width:760px){.xwrap{padding:72px 0 64px}.xwrap .svc{background:rgba(255,255,255,.96)}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -320,24 +314,11 @@ footer .cred a{color:var(--gold)}
 
 <section class="xsec" id="xray">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.4784 2.6314 -2.6314 0 133"/></filter></svg>
-  <div class="xside xside-l" aria-hidden="true">
-    <div class="xorb">🦷</div>
-    <div class="xring"><i>✨</i></div>
-    <div class="xorb">🔬</div>
-  </div>
   <div class="xframe" id="xframe">
     <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
     <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
   </div>
-  <div class="xside xside-r" aria-hidden="true">
-    <div class="xorb">💎</div>
-    <div class="xring"><i>🦷</i></div>
-    <div class="xorb">🧬</div>
-  </div>
-</section>
-
-<section id="services">
-  <div class="wrap">
+  <div class="wrap xwrap" id="services">
     <span class="kicker" data-reveal>სერვისები</span>
     <h2 data-reveal>ყველაფერი შენი <span class="accent">ღიმილისთვის</span></h2>
     <p class="sub" data-reveal>სრული სპექტრის სტომატოლოგიური მომსახურება — ერთ თანამედროვე სივრცეში.</p>
@@ -346,7 +327,7 @@ footer .cred a{color:var(--gold)}
       <div class="svc" data-reveal><span class="go">↗</span><div class="ic">⚙️</div><h3>იმპლანტოლოგია</h3><p>პრემიუმ იმპლანტები — დაკარგული კბილების სრული აღდგენა და საიმედო შედეგი.</p></div>
       <div class="svc" data-reveal><span class="go">↗</span><div class="ic">😁</div><h3>ორთოდონტია</h3><p>ბრეკეტ-სისტემები და გამჭვირვალე კაპები — ნებისმიერი ასაკისთვის.</p></div>
       <div class="svc" data-reveal><span class="go">↗</span><div class="ic">✨</div><h3>პროფესიული გათეთრება</h3><p>უსაფრთხო და სწრაფი გათეთრება — შესამჩნევი ცვლილება ერთ ვიზიტში.</p></div>
-      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🔬</div><h3>ქირურგია</h3><p>სიბრძნის კბილების ამოღება და ქირურგიული ჩარევები — მაქსიმალური კომფორტი.</p></div>
+      <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🔬</div><h3>ქირურგია</h3><p>სიბძნის კბილების ამოღება და ქირურგიული ჩარევები — მაქსიმალური კომფორტი.</p></div>
       <div class="svc" data-reveal><span class="go">↗</span><div class="ic">🧸</div><h3>საბავშვო სტომატოლოგია</h3><p>მშვიდი და მეგობრული გარემო პატარებისთვის — პირველი ვიზიტი სიამოვნებად.</p></div>
     </div>
   </div>
