@@ -310,7 +310,7 @@ footer .cred a{color:var(--gold)}
 </section>
 
 <section class="xsec" id="xray">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 -1.6 0 0.2"/></filter></svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.4784 2.6314 -2.6314 0 133"/></filter></svg>
   <div class="wrap">
     <div class="xhead">
       <span class="kicker" data-reveal>X-Ray</span>
@@ -561,7 +561,11 @@ const frame=document.getElementById('xframe'),vid=document.getElementById('xvid'
       hint=document.getElementById('xhint'),km=document.getElementById('keyMatrix');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 let iw=0,ih=0,xa=1,geo=null,rect=null;
-const setKey=()=>km.setAttribute('values',`1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 ${(-1.6*ALIGN.key).toFixed(3)} 0 ${(0.2*ALIGN.key).toFixed(3)}`);
+const setKey = () => {
+  const k = ALIGN.key || 1;
+  km.setAttribute('values',
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  ${(0.4784*k).toFixed(4)} ${(2.6314*k).toFixed(4)} ${(-2.6314*k).toFixed(4)} 0 ${(133*k).toFixed(1)}`);
+};
 setKey();
 function vidReady(){iw=vid.videoWidth;ih=vid.videoHeight;vid.play().catch(()=>{});layout();}
 vid.addEventListener('loadedmetadata',vidReady);
