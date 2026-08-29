@@ -352,6 +352,9 @@ footer .cred a{color:var(--gold)}
 gsap.registerPlugin(ScrollTrigger);
 var isTouch = matchMedia('(hover:none)').matches;
 
+/* video auto-resume */
+document.addEventListener('visibilitychange',function(){if(!document.hidden){var v=document.querySelector('video');if(v&&v.paused)v.play().catch(function(e){})}});
+
 /* lenis + gsap sync */
 var lenis = new Lenis({duration:1.15,smoothWheel:true});
 lenis.on('scroll',ScrollTrigger.update);
