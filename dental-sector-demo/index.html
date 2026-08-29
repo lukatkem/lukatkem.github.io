@@ -90,20 +90,27 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
-/* x-ray interactive section — fullscreen */
-.xsec{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:#0B2C4E}
-.xframe{position:absolute;inset:0;background:#1E90E0;cursor:crosshair;touch-action:pan-y}
+/* x-ray interactive section — centered box + cool side decor */
+.xsec{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,#0B2C4E,#081F38);padding:56px 24px}
+.xsec::before,.xsec::after{content:'';position:absolute;width:440px;height:440px;border-radius:50%;filter:blur(90px);pointer-events:none}
+.xsec::before{background:rgba(66,135,224,.35);top:-130px;left:-110px}
+.xsec::after{background:rgba(217,164,65,.2);bottom:-150px;right:-100px}
+.xframe{position:relative;width:min(1040px,92vw);aspect-ratio:16/9;border-radius:26px;overflow:hidden;background:#1E90E0;box-shadow:0 40px 90px rgba(6,20,40,.6),0 0 0 9px rgba(255,255,255,.09),0 0 70px rgba(66,135,224,.25);cursor:crosshair;touch-action:pan-y;z-index:2}
 .xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.xframe::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,43,78,.62) 0%,rgba(11,43,78,.12) 34%,rgba(11,43,78,0) 55%,rgba(11,43,78,.42) 100%);pointer-events:none;z-index:1}
 .xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;z-index:2}
 .xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
 .xspot img.on{opacity:1}
-.xhead{position:absolute;top:clamp(28px,7vh,64px);left:0;right:0;z-index:3;text-align:center;max-width:780px;margin:0 auto;padding:0 20px;pointer-events:none}
-.xhead .kicker{color:#fff;text-shadow:0 2px 12px rgba(8,26,48,.5)}
-.xhead h2{color:#fff;text-shadow:0 4px 22px rgba(8,26,48,.55)}
-.xhead h2 .accent{color:var(--gold)}
-.xsub{color:rgba(255,255,255,.88);font-size:17.5px;line-height:1.65;margin:0;text-shadow:0 2px 14px rgba(8,26,48,.55)}
-@media(max-width:760px){.xhead{top:22px;padding:0 16px}.xsub{font-size:15px;line-height:1.55}}
+.xside{position:absolute;top:50%;transform:translateY(-50%);z-index:3;pointer-events:none;display:flex;flex-direction:column;gap:22px}
+.xside-l{left:max(14px,4.2vw)}
+.xside-r{right:max(14px,4.2vw)}
+.xorb{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.07);border:1px solid rgba(217,164,65,.45);box-shadow:0 0 34px rgba(217,164,65,.25),inset 0 0 20px rgba(217,164,65,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:xfloat 5.5s ease-in-out infinite}
+.xside-r .xorb{border-color:rgba(111,169,236,.55);box-shadow:0 0 34px rgba(66,135,224,.35),inset 0 0 20px rgba(66,135,224,.14);animation-delay:-2.7s}
+.xring{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:2px dashed rgba(255,255,255,.35);animation:xspin 22s linear infinite;margin:0 auto}
+.xring i{font-style:normal;font-size:24px}
+@keyframes xfloat{50%{transform:translateY(-14px)}}
+@keyframes xspin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.xside{display:none}}
+@media(max-width:760px){.xsec{padding:36px 14px}.xframe{border-radius:18px;box-shadow:0 24px 60px rgba(6,20,40,.5),0 0 0 6px rgba(255,255,255,.09)}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -313,14 +320,19 @@ footer .cred a{color:var(--gold)}
 
 <section class="xsec" id="xray">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.4784 2.6314 -2.6314 0 133"/></filter></svg>
+  <div class="xside xside-l" aria-hidden="true">
+    <div class="xorb">🦷</div>
+    <div class="xring"><i>✨</i></div>
+    <div class="xorb">🔬</div>
+  </div>
   <div class="xframe" id="xframe">
     <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
     <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
-    <div class="xhead">
-      <span class="kicker">X-Ray</span>
-      <h2>ნახე კბილი <span class="accent">შიგნიდან</span></h2>
-      <p class="xsub">გადაატარე მაუსი კბილზე — და ნახავ, რა იმალება მის შიგნით: ემალი, დენტინი და ნერვები.</p>
-    </div>
+  </div>
+  <div class="xside xside-r" aria-hidden="true">
+    <div class="xorb">💎</div>
+    <div class="xring"><i>🦷</i></div>
+    <div class="xorb">🧬</div>
   </div>
 </section>
 
