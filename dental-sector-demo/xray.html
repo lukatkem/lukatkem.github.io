@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dental Sector — X-Ray 🦷</title>
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0; overflow: hidden;
+    background: #1e90e0;                 /* only visible while loading */
+    cursor: crosshair;
+    touch-action: none;
+    user-select: none; -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* the scene render — animated crew + giant tooth, fullscreen */
+  #scene {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0; transition: opacity .7s ease;
+    -webkit-user-drag: none;
+  }
+  #scene.on { opacity: 1; }
+
+  /* the glass x-ray tooth, chroma-keyed (blue bg removed), over the big tooth */
+  #spot {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  #spot img {
+    position: absolute;
+    filter: url(#keyBlue);
+    -webkit-user-drag: none;
+    opacity: 0; transition: opacity .5s;
+  }
+  #spot img.on { opacity: 1; }
+
+  /* back link + hint */
+  #back {
+    position: fixed; left: 18px; top: 18px; z-index: 40;
+    color: #fff; text-decoration: none;
+    font: 500 12px/1 -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: .04em;
+    background: rgba(10, 30, 60, .45);
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 10px 16px; border-radius: 999px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background .25s;
+  }
+  #back:hover { background: rgba(10, 30, 60, .7); }
+  #hint {
+    position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+    z-index: 40; color: #fff; pointer-events: none;
+    font: 600 13.5px/1 -apple-system, "Segoe UI", sans-serif;
+    background: rgba(10, 30, 60, .45);
+    border: 1px solid rgba(255,255,255,.3);
+    padding: 11px 18px; border-radius: 999px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    opacity: 1; transition: opacity .8s;
+    white-space: nowrap;
+  }
+  #hint.off { opacity: 0; }
+
+  /* hidden alignment tuner — press A */
+  #cal {
+    position: fixed; right: 18px; bottom: 18px; z-index: 50;
+    width: min(340px, calc(100vw - 36px));
+    background: rgba(12, 22, 40, .92); color: #eef4ff;
+    border: 1px solid rgba(160, 200, 255, .25); border-radius: 14px;
+    padding: 18px; font-family: ui-monospace, monospace;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  #cal[hidden] { display: none; }
+  #cal .k { font-size: 9px; letter-spacing: .28em; opacity: .6; margin-bottom: 12px; }
+  .crow { display: grid; grid-template-columns: 84px 1fr 40px; gap: 8px; align-items: center; margin-bottom: 7px; }
+  .crow span { font-size: 8.5px; letter-spacing: .08em; opacity: .7; }
+  .crow b { font-size: 10px; text-align: right; font-weight: 500; }
+  .crow input[type=range] { width: 100%; accent-color: #ff5b63; height: 14px; }
+  #calOut { display: block; font-size: 9.5px; line-height: 1.5; background: #060d1c;
+    border-radius: 8px; padding: 9px 11px; margin-top: 10px; word-break: break-all; user-select: all; }
+  #cal .hint { font-size: 10.5px; line-height: 1.55; opacity: .65; margin-top: 10px; }
+  #cal .row { display: flex; gap: 8px; margin-top: 10px; }
+  .cbtn { background: none; border: 1px solid rgba(160,200,255,.3); color: #eef4ff;
+    border-radius: 999px; cursor: pointer; font: 500 9px/1 ui-monospace, monospace;
+    letter-spacing: .18em; padding: 8px 14px; }
+  .cbtn:hover { border-color: rgba(200,230,255,.7); }
+
+  /* only ever shown if the hosted media fail */
+  #fb {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+    margin: 0; padding: 12px 20px; text-align: center;
+    background: rgba(12,22,40,.9); color: #eef4ff; border-radius: 12px;
+    font: 12.5px/1.6 ui-monospace, monospace;
+  }
+  #fb[hidden] { display: none; }
+</style>
+</head>
+<body>
+
+<!-- chroma-key filter: removes the x-ray plate's blue background -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="keyBlue" color-interpolation-filters="sRGB">
+    <feColorMatrix id="keyMatrix" type="matrix"
+      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 -1.6 0 0.2"/>
+  </filter>
+</svg>
+
+<video id="scene" autoplay muted loop playsinline preload="auto">
+  <source src="scene.mp4" type="video/mp4">
+</video>
+<div id="spot"><img id="glass" alt=""></div>
+
+<a id="back" href="./">← მთავარი</a>
+<div id="hint">🦷 გადაატარე მაუსი კბილზე — ვნახოთ შიგნით</div>
+
+<div id="cal" hidden>
+  <p class="k">ALIGN X-RAY OVERLAY — PRESS A TO HIDE</p>
+  <div class="crow"><span>TOOTH · X</span><input type="range" id="cSx" min="0.1" max="0.9" step="0.005"><b id="oSx"></b></div>
+  <div class="crow"><span>TOOTH · Y</span><input type="range" id="cSy" min="0.1" max="0.9" step="0.005"><b id="oSy"></b></div>
+  <div class="crow"><span>TOOTH · SIZE</span><input type="range" id="cSh" min="0.15" max="0.95" step="0.005"><b id="oSh"></b></div>
+  <div class="crow"><span>GLASS · TRIM X</span><input type="range" id="cTx" min="-0.25" max="0.25" step="0.005"><b id="oTx"></b></div>
+  <div class="crow"><span>GLASS · TRIM Y</span><input type="range" id="cTy" min="-0.25" max="0.25" step="0.005"><b id="oTy"></b></div>
+  <div class="crow"><span>GLASS · SIZE ×</span><input type="range" id="cTs" min="0.7" max="1.4" step="0.01"><b id="oTs"></b></div>
+  <div class="crow"><span>BLUE KEY</span><input type="range" id="cKey" min="0.4" max="2.4" step="0.05"><b id="oKey"></b></div>
+  <p class="hint">Drag until the glass tooth sits exactly on the big one, then paste this line into <b>ALIGN</b> at the top of the script:</p>
+  <code id="calOut"></code>
+  <div class="row">
+    <button class="cbtn" id="calCopy" type="button">COPY</button>
+    <button class="cbtn" id="calDone" type="button">DONE</button>
+  </div>
+</div>
+
+<p id="fb" hidden>media couldn't load — check scene.mp4 / xray-plate.png</p>
+
+<script>
+(() => {
+'use strict';
+
+/* Where the big tooth sits in the scene (sx, sy = center, sh = height, as
+   fractions of the displayed image), where the glass tooth sits in the x-ray
+   plate (xx, xy, xh), fine trims (tx, ty, ts) and chroma-key strength (key).
+   Tune with the hidden A-panel, then paste the printed line back here. */
+const ALIGN = { sx:.51, sy:.486, sh:.94, xx:.509, xy:.485, xh:.747, tx:0, ty:0, ts:1, key:1 };
+
+/* ?show  = spotlight pinned on the tooth at full strength (alignment check)
+   ?still = static scene.png instead of the video (fallback / testing)     */
+const FORCE = /[?&]show/.test(location.search);
+const STILL = /[?&]still/.test(location.search);
+
+const $ = id => document.getElementById(id);
+let scene=$('scene'), glass=$('glass'), spot=$('spot'),
+      fb=$('fb'), hint=$('hint'), cal=$('cal'), calOut=$('calOut'), keyMatrix=$('keyMatrix');
+
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+/* ---------- load ---------- */
+let iw=0, ih=0, xAspect=1, geo=null;
+
+function sceneReady(w, h){
+  iw = w; ih = h;
+  scene.classList.add('on');
+  layout();
+}
+if (STILL){
+  const img = new Image();
+  img.onload  = () => sceneReady(img.naturalWidth, img.naturalHeight);
+  img.onerror = fail;
+  img.src = 'scene.png';
+  scene.replaceWith(img);
+  img.id = 'scene'; scene = img;
+} else {
+  scene.addEventListener('loadedmetadata', () => sceneReady(scene.videoWidth, scene.videoHeight));
+  scene.addEventListener('error', fail);
+  /* keep it playing: browsers pause muted videos in background tabs */
+  const ensurePlay = () => { if (scene.paused) scene.play().catch(()=>{}); };
+  scene.addEventListener('canplay', ensurePlay);
+  addEventListener('pointerdown', ensurePlay);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) ensurePlay(); });
+  ensurePlay();
+}
+glass.addEventListener('load', () => {
+  xAspect = (glass.naturalWidth / glass.naturalHeight) || 1;
+  glass.classList.add('on');
+  layout();
+});
+function fail(){ fb.hidden = false; }
+glass.addEventListener('error', fail);
+glass.src = 'xray-plate.png';
+
+/* ---------- geometry: fit the glass tooth onto the big tooth ---------- */
+function setKey(){
+  const k = ALIGN.key;
+  keyMatrix.setAttribute('values',
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 ${(-1.6*k).toFixed(3)} 0 ${(0.2*k).toFixed(3)}`);
+}
+setKey();
+
+function layout(){
+  if (!iw || !xAspect) return;
+  const vw = innerWidth, vh = innerHeight;
+  /* cover-fit rect of the scene */
+  const s  = Math.max(vw / iw, vh / ih);
+  const dw = iw * s, dh = ih * s;
+  const ox = (vw - dw) / 2, oy = (vh - dh) / 2;
+  /* the big tooth on screen */
+  const th = ALIGN.sh * dh;
+  const cx = ox + ALIGN.sx * dw;
+  const cy = oy + ALIGN.sy * dh;
+  /* the x-ray plate, scaled so its glass tooth matches the big tooth */
+  const hI = (th * ALIGN.ts) / ALIGN.xh;
+  const wI = hI * xAspect;
+  glass.style.left   = (cx - ALIGN.xx * wI + ALIGN.tx * wI) + 'px';
+  glass.style.top    = (cy - ALIGN.xy * hI + ALIGN.ty * hI) + 'px';
+  glass.style.width  = wI + 'px';
+  glass.style.height = hI + 'px';
+  geo = { cx, cy, th };
+}
+addEventListener('resize', layout);
+
+/* ---------- pointer ---------- */
+let mx=-9e3, my=-9e3;         // raw cursor
+let sx=0, sy=0;               // smoothed spot position
+let sr=0, op=0;               // smoothed radius + opacity
+let present=false, have=false, calOpen=false, roamed=false;
+
+addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; present=true; offHint(); }, {passive:true});
+addEventListener('pointerdown', e => { mx=e.clientX; my=e.clientY; present=true; offHint(); });
+addEventListener('pointerup',    e => { if (e.pointerType !== 'mouse') present=false; });
+addEventListener('pointercancel',() => present=false);
+document.addEventListener('mouseleave', () => present=false);
+addEventListener('blur', () => present=false);
+function offHint(){ if (!roamed){ roamed = true; hint.classList.add('off'); } }
+
+/* ---------- hidden alignment panel (press A) ---------- */
+const CALS = [['cSx','sx'],['cSy','sy'],['cSh','sh'],['cTx','tx'],['cTy','ty'],['cTs','ts'],['cKey','key']];
+function printCal(){
+  const r = {}; for (const k in ALIGN) r[k] = +ALIGN[k].toFixed(3);
+  calOut.textContent = `const ALIGN = ${JSON.stringify(r)};`;
+}
+function syncCal(){
+  CALS.forEach(([id,k]) => { $(id).value = ALIGN[k]; $('o'+id.slice(1)).textContent = (+ALIGN[k]).toFixed(2); });
+  printCal();
+}
+CALS.forEach(([id,k]) => {
+  $(id).addEventListener('input', e => {
+    ALIGN[k] = parseFloat(e.target.value);
+    $('o'+id.slice(1)).textContent = ALIGN[k].toFixed(2);
+    if (k === 'key') setKey();
+    layout(); printCal();
+  });
+});
+function toggleCal(open){
+  calOpen = open ?? !calOpen;
+  cal.hidden = !calOpen;
+  if (calOpen) syncCal();
+}
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === 'a') toggleCal();
+  else if (k === 'escape' && calOpen) toggleCal(false);
+});
+$('calDone').addEventListener('click', () => toggleCal(false));
+$('calCopy').addEventListener('click', e => {
+  const btn = e.currentTarget;
+  const done = () => { btn.textContent='COPIED'; setTimeout(()=>btn.textContent='COPY',1300); };
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(calOut.textContent).then(done, ()=>{ calOut.focus(); });
+  else { const r=document.createRange(); r.selectNodeContents(calOut);
+         getSelection().removeAllRanges(); getSelection().addRange(r); done(); }
+});
+
+/* ---------- main loop ---------- */
+let last = performance.now();
+function tick(now){
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+
+  if (geo){
+    const rx = geo.th * .45, ry = geo.th * .58;
+    let tOp, tx, ty;
+
+    if (FORCE){                        /* pinned spotlight for alignment checks */
+      tx = geo.cx; ty = geo.cy; tOp = 1;
+    } else if (present){               /* follow the cursor, fade in on approach */
+      const d = Math.hypot((mx - geo.cx) / rx, (my - geo.cy) / ry);
+      tOp = clamp((1.22 - d) / .35, 0, 1);
+      tx = mx; ty = my;
+      if (!have){ sx = mx; sy = my; have = true; }
+    } else {                           /* idle: the x-ray roams the tooth by itself */
+      const t = now / 1000;
+      tx = geo.cx + Math.cos(t * .55)       * rx * .42;
+      ty = geo.cy + Math.sin(t * .8) * ry * .3;
+      tOp = .5;
+    }
+
+    const k = 1 - Math.exp(-dt * (present ? 22 : 2.2));
+    sx += (tx - sx) * k;
+    sy += (ty - sy) * k;
+    op += (tOp - op) * (1 - Math.exp(-dt * 9));
+
+    const base = FORCE ? geo.th * .42 : geo.th * (present ? .26 : .22);
+    sr += (base - sr) * (1 - Math.exp(-dt * 7));
+
+    /* mask is in viewport pixels — the layer is fixed fullscreen, so spot = mask center */
+    const R = Math.max(sr, .5);
+    const mask = `radial-gradient(circle ${R.toFixed(1)}px at ${sx.toFixed(1)}px ${sy.toFixed(1)}px, #000 ${(R*.55).toFixed(1)}px, rgba(0,0,0,0) ${R.toFixed(1)}px)`;
+    spot.style.webkitMaskImage = mask;
+    spot.style.maskImage = mask;
+    spot.style.opacity = (calOpen ? Math.max(op, .55) : op).toFixed(3);
+  }
+
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
