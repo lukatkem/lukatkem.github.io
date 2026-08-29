@@ -90,8 +90,17 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
-.chip3{top:-20px;left:-14px;animation:float1 7.5s ease-in-out infinite;text-decoration:none;cursor:pointer}
-.chip3:hover{transform:translateY(-3px)}
+/* x-ray interactive section */
+.xsec{background:linear-gradient(180deg,#F3F9FF,#E3EFFF);position:relative}
+.xhead{text-align:center;max-width:740px;margin:0 auto 44px}
+.xsub{color:var(--mut);font-size:17.5px;line-height:1.65;margin:0}
+.xframe{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#1E90E0;box-shadow:0 40px 90px rgba(9,38,66,.35),0 0 0 9px rgba(255,255,255,.9);cursor:crosshair;touch-action:pan-y}
+.xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
+.xhint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;color:#fff;font-weight:600;font-size:13.5px;background:rgba(10,30,60,.45);border:1px solid rgba(255,255,255,.3);padding:10px 16px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .8s;white-space:nowrap;pointer-events:none}
+.xhint.off{opacity:0}
+@media(max-width:760px){.xframe{aspect-ratio:4/3;border-radius:20px;box-shadow:0 24px 60px rgba(9,38,66,.3),0 0 0 7px rgba(255,255,255,.9)}.xhint{font-size:12px;padding:9px 13px}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -228,7 +237,7 @@ footer .cred a{color:var(--gold)}
 @media(max-width:620px){
   section{padding:70px 0}
   .svcgrid,.qgrid,.cgrid{grid-template-columns:1fr}
-  .chip1{right:0}.chip2{left:0}.chip3{left:0}
+  .chip1{right:0}.chip2{left:0}
   .badge98{left:6px;padding:12px 15px}
   h1{font-size:clamp(38px,11vw,52px)}
   .mqwrap{margin:-26px 0 -6px}
@@ -284,7 +293,6 @@ footer .cred a{color:var(--gold)}
       </div>
       <div class="chip chip1"><span class="big"><span class="star">★</span>5.0</span><small>174 Google შეფასება</small></div>
       <div class="chip chip2"><span class="big"><img src="logo.svg" alt="" style="height:19px;width:auto"> ოჯახის კლინიკა</span><small>თბილისი, პ. ასლანიძის ქ. 12</small></div>
-      <a class="chip chip3" href="xray.html" target="_blank" rel="noopener"><span class="big">🦷 X-Ray ხედი</span><small>ნახე კბილი შიგნიდან</small></a>
     </div>
   </div>
 </header>
@@ -297,6 +305,22 @@ footer .cred a{color:var(--gold)}
     <div data-reveal><div class="num"><span data-count="5" data-dec="1">0</span><em>★</em></div><div class="lbl">საშუალო რეიტინგი</div></div>
     <div data-reveal><div class="num"><span data-count="100">0</span><em>%</em></div><div class="lbl">სტერილურობის სტანდარტი</div></div>
     <div data-reveal><div class="num"><span data-count="6">0</span></div><div class="lbl">სერვისი ერთ სივრცეში</div></div>
+  </div>
+</section>
+
+<section class="xsec" id="xray">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 -1.6 0 0.2"/></filter></svg>
+  <div class="wrap">
+    <div class="xhead">
+      <span class="kicker" data-reveal>X-Ray</span>
+      <h2 data-reveal>ნახე კბილი <span class="accent">შიგნიდან</span></h2>
+      <p class="xsub" data-reveal>გადაატარე მაუსი კბილზე — და ნახავ, რა იმალება მის შიგნით: ემალი, დენტინი და ნერვები.</p>
+    </div>
+    <div class="xframe" id="xframe" data-reveal>
+      <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
+      <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
+      <div class="xhint" id="xhint">🦷 გადაატარე მაუსი კბილზე</div>
+    </div>
   </div>
 </section>
 
@@ -526,6 +550,76 @@ if(!isTouch){
     el.addEventListener('mouseleave',function(){ring.style.width='38px';ring.style.height='38px'});
   });
 }
+</script>
+<script>
+(()=>{'use strict';
+/* X-ray spotlight: cursor reveals the glass x-ray tooth over the animated scene */
+const ALIGN={sx:.51,sy:.486,sh:.94,xx:.509,xy:.485,xh:.747,tx:0,ty:0,ts:1,key:1};
+const frame=document.getElementById('xframe'),vid=document.getElementById('xvid'),
+      spot=document.getElementById('xspot'),img=document.getElementById('ximg'),
+      hint=document.getElementById('xhint'),km=document.getElementById('keyMatrix');
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+let iw=0,ih=0,xa=1,geo=null,rect=null;
+const setKey=()=>km.setAttribute('values',`1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 1.8 ${(-1.6*ALIGN.key).toFixed(3)} 0 ${(0.2*ALIGN.key).toFixed(3)}`);
+setKey();
+function vidReady(){iw=vid.videoWidth;ih=vid.videoHeight;vid.play().catch(()=>{});layout();}
+vid.addEventListener('loadedmetadata',vidReady);
+if(vid.readyState>=1)vidReady();
+function imgReady(){xa=(img.naturalWidth/img.naturalHeight)||1;img.classList.add('on');layout();}
+img.addEventListener('load',imgReady);
+if(img.complete&&img.naturalWidth)imgReady();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&vid.paused)vid.play().catch(()=>{})});
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&vid.paused)vid.play().catch(()=>{})})},{threshold:.2}).observe(frame);
+function layout(){
+  if(!iw||!xa)return;
+  rect=frame.getBoundingClientRect();
+  const vw=rect.width,vh=rect.height;
+  const s=Math.max(vw/iw,vh/ih),dw=iw*s,dh=ih*s,ox=(vw-dw)/2,oy=(vh-dh)/2;
+  const th=ALIGN.sh*dh,cx=ox+ALIGN.sx*dw,cy=oy+ALIGN.sy*dh;
+  const hI=(th*ALIGN.ts)/ALIGN.xh,wI=hI*xa;
+  img.style.left=(cx-ALIGN.xx*wI+ALIGN.tx*wI)+'px';
+  img.style.top=(cy-ALIGN.xy*hI+ALIGN.ty*hI)+'px';
+  img.style.width=wI+'px';img.style.height=hI+'px';
+  geo={cx,cy,th};
+}
+addEventListener('resize',layout);
+let mx=-9e3,my=-9e3,sx=0,sy=0,sr=0,op=0,present=false,have=false,roamed=false;
+const wake=()=>{if(!roamed){roamed=true;hint.classList.add('off')}};
+frame.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;present=true;wake()},{passive:true});
+frame.addEventListener('pointerdown',e=>{mx=e.clientX;my=e.clientY;present=true;wake()});
+frame.addEventListener('pointerleave',()=>present=false);
+frame.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')present=false});
+frame.addEventListener('pointercancel',()=>present=false);
+let last=performance.now();
+function tick(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(geo){
+    if(!rect)rect=frame.getBoundingClientRect();
+    const rx=geo.th*.45,ry=geo.th*.58;
+    let tOp,tx,ty;
+    if(present){
+      const lx=mx-rect.left,ly=my-rect.top;
+      const d=Math.hypot((lx-geo.cx)/rx,(ly-geo.cy)/ry);
+      tOp=clamp((1.22-d)/.35,0,1);tx=lx;ty=ly;
+      if(!have){sx=lx;sy=ly;have=true}
+    }else{
+      const t=now/1000;
+      tx=geo.cx+Math.cos(t*.55)*rx*.42;ty=geo.cy+Math.sin(t*.8)*ry*.3;tOp=.5;
+    }
+    const k=1-Math.exp(-dt*(present?22:2.2));
+    sx+=(tx-sx)*k;sy+=(ty-sy)*k;
+    op+=(tOp-op)*(1-Math.exp(-dt*9));
+    const base=geo.th*(present?.26:.22);
+    sr+=(base-sr)*(1-Math.exp(-dt*7));
+    const R=Math.max(sr,.5);
+    const mask=`radial-gradient(circle ${R.toFixed(1)}px at ${sx.toFixed(1)}px ${sy.toFixed(1)}px, #000 ${(R*.55).toFixed(1)}px, rgba(0,0,0,0) ${R.toFixed(1)}px)`;
+    spot.style.webkitMaskImage=mask;spot.style.maskImage=mask;
+    spot.style.opacity=op.toFixed(3);
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
