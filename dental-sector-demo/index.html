@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dental Sector — დენტალ სექტორი | სტომატოლოგია თბილისში</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <meta name="description" content="Dental Sector — თანამედროვე სტომატოლოგიური კლინიკა თბილისში. იმპლანტები, ბრეკეტები, გათეთრება, საბავშვო სტომატოლოგია. Google 5.0★ — 174 შეფასება.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +39,8 @@ img{display:block;max-width:100%}
 nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:20px 0;transition:.35s;color:#fff}
 nav .nrow{display:flex;align-items:center;justify-content:space-between}
 .logo{font-family:'Kanit';font-weight:800;font-size:20px;display:flex;align-items:center;gap:10px;letter-spacing:.02em}
-.logo .tooth{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.16);display:grid;place-items:center;font-size:17px;backdrop-filter:blur(6px)}
+.logo .tooth{width:30px;height:32px;display:grid;place-items:center}
+.logo .tooth img{width:100%;height:100%;object-fit:contain}
 .nlinks{display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:600}
 .nlinks a{opacity:.85;position:relative;transition:.25s}
 .nlinks a:hover{opacity:1}
@@ -47,7 +49,6 @@ nav .nrow{display:flex;align-items:center;justify-content:space-between}
 .pill{background:#fff;color:var(--ink);padding:11px 22px;border-radius:99px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;transition:.3s;box-shadow:0 8px 24px rgba(9,38,66,.18)}
 .pill:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(9,38,66,.25)}
 nav.solid{padding:12px 0;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 6px 24px rgba(13,43,78,.08)}
-nav.solid .logo .tooth{background:var(--blue);color:#fff}
 nav.solid .pill{background:var(--deep);color:#fff}
 #burger{display:none;background:none;border:0;color:inherit;font-size:26px;cursor:pointer;line-height:1}
 
@@ -210,7 +211,7 @@ footer .cred a{color:var(--gold)}
 
 <nav id="nav">
   <div class="wrap nrow">
-    <a class="logo" href="#top"><span class="tooth">🦷</span>DENTAL SECTOR</a>
+    <a class="logo" href="#top"><span class="tooth"><img src="logo.svg" alt="Dental Sector"></span>DENTAL SECTOR</a>
     <div class="nlinks" id="nlinks">
       <a href="#about">ჩვენ შესახებ</a>
       <a href="#services">სერვისები</a>
@@ -250,7 +251,7 @@ footer .cred a{color:var(--gold)}
         </div>
       </div>
       <div class="chip chip1"><span class="big"><span class="star">★</span>5.0</span><small>174 Google შეფასება</small></div>
-      <div class="chip chip2"><span class="big">🦷 ოჯახის კლინიკა</span><small>თბილისი, პ. ასლანიძის ქ. 12</small></div>
+      <div class="chip chip2"><span class="big"><img src="logo.svg" alt="" style="height:19px;width:auto"> ოჯახის კლინიკა</span><small>თბილისი, პ. ასლანიძის ქ. 12</small></div>
     </div>
   </div>
 </header>
@@ -325,7 +326,7 @@ footer .cred a{color:var(--gold)}
 
 <footer>
   <div class="wrap">
-    <div class="flogo">🦷 DENTAL SECTOR</div>
+    <div class="flogo"><img src="logo.svg" alt="" style="height:32px;width:auto;display:inline-block;vertical-align:-9px;margin-right:9px">DENTAL SECTOR</div>
     <p>© 2026 Dental Sector — დენტალ სექტორი · თბილისი</p>
     <p class="cred">Site crafted by <a href="https://lukatkem.github.io" target="_blank">Luka Tkemaladze</a></p>
   </div>
