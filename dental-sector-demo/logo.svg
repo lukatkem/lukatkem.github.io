@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 240">
+  <defs>
+    <clipPath id="t">
+      <path d="M110 14 C158 14 200 44 205 92 C208 122 202 146 196 170 C193 190 190 208 187 219 C184 232 166 232 163 219 C158 200 143 176 130 160 C124 153 118 150 110 150 C102 150 96 153 90 160 C77 176 62 200 57 219 C54 232 36 232 33 219 C30 208 27 190 24 170 C18 146 12 122 15 92 C20 44 62 14 110 14 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#t)">
+    <rect x="110" y="0" width="110" height="240" fill="#EFE9D3"/>
+    <rect x="0" y="0" width="110" height="240" fill="#181818"/>
+    <g stroke="#EFE9D3" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- horizontals -->
+      <path d="M18 40 L50 26 L82 34 L110 30"/>
+      <path d="M14 78 L44 66 L76 70 L110 66"/>
+      <path d="M20 116 L48 106 L80 108 L110 104"/>
+      <path d="M26 154 L52 146 L84 146 L110 144"/>
+      <path d="M32 192 L58 184 L88 182 L110 180"/>
+      <path d="M40 222 L64 214 L94 212"/>
+      <!-- verticals -->
+      <path d="M18 40 L14 78 L20 116 L26 154 L32 192 L40 222"/>
+      <path d="M50 26 L44 66 L48 106 L52 146 L58 184 L64 214"/>
+      <path d="M82 34 L76 70 L80 108 L84 146 L88 182 L94 212"/>
+      <path d="M110 30 L110 66 L110 104 L110 144 L110 180"/>
+      <!-- diagonals -->
+      <path d="M18 40 L44 66 M50 26 L76 70 M82 34 L110 66"/>
+      <path d="M14 78 L48 106 M44 66 L80 108 M76 70 L110 104"/>
+      <path d="M20 116 L52 146 M48 106 L84 146 M80 108 L110 144"/>
+      <path d="M26 154 L58 184 M52 146 L88 182 M84 146 L110 180"/>
+      <path d="M32 192 L64 214 M58 184 L94 212"/>
+    </g>
+    <g fill="#EFE9D3">
+      <circle cx="18" cy="40" r="4.5"/><circle cx="50" cy="26" r="4.5"/><circle cx="82" cy="34" r="4.5"/><circle cx="110" cy="30" r="4.5"/>
+      <circle cx="14" cy="78" r="4.5"/><circle cx="44" cy="66" r="4.5"/><circle cx="76" cy="70" r="4.5"/><circle cx="110" cy="66" r="4.5"/>
+      <circle cx="20" cy="116" r="4.5"/><circle cx="48" cy="106" r="4.5"/><circle cx="80" cy="108" r="4.5"/><circle cx="110" cy="104" r="4.5"/>
+      <circle cx="26" cy="154" r="4.5"/><circle cx="52" cy="146" r="4.5"/><circle cx="84" cy="146" r="4.5"/><circle cx="110" cy="144" r="4.5"/>
+      <circle cx="32" cy="192" r="4.5"/><circle cx="58" cy="184" r="4.5"/><circle cx="88" cy="182" r="4.5"/><circle cx="110" cy="180" r="4.5"/>
+      <circle cx="40" cy="222" r="4.5"/><circle cx="64" cy="214" r="4.5"/><circle cx="94" cy="212" r="4.5"/>
+    </g>
+  </g>
+  <path d="M110 14 C158 14 200 44 205 92 C208 122 202 146 196 170 C193 190 190 208 187 219 C184 232 166 232 163 219 C158 200 143 176 130 160 C124 153 118 150 110 150 C102 150 96 153 90 160 C77 176 62 200 57 219 C54 232 36 232 33 219 C30 208 27 190 24 170 C18 146 12 122 15 92 C20 44 62 14 110 14 Z" fill="none" stroke="#181818" stroke-width="10" stroke-linejoin="round"/>
+</svg>
