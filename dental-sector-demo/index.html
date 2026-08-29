@@ -104,6 +104,9 @@ h1 .gold{color:var(--gold)}
 .xwrap h2 .accent{color:var(--gold)}
 .xwrap .sub{color:rgba(255,255,255,.92);margin:0 auto;text-shadow:0 2px 14px rgba(8,26,48,.6)}
 .xwrap .svc{pointer-events:auto;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:transparent;box-shadow:0 20px 50px rgba(6,20,40,.45)}
+.xwrap .svc:nth-child(3n+1){margin-top:-26px}
+.xwrap .svc:nth-child(3n){margin-top:26px}
+@media(max-width:1020px){.xwrap .svc{margin-top:0}}
 @media(max-width:760px){.xwrap{padding:72px 0 64px}.xwrap .svc{background:rgba(255,255,255,.96)}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
