@@ -144,7 +144,7 @@
    fractions of the displayed image), where the glass tooth sits in the x-ray
    plate (xx, xy, xh), fine trims (tx, ty, ts) and chroma-key strength (key).
    Tune with the hidden A-panel, then paste the printed line back here. */
-const ALIGN = { sx:.51, sy:.486, sh:.94, xx:.509, xy:.485, xh:.747, tx:0, ty:0, ts:1, key:1 };
+const ALIGN = { sx:.492, sy:.5, sh:.7, xx:.528, xy:.495, xh:.739, tx:0, ty:0, ts:1, sxs:1.267, key:1 };
 
 /* ?show  = spotlight pinned on the tooth at full strength (alignment check)
    ?still = static scene.png instead of the video (fallback / testing)     */
@@ -212,7 +212,7 @@ function layout(){
   const cy = oy + ALIGN.sy * dh;
   /* the x-ray plate, scaled so its glass tooth matches the big tooth */
   const hI = (th * ALIGN.ts) / ALIGN.xh;
-  const wI = hI * xAspect;
+  const wI = hI * xAspect * (ALIGN.sxs || 1);
   glass.style.left   = (cx - ALIGN.xx * wI + ALIGN.tx * wI) + 'px';
   glass.style.top    = (cy - ALIGN.xy * hI + ALIGN.ty * hI) + 'px';
   glass.style.width  = wI + 'px';
