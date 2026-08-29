@@ -90,18 +90,20 @@ h1 .gold{color:var(--gold)}
 .chip .big .star{color:var(--gold)}
 .chip1{top:-20px;right:-14px;animation:float1 5s ease-in-out infinite}
 .chip2{bottom:-18px;left:-16px;animation:float1 6.5s ease-in-out infinite reverse}
-/* x-ray interactive section */
-.xsec{background:linear-gradient(180deg,#F3F9FF,#E3EFFF);position:relative}
-.xhead{text-align:center;max-width:740px;margin:0 auto 44px}
-.xsub{color:var(--mut);font-size:17.5px;line-height:1.65;margin:0}
-.xframe{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#1E90E0;box-shadow:0 40px 90px rgba(9,38,66,.35),0 0 0 9px rgba(255,255,255,.9);cursor:crosshair;touch-action:pan-y}
+/* x-ray interactive section — fullscreen */
+.xsec{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:#0B2C4E}
+.xframe{position:absolute;inset:0;background:#1E90E0;cursor:crosshair;touch-action:pan-y}
 .xframe video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.xframe::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,43,78,.62) 0%,rgba(11,43,78,.12) 34%,rgba(11,43,78,0) 55%,rgba(11,43,78,.42) 100%);pointer-events:none;z-index:1}
+.xspot{position:absolute;inset:0;pointer-events:none;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;z-index:2}
 .xspot img{position:absolute;filter:url(#keyBlue);opacity:0;transition:opacity .5s}
 .xspot img.on{opacity:1}
-.xhint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;color:#fff;font-weight:600;font-size:13.5px;background:rgba(10,30,60,.45);border:1px solid rgba(255,255,255,.3);padding:10px 16px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .8s;white-space:nowrap;pointer-events:none}
-.xhint.off{opacity:0}
-@media(max-width:760px){.xframe{aspect-ratio:4/3;border-radius:20px;box-shadow:0 24px 60px rgba(9,38,66,.3),0 0 0 7px rgba(255,255,255,.9)}.xhint{font-size:12px;padding:9px 13px}}
+.xhead{position:absolute;top:clamp(28px,7vh,64px);left:0;right:0;z-index:3;text-align:center;max-width:780px;margin:0 auto;padding:0 20px;pointer-events:none}
+.xhead .kicker{color:#fff;text-shadow:0 2px 12px rgba(8,26,48,.5)}
+.xhead h2{color:#fff;text-shadow:0 4px 22px rgba(8,26,48,.55)}
+.xhead h2 .accent{color:var(--gold)}
+.xsub{color:rgba(255,255,255,.88);font-size:17.5px;line-height:1.65;margin:0;text-shadow:0 2px 14px rgba(8,26,48,.55)}
+@media(max-width:760px){.xhead{top:22px;padding:0 16px}.xsub{font-size:15px;line-height:1.55}}
 @keyframes float1{50%{transform:translateY(-12px)}}
 
 .mqwrap{position:relative;z-index:5;margin:-44px 0 -14px;pointer-events:none}
@@ -311,16 +313,13 @@ footer .cred a{color:var(--gold)}
 
 <section class="xsec" id="xray">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="keyBlue" color-interpolation-filters="sRGB"><feColorMatrix id="keyMatrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.4784 2.6314 -2.6314 0 133"/></filter></svg>
-  <div class="wrap">
+  <div class="xframe" id="xframe">
+    <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
+    <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
     <div class="xhead">
-      <span class="kicker" data-reveal>X-Ray</span>
-      <h2 data-reveal>ნახე კბილი <span class="accent">შიგნიდან</span></h2>
-      <p class="xsub" data-reveal>გადაატარე მაუსი კბილზე — და ნახავ, რა იმალება მის შიგნით: ემალი, დენტინი და ნერვები.</p>
-    </div>
-    <div class="xframe" id="xframe" data-reveal>
-      <video id="xvid" autoplay muted loop playsinline preload="metadata" src="scene.mp4"></video>
-      <div class="xspot" id="xspot"><img id="ximg" src="xray-plate.png" alt=""></div>
-      <div class="xhint" id="xhint">🦷 გადაატარე მაუსი კბილზე</div>
+      <span class="kicker">X-Ray</span>
+      <h2>ნახე კბილი <span class="accent">შიგნიდან</span></h2>
+      <p class="xsub">გადაატარე მაუსი კბილზე — და ნახავ, რა იმალება მის შიგნით: ემალი, დენტინი და ნერვები.</p>
     </div>
   </div>
 </section>
@@ -555,10 +554,10 @@ if(!isTouch){
 <script>
 (()=>{'use strict';
 /* X-ray spotlight: cursor reveals the glass x-ray tooth over the animated scene */
-const ALIGN={sx:.492,sy:.5,sh:.7,xx:.528,xy:.495,xh:.739,tx:0,ty:0,ts:1,sxs:1.267,key:1};
+const ALIGN={sx:.492,sy:.5,sh:.7,xx:.528,xy:.495,xh:.739,tx:.035,ty:.025,ts:1,sxs:1.267,key:1};
 const frame=document.getElementById('xframe'),vid=document.getElementById('xvid'),
       spot=document.getElementById('xspot'),img=document.getElementById('ximg'),
-      hint=document.getElementById('xhint'),km=document.getElementById('keyMatrix');
+      km=document.getElementById('keyMatrix');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 let iw=0,ih=0,xa=1,geo=null,rect=null;
 const setKey = () => {
@@ -588,11 +587,10 @@ function layout(){
   geo={cx,cy,th};
 }
 addEventListener('resize',layout);
-let mx=-9e3,my=-9e3,sx=0,sy=0,sr=0,op=0,present=false,have=false,roamed=false;
-const wake=()=>{if(!roamed){roamed=true;hint.classList.add('off')}};
-frame.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;present=true;wake()},{passive:true});
+let mx=-9e3,my=-9e3,sx=0,sy=0,sr=0,op=0,present=false,have=false;
+frame.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;present=true},{passive:true});
 frame.addEventListener('pointerenter',()=>{if(vid.paused)vid.play().catch(()=>{})});
-frame.addEventListener('pointerdown',e=>{mx=e.clientX;my=e.clientY;present=true;wake()});
+frame.addEventListener('pointerdown',e=>{mx=e.clientX;my=e.clientY;present=true});
 frame.addEventListener('pointerleave',()=>present=false);
 frame.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')present=false});
 frame.addEventListener('pointercancel',()=>present=false);
@@ -600,7 +598,7 @@ let last=performance.now();
 function tick(now){
   const dt=Math.min(.05,(now-last)/1000);last=now;
   if(geo){
-    if(!rect)rect=frame.getBoundingClientRect();
+    rect=frame.getBoundingClientRect();
     const rx=geo.th*.45,ry=geo.th*.58;
     let tOp,tx,ty;
     if(present){
