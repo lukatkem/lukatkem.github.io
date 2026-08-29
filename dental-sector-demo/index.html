@@ -555,7 +555,7 @@ if(!isTouch){
 <script>
 (()=>{'use strict';
 /* X-ray spotlight: cursor reveals the glass x-ray tooth over the animated scene */
-const ALIGN={sx:.51,sy:.486,sh:.94,xx:.509,xy:.485,xh:.747,tx:0,ty:0,ts:1,key:1};
+const ALIGN={sx:.492,sy:.5,sh:.7,xx:.528,xy:.495,xh:.739,tx:0,ty:0,ts:1,sxs:1.267,key:1};
 const frame=document.getElementById('xframe'),vid=document.getElementById('xvid'),
       spot=document.getElementById('xspot'),img=document.getElementById('ximg'),
       hint=document.getElementById('xhint'),km=document.getElementById('keyMatrix');
@@ -577,7 +577,7 @@ function layout(){
   const vw=rect.width,vh=rect.height;
   const s=Math.max(vw/iw,vh/ih),dw=iw*s,dh=ih*s,ox=(vw-dw)/2,oy=(vh-dh)/2;
   const th=ALIGN.sh*dh,cx=ox+ALIGN.sx*dw,cy=oy+ALIGN.sy*dh;
-  const hI=(th*ALIGN.ts)/ALIGN.xh,wI=hI*xa;
+  const hI=(th*ALIGN.ts)/ALIGN.xh,wI=hI*xa*(ALIGN.sxs||1);
   img.style.left=(cx-ALIGN.xx*wI+ALIGN.tx*wI)+'px';
   img.style.top=(cy-ALIGN.xy*hI+ALIGN.ty*hI)+'px';
   img.style.width=wI+'px';img.style.height=hI+'px';
