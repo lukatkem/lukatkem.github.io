@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>პროფესიული გათეთრება — Dental Sector</title>
 <meta name="description" content="პროფესიული კბილების გათეთრება Dental Sector-ში — უსაფრთხო, ექიმის კონტროლის ქვეშ, შედეგი ერთი ვიზიტით.">
+<link rel="canonical" href="https://lukatkem.github.io/dental-sector-demo/svc-whitening.html">
+<meta name="theme-color" content="#4287E0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="პროფესიული გათეთრება — Dental Sector">
+<meta property="og:description" content="პროფესიული კბილების გათეთრება Dental Sector-ში — უსაფრთხო, ექიმის კონტროლის ქვეშ, შედეგი ერთი ვიზიტით.">
+<meta property="og:image" content="https://lukatkem.github.io/dental-sector-demo/clinic-1.jpg">
+<meta property="og:url" content="https://lukatkem.github.io/dental-sector-demo/svc-whitening.html">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,7 +113,22 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 @media(max-width:860px){.mgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.mgrid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){#pbar,.phero,.phero::before,.phero::after,.pscene svg,.btnw::after{animation:none!important}.rev{opacity:1;transform:none;transition:none}.ptilt{transition:none}}
+
+/* timeline lists */
+.tl{list-style:none;counter-reset:tl;margin:16px 0 10px}
+.tl li{counter-increment:tl;position:relative;padding:0 0 20px 48px}
+.tl li::before{content:counter(tl,decimal-leading-zero);position:absolute;left:0;top:0;width:31px;height:31px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:800;font-size:12.5px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(66,135,224,.35);transform:none}
+.tl li::after{content:'';position:absolute;left:15px;top:35px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child{padding-bottom:4px}
+.tl li:last-child::after{display:none}
+.pbody li:hover::before{box-shadow:0 0 12px rgba(217,164,65,.75)}
+/* related faq strip on service pages */
+.relgrid{grid-template-columns:repeat(2,1fr);max-width:720px;margin-left:auto;margin-right:auto}
+@media(max-width:640px){.relgrid{grid-template-columns:1fr}}
+/* a11y */
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalWebPage", "name": "პროფესიული გათეთრება — Dental Sector", "description": "პროფესიული კბილების გათეთრება Dental Sector-ში — უსაფრთხო, ექიმის კონტროლის ქვეშ, შედეგი ერთი ვიზიტით.", "about": {"@type": "MedicalProcedure", "name": "პროფესიული გათეთრება"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "მთავარი", "item": "https://lukatkem.github.io/dental-sector-demo/"}, {"@type": "ListItem", "position": 2, "name": "სერვისები", "item": "https://lukatkem.github.io/dental-sector-demo/index.html#services"}, {"@type": "ListItem", "position": 3, "name": "პროფესიული გათეთრება", "item": "https://lukatkem.github.io/dental-sector-demo/svc-whitening.html"}]}}</script>
 </head>
 <body>
 <div id="pbar"></div>
@@ -126,7 +148,7 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 <h2>რას იძლევა პროფესიული გათეთრება</h2>
 <p>ყავის, ჩაის, ღვინისა და თამბაქოს კვალი წლების განმავლობაში გროვდება მინანქარზე. პროფესიული გათეთრება ამ ფერს რამდენიმე ტონით ამსუბუქებს — ერთი ვიზიტით, ექიმის კონტროლის ქვეშ.</p>
 <h2>როგორ მიდის პროცედურა</h2>
-<ul>
+<ul class="tl">
 <li>ჯერ პროფილაქტიკური წმენდა — გათეთრება სუფთა მინანქარზე თანაბრად მოქმედებს.</li>
 <li>ღრძილებს ვფარავთ დამცავი ბარიერით, რომ გამათეთრებელმა არ შეეხოს.</li>
 <li>გამათეთრებელ გელს ვაწყებთ სინათლის აქტივაციით — პროცედურა დაახლოებით საათს გრძელდება.</li>
@@ -140,6 +162,10 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <div class="btns"><a class="btnc" href="tel:+995510100220">📞 510 10 02 20</a><a class="btnw" href="https://wa.me/995510100220" target="_blank" rel="noopener">WhatsApp</a></div>
 </div>
 <footer class="pfoot">Dental Sector · პავლე ასლანიდის ქ. 12, თბილისი</footer>
+<section class="more"><h2>ამასთან დაკავშირებული კითხვები</h2><div class="mgrid relgrid">
+<a class="mcard" href="faq-painless.html"><span class="mi">🛋️</span><span>ტკივილგარეშეა მკურნალობა?</span><span class="qa">↗</span></a>
+<a class="mcard" href="faq-checkup.html"><span class="mi">🔄</span><span>როგორ ხშირად მივდივარ შემოწმებაზე?</span><span class="qa">↗</span></a>
+</div></section>
 <section class="more"><h2>სხვა სერვისები</h2><div class="mgrid">
 <a class="mcard" href="svc-kids.html"><span class="mi">🧸</span><span>საბავშვო სტომატოლოგია</span><span class="qa">↗</span></a>
 <a class="mcard" href="svc-surgery.html"><span class="mi">🔬</span><span>ქირურგია</span><span class="qa">↗</span></a>
