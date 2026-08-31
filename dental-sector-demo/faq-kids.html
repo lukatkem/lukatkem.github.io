@@ -42,6 +42,22 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 .btnw:hover{transform:translateY(-3px)}
 .pfoot{text-align:center;color:var(--mut);font-size:13px;padding:0 20px 36px}
 @media(max-width:560px){.cta{flex-direction:column;align-items:flex-start}}
+
+.pflex{display:flex;align-items:center;justify-content:space-between;gap:34px}
+.ptext{min-width:0}
+.pscene{flex:none;width:200px;height:200px;animation:riseIn .9s .3s both}
+.pscene svg{width:100%;height:100%;overflow:visible}
+.crumb{animation:riseIn .7s .05s both}
+.phero h1{animation:riseIn .8s .15s both}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.pflex{flex-direction:column;align-items:flex-start;gap:8px}.pscene{width:150px;height:150px;margin:8px auto 0}}
+@media(prefers-reduced-motion:reduce){.pscene *{animation:none!important}}
+
+.s4wig{animation:s4wig 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 88%}
+@keyframes s4wig{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.s4b{opacity:0;animation:s4up 3.8s linear infinite}
+.b1{animation-delay:0s}.b2{animation-delay:.8s}.b3{animation-delay:1.5s}.b4{animation-delay:2.2s}.b5{animation-delay:3s}
+@keyframes s4up{0%{transform:translateY(26px);opacity:0}18%{opacity:.9}75%{opacity:.65}100%{transform:translateY(-84px);opacity:0}}
 </style>
 </head>
 <body>
@@ -49,10 +65,21 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <span class="brand"><img src="logo.svg" alt="Dental Sector">Dental Sector</span>
   <a class="back" href="index.html">← მთავარი გვერდი</a>
 </div></nav>
-<header class="phero"><div class="in">
+<header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">პაციენტის კუთხე</div>
   <h1>როგორია ბავშვის პირველი ვიზიტი?</h1>
-</div></header>
+</div><div class="pscene" aria-hidden="true"><svg viewBox="0 0 200 200">
+<g class="s4wig">
+<path d="M100 34 C 78 34, 64 48, 64 68 C 64 88, 74 96, 77 118 C 79 132, 86 140, 94 140 C 102 140, 104 130, 105 120 C 105.5 114, 110.5 114, 111 120 C 112 130, 114 140, 122 140 C 130 140, 137 132, 139 118 C 142 96, 152 88, 152 68 C 152 48, 138 34, 116 34 Z" fill="#fff" stroke="var(--blue)" stroke-width="6" stroke-linejoin="round"/>
+<circle cx="92" cy="72" r="6" fill="var(--deep)"/>
+<circle cx="124" cy="72" r="6" fill="var(--deep)"/>
+<path d="M90 92 q18 16 36 0" fill="none" stroke="var(--deep)" stroke-width="6" stroke-linecap="round"/>
+</g>
+<circle class="s4b b1" cx="42" cy="150" r="7" fill="rgba(255,255,255,.9)"/>
+<circle class="s4b b2" cx="168" cy="160" r="5" fill="rgba(255,255,255,.8)"/>
+<circle class="s4b b3" cx="152" cy="140" r="9" fill="var(--gold)" opacity=".55"/>
+<circle class="s4b b4" cx="34" cy="120" r="5" fill="rgba(255,255,255,.8)"/>
+<circle class="s4b b5" cx="176" cy="110" r="7" fill="rgba(255,255,255,.85)"/></svg></div></div></header>
 <main class="pbody">
 <h2>პირველი ვიზიტი = გაცნობა</h2>
 <p>ბავშვის პირველი ვიზიტი მშვიდობიანი გაცნობაა: პატარა დაათვალიერებს კაბინეტს, ექიმი თამაშით დათვლის კბილებს და არაფერს ვაკეთებთ იძულებით. პირველმა გამოცდილებამ უნდა დატოვოს სასიამოვნო მოგონება — ამას მთელი შემდგომი დამოკიდებულება გამოდის.</p>
