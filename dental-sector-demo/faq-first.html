@@ -56,17 +56,61 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 .s6c{stroke-dasharray:40;stroke-dashoffset:40;animation:s6t 4.8s infinite}
 .c1{animation-delay:0s}.c2{animation-delay:.7s}.c3{animation-delay:1.4s}
 @keyframes s6t{0%{stroke-dashoffset:40;opacity:0}8%{opacity:1}18%{stroke-dashoffset:0;opacity:1}80%{stroke-dashoffset:0;opacity:1}90%{opacity:0}100%{stroke-dashoffset:40;opacity:0}}
+
+/* ---- page chrome + motion ---- */
+#pbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),#fff);z-index:99;transition:width .12s linear}
+.minnav a.brand{text-decoration:none}
+.minnav.scrolled{box-shadow:0 8px 30px rgba(13,43,78,.1)}
+.phero{position:relative;overflow:hidden;background:linear-gradient(135deg,#4287E0,#6FA9EC,#3D7FD6);background-size:220% 220%;animation:heroShift 9s ease-in-out infinite}
+@keyframes heroShift{0%,100%{background-position:0% 30%}50%{background-position:100% 70%}}
+.phero::before,.phero::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
+.phero::before{width:340px;height:340px;left:-120px;bottom:-160px;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);animation:blob 11s ease-in-out infinite}
+.phero::after{width:260px;height:260px;right:-90px;top:-110px;background:radial-gradient(circle,rgba(255,255,255,.2),transparent 70%);animation:blob 13s ease-in-out infinite reverse}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(26px,-18px) scale(1.12)}}
+.pscene{transition:none}
+.ptilt{width:100%;height:100%;will-change:transform;transition:transform .3s ease-out}
+.pscene svg{animation:sceneFloat 5.5s ease-in-out 1.4s infinite}
+@keyframes sceneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.pbody h2{position:relative;padding-bottom:8px}
+.pbody h2::after{content:'';position:absolute;left:0;bottom:0;width:52px;height:3px;border-radius:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .7s .15s ease}
+.pbody h2.in::after{transform:scaleX(1)}
+.pbody li::before{transition:.3s}
+.pbody li:hover::before{transform:scale(1.55);box-shadow:0 0 10px var(--gold)}
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease,padding .3s ease}
+.rev.in{opacity:1;transform:none}
+.btnw{position:relative}
+.btnw::after{content:'';position:absolute;inset:0;border-radius:99px;border:2px solid rgba(217,164,65,.85);animation:wpulse 2.2s ease-out infinite;pointer-events:none}
+@keyframes wpulse{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(1.32);opacity:0}}
+#btt{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;border:0;font-size:19px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(14px);transition:.35s;z-index:98;box-shadow:0 12px 28px rgba(66,135,224,.45)}
+#btt.show{opacity:1;pointer-events:auto;transform:none}
+#btt:hover{background:var(--deep)}
+/* ---- more topics ---- */
+.more{width:min(1080px,92%);margin:10px auto 60px;text-align:center}
+.more h2{font-size:22px;font-weight:800;color:var(--deep);margin-bottom:22px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.mcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;transition:.3s}
+.mcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(13,43,78,.12);border-color:transparent}
+.mcard .mi{width:42px;height:42px;border-radius:12px;background:rgba(66,135,224,.12);display:grid;place-items:center;font-size:19px;flex:none}
+.mcard span{font-weight:700;font-size:14px;color:var(--deep);line-height:1.35}
+.mcard .qa{margin-left:auto;color:var(--gold);font-size:14px;transition:.3s}
+.mcard:hover .qa{transform:translate(3px,-3px)}
+.mback{display:inline-block;margin-top:18px;font-weight:700;font-size:14px;color:var(--blue);text-decoration:none}
+.mback:hover{text-decoration:underline}
+@media(max-width:860px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.mgrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#pbar,.phero,.phero::before,.phero::after,.pscene svg,.btnw::after{animation:none!important}.rev{opacity:1;transform:none;transition:none}.ptilt{transition:none}}
 </style>
 </head>
 <body>
+<div id="pbar"></div>
 <nav class="minnav"><div class="in">
-  <span class="brand"><img src="logo.svg" alt="Dental Sector">Dental Sector</span>
+  <a class="brand" href="index.html"><img src="logo.svg" alt="Dental Sector">Dental Sector</a>
   <a class="back" href="index.html">← მთავარი გვერდი</a>
 </div></nav>
 <header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">პაციენტის კუთხე</div>
   <h1>რა მჭირდება პირველ ვიზიტზე?</h1>
-</div><div class="pscene" aria-hidden="true"><svg viewBox="0 0 200 200">
+</div><div class="pscene" aria-hidden="true"><div class="ptilt"><svg viewBox="0 0 200 200">
 <rect x="40" y="42" width="120" height="116" rx="18" fill="#fff"/>
 <rect x="56" y="64" width="16" height="16" rx="5" fill="none" stroke="var(--blue)" stroke-width="3"/>
 <rect x="82" y="67" width="58" height="9" rx="4.5" fill="var(--line)"/>
@@ -76,7 +120,7 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 <rect x="82" y="135" width="58" height="9" rx="4.5" fill="var(--line)"/>
 <path class="s6c c1" d="M59 72 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <path class="s6c c2" d="M59 106 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path class="s6c c3" d="M59 140 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></header>
+<path class="s6c c3" d="M59 140 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div></header>
 <main class="pbody">
 <h2>მოკლე პასუხი: თითქმის არაფერი</h2>
 <p>სპეციალური მომზადება არ სჭირდება — უბრალოდ მობრძანდი. სასარგებლო იქნება, თუ წამოიღებ:</p>
@@ -98,5 +142,49 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <div class="btns"><a class="btnc" href="tel:+995510100220">📞 510 10 02 20</a><a class="btnw" href="https://wa.me/995510100220" target="_blank" rel="noopener">WhatsApp</a></div>
 </div>
 <footer class="pfoot">Dental Sector · პავლე ასლანიდის ქ. 12, თბილისი</footer>
+<section class="more"><h2>სხვა კითხვები</h2><div class="mgrid">
+<a class="mcard" href="faq-book.html"><span class="mi">📅</span><span>როგორ ჩავიწერო ვიზიტი?</span><span class="qa">↗</span></a>
+<a class="mcard" href="faq-painless.html"><span class="mi">🛋️</span><span>ტკივილგარეშეა მკურნალობა?</span><span class="qa">↗</span></a>
+<a class="mcard" href="faq-checkup.html"><span class="mi">🔄</span><span>როგორ ხშირად მივდივარ შემოწმებაზე?</span><span class="qa">↗</span></a>
+<a class="mcard" href="faq-kids.html"><span class="mi">🧸</span><span>როგორია ბავშვის პირველი ვიზიტი?</span><span class="qa">↗</span></a>
+<a class="mcard" href="faq-xray.html"><span class="mi">🛡️</span><span>უსაფრთხოა თუ არა რენტგენი?</span><span class="qa">↗</span></a>
+</div><a class="mback" href="index.html#faq">← ყველა კითხვა</a></section>
+<button id="btt" aria-label="ზემოთ">↑</button>
+
+<script>
+(function(){
+  var doc=document, bar=doc.getElementById('pbar'), top=doc.getElementById('btt'), nav=doc.querySelector('.minnav');
+  function onScroll(){
+    var h=doc.documentElement, sc=h.scrollTop||doc.body.scrollTop, mx=h.scrollHeight-h.clientHeight;
+    bar.style.width=(mx>0?(sc/mx*100):0)+'%';
+    if(nav)nav.classList.toggle('scrolled',sc>10);
+    top.classList.toggle('show',sc>600);
+  }
+  var t=false;
+  addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){onScroll();t=false})}},{passive:true});
+  onScroll();
+  top.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
+  var items=[];
+  doc.querySelectorAll('.pbody > *').forEach(function(el){el.classList.add('rev');items.push(el)});
+  doc.querySelectorAll('.cta').forEach(function(el){el.classList.add('rev');items.push(el)});
+  doc.querySelectorAll('.pbody ul').forEach(function(ul){
+    Array.prototype.forEach.call(ul.children,function(li,i){
+      li.classList.add('rev');li.style.transitionDelay=(i*80)+'ms';items.push(li);
+    });
+  });
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  items.forEach(function(el){io.observe(el)});
+  if(matchMedia('(pointer:fine)').matches){
+    var tl=doc.querySelector('.ptilt'), hero=doc.querySelector('.phero');
+    if(tl&&hero){
+      hero.addEventListener('pointermove',function(e){
+        var r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        tl.style.transform='translate('+(x*16).toFixed(1)+'px,'+(y*12).toFixed(1)+'px) rotate('+(x*4).toFixed(1)+'deg)';
+      });
+      hero.addEventListener('pointerleave',function(){tl.style.transform=''});
+    }
+  }
+})();
+</script>
 </body>
 </html>
