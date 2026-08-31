@@ -129,6 +129,11 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 @media(max-width:640px){.relgrid{grid-template-columns:1fr}}
 /* a11y */
 a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+
+html{scroll-behavior:smooth}
+.vchip{display:inline-block;margin-top:18px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:99px;font-size:13.5px;font-weight:600;color:#fff;backdrop-filter:blur(6px);animation:riseIn .8s .35s both}
+.btnghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:99px;cursor:pointer;transition:.3s;font-family:inherit}
+.btnghost:hover{border-color:#fff;background:rgba(255,255,255,.12);transform:translateY(-3px)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalWebPage", "name": "თერაპიული სტომატოლოგია — Dental Sector", "description": "თერაპიული სტომატოლოგია Dental Sector-ში — კარიესის მკურნალობა, არხების მკურნალობა (ენდოდონტია), ზუსტი თერაპია ტკივილგარეშე.", "about": {"@type": "MedicalProcedure", "name": "თერაპიული სტომატოლოგია"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "მთავარი", "item": "https://lukatkem.github.io/dental-sector-demo/"}, {"@type": "ListItem", "position": 2, "name": "სერვისები", "item": "https://lukatkem.github.io/dental-sector-demo/index.html#services"}, {"@type": "ListItem", "position": 3, "name": "თერაპიული სტომატოლოგია", "item": "https://lukatkem.github.io/dental-sector-demo/svc-therapy.html"}]}}</script>
 </head>
@@ -141,6 +146,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 <header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">სერვისები</div>
   <h1>თერაპიული სტომატოლოგია</h1>
+  <div class="vchip">ადრეული მკურნალობა = მარტივი მკურნალობა</div>
 </div><div class="pscene" aria-hidden="true"><div class="ptilt"><svg viewBox="0 0 200 200"><g transform="translate(64,52) scale(.8)"><path d="M100 34 C 78 34, 64 48, 64 68 C 64 88, 74 96, 77 118 C 79 132, 86 140, 94 140 C 102 140, 104 130, 105 120 C 105.5 114, 110.5 114, 111 120 C 112 130, 114 140, 122 140 C 130 140, 137 132, 139 118 C 142 96, 152 88, 152 68 C 152 48, 138 34, 116 34 Z" fill="#fff"/></g>
 <ellipse class="th1spot" cx="92" cy="100" rx="10" ry="13" fill="var(--gold)"/>
 <path class="th1brush" d="M150 40 L118 78" stroke="var(--gold)" stroke-width="8" stroke-linecap="round"/>
@@ -161,7 +167,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 </main>
 <div class="cta">
   <div><h3>გაქვს კითხვა?</h3><small>ორშაბათიდან შაბათამდე, 10:00–20:00</small></div>
-  <div class="btns"><a class="btnc" href="tel:+995510100220">📞 510 10 02 20</a><a class="btnw" href="https://wa.me/995510100220" target="_blank" rel="noopener">WhatsApp</a></div>
+  <div class="btns"><button class="btnghost" id="copylink" type="button">🔗 ბმულის კოპირება</button><a class="btnc" href="tel:+995510100220">📞 510 10 02 20</a><a class="btnw" href="https://wa.me/995510100220" target="_blank" rel="noopener">WhatsApp</a></div>
 </div>
 <footer class="pfoot">Dental Sector · პავლე ასლანიდის ქ. 12, თბილისი</footer>
 <section class="more"><h2>ამასთან დაკავშირებული კითხვები</h2><div class="mgrid relgrid">
@@ -210,6 +216,22 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       hero.addEventListener('pointerleave',function(){tl.style.transform=''});
     }
   }
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('copylink');
+  if(!b)return;
+  function done(){b.textContent='დაკოპირდა ✓';setTimeout(function(){b.textContent='🔗 ბმულის კოპირება'},2000);}
+  b.addEventListener('click',function(){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(location.href).then(done).catch(function(){fb()});
+    }else fb();
+    function fb(){
+      var t=document.createElement('textarea');t.value=location.href;document.body.appendChild(t);
+      t.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(t);
+    }
+  });
 })();
 </script>
 </body>
