@@ -42,6 +42,21 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 .btnw:hover{transform:translateY(-3px)}
 .pfoot{text-align:center;color:var(--mut);font-size:13px;padding:0 20px 36px}
 @media(max-width:560px){.cta{flex-direction:column;align-items:flex-start}}
+
+.pflex{display:flex;align-items:center;justify-content:space-between;gap:34px}
+.ptext{min-width:0}
+.pscene{flex:none;width:200px;height:200px;animation:riseIn .9s .3s both}
+.pscene svg{width:100%;height:100%;overflow:visible}
+.crumb{animation:riseIn .7s .05s both}
+.phero h1{animation:riseIn .8s .15s both}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.pflex{flex-direction:column;align-items:flex-start;gap:8px}.pscene{width:150px;height:150px;margin:8px auto 0}}
+@media(prefers-reduced-motion:reduce){.pscene *{animation:none!important}}
+
+.s5scan{animation:s5scan 2.8s ease-in-out infinite alternate}
+@keyframes s5scan{from{transform:translateY(26px)}to{transform:translateY(138px)}}
+.s5shield{animation:s5pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes s5pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 </style>
 </head>
 <body>
@@ -49,10 +64,14 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <span class="brand"><img src="logo.svg" alt="Dental Sector">Dental Sector</span>
   <a class="back" href="index.html">← მთავარი გვერდი</a>
 </div></nav>
-<header class="phero"><div class="in">
+<header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">პაციენტის კუთხე</div>
   <h1>უსაფრთხოა თუ არა რენტგენი?</h1>
-</div></header>
+</div><div class="pscene" aria-hidden="true"><svg viewBox="0 0 200 200">
+<rect x="32" y="18" width="136" height="152" rx="18" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.55)" stroke-width="3"/>
+<g transform="translate(66,46) scale(.85)"><path d="M100 34 C 78 34, 64 48, 64 68 C 64 88, 74 96, 77 118 C 79 132, 86 140, 94 140 C 102 140, 104 130, 105 120 C 105.5 114, 110.5 114, 111 120 C 112 130, 114 140, 122 140 C 130 140, 137 132, 139 118 C 142 96, 152 88, 152 68 C 152 48, 138 34, 116 34 Z" fill="rgba(255,255,255,.16)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/></g>
+<rect class="s5scan" x="40" y="0" width="120" height="8" rx="4" fill="#fff" opacity=".9"/>
+<g class="s5shield"><circle cx="158" cy="42" r="21" fill="var(--gold)"/><path d="M149 42 l7 7 l13 -15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div></div></header>
 <main class="pbody">
 <h2>მოკლე პასუხი: კი</h2>
 <p>ვიყენებთ თანამედროვე ციფრულ აპარატურას, რომელიც მინიმალურ დასხივებას იყენებს. გამოვიყენებთ მხოლოდ მაშინ, როცა ეს ზუსტი დიაგნოზისთვის მართლა აუცილებელია.</p>
