@@ -42,6 +42,20 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 .btnw:hover{transform:translateY(-3px)}
 .pfoot{text-align:center;color:var(--mut);font-size:13px;padding:0 20px 36px}
 @media(max-width:560px){.cta{flex-direction:column;align-items:flex-start}}
+
+.pflex{display:flex;align-items:center;justify-content:space-between;gap:34px}
+.ptext{min-width:0}
+.pscene{flex:none;width:200px;height:200px;animation:riseIn .9s .3s both}
+.pscene svg{width:100%;height:100%;overflow:visible}
+.crumb{animation:riseIn .7s .05s both}
+.phero h1{animation:riseIn .8s .15s both}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.pflex{flex-direction:column;align-items:flex-start;gap:8px}.pscene{width:150px;height:150px;margin:8px auto 0}}
+@media(prefers-reduced-motion:reduce){.pscene *{animation:none!important}}
+
+.s6c{stroke-dasharray:40;stroke-dashoffset:40;animation:s6t 4.8s infinite}
+.c1{animation-delay:0s}.c2{animation-delay:.7s}.c3{animation-delay:1.4s}
+@keyframes s6t{0%{stroke-dashoffset:40;opacity:0}8%{opacity:1}18%{stroke-dashoffset:0;opacity:1}80%{stroke-dashoffset:0;opacity:1}90%{opacity:0}100%{stroke-dashoffset:40;opacity:0}}
 </style>
 </head>
 <body>
@@ -49,10 +63,20 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <span class="brand"><img src="logo.svg" alt="Dental Sector">Dental Sector</span>
   <a class="back" href="index.html">← მთავარი გვერდი</a>
 </div></nav>
-<header class="phero"><div class="in">
+<header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">პაციენტის კუთხე</div>
   <h1>რა მჭირდება პირველ ვიზიტზე?</h1>
-</div></header>
+</div><div class="pscene" aria-hidden="true"><svg viewBox="0 0 200 200">
+<rect x="40" y="42" width="120" height="116" rx="18" fill="#fff"/>
+<rect x="56" y="64" width="16" height="16" rx="5" fill="none" stroke="var(--blue)" stroke-width="3"/>
+<rect x="82" y="67" width="58" height="9" rx="4.5" fill="var(--line)"/>
+<rect x="56" y="98" width="16" height="16" rx="5" fill="none" stroke="var(--blue)" stroke-width="3"/>
+<rect x="82" y="101" width="58" height="9" rx="4.5" fill="var(--gold)" opacity=".7"/>
+<rect x="56" y="132" width="16" height="16" rx="5" fill="none" stroke="var(--blue)" stroke-width="3"/>
+<rect x="82" y="135" width="58" height="9" rx="4.5" fill="var(--line)"/>
+<path class="s6c c1" d="M59 72 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s6c c2" d="M59 106 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s6c c3" d="M59 140 l5 5 l10 -11" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></header>
 <main class="pbody">
 <h2>მოკლე პასუხი: თითქმის არაფერი</h2>
 <p>სპეციალური მომზადება არ სჭირდება — უბრალოდ მობრძანდი. სასარგებლო იქნება, თუ წამოიღებ:</p>
