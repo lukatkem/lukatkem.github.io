@@ -42,6 +42,22 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
 .btnw:hover{transform:translateY(-3px)}
 .pfoot{text-align:center;color:var(--mut);font-size:13px;padding:0 20px 36px}
 @media(max-width:560px){.cta{flex-direction:column;align-items:flex-start}}
+
+.pflex{display:flex;align-items:center;justify-content:space-between;gap:34px}
+.ptext{min-width:0}
+.pscene{flex:none;width:200px;height:200px;animation:riseIn .9s .3s both}
+.pscene svg{width:100%;height:100%;overflow:visible}
+.crumb{animation:riseIn .7s .05s both}
+.phero h1{animation:riseIn .8s .15s both}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.pflex{flex-direction:column;align-items:flex-start;gap:8px}.pscene{width:150px;height:150px;margin:8px auto 0}}
+@media(prefers-reduced-motion:reduce){.pscene *{animation:none!important}}
+
+.s3rot{animation:s3spin 10s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes s3spin{to{transform:rotate(360deg)}}
+.s3d{fill:rgba(255,255,255,.55);transform-box:fill-box;transform-origin:center;animation:s3lit 3.6s infinite}
+.d1{animation-delay:0s}.d2{animation-delay:.6s}.d3{animation-delay:1.2s}.d4{animation-delay:1.8s}.d5{animation-delay:2.4s}.d6{animation-delay:3s}
+@keyframes s3lit{0%,14%{fill:var(--gold);transform:scale(1.4)}28%,100%{fill:rgba(255,255,255,.55);transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -49,10 +65,19 @@ body{font-family:'Noto Sans Georgian',sans-serif;color:var(--deep);background:#f
   <span class="brand"><img src="logo.svg" alt="Dental Sector">Dental Sector</span>
   <a class="back" href="index.html">← მთავარი გვერდი</a>
 </div></nav>
-<header class="phero"><div class="in">
+<header class="phero"><div class="in pflex"><div class="ptext">
   <div class="crumb">პაციენტის კუთხე</div>
   <h1>როგორ ხშირად მივდივარ შემოწმებაზე?</h1>
-</div></header>
+</div><div class="pscene" aria-hidden="true"><svg viewBox="0 0 200 200">
+<circle class="s3rot" cx="100" cy="100" r="88" fill="none" stroke="var(--blue2)" stroke-width="3" stroke-dasharray="4 11" stroke-linecap="round"/>
+<circle class="s3d d1" cx="100" cy="38" r="8"/>
+<circle class="s3d d2" cx="153.7" cy="69" r="8"/>
+<circle class="s3d d3" cx="153.7" cy="131" r="8"/>
+<circle class="s3d d4" cx="100" cy="162" r="8"/>
+<circle class="s3d d5" cx="46.3" cy="131" r="8"/>
+<circle class="s3d d6" cx="46.3" cy="69" r="8"/>
+<circle cx="100" cy="100" r="36" fill="#fff" stroke="var(--blue)" stroke-width="4"/>
+<text x="100" y="112" text-anchor="middle" font-size="34" font-weight="800" fill="var(--blue)" font-family="'Noto Sans Georgian',sans-serif">6</text></svg></div></div></header>
 <main class="pbody">
 <h2>ოქროს სტანდარტი — ყოველ 6 თვეში</h2>
 <p>იდეალურ შემთხვევაში შემოწმებაზე წელიწადში ორჯერ მიდიხარ. ეს საკმარისია, რომ ნებისმიერი პრობლემა ადრეულ სტადიაზე დაფიქსირდეს.</p>
