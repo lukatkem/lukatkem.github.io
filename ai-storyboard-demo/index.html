@@ -36,6 +36,20 @@ a:hover{text-decoration:underline}
 .meta span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:6px 13px}
 .meta span i{color:var(--gold);font-style:normal}
 
+/* storyboard board */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:680px){.board{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s}
+.tile:hover{transform:translateY(-3px);border-color:var(--line2)}
+.tile .img{position:relative;aspect-ratio:9/16;overflow:hidden;background:#0D0E14}
+.tile .img img{width:100%;height:100%;object-fit:cover;display:block}
+.tile .tag{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#fff;background:rgba(10,11,16,.8);border:1px solid rgba(255,255,255,.14);padding:3px 9px;border-radius:7px}
+.tile .tag.g{color:var(--gold)}
+.tile .tinfo{padding:12px 13px 14px;border-top:1px solid var(--line)}
+.tile .tinfo b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--gold)}
+.tile .tinfo p{font-size:12.5px;color:var(--mut);margin-top:4px;line-height:1.45}
+.boardnote{margin-top:16px;font-size:13px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+
 /* sections */
 section{padding:64px 0;border-bottom:1px solid var(--line)}
 .kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:10px}
@@ -246,27 +260,28 @@ footer b{color:var(--mut)}
 <section>
   <div class="wrap">
     <div class="kick">04 · Frames</div>
-    <h2>Composition Boards</h2>
-    <p class="lead">Layout sketches for every frame — figure placement, eyeline height and the thirds grid the prompts are written against.</p>
-    <div class="frames">
-      <div class="frame"><div class="phone" data-label="HIGH WIDE · C1"><span class="fchip">S1</span><div class="fig m" style="left:18%;bottom:26%"></div><div class="fig d" style="left:56%;bottom:26%"></div><div class="elline" data-el="eye 1.6m" style="bottom:42%"></div><div class="flab" style="top:6%;left:50%;transform:translateX(-50%)">MIRROR</div><div class="flab" style="bottom:10%;left:50%;transform:translateX(-50%)">DOORS</div></div><div class="cap"><b>S1</b> · both on thirds, mirror established</div></div>
-      <div class="frame"><div class="phone" data-label="MIRROR INSERT · C2"><span class="fchip">S2</span><div class="ph glow" style="left:40%;top:46%;width:20%;height:11%"></div><div class="fig m" style="left:22%;bottom:18%;width:22%"></div><div class="flab" style="top:16%;left:50%;transform:translateX(-50%);color:#B9A8FF">REFLECTION</div></div><div class="cap"><b>S2</b> · phone buzzes, Mia's reflection locks on</div></div>
-      <div class="frame"><div class="phone" data-label="OTS · D → M"><span class="fchip">S3</span><div class="fig d" style="left:-8%;bottom:-14%;width:52%;height:34%;border-radius:30%"></div><div class="fig m" style="left:54%;bottom:30%;width:26%"></div></div><div class="cap"><b>S3</b> · Daniel flips the phone, blind to the mirror</div></div>
-      <div class="frame"><div class="phone" data-label="CU · M EYES"><span class="fchip">S4</span><div class="fig m" style="left:30%;top:18%;width:44%;height:46%"></div><div class="elline" data-el="eyeline" style="top:34%"></div><div class="flab" style="top:64%;right:8%;color:var(--gold)">→ phone</div></div><div class="cap"><b>S4</b> · smile holds, eyes leave</div></div>
-      <div class="frame"><div class="phone" data-label="MACRO · REVEAL"><span class="fchip">S5</span><div class="ph glow" style="left:12%;top:24%;width:76%;height:40%"></div><div class="flab" style="top:30%;left:18%;color:#C9CBD6">V: I'm at the party.</div></div><div class="cap"><b>S5</b> · the message — only text frame in the reel</div></div>
-      <div class="frame"><div class="phone" data-label="CU · D"><span class="fchip">S6</span><div class="fig d" style="left:26%;top:18%;width:44%;height:46%"></div><div class="elline" data-el="eyeline ↓" style="top:34%"></div></div><div class="cap"><b>S6</b> · jaw tight — mirrors S4 exactly</div></div>
-      <div class="frame"><div class="phone" data-label="2-SHOT · DING"><span class="fchip">S7</span><div class="glowtop"></div><div class="fig m" style="left:14%;bottom:20%"></div><div class="fig d" style="left:58%;bottom:20%"></div></div><div class="cap"><b>S7</b> · gold bloom swallows the cold elevator</div></div>
-      <div class="frame"><div class="phone" data-label="LOW HERO · M"><span class="fchip">S8</span><div class="fig m" style="left:34%;bottom:-6%;width:36%;height:64%"></div><div class="elline" data-el="camera 0.9m" style="bottom:38%"></div></div><div class="cap"><b>S8</b> · "Not here." — she owns the frame</div></div>
-      <div class="frame"><div class="phone" data-label="EMPTY · TAG"><span class="fchip">S9</span><div class="ph" style="left:14%;top:40%;width:8%;height:14%"></div><div class="elline" data-el="rail" style="bottom:30%"></div><div class="flab" style="bottom:8%;left:50%;transform:translateX(-50%);color:var(--gold)">slit of light</div></div><div class="cap"><b>S9</b> · the coupe stays behind</div></div>
+    <h2>The Storyboard</h2>
+    <p class="lead">All nine frames generated with the locked prompts from section 06 — character, location and style held constant across every generation. This is the deliverable: a board you can play as an animatic.</p>
+    <div class="board">
+      <div class="tile"><div class="img"><span class="tag g">S1 · HIGH WIDE</span><img src="frames/s1.jpg" alt="S1 high wide — champagne hand-off"></div><div class="tinfo"><b>B1 · 00:00</b><p>Doors close on Mia and Daniel; coupe hand-off. Mirror behind them — the scene's weapon, planted early.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S2 · MIRROR</span><img src="frames/s2.jpg" alt="S2 mirror insert — phone buzzes"></div><div class="tinfo"><b>B1 · 00:08</b><p>Phone buzzes face-up. In the mirror, Mia's reflection locks onto it before he notices.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S3 · OTS</span><img src="frames/s3.jpg" alt="S3 over-the-shoulder"></div><div class="tinfo"><b>B1 · 00:15</b><p>Daniel flips the phone away — he thinks he's safe. He's reading the wrong audience.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S4 · CU MIA</span><img src="frames/s4.jpg" alt="S4 close-up Mia"></div><div class="tinfo"><b>B2 · 00:24</b><p>The key acting frame: smile fully intact, eyes gone. Most retakes budgeted here.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S5 · MACRO</span><img src="frames/s5.jpg" alt="S5 macro phone screen"></div><div class="tinfo"><b>B2 · 00:31</b><p>The reveal insert — "V: I'm at the party." The only frame allowed to prioritize text legibility.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S6 · CU DANIEL</span><img src="frames/s6.jpg" alt="S6 close-up Daniel"></div><div class="tinfo"><b>B2 · 00:39</b><p>Jaw tight. Composition mirrored against S4 — the couple now framed as opposites.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S7 · DING</span><img src="frames/s7.jpg" alt="S7 two-shot doors opening"></div><div class="tinfo"><b>B3 · 00:48</b><p>Doors open on applause and gold light. Lighting flips warm — the continuity cut point.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S8 · LOW HERO</span><img src="frames/s8.jpg" alt="S8 low hero Mia"></div><div class="tinfo"><b>B3 · 00:55</b><p>"Not here." — collar fix, perfect smile. Power transfers to Mia in one low-angle push.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S9 · TAG</span><img src="frames/s9.jpg" alt="S9 empty elevator tag"></div><div class="tinfo"><b>B3 · 01:02</b><p>Empty cabin, the coupe left on the rail, doors sealing the gold light out. She's already ahead.</p></div></div>
     </div>
+    <div class="boardnote">frames/s1–s9.jpg · 540×960 · generated from the section-06 prompts, seeds logged per shot</div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="kick">05 · Blocking</div>
-    <h2>Overhead Layout</h2>
-    <p class="lead">One axis, one rule: the 180° line runs north–south along the mirror. Everything the camera does respects it, so reflections and screen direction never flip between generations.</p>
+    <h2>Overhead Layout &amp; Axis</h2>
+    <p class="lead">Framing logic behind the board: tall vertical compositions, eyelines readable at thumbnail size, one insert carries the plot — and one hard rule: the 180° axis runs north–south along the mirror, so reflections and screen direction never flip between generations.</p>
     <div class="blockwrap">
       <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
         <rect x="0" y="0" width="420" height="520" fill="none"/>
