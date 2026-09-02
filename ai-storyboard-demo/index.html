@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <style>
 :root{
   --bg:#07080C;--panel:#0F1118;--panel2:#151824;--line:#1E222D;--line2:#2B303D;
@@ -73,9 +74,9 @@ section{padding:88px 0;border-bottom:1px solid var(--line)}
 h2{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:10px}
 .lead{color:var(--mut);max-width:720px;margin-bottom:34px;font-size:15.5px}
 
-/* reveal */
-.rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.rev.in{opacity:1;transform:none}
+/* reveal — only hidden when JS is running (html.js); no-JS users see everything */
+html.js .rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+html.js .rev.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
 /* ============ ANIMATIC PLAYER ============ */
@@ -606,7 +607,7 @@ SHOTS.forEach(function(s,i){
   d.addEventListener("click",function(){show(i);play();});
   segsWrap.appendChild(d);segs.push(d);
 });
-var cur=0,playing=false,elapsed=0,lastTs=0,ended=false;
+var cur=0,playing=false,elapsed=0,lastNow=0,ended=false,timer=null;
 var pPlay=document.getElementById("pPlay"),pcover=document.getElementById("pcover"),pcoverBtn=document.getElementById("pcoverBtn");
 var pshot=document.getElementById("pshot"),ptc=document.getElementById("ptc"),pcap=document.getElementById("pcap"),pNow=document.getElementById("pNow");
 function show(i){
@@ -623,29 +624,26 @@ function updateTc(frac){
   var t=s.tc+Math.min(1,frac)*s.sd;
   ptc.textContent=fmt(t);pNow.textContent=fmt(t);
 }
-function tick(ts){
+function tick(){
   if(!playing)return;
-  if(lastTs===0)lastTs=ts;
-  elapsed+=(ts-lastTs)/1000;lastTs=ts;
+  var now=performance.now();
+  if(!lastNow)lastNow=now;
+  elapsed+=(now-lastNow)/1000;lastNow=now;
   var d=SHOTS[cur].sd;
   if(elapsed>=d){
     elapsed=0;
-    if(cur>=SHOTS.length-1){
-      playing=false;setUI();show(0);return;
-    }
+    if(cur>=SHOTS.length-1){playing=false;ended=true;lastNow=0;if(timer){clearInterval(timer);timer=null;}setUI();show(0);return;}
     show(cur+1);
   }else{
     segs[cur].firstChild.style.width=(elapsed/d*100)+"%";
     updateTc(elapsed/d);
   }
-  requestAnimationFrame(tick);
 }
 function play(){
-  if(ended||cur===SHOTS.length-1&&elapsed===0){}
   ended=false;
-  if(!playing){playing=true;lastTs=0;setUI();requestAnimationFrame(tick);}
+  if(!playing){playing=true;lastNow=0;setUI();timer=setInterval(tick,200);}
 }
-function pause(){playing=false;setUI();}
+function pause(){playing=false;lastNow=0;if(timer){clearInterval(timer);timer=null;}setUI();}
 function toggle(){playing?pause():play();}
 function setUI(){
   pPlay.textContent=playing?"❚❚":"▶";
