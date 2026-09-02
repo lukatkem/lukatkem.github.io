@@ -41,7 +41,7 @@ a:hover{text-decoration:underline}
 @media(max-width:680px){.board{grid-template-columns:repeat(2,1fr)}}
 .tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s}
 .tile:hover{transform:translateY(-3px);border-color:var(--line2)}
-.tile .img{position:relative;aspect-ratio:9/16;overflow:hidden;background:#0D0E14}
+.tile .img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0D0E14}
 .tile .img img{width:100%;height:100%;object-fit:cover;display:block}
 .tile .tag{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#fff;background:rgba(10,11,16,.8);border:1px solid rgba(255,255,255,.14);padding:3px 9px;border-radius:7px}
 .tile .tag.g{color:var(--gold)}
@@ -87,31 +87,6 @@ td .b.b1{color:#F29CA0;border-color:rgba(229,72,77,.4)}
 td .b.b2{color:var(--gold);border-color:rgba(212,168,67,.4)}
 td .b.b3{color:#B9A8FF;border-color:rgba(122,92,255,.4)}
 td em{color:var(--mut);font-style:normal;display:block;font-size:12.5px;margin-top:3px}
-
-/* frames */
-.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
-.frame{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
-.phone{position:relative;aspect-ratio:9/16;border-radius:8px;background:linear-gradient(180deg,#1A1D28,#101218);overflow:hidden;border:1px solid var(--line2)}
-.phone::before{content:"";position:absolute;inset:0;background:
-  linear-gradient(90deg,transparent calc(33.3% - .5px),rgba(255,255,255,.045) 33.3%,transparent calc(33.3% + .5px)),
-  linear-gradient(90deg,transparent calc(66.6% - .5px),rgba(255,255,255,.045) 66.6%,transparent calc(66.6% + .5px)),
-  linear-gradient(0deg,transparent calc(33.3% - .5px),rgba(255,255,255,.045) 33.3%,transparent calc(33.3% + .5px)),
-  linear-gradient(0deg,transparent calc(66.6% - .5px),rgba(255,255,255,.045) 66.6%,transparent calc(66.6% + .5px));pointer-events:none}
-.phone::after{content:attr(data-label);position:absolute;left:8px;bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--mut);background:rgba(10,11,16,.75);border:1px solid var(--line2);padding:3px 8px;border-radius:6px}
-.fchip{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--tx);background:rgba(10,11,16,.75);border:1px solid var(--line2);padding:3px 8px;border-radius:6px;z-index:3}
-.fig{position:absolute;width:26%;aspect-ratio:.62;border-radius:40% 40% 12% 12%/34% 34% 8% 8%;background:#3A3E4D}
-.fig::before{content:"";position:absolute;top:-24%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1;border-radius:50%;background:inherit}
-.fig.m{background:linear-gradient(180deg,#E5484D,#8E2B30)}
-.fig.d{background:linear-gradient(180deg,#565B6E,#2E3240)}
-.ph{position:absolute;background:#0B0C11;border:1.5px solid #4A4F62;border-radius:14%}
-.ph::before{content:"";position:absolute;inset:12%;background:#20242F;border-radius:8%}
-.ph.glow{border-color:var(--gold);box-shadow:0 0 22px rgba(212,168,67,.35)}
-.glowtop{position:absolute;inset:0;background:radial-gradient(120% 55% at 50% 0%,rgba(255,220,150,.22),transparent 65%)}
-.elline{position:absolute;left:6%;right:6%;height:1px;background:rgba(255,255,255,.16)}
-.elline::after{content:attr(data-el);position:absolute;right:0;top:-16px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim)}
-.flab{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.06em}
-.cap{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--mut);padding:10px 4px 2px;line-height:1.5}
-.cap b{color:var(--tx)}
 
 /* prompts */
 .plist{display:grid;gap:14px}
@@ -165,14 +140,14 @@ footer b{color:var(--mut)}
 <header class="hero">
   <div class="wrap">
     <div class="slate">WORK SAMPLE · <b>EP-AI-003</b> · AI STORYBOARD &amp; SCENE BREAKDOWN ASSISTANT</div>
-    <h1>“The Last<br><span class="r">Elevator</span>”</h1>
-    <p class="sub">A complete breakdown of an original vertical-drama cold open — the exact workflow from your job description: beats → shot list → blocking → AI image prompts → continuity bible. Produced with Claude; prompts are locked and ready to run in ChatGPT.</p>
+    <h1>“Same<br><span class="r">Bread</span>”</h1>
+    <p class="sub">A complete breakdown of an original short film scene — the exact workflow from your job description: beats → shot list → blocking → AI image prompts → continuity bible. Every frame generated in one session with a frontier image model (Google Gemini / Nano Banana); breakdown and prompt system built with Claude.</p>
     <div class="meta">
-      <span><i>9:16</i> vertical</span>
+      <span><i>16:9</i> cinematic</span>
       <span><i>3</i> beats</span>
-      <span><i>9</i> shots</span>
-      <span><i>~65s</i> runtime</span>
-      <span><i>2</i> characters + insert</span>
+      <span><i>12</i> shots</span>
+      <span><i>~2 min</i> runtime</span>
+      <span><i>2</i> characters, 1 location</span>
     </div>
   </div>
 </header>
@@ -181,44 +156,72 @@ footer b{color:var(--mut)}
   <div class="wrap">
     <div class="kick">01 · The Scene</div>
     <h2>Original Screenplay</h2>
-    <p class="lead">Cold open for episode 1 of a vertical drama. One location, two faces, one phone — the cheapest scene to keep consistent across AI generations, and the hardest to fake continuity in. That trade-off is the point.</p>
-    <p class="logline">On the night of her engagement party, <b>Mia</b> learns who her fiancé really is — from a message preview in an elevator mirror.</p>
-    <div class="script"><span class="sh">INT. LUXURY APARTMENT ELEVATOR — NIGHT</span>
+    <p class="lead">A closing chapter, not a cliffhanger — deliberately chosen to test the hardest AI continuity problem: one elderly face, one young face, one location, and props that must survive twelve generations (the sign, the crock, the tattoo). If the board holds, the pipeline holds.</p>
+    <p class="logline">On the last day of a fifty-year bakery, <b>Marek</b> meets the stranger who will bake tomorrow's bread — and lets the ovens change hands.</p>
+    <div class="script"><span class="sh">EXT. MAREK'S BAKERY — NIGHT</span>
 
-<span class="sh">S1</span>  The doors close on MIA (late 20s, red satin
-     slip dress) and DANIEL (early 30s, charcoal
-     suit). He hands her a champagne coupe.
+<span class="sh">S1</span>  A green-and-gold corner shop holds its light
+     against the dark. Steam sighs from the vent.
+     Taped inside the window, a cardboard card:
+     FINAL DAY — THANK YOU.
 
-     <span class="paren">elevator hums upward</span>
+<span class="sh">S2</span>  <span class="paren">top-down, through flour</span>
+     Two pairs of hands work one dough —
+     old knuckles, young wrists, the same rhythm.
 
-<span class="sh">S2</span>  In his other hand, his PHONE buzzes — face-up.
+<span class="sh">S3</span>  MAREK (70s, white hair, flour-dusted apron)
+     tapes the FINAL DAY card straight in the
+     window glass. His reflection tapes it with him.
 
-<span class="sh">S3</span>  Daniel flips it toward himself. Too late.
+<span class="sh">S4</span>  <span class="paren">dissolve: the last day</span>
+     The shop floods. Schoolkids, builders in hi-vis,
+     phones held up. The neighbourhood says goodbye
+     to a counter.
 
-     In the MIRROR, Mia's reflection is already
-     reading the preview.
+<span class="sh">S5</span>  The regular — a flat cap, counted-out coins —
+     buys the last loaf Marek will ever sell him.
+     Neither man makes a joke of it.
 
-<span class="sh">S4</span>  Close on Mia. Her smile doesn't move.
-     Her eyes do.
+<span class="sh">S6</span>  Closing time. In the doorway stands CLARA
+     (late 20s, apron on, arms at her sides).
+     She is not here to buy bread.
 
-     <span class="sh">MESSAGE PREVIEW</span>
-     <span class="paren">on Daniel's phone screen</span>
-     <span class="ch">V</span>: You told her I was your assistant.
-        I'm at the party.
+                     MAREK
+              <span class="paren">measuring her</span>
+          We're finished.
 
-<span class="sh">S6</span>  Daniel reads it. The jaw goes tight.
+                     CLARA
+              <span class="paren">not moving</span>
+          Not the ovens.
 
-<span class="sh">S7</span>  DING. The doors open on warm light and
-     applause. Both faces catch gold.
+<span class="sh">S7</span>  <span class="paren">top-down insert</span>
+     The old hands fold, the young hands learn.
+     A phone lies face-down in the flour —
+     nobody is looking at it.
 
-<span class="sh">S8</span>  Mia steps out FIRST. Fixes Daniel's collar.
+<span class="sh">S8</span>  The back room. Marek, alone on a crate,
+     reading glasses on, holds a curling photograph:
+     himself and his wife, forty years younger,
+     in front of this same oven.
 
-                     MIA
-              <span class="paren">perfect smile, low</span>
-          Not here.
+<span class="sh">S9</span>  Night shift. Marek and Clara work the
+     wood-fired oven in silence. She loads;
+     he watches — and lets her.
 
-<span class="sh">S9</span>  The doors close on the empty elevator —
-     and her champagne coupe, left on the rail.</div>
+<span class="sh">S10</span> Morning, at the threshold. He passes her
+     the STARTER CROCK — red ribbon, fifty years
+     of sourdough — and the keys with it.
+
+<span class="sh">S11</span> <span class="paren">dawn, chairs still stacked</span>
+     Marek flips the sign to OPEN one last time.
+     Not his shift. His gift.
+
+<span class="sh">S12</span> <span class="sh">EXT. — GOLDEN HOUR</span>
+     The queue is back. The sign reads:
+     CLARA'S — SAME BREAD.
+
+          <span class="ch">TITLE</span>: Some ovens don't go out.
+          They just change hands.</div>
   </div>
 </section>
 
@@ -228,9 +231,9 @@ footer b{color:var(--mut)}
     <h2>Beat Breakdown</h2>
     <p class="lead">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches.</p>
     <div class="beats">
-      <div class="beat b1"><div class="tc">00:00 – 00:22</div><h3>The Ascent</h3><p>Flirty banter, champagne, celebration. A phone buzzes and is silenced — read as party logistics. Plant: Mia sees everything in the mirror before we ever cut wide on it.</p></div>
-      <div class="beat b2"><div class="tc">00:22 – 00:48</div><h3>The Message</h3><p>The reveal lands in three images: mirror watch → eyes hold → macro on the screen. No dialogue. The smile stays; the eyes leave.</p></div>
-      <div class="beat b3"><div class="tc">00:48 – 01:05</div><h3>The Smile</h3><p>Doors open, applause, gold light. Mia takes control of the frame — collar fix, "Not here." — and exits first. Tag on the abandoned coupe: she's already three moves ahead.</p></div>
+      <div class="beat b1"><div class="tc">00:00 – 00:40</div><h3>The Final Day</h3><p>The shop, the craft, the goodbye. Plant the three continuity props early — the FINAL DAY card, the flour, the oven glow — because every later generation must answer to them.</p></div>
+      <div class="beat b2"><div class="tc">00:40 – 01:20</div><h3>The Stranger</h3><p>No dialogue carries this beat: a doorway, hands teaching hands, a photograph of the dead, a shared night shift. Marek decides with his shoulders before he says a word.</p></div>
+      <div class="beat b3"><div class="tc">01:20 – 02:00</div><h3>Same Bread</h3><p>The crock and the keys cross the threshold at dawn — inheritance in one object. The sign changes name; the queue doesn't notice. Tag on the caption card.</p></div>
     </div>
   </div>
 </section>
@@ -238,20 +241,23 @@ footer b{color:var(--mut)}
 <section>
   <div class="wrap">
     <div class="kick">03 · Shot List</div>
-    <h2>9 Shots, 9:16</h2>
-    <p class="lead">Framing chosen for vertical: tall compositions, eyelines readable at thumbnail size, one insert carries the plot.</p>
+    <h2>12 Shots, 16:9</h2>
+    <p class="lead">Landscape compositions with the humans on the thirds; two top-down inserts carry the theme so faces are never asked to do exposition. One hard rule: the counter axis never flips, so screen direction stays stable across all twelve generations.</p>
     <div class="tblwrap">
       <table>
-        <tr><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / 180°</th><th>Action</th></tr>
-        <tr><td class="sn">S1</td><td><span class="b b1">B1</span></td><td>High wide, corner</td><td>C1 · NW corner, ~2.1m, static</td><td>M and D face door then each other; Mia screen-left, Daniel screen-right — line established on N–S axis</td><td>Doors close; coupe hand-off <em>establishes geography + mirror position</em></td></tr>
-        <tr><td class="sn">S2</td><td><span class="b b1">B1</span></td><td>Mirror insert</td><td>C2 · W wall, aimed at mirror</td><td>Mia's reflected eyeline → phone in D's hand</td><td>Phone buzzes face-up <em>audience learns with Mia</em></td></tr>
-        <tr><td class="sn">S3</td><td><span class="b b1">B1</span></td><td>OTS over Daniel</td><td>C2 +8cm, over D's R shoulder</td><td>Mia (reflection) holds smile at Daniel</td><td>D flips phone to himself <em>the miss — he thinks he's safe</em></td></tr>
-        <tr><td class="sn">S4</td><td><span class="b b2">B2</span></td><td>CU Mia, eye-line thirds</td><td>C2 zoom, eye height</td><td>Eyes shift to mirror-phone, screen-right of frame</td><td>Smile intact, eyes move <em>key acting frame — generate most retakes here</em></td></tr>
-        <tr><td class="sn">S5</td><td><span class="b b2">B2</span></td><td>Macro on phone screen</td><td>C5 · 30cm insert lens</td><td>n/a — text legible, no face</td><td>Message preview fills frame <em>only frame allowed to break style slightly for legibility</em></td></tr>
-        <tr><td class="sn">S6</td><td><span class="b b2">B2</span></td><td>CU Daniel</td><td>C2 mirrored, eye height</td><td>Down-left at phone; mirrors S4 composition</td><td>Jaw tightens <em>bookend symmetry with S4</em></td></tr>
-        <tr><td class="sn">S7</td><td><span class="b b3">B3</span></td><td>2-shot, doors opening</td><td>C7 · S of door, 1.4m, static</td><td>Both face camera, then past it</td><td>Gold bloom, off-screen applause <em>lighting flips warm — continuity cut point</em></td></tr>
-        <tr><td class="sn">S8</td><td><span class="b b3">B3</span></td><td>Low hero on Mia</td><td>C8 · 0.9m low, slight push</td><td>Mia down at Daniel (hand on collar)</td><td>Collar fix, "Not here." <em>power transfer to Mia</em></td></tr>
-        <tr><td class="sn">S9</td><td><span class="b b3">B3</span></td><td>Empty elevator, doors closing</td><td>C9 · inside, N wall by mirror</td><td>no faces</td><td>Coupe on the rail, slit of light <em>tag: consequence, not dialogue</em></td></tr>
+        <tr><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / axis</th><th>Action</th></tr>
+        <tr><td class="sn">S1</td><td><span class="b b1">B1</span></td><td>EXT establishing, corner angle</td><td>C1 · across the junction, static</td><td>no faces — shop is the subject</td><td>Steam, lit sign, FINAL DAY card <em>plants the card + facade props</em></td></tr>
+        <tr><td class="sn">S2</td><td><span class="b b1">B1</span></td><td>Top-down macro, hands on dough</td><td>C2 · overhead 0.8m</td><td>n/a — hands only</td><td>Old + young hands, one dough <em>theme frame — bookends at S7</em></td></tr>
+        <tr><td class="sn">S3</td><td><span class="b b1">B1</span></td><td>Mid through window glass</td><td>C3 · sidewalk, reflections kept</td><td>Marek's reflection over his shoulder</td><td>Taping FINAL DAY — EVERYTHING MUST GO card <em>sign copy locked verbatim</em></td></tr>
+        <tr><td class="sn">S4</td><td><span class="b b1">B1</span></td><td>Wide interior, door side</td><td>C4 · by the bell, 24mm</td><td>crowd converges on counter</td><td>Last-day crowd, phones up <em>sets max occupancy for later empties</em></td></tr>
+        <tr><td class="sn">S5</td><td><span class="b b1">B1</span></td><td>Two-shot over counter</td><td>C5 · counter front, eye height</td><td>customer ↔ Marek, level</td><td>Coins counted, last loaf handed over <em>farewell without dialogue</em></td></tr>
+        <tr><td class="sn">S6</td><td><span class="b b2">B2</span></td><td>OTS over Marek to doorway</td><td>C6 · behind M's L shoulder</td><td>Clara's eyeline straight down counter axis</td><td>Clara in the doorway, apron on <em>the stranger is not a customer</em></td></tr>
+        <tr><td class="sn">S7</td><td><span class="b b2">B2</span></td><td>Top-down insert, tighter</td><td>C2 return · overhead 0.7m</td><td>n/a — hands only</td><td>Hands teaching hands; phone face-down <em>mirrors S2 — inheritance in miniature</em></td></tr>
+        <tr><td class="sn">S8</td><td><span class="b b2">B2</span></td><td>Medium, back room</td><td>C8 · static 50mm, window key</td><td>Marek down at the photograph</td><td>Photo of him and his wife at this oven <em>the reason he almost says no</em></td></tr>
+        <tr><td class="sn">S9</td><td><span class="b b2">B2</span></td><td>Profile 2-shot at the oven</td><td>C9 · across the bakehouse</td><td>both faces to the fire, no eyeline contest</td><td>She loads the peel; he only watches <em>the decision, played on his posture</em></td></tr>
+        <tr><td class="sn">S10</td><td><span class="b b3">B3</span></td><td>Mid 2-shot at threshold</td><td>C10 · street side, morning</td><td>hand to hand, crock centre-frame</td><td>Starter crock + keys change hands <em>whole story in one prop</em></td></tr>
+        <tr><td class="sn">S11</td><td><span class="b b3">B3</span></td><td>Interior reverse, through window</td><td>C11 · inside looking out</td><td>Marek to the street, back half-turned</td><td>OPEN flipped at dawn, chairs stacked <em>not his shift — his gift</em></td></tr>
+        <tr><td class="sn">S12</td><td><span class="b b3">B3</span></td><td>EXT hero wide, golden hour</td><td>C1 return position, warm grade</td><td>queue toward camera</td><td>CLARA'S — SAME BREAD; caption card <em>same angle as S1 — time passed, axis kept</em></td></tr>
       </table>
     </div>
   </div>
@@ -261,19 +267,22 @@ footer b{color:var(--mut)}
   <div class="wrap">
     <div class="kick">04 · Frames</div>
     <h2>The Storyboard</h2>
-    <p class="lead">All nine frames generated with the locked prompts from section 06 — character, location and style held constant across every generation. This is the deliverable: a board you can play as an animatic.</p>
+    <p class="lead">All twelve frames generated in one Gemini thread with the locked prompts from section 06 — faces, wardrobe, sign copy and oven glow held constant across every generation. This is the deliverable: a board you can play as an animatic.</p>
     <div class="board">
-      <div class="tile"><div class="img"><span class="tag g">S1 · HIGH WIDE</span><img src="frames/s1.jpg" alt="S1 high wide — champagne hand-off"></div><div class="tinfo"><b>B1 · 00:00</b><p>Doors close on Mia and Daniel; coupe hand-off. Mirror behind them — the scene's weapon, planted early.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S2 · MIRROR</span><img src="frames/s2.jpg" alt="S2 mirror insert — phone buzzes"></div><div class="tinfo"><b>B1 · 00:08</b><p>Phone buzzes face-up. In the mirror, Mia's reflection locks onto it before he notices.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S3 · OTS</span><img src="frames/s3.jpg" alt="S3 over-the-shoulder"></div><div class="tinfo"><b>B1 · 00:15</b><p>Daniel flips the phone away — he thinks he's safe. He's reading the wrong audience.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S4 · CU MIA</span><img src="frames/s4.jpg" alt="S4 close-up Mia"></div><div class="tinfo"><b>B2 · 00:24</b><p>The key acting frame: smile fully intact, eyes gone. Most retakes budgeted here.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S5 · MACRO</span><img src="frames/s5.jpg" alt="S5 macro phone screen"></div><div class="tinfo"><b>B2 · 00:31</b><p>The reveal insert — "V: I'm at the party." The only frame allowed to prioritize text legibility.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S6 · CU DANIEL</span><img src="frames/s6.jpg" alt="S6 close-up Daniel"></div><div class="tinfo"><b>B2 · 00:39</b><p>Jaw tight. Composition mirrored against S4 — the couple now framed as opposites.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S7 · DING</span><img src="frames/s7.jpg" alt="S7 two-shot doors opening"></div><div class="tinfo"><b>B3 · 00:48</b><p>Doors open on applause and gold light. Lighting flips warm — the continuity cut point.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S8 · LOW HERO</span><img src="frames/s8.jpg" alt="S8 low hero Mia"></div><div class="tinfo"><b>B3 · 00:55</b><p>"Not here." — collar fix, perfect smile. Power transfers to Mia in one low-angle push.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S9 · TAG</span><img src="frames/s9.jpg" alt="S9 empty elevator tag"></div><div class="tinfo"><b>B3 · 01:02</b><p>Empty cabin, the coupe left on the rail, doors sealing the gold light out. She's already ahead.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S1 · ESTABLISHING</span><img src="frames/s1.jpg" alt="S1 establishing — Marek's Bakery at night"></div><div class="tinfo"><b>B1 · 00:00</b><p>The corner shop at night — steam, warm window, FINAL DAY card already in the glass. The audience reads the premise in one frame.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S2 · HANDS MACRO</span><img src="frames/s2.jpg" alt="S2 top-down hands kneading"></div><div class="tinfo"><b>B1 · 00:07</b><p>Theme frame: old knuckles and young wrists on one dough. No faces needed — the story is the rhythm.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S3 · THE SIGN</span><img src="frames/s3.jpg" alt="S3 Marek taping FINAL DAY sign"></div><div class="tinfo"><b>B1 · 00:14</b><p>Marek tapes the card his reflection already wrote: FINAL DAY — EVERYTHING MUST GO — THANK YOU FOR 50 YEARS. Sign copy locked verbatim.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S4 · LAST DAY</span><img src="frames/s4.jpg" alt="S4 crowd inside on the final day"></div><div class="tinfo"><b>B1 · 00:21</b><p>The neighbourhood floods in — kids, builders, phones up. Peak occupancy frame; every later shot must feel emptier than this.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S5 · THE REGULAR</span><img src="frames/s5.jpg" alt="S5 the regular buys the last loaf"></div><div class="tinfo"><b>B1 · 00:31</b><p>Flat cap, counted coins, the last loaf. Two men who never needed conversation — and today have none.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S6 · THE STRANGER</span><img src="frames/s6.jpg" alt="S6 Clara in the doorway"></div><div class="tinfo"><b>B2 · 00:42</b><p>Closing time. Clara stands in the doorway with her apron already on — she's not buying bread, she's asking for it.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S7 · TEACHING</span><img src="frames/s7.jpg" alt="S7 hands teaching hands"></div><div class="tinfo"><b>B2 · 00:52</b><p>The S2 frame returns, tighter: her hands under his, the fold correct, the phone face-down in the flour.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S8 · THE PHOTO</span><img src="frames/s8.jpg" alt="S8 Marek with the old photograph"></div><div class="tinfo"><b>B2 · 01:02</b><p>Back room. Marek and a curling photograph — him and his wife, forty years younger, in front of the same oven.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S9 · NIGHT SHIFT</span><img src="frames/s9.jpg" alt="S9 at the oven together"></div><div class="tinfo"><b>B2 · 01:10</b><p>Two silhouettes, one fire. She loads the peel; he watches and lets her. The whole decision, played on posture.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S10 · HANDOVER</span><img src="frames/s10.jpg" alt="S10 the starter crock changes hands"></div><div class="tinfo"><b>B3 · 01:24</b><p>At the threshold: the starter crock with its red ribbon — fifty years of sourdough — passed with the keys.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S11 · OPEN, ONCE MORE</span><img src="frames/s11.jpg" alt="S11 flipping the OPEN sign at dawn"></div><div class="tinfo"><b>B3 · 01:38</b><p>Dawn, chairs stacked, ovens warming. Marek flips the sign to OPEN one last time — for her.</p></div></div>
+      <div class="tile"><div class="img"><span class="tag g">S12 · TAG</span><img src="frames/s12.jpg" alt="S12 golden hour queue at Clara's"></div><div class="tinfo"><b>B3 · 01:50</b><p>Golden hour, queue to the corner, sign re-lettered: CLARA'S — SAME BREAD. Caption: some ovens don't go out.</p></div></div>
     </div>
-    <div class="boardnote">frames/s1–s9.jpg · 540×960 · generated from the section-06 prompts, seeds logged per shot</div>
+    <div class="boardnote">frames/s1–s12.jpg · 1024×572 · one Gemini (Nano Banana) thread, seeds + edits logged per shot</div>
   </div>
 </section>
 
@@ -281,56 +290,61 @@ footer b{color:var(--mut)}
   <div class="wrap">
     <div class="kick">05 · Blocking</div>
     <h2>Overhead Layout &amp; Axis</h2>
-    <p class="lead">Framing logic behind the board: tall vertical compositions, eyelines readable at thumbnail size, one insert carries the plot — and one hard rule: the 180° axis runs north–south along the mirror, so reflections and screen direction never flip between generations.</p>
+    <p class="lead">The framing logic behind the board: shop geometry fixed once, camera positions reused, and one hard rule — the counter axis runs north–south, so S1/S12 share an angle across time and S6's eyeline never flips screen direction between generations.</p>
     <div class="blockwrap">
-      <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
-        <rect x="0" y="0" width="420" height="520" fill="none"/>
-        <rect x="110" y="40" width="200" height="210" fill="#161924" stroke="#2E3240" stroke-width="2"/>
-        <text x="210" y="30" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">MIRROR WALL (N)</text>
-        <line x1="110" y1="46" x2="310" y2="46" stroke="#D4A843" stroke-width="2" stroke-dasharray="3 3"/>
-        <text x="210" y="70" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ELEVATOR 2.0 × 2.1 m</text>
-        <line x1="304" y1="60" x2="304" y2="240" stroke="#2E3240" stroke-width="4"/>
-        <text x="352" y="150" fill="#5A5E70" font-family="JetBrains Mono" font-size="9">RAIL (E)</text>
-        <rect x="150" y="248" width="120" height="8" fill="#D4A843"/>
-        <text x="210" y="276" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">DOORS (S)</text>
-        <rect x="60" y="300" width="300" height="150" fill="#12141C" stroke="#23262F" stroke-width="2"/>
-        <text x="210" y="325" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">PARTY LANDING — gold string lights, roses</text>
-        <circle cx="120" cy="330" r="4" fill="#D4A843" opacity=".7"/><circle cx="300" cy="330" r="4" fill="#D4A843" opacity=".7"/>
-        <line x1="180" y1="410" x2="240" y2="410" stroke="#2E3240" stroke-width="2"/>
-        <text x="210" y="432" fill="#5A5E70" font-family="JetBrains Mono" font-size="9" text-anchor="middle">stairs to party</text>
-        <!-- 180 line -->
-        <line x1="110" y1="150" x2="310" y2="150" stroke="#2299ff" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="6 4"/>
-        <text x="210" y="145" fill="#3E6FA8" font-family="JetBrains Mono" font-size="9" text-anchor="middle">180° AXIS (N–S)</text>
-        <!-- B1 positions -->
-        <circle cx="170" cy="190" r="11" fill="#E5484D"/><text x="170" y="194" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">M</text>
-        <circle cx="240" cy="190" r="11" fill="#565B6E"/><text x="240" y="194" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">D</text>
-        <text x="210" y="222" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">B1 start</text>
-        <!-- B2 sightline via mirror -->
-        <path d="M 170 180 L 170 56 L 258 178" fill="none" stroke="#E5484D" stroke-width="1.5" stroke-dasharray="4 4" opacity=".8"/>
-        <text x="96" y="100" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">M eyeline</text>
-        <text x="96" y="112" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">via mirror</text>
-        <!-- exit arrows -->
-        <path d="M 190 236 C 190 300, 205 340, 208 372" fill="none" stroke="#7A9BD6" stroke-width="2"/>
-        <polygon points="208,380 202,368 214,368" fill="#7A9BD6"/>
-        <path d="M 226 236 C 228 310, 222 360, 216 408" fill="none" stroke="#7A9BD6" stroke-width="2" opacity=".55"/>
-        <polygon points="216,416 210,404 222,404" fill="#7A9BD6" opacity=".55"/>
-        <text x="258" y="352" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">B3 exit</text>
-        <text x="258" y="364" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">M first, D follows</text>
+      <svg viewBox="0 0 420 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
+        <rect x="0" y="0" width="420" height="440" fill="none"/>
+        <!-- shop box -->
+        <rect x="90" y="60" width="240" height="240" fill="#161924" stroke="#2E3240" stroke-width="2"/>
+        <text x="210" y="50" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">OVEN WALL (N) — wood fire, gold glow</text>
+        <rect x="140" y="66" width="140" height="10" fill="#3A2E1C"/>
+        <text x="210" y="92" fill="#8B8FA3" font-family="JetBrains Mono" font-size="9" text-anchor="middle">BRICK OVEN</text>
+        <!-- counter -->
+        <rect x="210" y="110" width="16" height="150" fill="#D4A843" opacity=".85"/>
+        <text x="248" y="190" fill="#8B8FA3" font-family="JetBrains Mono" font-size="9">COUNTER (E)</text>
+        <!-- back room -->
+        <rect x="96" y="66" width="70" height="60" fill="#12141C" stroke="#23262F" stroke-width="1.5"/>
+        <text x="131" y="100" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">BACK ROOM</text>
+        <text x="131" y="112" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">(S8 photo)</text>
+        <!-- door + window south -->
+        <rect x="150" y="298" width="60" height="8" fill="#D4A843"/>
+        <text x="180" y="322" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">DOOR (S)</text>
+        <rect x="230" y="298" width="70" height="8" fill="#2E3240"/>
+        <text x="265" y="322" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">WINDOW + card</text>
+        <!-- street -->
+        <rect x="60" y="340" width="300" height="70" fill="#12141C" stroke="#23262F" stroke-width="2"/>
+        <text x="210" y="362" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">STREET — cobblestones, parked cars, street lamp</text>
+        <text x="210" y="378" fill="#5A5E70" font-family="JetBrains Mono" font-size="9" text-anchor="middle">C1 (S1) = C12 (S12) — same angle, time passed</text>
+        <!-- 180 axis -->
+        <line x1="218" y1="100" x2="218" y2="298" stroke="#2299ff" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text x="130" y="230" fill="#3E6FA8" font-family="JetBrains Mono" font-size="9" text-anchor="middle">180° AXIS (N–S)</text>
+        <!-- B1/B2 positions -->
+        <circle cx="186" cy="170" r="11" fill="#E5484D"/><text x="186" y="174" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">M</text>
+        <circle cx="186" cy="280" r="11" fill="#D4A843"/><text x="186" y="284" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">C</text>
+        <text x="150" y="260" fill="#F29CA0" font-family="JetBrains Mono" font-size="9">S5 counter</text>
+        <text x="150" y="272" fill="#F29CA0" font-family="JetBrains Mono" font-size="9">S6 doorway</text>
+        <!-- oven positions -->
+        <circle cx="150" cy="130" r="9" fill="#E5484D" opacity=".9"/><text x="150" y="134" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="8" text-anchor="middle">M</text>
+        <circle cx="176" cy="130" r="9" fill="#D4A843" opacity=".9"/><text x="176" y="134" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="8" text-anchor="middle">C</text>
+        <text x="163" y="118" fill="#F29CA0" font-family="JetBrains Mono" font-size="8" text-anchor="middle">S9 oven</text>
+        <!-- handover arrow -->
+        <path d="M 150 320 C 120 335, 120 350, 122 366" fill="none" stroke="#7A9BD6" stroke-width="2"/>
+        <polygon points="122,374 116,362 128,362" fill="#7A9BD6"/>
+        <text x="60" y="392" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">S10 crock + keys</text>
         <!-- cameras -->
-        <polygon points="88,96 100,104 88,112" fill="#D4A843"/><text x="66" y="108" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C1</text>
-        <polygon points="86,168 98,176 86,184" fill="#D4A843"/><text x="64" y="180" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C2</text>
-        <polygon points="252,150 264,158 252,166" fill="#D4A843"/><text x="270" y="162" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C5</text>
-        <polygon points="196,330 208,338 196,346" fill="#D4A843"/><text x="214" y="344" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C7</text>
-        <polygon points="170,470 182,478 170,486" fill="#D4A843"/><text x="188" y="482" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C8 low hero</text>
-        <polygon points="286,96 298,104 286,112" fill="#D4A843"/><text x="304" y="108" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C9</text>
+        <polygon points="360,300 372,308 360,316" fill="#D4A843"/><text x="378" y="312" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C1/C12</text>
+        <polygon points="120,240 132,248 120,256" fill="#D4A843"/><text x="96" y="252" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C5</text>
+        <polygon points="230,270 242,278 230,286" fill="#D4A843"/><text x="248" y="282" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C6</text>
+        <polygon points="330,150 342,158 330,166" fill="#D4A843"/><text x="348" y="162" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C9</text>
+        <polygon points="150,340 162,348 150,356" fill="#D4A843"/><text x="130" y="356" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C10</text>
       </svg>
       <div class="legend">
-        <div class="li"><span class="dot m"></span><span><b>Mia</b> — screen-left of axis</span></div>
-        <div class="li"><span class="dot d"></span><span><b>Daniel</b> — screen-right</span></div>
+        <div class="li"><span class="dot m"></span><span><b>Marek</b> — shop side of axis</span></div>
+        <div class="li"><span class="dot d" style="background:#D4A843"></span><span><b>Clara</b> — door / oven side</span></div>
         <div class="li"><span class="tri"></span><span><b>C#</b> — camera position (shot list)</span></div>
-        <div class="li"><span class="dash"></span><span><b>Red dashed</b> — Mia's eyeline via mirror</span></div>
-        <div class="li"><span class="arrow"></span><span><b>Blue</b> — exit blocking, B3</span></div>
-        <div class="li" style="margin-top:6px;color:#C9CBD6">Camera never crosses the blue axis — screen direction stays stable for every generated frame.</div>
+        <div class="li"><span class="dash"></span><span><b>Red dashed</b> — S6 eyeline, kept on-axis</span></div>
+        <div class="li"><span class="arrow"></span><span><b>Blue</b> — S10 handover path at threshold</span></div>
+        <div class="li" style="margin-top:6px;color:#C9CBD6">The camera never crosses the blue axis — screen direction stays stable for every generated frame.</div>
       </div>
     </div>
   </div>
@@ -339,37 +353,43 @@ footer b{color:var(--mut)}
 <section>
   <div class="wrap">
     <div class="kick">06 · AI Image Prompts</div>
-    <h2>ChatGPT-Ready Prompts</h2>
+    <h2>Paste-Ready Prompts</h2>
     <p class="lead">Every prompt is assembled from four locked blocks — style, character, location, then the shot. Paste as-is; no retouching needed. Changelog discipline below.</p>
     <div class="locks">
-      <div class="lock"><h4>MIA — CHARACTER LOCK</h4><p>Late 20s, shoulder-length dark brown hair tucked behind her left ear, small mole below her left eye, red satin slip dress, thin gold hoop earrings.</p></div>
-      <div class="lock"><h4>DANIEL — CHARACTER LOCK</h4><p>Early 30s, short black hair, clean-shaven, strong jaw, charcoal suit, white shirt with open collar, black leather watch.</p></div>
-      <div class="lock gold"><h4>LOCATION LOCK</h4><p>Luxury apartment elevator: black marble, gold trim, full-height mirror on the back wall, brass rail. Beyond the doors: cream roses, warm gold string lights.</p></div>
-      <div class="lock gold"><h4>STYLE LOCK</h4><p>Cinematic photorealism, vertical 9:16, shallow DOF, 35mm, soft contrast, muted palette with a deep red accent, fine film grain.</p></div>
+      <div class="lock"><h4>MAREK — CHARACTER LOCK</h4><p>Mid-70s, wavy white hair, ruddy cheeks, navy knit sweater with rolled sleeves under a flour-dusted cream canvas apron; wire reading glasses worn on his head or nose; thin scar on the right forearm.</p></div>
+      <div class="lock"><h4>CLARA — CHARACTER LOCK</h4><p>Late 20s, dark brown hair tied back in a low bun, wheat-stalk tattoo on the left forearm, charcoal-olive t-shirt, cream canvas apron with keys hooked at the hip.</p></div>
+      <div class="lock gold"><h4>LOCATION LOCK</h4><p>Corner bakery: dark green facade with gold serif sign "MAREK'S BAKERY", wicker baskets hanging in the window, black-and-white checkered tile floor, flour-scoured wooden counter, glowing brick wood-fired oven, brass bell over the door; outside — wet cobblestones, a blue street lamp.</p></div>
+      <div class="lock gold"><h4>STYLE LOCK</h4><p>Cinematic photorealism, landscape 16:9, shallow DOF, 35mm, warm tungsten against cool dusk light, muted palette with deep green and gold accents, fine film grain. No watermark, no logo.</p></div>
     </div>
     <div class="plist">
-      <div class="pcard"><div class="phead"><span class="pt"><i>S1</i> — HIGH WIDE, CORNER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-High-angle wide shot from the elevator's northwest corner looking down: Mia screen-left facing Daniel screen-right, champagne coupe mid hand-off between them, both reflected small in the mirror wall behind. Doors at frame bottom. Warm single ceiling spotlight, cold marble tones. No text, no watermark, faces identical to character locks.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S2</i> — MIRROR INSERT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-Medium insert aimed at the mirror wall: in the reflection, Daniel's right hand holds a matte black phone face-up, screen glowing; behind and left, Mia's reflected face turning toward the phone, eyes locked on it. Shallow DOF, phone sharpest element. Same elevator, same wardrobe. No readable text yet, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S3</i> — OTS OVER DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-Over-the-shoulder from behind Daniel's right shoulder (dark blurred charcoal suit in frame left edge), Mia facing him — real, not reflection — raising her champagne coupe, warm smile. Her eyes angled slightly to frame right where the mirror sits. Composition mirrors S2. No text, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S4</i> — CU MIA, EYES</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[LOCATION]</span>
-Extreme close-up on Mia's face filling upper frame thirds, eyes on the upper horizontal third line. The smile is fully intact; only her eyes have shifted hard to frame right. Gold hoop catching the ceiling spotlight, mole below her left eye visible. Cold elevator light. No text, no watermark, face identical to character lock.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S5</i> — MACRO, THE REVEAL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
-Macro insert, 30cm from the phone screen held in a man's hand (black leather watch visible at frame edge): a messaging app preview fills the screen — sender "V", text reads "You told her I was your assistant. I'm at the party." Slight screen glow on surrounding darkness, background fully black. Crisp legible type, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S6</i> — CU DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-Extreme close-up on Daniel, composition mirrored against S4: eyes down-left toward his phone, jaw visibly tight, lips pressed. Same cold elevator light as S4. No text, no watermark, face identical to character lock.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S7</i> — 2-SHOT, DOORS OPEN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-Static two-shot from the landing facing the open elevator doors: Mia and Daniel side by side in the doorway, silhouettes rimmed by warm gold light blooming from the party behind camera, blurred string lights and cream roses in background bokeh. Both faces catch gold; her smile returns, his doesn't. Lighting flips warm — wardrobe unchanged. No text, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S8</i> — LOW HERO, MIA</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
-Low-angle hero shot, camera at 0.9m: Mia dominant in frame, one hand fixing Daniel's collar (his blurred shoulder at frame right), her expression a perfect, controlled smile, chin slightly down. Warm gold landing light, red satin catching it. Authority in the posture. No text, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S9</i> — EMPTY ELEVATOR TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
-Static frame from inside the elevator by the mirror wall: the elevator now empty except a half-full champagne coupe resting on the brass rail, doors sliding closed leaving a narrowing slit of warm gold light from the landing. Cold marble, single spotlight. No people, no text, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S1</i> — ESTABLISHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Exterior wide, corner angle across the junction at night: the bakery's dark green facade glowing against the dark, gold serif sign "MAREK'S BAKERY" lit, steam sighing from a roof vent, warm window light spilling onto wet cobblestones. A cardboard card taped inside the window reads "FINAL DAY, THANK YOU". Parked cars, one blue street lamp. No people. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S2</i> — HANDS MACRO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+Top-down macro over a flour-dusted dark wooden table: two pairs of hands kneading one ball of dough — an old man's weathered hands with a silver wristwatch, and a young woman's hands with a wheat-stalk tattoo on the forearm. Flour dust scattered in rays. Warm tungsten light. No faces. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S3</i> — THE SIGN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+Medium shot through the window glass from the sidewalk: Marek, apron dusted with flour, taping a cardboard sign inside the window. The card reads exactly "FINAL DAY — EVERYTHING MUST GO — THANK YOU FOR 50 YEARS" in handwriting. His reflection doubles him in the glass, the lit shop interior and hanging baskets behind, street fading to dusk outside. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S4</i> — LAST DAY CROWD</span><button class="copy" >copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Wide interior shot from the door: the small bakery crowded — schoolkids in uniform, builders in hi-vis vests, parents holding toddlers, one man photographing with his phone. An old woman in an olive jacket serves bread at the counter while Marek bags loaves at the till, smiling. Gold letters "MAREK'S BAKERY" on the back wall, brick oven glowing behind. Daylight. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S5</i> — THE REGULAR</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+Two-shot over the counter, eye height: an elderly customer in a flat cap and dark coat counts coins on the wooden counter while Marek hands him a paper-wrapped loaf across it. Quiet warmth, customers waiting blurred in the background, oven glow camera-left. Neither man smiling. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S6</i> — THE STRANGER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+Over-the-shoulder shot from behind Marek's left shoulder (his blurred white hair and apron in the near foreground, right of frame): Clara stands in the open doorway in her cream apron over a dark t-shirt, hands at her sides, looking straight down the room at him. Cool blue street light behind her, warm interior ahead. Composition holds the tension between door and counter. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S7</i> — TEACHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+Top-down insert, tighter than S2: the old man's hands guiding the young woman's hands as they fold one dough together, her wheat-stalk tattoo visible, a smartphone lying face-down on the floury wood at frame right. Warm side light from the oven. No faces. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S8</i> — THE PHOTO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span>
+Medium shot in the dusty back room: Marek sits on a wooden crate, reading glasses on, holding a curling old photograph — the photo shows a young couple (him and his wife) in aprons laughing in front of the same brick oven decades ago. Bookshelf, vintage radio, a coat on a hook, the oven's fire glowing through the doorway behind him. Window key light. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S9</i> — NIGHT SHIFT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+Profile two-shot across the bakehouse at night: Marek and Clara stand side by side at the glowing brick wood-fired oven, she in her cream apron loading bread with a wooden peel, he watching with his hands folded in front of him. Blue dusk in the street window behind them, fire gold on their faces. No dialogue, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S10</i> — HANDOVER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+Medium two-shot at the open door in morning light: Marek passes a ceramic starter crock with a red ribbon around it into Clara's hands — both of their hands on the jar for a beat, his keys already on her hip. The glowing oven behind him, the grey street behind her. Solemn, ceremonial. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S11</i> — OPEN, ONCE MORE</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+Interior shot looking out through the front window at dawn: Marek reaches up to flip the door sign to "OPEN", chairs still stacked on the tables, the bakery empty and warm, blue early light and one street lamp outside on the wet pavement. His posture quiet and final. No watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S12</i> — TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Exterior hero wide, same corner angle as S1 but golden hour: the bakery facade now reads "CLARA'S BAKERY — SAME BREAD" in gold letters, warm light flooding the window, a queue of regular customers holding paper bags along the sidewalk, bicycles and cars passing. Same cobblestones, same street lamp. Subtitles at the bottom read "Some ovens don't go out. They just change hands." No watermark.</div></div>
     </div>
     <div class="locks">
-      <div class="lock"><h4>PROMPT CHANGELOG — SAMPLE</h4><p>S4 v3 → v4: key light moved from camera-left to top-center to kill the double reflection in the hoops; framing raised to keep the neckline in frame. Logged per shot — same record kept for every retake.</p></div>
-      <div class="lock"><h4>RETAKES &amp; SEEDS</h4><p>One seed per character, edits in place instead of fresh rolls; S4 flagged as the most-iterated frame so its history is the deepest. Failed gens never re-rolled blind — the prompt moves first.</p></div>
+      <div class="lock"><h4>PROMPT CHANGELOG — SAMPLE</h4><p>S3 v1→v2: sign text garbled by the model — locked the card copy verbatim in quotes and re-gen. S6 v2→v3: Clara's tattoo moved to the left forearm to match S2/S7/S10; apron locked to cream. S12 v1→v2: facade re-lettered "CLARA'S — SAME BREAD" and queue density raised. Logged per shot — same record kept for every retake.</p></div>
+      <div class="lock"><h4>RETAKES &amp; SEEDS</h4><p>One thread for all twelve frames, edits requested in place instead of fresh rolls; S3 and S12 carry the most history because sign text is the hardest continuity prop. Failed gens never re-rolled blind — the prompt moves first.</p></div>
     </div>
   </div>
 </section>
@@ -380,9 +400,9 @@ Static frame from inside the elevator by the mirror wall: the elevator now empty
     <h2>Luka Tkemaladze</h2>
     <div class="about">
       <div>
-        <p><b>This page is the job description, executed.</b> A script was broken into beats and shots, blocking was drawn against a hard 180° rule, and every frame got a locked, paste-ready prompt derived from a continuity bible — assembled with Claude in one working session, which is exactly the loop this role runs daily.</p>
+        <p><b>This page is the job description, executed.</b> A script was broken into beats and shots, blocking was drawn against a hard axis rule, and every frame got a locked, paste-ready prompt derived from a continuity bible — then generated, checked against the locks, and re-prompted until the board held. Twelve frames, one thread, faces and props intact. That is the loop this role runs daily.</p>
         <p>My background: <b>Higher education in Computer Sciences and Systems</b> (academy diploma), freeCodeCamp certifications, hands-on prompt engineering with Claude and ChatGPT (RAG projects, PDF-to-Excel automation), and interactive 3D/portfolio work — I care about frames, light and where continuity breaks.</p>
-        <p>Built with Claude → structured, logged, versioned. Ready to run the same process on your scripts — in your standards, with your reference locks, at production speed.</p>
+        <p>Images: Google Gemini (Nano Banana) · Breakdown, blocking and prompt system: Claude. Ready to run the same process on your scripts — in your standards, with your reference locks, at production speed.</p>
         <p style="margin-top:18px">Portfolio: <a href="https://lukatkem.github.io" target="_blank">lukatkem.github.io</a> · GitHub: <a href="https://github.com/lukatkem" target="_blank">github.com/lukatkem</a></p>
       </div>
       <div class="facts">
