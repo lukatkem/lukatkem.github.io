@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Storyboard — Scene Breakdown Work Sample — Luka Tkemaladze</title>
+<meta name="description" content="Work sample for the AI Storyboard and Scene Breakdown Assistant role (EP-AI-003): beat breakdown, shot list, blocking, AI image prompts and continuity bible.">
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0B10;--panel:#12141C;--panel2:#161924;--line:#23262F;--line2:#2E3240;
+  --tx:#E8E9EF;--mut:#8B8FA3;--red:#E5484D;--gold:#D4A843;--dim:#5A5E70;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Archivo',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--red);color:#fff}
+
+/* hero */
+.hero{padding:72px 0 56px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(600px 300px at 85% -10%,rgba(212,168,67,.10),transparent 60%),
+  radial-gradient(500px 280px at 8% 110%,rgba(229,72,77,.08),transparent 60%);pointer-events:none}
+.slate{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:8px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mut);background:var(--panel)}
+.slate b{color:var(--gold);font-weight:600}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.04;letter-spacing:-.02em;margin:26px 0 10px;text-transform:uppercase}
+.hero h1 .r{color:var(--red)}
+.hero .sub{color:var(--mut);font-size:17px;max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.meta span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:6px 13px}
+.meta span i{color:var(--gold);font-style:normal}
+
+/* sections */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:8px}
+.lead{color:var(--mut);max-width:700px;margin-bottom:30px}
+
+/* screenplay */
+.script{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px 30px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.75;color:#C9CBD6;white-space:pre-wrap;overflow-x:auto}
+.script .sh{color:var(--tx);font-weight:600}
+.script .ch{color:var(--gold)}
+.script .paren{color:var(--dim)}
+.logline{border-left:3px solid var(--gold);padding:4px 0 4px 18px;margin-bottom:26px;color:var(--tx);font-size:17px;max-width:720px}
+.logline b{color:var(--gold)}
+
+/* beats */
+.beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.beat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.beat::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
+.beat.b2::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.beat.b3::after{background:linear-gradient(90deg,#7A5CFF,transparent)}
+.beat .tc{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.1em}
+.beat h3{font-size:19px;font-weight:700;margin:8px 0 8px;text-transform:uppercase}
+.beat p{color:var(--mut);font-size:14.5px}
+
+/* shot table */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;min-width:760px;font-size:13.5px}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;padding:14px 14px;border-bottom:1px solid var(--line2);white-space:nowrap}
+td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#C9CBD6}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.015)}
+td.sn{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600}
+td .b{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--mut)}
+td .b.b1{color:#F29CA0;border-color:rgba(229,72,77,.4)}
+td .b.b2{color:var(--gold);border-color:rgba(212,168,67,.4)}
+td .b.b3{color:#B9A8FF;border-color:rgba(122,92,255,.4)}
+td em{color:var(--mut);font-style:normal;display:block;font-size:12.5px;margin-top:3px}
+
+/* frames */
+.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
+.frame{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
+.phone{position:relative;aspect-ratio:9/16;border-radius:8px;background:linear-gradient(180deg,#1A1D28,#101218);overflow:hidden;border:1px solid var(--line2)}
+.phone::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent calc(33.3% - .5px),rgba(255,255,255,.045) 33.3%,transparent calc(33.3% + .5px)),
+  linear-gradient(90deg,transparent calc(66.6% - .5px),rgba(255,255,255,.045) 66.6%,transparent calc(66.6% + .5px)),
+  linear-gradient(0deg,transparent calc(33.3% - .5px),rgba(255,255,255,.045) 33.3%,transparent calc(33.3% + .5px)),
+  linear-gradient(0deg,transparent calc(66.6% - .5px),rgba(255,255,255,.045) 66.6%,transparent calc(66.6% + .5px));pointer-events:none}
+.phone::after{content:attr(data-label);position:absolute;left:8px;bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--mut);background:rgba(10,11,16,.75);border:1px solid var(--line2);padding:3px 8px;border-radius:6px}
+.fchip{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--tx);background:rgba(10,11,16,.75);border:1px solid var(--line2);padding:3px 8px;border-radius:6px;z-index:3}
+.fig{position:absolute;width:26%;aspect-ratio:.62;border-radius:40% 40% 12% 12%/34% 34% 8% 8%;background:#3A3E4D}
+.fig::before{content:"";position:absolute;top:-24%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1;border-radius:50%;background:inherit}
+.fig.m{background:linear-gradient(180deg,#E5484D,#8E2B30)}
+.fig.d{background:linear-gradient(180deg,#565B6E,#2E3240)}
+.ph{position:absolute;background:#0B0C11;border:1.5px solid #4A4F62;border-radius:14%}
+.ph::before{content:"";position:absolute;inset:12%;background:#20242F;border-radius:8%}
+.ph.glow{border-color:var(--gold);box-shadow:0 0 22px rgba(212,168,67,.35)}
+.glowtop{position:absolute;inset:0;background:radial-gradient(120% 55% at 50% 0%,rgba(255,220,150,.22),transparent 65%)}
+.elline{position:absolute;left:6%;right:6%;height:1px;background:rgba(255,255,255,.16)}
+.elline::after{content:attr(data-el);position:absolute;right:0;top:-16px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim)}
+.flab{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.06em}
+.cap{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--mut);padding:10px 4px 2px;line-height:1.5}
+.cap b{color:var(--tx)}
+
+/* prompts */
+.plist{display:grid;gap:14px}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.phead .pt{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;color:var(--tx)}
+.phead .pt i{color:var(--gold);font-style:normal}
+.copy{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);background:var(--panel2);border:1px solid var(--line2);border-radius:7px;padding:5px 11px;cursor:pointer;transition:.15s}
+.copy:hover{color:var(--tx);border-color:var(--gold)}
+.copy.ok{color:#6FCF97;border-color:#3B6B4C}
+.pbody{padding:16px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#B9BCC9;white-space:pre-wrap}
+.pbody .lk{color:var(--gold)}
+.pbody .st{color:#7A9BD6}
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:22px 0 8px}
+.lock{background:var(--panel2);border:1px dashed var(--line2);border-radius:12px;padding:16px}
+.lock h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--red);margin-bottom:8px}
+.lock.gold h4{color:var(--gold)}
+.lock p{font-size:13px;color:var(--mut);line-height:1.6}
+
+/* blocking svg */
+.blockwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;grid-template-columns:1fr 260px;gap:26px;align-items:start}
+.blockwrap svg{width:100%;height:auto;display:block}
+.legend{font-size:13px;color:var(--mut);display:grid;gap:10px}
+.legend .li{display:flex;gap:10px;align-items:center}
+.dot{width:14px;height:14px;border-radius:50%;flex:none}
+.dot.m{background:var(--red)}
+.dot.d{background:#565B6E}
+.tri{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--gold);flex:none}
+.dash{width:26px;height:0;border-top:2px dashed rgba(229,72,77,.7);flex:none}
+.arrow{width:26px;height:0;border-top:2px solid #7A9BD6;flex:none}
+.legend b{color:var(--tx)}
+@media(max-width:760px){.blockwrap{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:start}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.about p{color:var(--mut);font-size:15px;margin-bottom:14px}
+.about p b{color:var(--tx)}
+.facts{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:12px}
+.facts div{display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
+.facts span{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:12px}
+.facts b{color:var(--tx);font-weight:600;text-align:right}
+.facts a{font-weight:600}
+
+footer{padding:40px 0 60px;color:var(--dim);font-size:13px;text-align:center}
+footer b{color:var(--mut)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="slate">WORK SAMPLE · <b>EP-AI-003</b> · AI STORYBOARD &amp; SCENE BREAKDOWN ASSISTANT</div>
+    <h1>“The Last<br><span class="r">Elevator</span>”</h1>
+    <p class="sub">A complete breakdown of an original vertical-drama cold open — the exact workflow from your job description: beats → shot list → blocking → AI image prompts → continuity bible. Produced with Claude; prompts are locked and ready to run in ChatGPT.</p>
+    <div class="meta">
+      <span><i>9:16</i> vertical</span>
+      <span><i>3</i> beats</span>
+      <span><i>9</i> shots</span>
+      <span><i>~65s</i> runtime</span>
+      <span><i>2</i> characters + insert</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kick">01 · The Scene</div>
+    <h2>Original Screenplay</h2>
+    <p class="lead">Cold open for episode 1 of a vertical drama. One location, two faces, one phone — the cheapest scene to keep consistent across AI generations, and the hardest to fake continuity in. That trade-off is the point.</p>
+    <p class="logline">On the night of her engagement party, <b>Mia</b> learns who her fiancé really is — from a message preview in an elevator mirror.</p>
+    <div class="script"><span class="sh">INT. LUXURY APARTMENT ELEVATOR — NIGHT</span>
+
+<span class="sh">S1</span>  The doors close on MIA (late 20s, red satin
+     slip dress) and DANIEL (early 30s, charcoal
+     suit). He hands her a champagne coupe.
+
+     <span class="paren">elevator hums upward</span>
+
+<span class="sh">S2</span>  In his other hand, his PHONE buzzes — face-up.
+
+<span class="sh">S3</span>  Daniel flips it toward himself. Too late.
+
+     In the MIRROR, Mia's reflection is already
+     reading the preview.
+
+<span class="sh">S4</span>  Close on Mia. Her smile doesn't move.
+     Her eyes do.
+
+     <span class="sh">MESSAGE PREVIEW</span>
+     <span class="paren">on Daniel's phone screen</span>
+     <span class="ch">V</span>: You told her I was your assistant.
+        I'm at the party.
+
+<span class="sh">S6</span>  Daniel reads it. The jaw goes tight.
+
+<span class="sh">S7</span>  DING. The doors open on warm light and
+     applause. Both faces catch gold.
+
+<span class="sh">S8</span>  Mia steps out FIRST. Fixes Daniel's collar.
+
+                     MIA
+              <span class="paren">perfect smile, low</span>
+          Not here.
+
+<span class="sh">S9</span>  The doors close on the empty elevator —
+     and her champagne coupe, left on the rail.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">02 · Dramatic Beats</div>
+    <h2>Beat Breakdown</h2>
+    <p class="lead">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches.</p>
+    <div class="beats">
+      <div class="beat b1"><div class="tc">00:00 – 00:22</div><h3>The Ascent</h3><p>Flirty banter, champagne, celebration. A phone buzzes and is silenced — read as party logistics. Plant: Mia sees everything in the mirror before we ever cut wide on it.</p></div>
+      <div class="beat b2"><div class="tc">00:22 – 00:48</div><h3>The Message</h3><p>The reveal lands in three images: mirror watch → eyes hold → macro on the screen. No dialogue. The smile stays; the eyes leave.</p></div>
+      <div class="beat b3"><div class="tc">00:48 – 01:05</div><h3>The Smile</h3><p>Doors open, applause, gold light. Mia takes control of the frame — collar fix, "Not here." — and exits first. Tag on the abandoned coupe: she's already three moves ahead.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">03 · Shot List</div>
+    <h2>9 Shots, 9:16</h2>
+    <p class="lead">Framing chosen for vertical: tall compositions, eyelines readable at thumbnail size, one insert carries the plot.</p>
+    <div class="tblwrap">
+      <table>
+        <tr><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / 180°</th><th>Action</th></tr>
+        <tr><td class="sn">S1</td><td><span class="b b1">B1</span></td><td>High wide, corner</td><td>C1 · NW corner, ~2.1m, static</td><td>M and D face door then each other; Mia screen-left, Daniel screen-right — line established on N–S axis</td><td>Doors close; coupe hand-off <em>establishes geography + mirror position</em></td></tr>
+        <tr><td class="sn">S2</td><td><span class="b b1">B1</span></td><td>Mirror insert</td><td>C2 · W wall, aimed at mirror</td><td>Mia's reflected eyeline → phone in D's hand</td><td>Phone buzzes face-up <em>audience learns with Mia</em></td></tr>
+        <tr><td class="sn">S3</td><td><span class="b b1">B1</span></td><td>OTS over Daniel</td><td>C2 +8cm, over D's R shoulder</td><td>Mia (reflection) holds smile at Daniel</td><td>D flips phone to himself <em>the miss — he thinks he's safe</em></td></tr>
+        <tr><td class="sn">S4</td><td><span class="b b2">B2</span></td><td>CU Mia, eye-line thirds</td><td>C2 zoom, eye height</td><td>Eyes shift to mirror-phone, screen-right of frame</td><td>Smile intact, eyes move <em>key acting frame — generate most retakes here</em></td></tr>
+        <tr><td class="sn">S5</td><td><span class="b b2">B2</span></td><td>Macro on phone screen</td><td>C5 · 30cm insert lens</td><td>n/a — text legible, no face</td><td>Message preview fills frame <em>only frame allowed to break style slightly for legibility</em></td></tr>
+        <tr><td class="sn">S6</td><td><span class="b b2">B2</span></td><td>CU Daniel</td><td>C2 mirrored, eye height</td><td>Down-left at phone; mirrors S4 composition</td><td>Jaw tightens <em>bookend symmetry with S4</em></td></tr>
+        <tr><td class="sn">S7</td><td><span class="b b3">B3</span></td><td>2-shot, doors opening</td><td>C7 · S of door, 1.4m, static</td><td>Both face camera, then past it</td><td>Gold bloom, off-screen applause <em>lighting flips warm — continuity cut point</em></td></tr>
+        <tr><td class="sn">S8</td><td><span class="b b3">B3</span></td><td>Low hero on Mia</td><td>C8 · 0.9m low, slight push</td><td>Mia down at Daniel (hand on collar)</td><td>Collar fix, "Not here." <em>power transfer to Mia</em></td></tr>
+        <tr><td class="sn">S9</td><td><span class="b b3">B3</span></td><td>Empty elevator, doors closing</td><td>C9 · inside, N wall by mirror</td><td>no faces</td><td>Coupe on the rail, slit of light <em>tag: consequence, not dialogue</em></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">04 · Frames</div>
+    <h2>Composition Boards</h2>
+    <p class="lead">Layout sketches for every frame — figure placement, eyeline height and the thirds grid the prompts are written against.</p>
+    <div class="frames">
+      <div class="frame"><div class="phone" data-label="HIGH WIDE · C1"><span class="fchip">S1</span><div class="fig m" style="left:18%;bottom:26%"></div><div class="fig d" style="left:56%;bottom:26%"></div><div class="elline" data-el="eye 1.6m" style="bottom:42%"></div><div class="flab" style="top:6%;left:50%;transform:translateX(-50%)">MIRROR</div><div class="flab" style="bottom:10%;left:50%;transform:translateX(-50%)">DOORS</div></div><div class="cap"><b>S1</b> · both on thirds, mirror established</div></div>
+      <div class="frame"><div class="phone" data-label="MIRROR INSERT · C2"><span class="fchip">S2</span><div class="ph glow" style="left:40%;top:46%;width:20%;height:11%"></div><div class="fig m" style="left:22%;bottom:18%;width:22%"></div><div class="flab" style="top:16%;left:50%;transform:translateX(-50%);color:#B9A8FF">REFLECTION</div></div><div class="cap"><b>S2</b> · phone buzzes, Mia's reflection locks on</div></div>
+      <div class="frame"><div class="phone" data-label="OTS · D → M"><span class="fchip">S3</span><div class="fig d" style="left:-8%;bottom:-14%;width:52%;height:34%;border-radius:30%"></div><div class="fig m" style="left:54%;bottom:30%;width:26%"></div></div><div class="cap"><b>S3</b> · Daniel flips the phone, blind to the mirror</div></div>
+      <div class="frame"><div class="phone" data-label="CU · M EYES"><span class="fchip">S4</span><div class="fig m" style="left:30%;top:18%;width:44%;height:46%"></div><div class="elline" data-el="eyeline" style="top:34%"></div><div class="flab" style="top:64%;right:8%;color:var(--gold)">→ phone</div></div><div class="cap"><b>S4</b> · smile holds, eyes leave</div></div>
+      <div class="frame"><div class="phone" data-label="MACRO · REVEAL"><span class="fchip">S5</span><div class="ph glow" style="left:12%;top:24%;width:76%;height:40%"></div><div class="flab" style="top:30%;left:18%;color:#C9CBD6">V: I'm at the party.</div></div><div class="cap"><b>S5</b> · the message — only text frame in the reel</div></div>
+      <div class="frame"><div class="phone" data-label="CU · D"><span class="fchip">S6</span><div class="fig d" style="left:26%;top:18%;width:44%;height:46%"></div><div class="elline" data-el="eyeline ↓" style="top:34%"></div></div><div class="cap"><b>S6</b> · jaw tight — mirrors S4 exactly</div></div>
+      <div class="frame"><div class="phone" data-label="2-SHOT · DING"><span class="fchip">S7</span><div class="glowtop"></div><div class="fig m" style="left:14%;bottom:20%"></div><div class="fig d" style="left:58%;bottom:20%"></div></div><div class="cap"><b>S7</b> · gold bloom swallows the cold elevator</div></div>
+      <div class="frame"><div class="phone" data-label="LOW HERO · M"><span class="fchip">S8</span><div class="fig m" style="left:34%;bottom:-6%;width:36%;height:64%"></div><div class="elline" data-el="camera 0.9m" style="bottom:38%"></div></div><div class="cap"><b>S8</b> · "Not here." — she owns the frame</div></div>
+      <div class="frame"><div class="phone" data-label="EMPTY · TAG"><span class="fchip">S9</span><div class="ph" style="left:14%;top:40%;width:8%;height:14%"></div><div class="elline" data-el="rail" style="bottom:30%"></div><div class="flab" style="bottom:8%;left:50%;transform:translateX(-50%);color:var(--gold)">slit of light</div></div><div class="cap"><b>S9</b> · the coupe stays behind</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">05 · Blocking</div>
+    <h2>Overhead Layout</h2>
+    <p class="lead">One axis, one rule: the 180° line runs north–south along the mirror. Everything the camera does respects it, so reflections and screen direction never flip between generations.</p>
+    <div class="blockwrap">
+      <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
+        <rect x="0" y="0" width="420" height="520" fill="none"/>
+        <rect x="110" y="40" width="200" height="210" fill="#161924" stroke="#2E3240" stroke-width="2"/>
+        <text x="210" y="30" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">MIRROR WALL (N)</text>
+        <line x1="110" y1="46" x2="310" y2="46" stroke="#D4A843" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="210" y="70" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ELEVATOR 2.0 × 2.1 m</text>
+        <line x1="304" y1="60" x2="304" y2="240" stroke="#2E3240" stroke-width="4"/>
+        <text x="352" y="150" fill="#5A5E70" font-family="JetBrains Mono" font-size="9">RAIL (E)</text>
+        <rect x="150" y="248" width="120" height="8" fill="#D4A843"/>
+        <text x="210" y="276" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">DOORS (S)</text>
+        <rect x="60" y="300" width="300" height="150" fill="#12141C" stroke="#23262F" stroke-width="2"/>
+        <text x="210" y="325" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">PARTY LANDING — gold string lights, roses</text>
+        <circle cx="120" cy="330" r="4" fill="#D4A843" opacity=".7"/><circle cx="300" cy="330" r="4" fill="#D4A843" opacity=".7"/>
+        <line x1="180" y1="410" x2="240" y2="410" stroke="#2E3240" stroke-width="2"/>
+        <text x="210" y="432" fill="#5A5E70" font-family="JetBrains Mono" font-size="9" text-anchor="middle">stairs to party</text>
+        <!-- 180 line -->
+        <line x1="110" y1="150" x2="310" y2="150" stroke="#2299ff" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text x="210" y="145" fill="#3E6FA8" font-family="JetBrains Mono" font-size="9" text-anchor="middle">180° AXIS (N–S)</text>
+        <!-- B1 positions -->
+        <circle cx="170" cy="190" r="11" fill="#E5484D"/><text x="170" y="194" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">M</text>
+        <circle cx="240" cy="190" r="11" fill="#565B6E"/><text x="240" y="194" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">D</text>
+        <text x="210" y="222" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">B1 start</text>
+        <!-- B2 sightline via mirror -->
+        <path d="M 170 180 L 170 56 L 258 178" fill="none" stroke="#E5484D" stroke-width="1.5" stroke-dasharray="4 4" opacity=".8"/>
+        <text x="96" y="100" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">M eyeline</text>
+        <text x="96" y="112" fill="#F29CA0" font-family="JetBrains Mono" font-size="9" text-anchor="middle">via mirror</text>
+        <!-- exit arrows -->
+        <path d="M 190 236 C 190 300, 205 340, 208 372" fill="none" stroke="#7A9BD6" stroke-width="2"/>
+        <polygon points="208,380 202,368 214,368" fill="#7A9BD6"/>
+        <path d="M 226 236 C 228 310, 222 360, 216 408" fill="none" stroke="#7A9BD6" stroke-width="2" opacity=".55"/>
+        <polygon points="216,416 210,404 222,404" fill="#7A9BD6" opacity=".55"/>
+        <text x="258" y="352" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">B3 exit</text>
+        <text x="258" y="364" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">M first, D follows</text>
+        <!-- cameras -->
+        <polygon points="88,96 100,104 88,112" fill="#D4A843"/><text x="66" y="108" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C1</text>
+        <polygon points="86,168 98,176 86,184" fill="#D4A843"/><text x="64" y="180" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C2</text>
+        <polygon points="252,150 264,158 252,166" fill="#D4A843"/><text x="270" y="162" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C5</text>
+        <polygon points="196,330 208,338 196,346" fill="#D4A843"/><text x="214" y="344" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C7</text>
+        <polygon points="170,470 182,478 170,486" fill="#D4A843"/><text x="188" y="482" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C8 low hero</text>
+        <polygon points="286,96 298,104 286,112" fill="#D4A843"/><text x="304" y="108" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C9</text>
+      </svg>
+      <div class="legend">
+        <div class="li"><span class="dot m"></span><span><b>Mia</b> — screen-left of axis</span></div>
+        <div class="li"><span class="dot d"></span><span><b>Daniel</b> — screen-right</span></div>
+        <div class="li"><span class="tri"></span><span><b>C#</b> — camera position (shot list)</span></div>
+        <div class="li"><span class="dash"></span><span><b>Red dashed</b> — Mia's eyeline via mirror</span></div>
+        <div class="li"><span class="arrow"></span><span><b>Blue</b> — exit blocking, B3</span></div>
+        <div class="li" style="margin-top:6px;color:#C9CBD6">Camera never crosses the blue axis — screen direction stays stable for every generated frame.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">06 · AI Image Prompts</div>
+    <h2>ChatGPT-Ready Prompts</h2>
+    <p class="lead">Every prompt is assembled from four locked blocks — style, character, location, then the shot. Paste as-is; no retouching needed. Changelog discipline below.</p>
+    <div class="locks">
+      <div class="lock"><h4>MIA — CHARACTER LOCK</h4><p>Late 20s, shoulder-length dark brown hair tucked behind her left ear, small mole below her left eye, red satin slip dress, thin gold hoop earrings.</p></div>
+      <div class="lock"><h4>DANIEL — CHARACTER LOCK</h4><p>Early 30s, short black hair, clean-shaven, strong jaw, charcoal suit, white shirt with open collar, black leather watch.</p></div>
+      <div class="lock gold"><h4>LOCATION LOCK</h4><p>Luxury apartment elevator: black marble, gold trim, full-height mirror on the back wall, brass rail. Beyond the doors: cream roses, warm gold string lights.</p></div>
+      <div class="lock gold"><h4>STYLE LOCK</h4><p>Cinematic photorealism, vertical 9:16, shallow DOF, 35mm, soft contrast, muted palette with a deep red accent, fine film grain.</p></div>
+    </div>
+    <div class="plist">
+      <div class="pcard"><div class="phead"><span class="pt"><i>S1</i> — HIGH WIDE, CORNER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+High-angle wide shot from the elevator's northwest corner looking down: Mia screen-left facing Daniel screen-right, champagne coupe mid hand-off between them, both reflected small in the mirror wall behind. Doors at frame bottom. Warm single ceiling spotlight, cold marble tones. No text, no watermark, faces identical to character locks.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S2</i> — MIRROR INSERT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Medium insert aimed at the mirror wall: in the reflection, Daniel's right hand holds a matte black phone face-up, screen glowing; behind and left, Mia's reflected face turning toward the phone, eyes locked on it. Shallow DOF, phone sharpest element. Same elevator, same wardrobe. No readable text yet, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S3</i> — OTS OVER DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Over-the-shoulder from behind Daniel's right shoulder (dark blurred charcoal suit in frame left edge), Mia facing him — real, not reflection — raising her champagne coupe, warm smile. Her eyes angled slightly to frame right where the mirror sits. Composition mirrors S2. No text, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S4</i> — CU MIA, EYES</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[LOCATION]</span>
+Extreme close-up on Mia's face filling upper frame thirds, eyes on the upper horizontal third line. The smile is fully intact; only her eyes have shifted hard to frame right. Gold hoop catching the ceiling spotlight, mole below her left eye visible. Cold elevator light. No text, no watermark, face identical to character lock.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S5</i> — MACRO, THE REVEAL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+Macro insert, 30cm from the phone screen held in a man's hand (black leather watch visible at frame edge): a messaging app preview fills the screen — sender "V", text reads "You told her I was your assistant. I'm at the party." Slight screen glow on surrounding darkness, background fully black. Crisp legible type, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S6</i> — CU DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Extreme close-up on Daniel, composition mirrored against S4: eyes down-left toward his phone, jaw visibly tight, lips pressed. Same cold elevator light as S4. No text, no watermark, face identical to character lock.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S7</i> — 2-SHOT, DOORS OPEN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Static two-shot from the landing facing the open elevator doors: Mia and Daniel side by side in the doorway, silhouettes rimmed by warm gold light blooming from the party behind camera, blurred string lights and cream roses in background bokeh. Both faces catch gold; her smile returns, his doesn't. Lighting flips warm — wardrobe unchanged. No text, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S8</i> — LOW HERO, MIA</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Low-angle hero shot, camera at 0.9m: Mia dominant in frame, one hand fixing Daniel's collar (his blurred shoulder at frame right), her expression a perfect, controlled smile, chin slightly down. Warm gold landing light, red satin catching it. Authority in the posture. No text, no watermark.</div></div>
+      <div class="pcard"><div class="phead"><span class="pt"><i>S9</i> — EMPTY ELEVATOR TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Static frame from inside the elevator by the mirror wall: the elevator now empty except a half-full champagne coupe resting on the brass rail, doors sliding closed leaving a narrowing slit of warm gold light from the landing. Cold marble, single spotlight. No people, no text, no watermark.</div></div>
+    </div>
+    <div class="locks">
+      <div class="lock"><h4>PROMPT CHANGELOG — SAMPLE</h4><p>S4 v3 → v4: key light moved from camera-left to top-center to kill the double reflection in the hoops; framing raised to keep the neckline in frame. Logged per shot — same record kept for every retake.</p></div>
+      <div class="lock"><h4>RETAKES &amp; SEEDS</h4><p>One seed per character, edits in place instead of fresh rolls; S4 flagged as the most-iterated frame so its history is the deepest. Failed gens never re-rolled blind — the prompt moves first.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">07 · Who Made This</div>
+    <h2>Luka Tkemaladze</h2>
+    <div class="about">
+      <div>
+        <p><b>This page is the job description, executed.</b> A script was broken into beats and shots, blocking was drawn against a hard 180° rule, and every frame got a locked, paste-ready prompt derived from a continuity bible — assembled with Claude in one working session, which is exactly the loop this role runs daily.</p>
+        <p>My background: <b>Higher education in Computer Sciences and Systems</b> (academy diploma), freeCodeCamp certifications, hands-on prompt engineering with Claude and ChatGPT (RAG projects, PDF-to-Excel automation), and interactive 3D/portfolio work — I care about frames, light and where continuity breaks.</p>
+        <p>Built with Claude → structured, logged, versioned. Ready to run the same process on your scripts — in your standards, with your reference locks, at production speed.</p>
+        <p style="margin-top:18px">Portfolio: <a href="https://lukatkem.github.io" target="_blank">lukatkem.github.io</a> · GitHub: <a href="https://github.com/lukatkem" target="_blank">github.com/lukatkem</a></p>
+      </div>
+      <div class="facts">
+        <div><span>ROLE</span><b>EP-AI-003 · Storyboard &amp; Scene Breakdown Assistant</b></div>
+        <div><span>ON-SITE</span><b>Vake, Tbilisi — available</b></div>
+        <div><span>HARDWARE</span><b>Own reliable PC</b></div>
+        <div><span>ENGLISH</span><b>Strong written (this page is the test)</b></div>
+        <div><span>SCHEDULE</span><b>4 × 10h — comfortable</b></div>
+        <div><span>CONTACT</span><b>+995 577 30 81 92</b></div>
+        <div><span>EMAIL</span><b>lukatyemaladze13@gmail.com</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>Luka Tkemaladze</b> · AI Storyboard &amp; Scene Breakdown — Work Sample · <a href="mailto:lukatyemaladze13@gmail.com">lukatyemaladze13@gmail.com</a>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.closest('.pcard').querySelector('.pbody').innerText;
+    function done(){b.textContent='copied ✓';b.classList.add('ok');setTimeout(function(){b.textContent='copy';b.classList.remove('ok')},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallback()})}else{fallback()}
+    function fallback(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);done();}
+  });
+});
+</script>
+</body>
+</html>
