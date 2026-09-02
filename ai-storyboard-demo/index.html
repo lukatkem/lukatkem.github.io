@@ -3,335 +3,454 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Storyboard — Scene Breakdown Work Sample — Luka Tkemaladze</title>
-<meta name="description" content="Work sample for the AI Storyboard and Scene Breakdown Assistant role (EP-AI-003): beat breakdown, shot list, blocking, AI image prompts and continuity bible.">
+<title>Same Bread — AI Storyboard Work Sample — Luka Tkemaladze</title>
+<meta name="description" content="Work sample for the AI Storyboard and Scene Breakdown Assistant role (EP-AI-003): playable animatic, beat breakdown, shot list, blocking, AI image prompts and continuity bible — 12 frames, one thread.">
 <link rel="icon" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0A0B10;--panel:#12141C;--panel2:#161924;--line:#23262F;--line2:#2E3240;
-  --tx:#E8E9EF;--mut:#8B8FA3;--red:#E5484D;--gold:#D4A843;--dim:#5A5E70;
+  --bg:#07080C;--panel:#0F1118;--panel2:#151824;--line:#1E222D;--line2:#2B303D;
+  --tx:#EDEEF3;--mut:#9095A8;--dim:#5B6072;--red:#E5484D;--gold:#D4A843;--vio:#8B7BFF;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:'Archivo',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+body{background:var(--bg);color:var(--tx);font-family:'Archivo',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
 a{color:var(--gold);text-decoration:none}
 a:hover{text-decoration:underline}
-::selection{background:var(--red);color:#fff}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* film grain */
+body::after{content:"";position:fixed;inset:0;z-index:3000;pointer-events:none;opacity:.045;
+background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");}
+
+/* scroll progress + nav */
+#pbar{position:fixed;top:0;left:0;height:2px;width:0;z-index:1100;background:linear-gradient(90deg,var(--red),var(--gold))}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:22px;padding:14px 24px;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(7,8,12,.84);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+.nv-word{font-weight:900;letter-spacing:.06em;font-size:14px;color:var(--tx);text-transform:uppercase}
+.nv-word i{color:var(--red);font-style:normal}
+nav .nv-links{display:flex;gap:16px;margin:0 auto}
+nav .nv-links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase}
+nav .nv-links a:hover{color:var(--gold);text-decoration:none}
+.nv-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(212,168,67,.35);border-radius:999px;padding:5px 12px;background:rgba(212,168,67,.06)}
+@media(max-width:900px){nav .nv-links{display:none}}
 
 /* hero */
-.hero{padding:72px 0 56px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(600px 300px at 85% -10%,rgba(212,168,67,.10),transparent 60%),
-  radial-gradient(500px 280px at 8% 110%,rgba(229,72,77,.08),transparent 60%);pointer-events:none}
-.slate{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:8px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mut);background:var(--panel)}
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.5;filter:saturate(.92)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(7,8,12,.78) 0%,rgba(7,8,12,.30) 42%,rgba(7,8,12,.55) 68%,var(--bg) 96%),
+  radial-gradient(700px 380px at 82% 8%,rgba(212,168,67,.10),transparent 60%)}
+.hero-in{position:relative;z-index:2;padding-top:110px;padding-bottom:90px}
+.slate{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:8px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mut);background:rgba(15,17,24,.7)}
 .slate b{color:var(--gold);font-weight:600}
-.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.04;letter-spacing:-.02em;margin:26px 0 10px;text-transform:uppercase}
+.slate .rd{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(58px,11vw,128px);font-weight:900;line-height:.94;letter-spacing:-.02em;text-transform:uppercase;margin:30px 0 18px;text-shadow:0 4px 40px rgba(0,0,0,.6)}
 .hero h1 .r{color:var(--red)}
-.hero .sub{color:var(--mut);font-size:17px;max-width:640px}
+.hero .sub{color:#C4C7D4;font-size:clamp(15px,2vw,18px);max-width:620px;text-shadow:0 2px 18px rgba(0,0,0,.7)}
 .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.meta span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:6px 13px}
+.meta span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);border:1px solid rgba(255,255,255,.16);background:rgba(10,11,16,.6);border-radius:999px;padding:6px 13px;backdrop-filter:blur(4px)}
 .meta span i{color:var(--gold);font-style:normal}
-
-/* storyboard board */
-.board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:680px){.board{grid-template-columns:repeat(2,1fr)}}
-.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s}
-.tile:hover{transform:translateY(-3px);border-color:var(--line2)}
-.tile .img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0D0E14}
-.tile .img img{width:100%;height:100%;object-fit:cover;display:block}
-.tile .tag{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#fff;background:rgba(10,11,16,.8);border:1px solid rgba(255,255,255,.14);padding:3px 9px;border-radius:7px}
-.tile .tag.g{color:var(--gold)}
-.tile .tinfo{padding:12px 13px 14px;border-top:1px solid var(--line)}
-.tile .tinfo b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--gold)}
-.tile .tinfo p{font-size:12.5px;color:var(--mut);margin-top:4px;line-height:1.45}
-.boardnote{margin-top:16px;font-size:13px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btnp{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;letter-spacing:.1em;padding:15px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.14);cursor:pointer;transition:.2s;text-transform:uppercase}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(229,72,77,.35);text-decoration:none}
+.btng{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--tx);padding:15px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(10,11,16,.55);cursor:pointer;transition:.2s;text-transform:uppercase;backdrop-filter:blur(4px)}
+.btng:hover{border-color:var(--gold);color:var(--gold);text-decoration:none;transform:translateY(-2px)}
+.hero-foot{position:absolute;bottom:24px;left:0;right:0;z-index:2;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--dim)}
+.hero-foot span{display:inline-block;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 
 /* sections */
-section{padding:64px 0;border-bottom:1px solid var(--line)}
-.kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:10px}
-h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:8px}
-.lead{color:var(--mut);max-width:700px;margin-bottom:30px}
+section{padding:88px 0;border-bottom:1px solid var(--line)}
+.kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.24em;color:var(--red);text-transform:uppercase;margin-bottom:12px}
+.kick::before{content:"";display:inline-block;width:24px;height:2px;background:var(--red);margin-right:12px;vertical-align:middle}
+h2{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:10px}
+.lead{color:var(--mut);max-width:720px;margin-bottom:34px;font-size:15.5px}
 
-/* screenplay */
-.script{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px 30px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.75;color:#C9CBD6;white-space:pre-wrap;overflow-x:auto}
-.script .sh{color:var(--tx);font-weight:600}
-.script .ch{color:var(--gold)}
-.script .paren{color:var(--dim)}
-.logline{border-left:3px solid var(--gold);padding:4px 0 4px 18px;margin-bottom:26px;color:var(--tx);font-size:17px;max-width:720px}
+/* reveal */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rev.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ============ ANIMATIC PLAYER ============ */
+.player{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.stage{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;cursor:pointer}
+.pfr{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .55s ease;will-change:transform,opacity}
+.pfr.on{opacity:1;animation:kb 7.5s ease-out forwards}
+@keyframes kb{from{transform:scale(1.075)}to{transform:scale(1.015)}}
+.pcover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,9,.32);opacity:1;transition:opacity .3s;z-index:3}
+.pcover.off{opacity:0;pointer-events:none}
+.pcover button{width:88px;height:88px;border-radius:50%;background:rgba(10,11,16,.72);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:26px;cursor:pointer;backdrop-filter:blur(6px);transition:.2s;font-family:monospace}
+.pcover button:hover{transform:scale(1.07);border-color:var(--gold);color:var(--gold)}
+.pshot{position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;color:#fff;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.14);padding:5px 11px;border-radius:8px;backdrop-filter:blur(4px)}
+.pshot i{color:var(--gold);font-style:normal}
+.ptc{position:absolute;top:14px;right:14px;z-index:2;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fff;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.14);padding:5px 11px;border-radius:8px;backdrop-filter:blur(4px)}
+.ptc .rd{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.4s infinite}
+.psegs{display:flex;gap:4px;margin-top:14px}
+.seg{flex:1;height:6px;border-radius:3px;background:var(--line2);overflow:hidden;cursor:pointer;position:relative;transition:transform .15s}
+.seg:hover{transform:scaleY(1.5)}
+.seg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red))}
+.seg.done i{width:100%}
+.pctrl{display:flex;align-items:center;gap:10px;margin-top:14px}
+.pbtn{width:44px;height:44px;border-radius:11px;background:var(--panel2);border:1px solid var(--line2);color:var(--tx);font-size:15px;cursor:pointer;transition:.15s;font-family:monospace}
+.pbtn:hover{border-color:var(--gold);color:var(--gold)}
+.pbtn.big{width:54px;background:var(--red);border-color:rgba(255,255,255,.15);color:#fff;font-size:17px}
+.pbtn.big:hover{background:#F05A5F;color:#fff;border-color:#fff}
+.pmeta{margin-left:auto;text-align:right}
+.ptime{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold);font-weight:600}
+.ptime span{color:var(--dim);font-weight:400}
+.pnote{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.06em;margin-top:2px}
+.pcap{margin-top:12px;color:var(--mut);font-size:14.5px;min-height:22px}
+.pcap b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--gold);margin-right:10px}
+
+/* ============ BOARD ============ */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.board{grid-template-columns:1fr}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
+.tile:hover{transform:translateY(-5px);border-color:var(--line2);box-shadow:0 18px 44px rgba(0,0,0,.4)}
+.tile .img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0D0E14}
+.tile .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tile:hover .img img{transform:scale(1.06)}
+.tile .img::after{content:"⤢";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:8px;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transition:.25s}
+.tile:hover .img::after{opacity:1}
+.tile .tag{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#fff;background:rgba(10,11,16,.82);border:1px solid rgba(255,255,255,.14);padding:4px 10px;border-radius:7px;backdrop-filter:blur(4px)}
+.tile .tag.g{color:var(--gold)}
+.tile .tinfo{padding:14px 15px 16px;border-top:1px solid var(--line)}
+.tile .tinfo b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--gold)}
+.tile .tinfo p{font-size:13px;color:var(--mut);margin-top:5px;line-height:1.5}
+.boardnote{margin-top:18px;font-size:12.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+
+/* ============ SCREENPLAY ============ */
+.logline{border-left:3px solid var(--gold);padding:4px 0 4px 18px;margin-bottom:30px;color:var(--tx);font-size:17px;max-width:720px}
 .logline b{color:var(--gold)}
+.sppaper{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:clamp(26px,5vw,58px) clamp(22px,6vw,76px);font-family:'Courier Prime',monospace;font-size:15px;line-height:1.7;color:#C9CCD8;max-width:880px;margin:0 auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.sppaper::before{content:"SAME BREAD — sh. 1.0 · pp. 1";position:absolute;top:14px;right:20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.sc-sl{color:var(--tx);font-weight:700;text-transform:uppercase;margin:30px 0 18px}
+.sc-sl:first-child{margin-top:0}
+.sc-act{margin:0 0 16px;max-width:620px}
+.sc-fade{color:var(--dim);margin:0 0 16px}
+.sc-sn{display:inline-block;color:var(--gold);font-weight:700;margin-right:10px}
+.sc-dial{margin:20px 0 24px 100px}
+@media(max-width:640px){.sc-dial{margin-left:40px}}
+.sc-ch{text-align:center;color:var(--tx);font-weight:700;letter-spacing:.05em}
+.sc-par{text-align:center;color:var(--dim);font-size:12.5px;margin:3px 0 4px}
+.sc-dl{text-align:center;max-width:340px;margin:0 auto;color:#DDE0EA}
+.sc-title{margin-top:30px;color:var(--gold);text-align:center;letter-spacing:.03em}
 
-/* beats */
-.beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.beat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+/* ============ BEATS ============ */
+.beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.beat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:.25s}
+.beat:hover{border-color:var(--line2);transform:translateY(-3px)}
 .beat::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
 .beat.b2::after{background:linear-gradient(90deg,var(--gold),transparent)}
-.beat.b3::after{background:linear-gradient(90deg,#7A5CFF,transparent)}
-.beat .tc{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.1em}
-.beat h3{font-size:19px;font-weight:700;margin:8px 0 8px;text-transform:uppercase}
-.beat p{color:var(--mut);font-size:14.5px}
+.beat.b3::after{background:linear-gradient(90deg,var(--vio),transparent)}
+.beat .tc{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.12em}
+.beat h3{font-size:19px;font-weight:900;margin:9px 0 8px;text-transform:uppercase;letter-spacing:.02em}
+.beat p{color:var(--mut);font-size:14px}
+.beat .strip{display:flex;gap:7px;margin-top:16px}
+.beat .strip img{width:74px;aspect-ratio:16/9;object-fit:cover;border-radius:7px;border:1px solid var(--line2);cursor:pointer;opacity:.82;transition:.2s;display:block}
+.beat .strip img:hover{opacity:1;transform:scale(1.06);border-color:var(--gold)}
 
-/* shot table */
-.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-table{width:100%;border-collapse:collapse;min-width:760px;font-size:13.5px}
-th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;padding:14px 14px;border-bottom:1px solid var(--line2);white-space:nowrap}
-td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#C9CBD6}
+/* ============ SHOT LIST ============ */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:13.5px}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;padding:14px;border-bottom:1px solid var(--line2);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#C9CBD6}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,.015)}
+tbody tr{cursor:pointer;transition:background .15s}
+tbody tr:hover{background:rgba(212,168,67,.05)}
+td.th{width:92px}
+td.th img{width:84px;aspect-ratio:16/9;object-fit:cover;border-radius:7px;border:1px solid var(--line2);display:block}
 td.sn{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600}
 td .b{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--mut)}
 td .b.b1{color:#F29CA0;border-color:rgba(229,72,77,.4)}
 td .b.b2{color:var(--gold);border-color:rgba(212,168,67,.4)}
-td .b.b3{color:#B9A8FF;border-color:rgba(122,92,255,.4)}
+td .b.b3{color:#B9A8FF;border-color:rgba(139,123,255,.4)}
 td em{color:var(--mut);font-style:normal;display:block;font-size:12.5px;margin-top:3px}
 
-/* prompts */
-.plist{display:grid;gap:14px}
-.pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+/* ============ BLOCKING ============ */
+.blockwrap{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:start}
+.blockwrap svg{width:100%;height:auto;display:block}
+.legend{font-size:13.5px;color:var(--mut);display:grid;gap:11px;align-content:start}
+.legend .li{display:flex;gap:10px;align-items:center}
+.dot{width:14px;height:14px;border-radius:50%;flex:none}
+.dot.m{background:var(--red)}
+.tri{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--gold);flex:none}
+.dash{width:26px;height:0;border-top:2px dashed rgba(229,72,77,.7);flex:none}
+.arrow{width:26px;height:0;border-top:2px solid #7A9BD6;flex:none}
+.legend b{color:var(--tx)}
+@media(max-width:780px){.blockwrap{grid-template-columns:1fr}}
+.dw{stroke-dasharray:1;stroke-dashoffset:1}
+.blockwrap.in .dw{animation:draw 1.5s ease forwards}
+.blockwrap.in .dw.d2{animation-delay:.55s}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ============ PROMPTS ============ */
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:0 0 22px}
+.lock{background:var(--panel2);border:1px dashed var(--line2);border-radius:13px;padding:17px;transition:.2s}
+.lock:hover{border-color:var(--gold)}
+.lock h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--red);margin-bottom:8px}
+.lock.gold h4{color:var(--gold)}
+.lock p{font-size:13px;color:var(--mut);line-height:1.6}
+.plist{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:14px}
+@media(max-width:1020px){.plist{grid-template-columns:1fr}}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:border-color .2s}
+.pcard:hover{border-color:var(--line2)}
 .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
 .phead .pt{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;color:var(--tx)}
 .phead .pt i{color:var(--gold);font-style:normal}
 .copy{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);background:var(--panel2);border:1px solid var(--line2);border-radius:7px;padding:5px 11px;cursor:pointer;transition:.15s}
 .copy:hover{color:var(--tx);border-color:var(--gold)}
 .copy.ok{color:#6FCF97;border-color:#3B6B4C}
-.pbody{padding:16px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#B9BCC9;white-space:pre-wrap}
+.pbody{padding:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;color:#B9BCC9;white-space:pre-wrap}
 .pbody .lk{color:var(--gold)}
-.pbody .st{color:#7A9BD6}
-.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:22px 0 8px}
-.lock{background:var(--panel2);border:1px dashed var(--line2);border-radius:12px;padding:16px}
-.lock h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--red);margin-bottom:8px}
-.lock.gold h4{color:var(--gold)}
-.lock p{font-size:13px;color:var(--mut);line-height:1.6}
 
-/* blocking svg */
-.blockwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;grid-template-columns:1fr 260px;gap:26px;align-items:start}
-.blockwrap svg{width:100%;height:auto;display:block}
-.legend{font-size:13px;color:var(--mut);display:grid;gap:10px}
-.legend .li{display:flex;gap:10px;align-items:center}
-.dot{width:14px;height:14px;border-radius:50%;flex:none}
-.dot.m{background:var(--red)}
-.dot.d{background:#565B6E}
-.tri{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--gold);flex:none}
-.dash{width:26px;height:0;border-top:2px dashed rgba(229,72,77,.7);flex:none}
-.arrow{width:26px;height:0;border-top:2px solid #7A9BD6;flex:none}
-.legend b{color:var(--tx)}
-@media(max-width:760px){.blockwrap{grid-template-columns:1fr}}
-
-/* about */
-.about{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:start}
-@media(max-width:760px){.about{grid-template-columns:1fr}}
+/* ============ ABOUT ============ */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:start}
+@media(max-width:780px){.about{grid-template-columns:1fr}}
 .about p{color:var(--mut);font-size:15px;margin-bottom:14px}
 .about p b{color:var(--tx)}
-.facts{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:12px}
+.facts{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:13px}
 .facts div{display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
-.facts span{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:12px}
+.facts span{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.08em}
 .facts b{color:var(--tx);font-weight:600;text-align:right}
 .facts a{font-weight:600}
 
-footer{padding:40px 0 60px;color:var(--dim);font-size:13px;text-align:center}
+footer{padding:44px 0 64px;color:var(--dim);font-size:13px;text-align:center}
 footer b{color:var(--mut)}
+
+/* ============ LIGHTBOX ============ */
+#lb{position:fixed;inset:0;z-index:2500;background:rgba(4,5,8,.94);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;flex-direction:column;padding:60px 16px}
+#lb.open{display:flex}
+#lb img{max-width:min(1100px,92vw);max-height:70vh;border-radius:12px;border:1px solid var(--line2);box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.lb-cap{margin-top:16px;color:var(--mut);text-align:center;max-width:740px;font-size:14.5px;line-height:1.55}
+.lb-cap b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--gold);display:block;margin-bottom:5px}
+.lb-x{position:fixed;top:18px;right:22px;width:46px;height:46px;border-radius:50%;background:rgba(15,17,24,.85);border:1px solid var(--line2);color:#fff;font-size:17px;cursor:pointer;transition:.2s}
+.lb-x:hover{border-color:var(--red);color:var(--red);transform:rotate(90deg)}
+.lb-count{position:fixed;top:30px;left:26px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--dim)}
+.lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:rgba(15,17,24,.85);border:1px solid var(--line2);color:#fff;font-size:20px;cursor:pointer;transition:.2s}
+.lb-nav:hover{border-color:var(--gold);color:var(--gold)}
+.lb-prev{left:18px}.lb-next{right:18px}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rev{opacity:1;transform:none;transition:none}
+  .pfr{animation:none!important}
+  body::after,.hero-foot span,.slate .rd,.ptc .rd{animation:none}
+  .dw{stroke-dashoffset:0;animation:none!important}
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="slate">WORK SAMPLE · <b>EP-AI-003</b> · AI STORYBOARD &amp; SCENE BREAKDOWN ASSISTANT</div>
-    <h1>“Same<br><span class="r">Bread</span>”</h1>
-    <p class="sub">A complete breakdown of an original short film scene — the exact workflow from your job description: beats → shot list → blocking → AI image prompts → continuity bible. Every frame generated in one session with a frontier image model (Google Gemini / Nano Banana); breakdown and prompt system built with Claude.</p>
-    <div class="meta">
+<div id="pbar"></div>
+<nav id="topnav">
+  <span class="nv-word">SAME<i>BREAD</i></span>
+  <div class="nv-links">
+    <a href="#animatic">Animatic</a><a href="#board">Board</a><a href="#script">Script</a><a href="#beats">Beats</a><a href="#shots">Shots</a><a href="#blocking">Blocking</a><a href="#prompts">Prompts</a><a href="#about">Contact</a>
+  </div>
+  <span class="nv-chip">EP-AI-003</span>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="frames/s1.jpg" alt="S1 — Marek's Bakery at night"></div>
+  <div class="hero-in wrap">
+    <div class="slate rev"><span class="rd"></span>WORK SAMPLE · <b>EP-AI-003</b> · AI STORYBOARD &amp; SCENE BREAKDOWN ASSISTANT</div>
+    <h1 class="rev d1">Same<br><span class="r">Bread</span></h1>
+    <p class="sub rev d2">A complete breakdown of an original short film scene — the exact workflow from your job description: beats → shot list → blocking → AI image prompts → continuity bible. Every frame generated in one session with a frontier image model (Google Gemini / Nano Banana); breakdown and prompt system built with Claude.</p>
+    <div class="meta rev d2">
       <span><i>16:9</i> cinematic</span>
       <span><i>3</i> beats</span>
       <span><i>12</i> shots</span>
       <span><i>~2 min</i> runtime</span>
       <span><i>2</i> characters, 1 location</span>
     </div>
+    <div class="ctas rev d3">
+      <button class="btnp" id="ctaPlay">▶ &nbsp;Play the animatic</button>
+      <a class="btng" href="#board">Browse the board ↓</a>
+    </div>
   </div>
+  <div class="hero-foot"><span>SCROLL ▾</span></div>
 </header>
 
-<section>
+<!-- 01 ANIMATIC -->
+<section id="animatic">
   <div class="wrap">
-    <div class="kick">01 · The Scene</div>
-    <h2>Original Screenplay</h2>
-    <p class="lead">A closing chapter, not a cliffhanger — deliberately chosen to test the hardest AI continuity problem: one elderly face, one young face, one location, and props that must survive twelve generations (the sign, the crock, the tattoo). If the board holds, the pipeline holds.</p>
-    <p class="logline">On the last day of a fifty-year bakery, <b>Marek</b> meets the stranger who will bake tomorrow's bread — and lets the ovens change hands.</p>
-    <div class="script"><span class="sh">EXT. MAREK'S BAKERY — NIGHT</span>
-
-<span class="sh">S1</span>  A green-and-gold corner shop holds its light
-     against the dark. Steam sighs from the vent.
-     Taped inside the window, a cardboard card:
-     FINAL DAY — THANK YOU.
-
-<span class="sh">S2</span>  <span class="paren">top-down, through flour</span>
-     Two pairs of hands work one dough —
-     old knuckles, young wrists, the same rhythm.
-
-<span class="sh">S3</span>  MAREK (70s, white hair, flour-dusted apron)
-     tapes the FINAL DAY card straight in the
-     window glass. His reflection tapes it with him.
-
-<span class="sh">S4</span>  <span class="paren">dissolve: the last day</span>
-     The shop floods. Schoolkids, builders in hi-vis,
-     phones held up. The neighbourhood says goodbye
-     to a counter.
-
-<span class="sh">S5</span>  The regular — a flat cap, counted-out coins —
-     buys the last loaf Marek will ever sell him.
-     Neither man makes a joke of it.
-
-<span class="sh">S6</span>  Closing time. In the doorway stands CLARA
-     (late 20s, apron on, arms at her sides).
-     She is not here to buy bread.
-
-                     MAREK
-              <span class="paren">measuring her</span>
-          We're finished.
-
-                     CLARA
-              <span class="paren">not moving</span>
-          Not the ovens.
-
-<span class="sh">S7</span>  <span class="paren">top-down insert</span>
-     The old hands fold, the young hands learn.
-     A phone lies face-down in the flour —
-     nobody is looking at it.
-
-<span class="sh">S8</span>  The back room. Marek, alone on a crate,
-     reading glasses on, holds a curling photograph:
-     himself and his wife, forty years younger,
-     in front of this same oven.
-
-<span class="sh">S9</span>  Night shift. Marek and Clara work the
-     wood-fired oven in silence. She loads;
-     he watches — and lets her.
-
-<span class="sh">S10</span> Morning, at the threshold. He passes her
-     the STARTER CROCK — red ribbon, fifty years
-     of sourdough — and the keys with it.
-
-<span class="sh">S11</span> <span class="paren">dawn, chairs still stacked</span>
-     Marek flips the sign to OPEN one last time.
-     Not his shift. His gift.
-
-<span class="sh">S12</span> <span class="sh">EXT. — GOLDEN HOUR</span>
-     The queue is back. The sign reads:
-     CLARA'S — SAME BREAD.
-
-          <span class="ch">TITLE</span>: Some ovens don't go out.
-          They just change hands.</div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="kick">02 · Dramatic Beats</div>
-    <h2>Beat Breakdown</h2>
-    <p class="lead">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches.</p>
-    <div class="beats">
-      <div class="beat b1"><div class="tc">00:00 – 00:40</div><h3>The Final Day</h3><p>The shop, the craft, the goodbye. Plant the three continuity props early — the FINAL DAY card, the flour, the oven glow — because every later generation must answer to them.</p></div>
-      <div class="beat b2"><div class="tc">00:40 – 01:20</div><h3>The Stranger</h3><p>No dialogue carries this beat: a doorway, hands teaching hands, a photograph of the dead, a shared night shift. Marek decides with his shoulders before he says a word.</p></div>
-      <div class="beat b3"><div class="tc">01:20 – 02:00</div><h3>Same Bread</h3><p>The crock and the keys cross the threshold at dawn — inheritance in one object. The sign changes name; the queue doesn't notice. Tag on the caption card.</p></div>
+    <div class="kick rev">01 · The Animatic</div>
+    <h2 class="rev">Play the Board</h2>
+    <p class="lead rev">The twelve frames cut together against the shot timings — the same review pass a director gets before production. Space toggles play, arrows step shots, or click any segment to jump.</p>
+    <div class="player rev">
+      <div class="stage" id="stage" title="Click to play / pause">
+        <img class="pfr on" src="frames/s1.jpg" alt="S1">
+        <img class="pfr" src="frames/s2.jpg" alt="S2">
+        <img class="pfr" src="frames/s3.jpg" alt="S3">
+        <img class="pfr" src="frames/s4.jpg" alt="S4">
+        <img class="pfr" src="frames/s5.jpg" alt="S5">
+        <img class="pfr" src="frames/s6.jpg" alt="S6">
+        <img class="pfr" src="frames/s7.jpg" alt="S7">
+        <img class="pfr" src="frames/s8.jpg" alt="S8">
+        <img class="pfr" src="frames/s9.jpg" alt="S9">
+        <img class="pfr" src="frames/s10.jpg" alt="S10">
+        <img class="pfr" src="frames/s11.jpg" alt="S11">
+        <img class="pfr" src="frames/s12.jpg" alt="S12">
+        <span class="pshot" id="pshot"><i>S1</i> · ESTABLISHING</span>
+        <span class="ptc"><span class="rd"></span>TC <span id="ptc">00:00</span></span>
+        <div class="pcover" id="pcover"><button id="pcoverBtn" aria-label="Play">▶</button></div>
+      </div>
+      <div class="psegs" id="psegs"></div>
+      <div class="pctrl">
+        <button class="pbtn big" id="pPlay" aria-label="Play / pause">▶</button>
+        <button class="pbtn" id="pPrev" aria-label="Previous shot">‹</button>
+        <button class="pbtn" id="pNext" aria-label="Next shot">›</button>
+        <div class="pmeta">
+          <div class="ptime"><span id="pNow">00:00</span> <span>/ 02:00</span></div>
+          <div class="pnote">TIMED TO THE FULL 2:00 CUT · PLAYED AT 2× FOR REVIEW</div>
+        </div>
+      </div>
+      <div class="pcap" id="pcap"><b>S1</b>The corner shop at night — steam, warm window, FINAL DAY card in the glass.</div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- 02 BOARD -->
+<section id="board">
   <div class="wrap">
-    <div class="kick">03 · Shot List</div>
-    <h2>12 Shots, 16:9</h2>
-    <p class="lead">Landscape compositions with the humans on the thirds; two top-down inserts carry the theme so faces are never asked to do exposition. One hard rule: the counter axis never flips, so screen direction stays stable across all twelve generations.</p>
-    <div class="tblwrap">
-      <table>
-        <tr><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / axis</th><th>Action</th></tr>
-        <tr><td class="sn">S1</td><td><span class="b b1">B1</span></td><td>EXT establishing, corner angle</td><td>C1 · across the junction, static</td><td>no faces — shop is the subject</td><td>Steam, lit sign, FINAL DAY card <em>plants the card + facade props</em></td></tr>
-        <tr><td class="sn">S2</td><td><span class="b b1">B1</span></td><td>Top-down macro, hands on dough</td><td>C2 · overhead 0.8m</td><td>n/a — hands only</td><td>Old + young hands, one dough <em>theme frame — bookends at S7</em></td></tr>
-        <tr><td class="sn">S3</td><td><span class="b b1">B1</span></td><td>Mid through window glass</td><td>C3 · sidewalk, reflections kept</td><td>Marek's reflection over his shoulder</td><td>Taping FINAL DAY — EVERYTHING MUST GO card <em>sign copy locked verbatim</em></td></tr>
-        <tr><td class="sn">S4</td><td><span class="b b1">B1</span></td><td>Wide interior, door side</td><td>C4 · by the bell, 24mm</td><td>crowd converges on counter</td><td>Last-day crowd, phones up <em>sets max occupancy for later empties</em></td></tr>
-        <tr><td class="sn">S5</td><td><span class="b b1">B1</span></td><td>Two-shot over counter</td><td>C5 · counter front, eye height</td><td>customer ↔ Marek, level</td><td>Coins counted, last loaf handed over <em>farewell without dialogue</em></td></tr>
-        <tr><td class="sn">S6</td><td><span class="b b2">B2</span></td><td>OTS over Marek to doorway</td><td>C6 · behind M's L shoulder</td><td>Clara's eyeline straight down counter axis</td><td>Clara in the doorway, apron on <em>the stranger is not a customer</em></td></tr>
-        <tr><td class="sn">S7</td><td><span class="b b2">B2</span></td><td>Top-down insert, tighter</td><td>C2 return · overhead 0.7m</td><td>n/a — hands only</td><td>Hands teaching hands; phone face-down <em>mirrors S2 — inheritance in miniature</em></td></tr>
-        <tr><td class="sn">S8</td><td><span class="b b2">B2</span></td><td>Medium, back room</td><td>C8 · static 50mm, window key</td><td>Marek down at the photograph</td><td>Photo of him and his wife at this oven <em>the reason he almost says no</em></td></tr>
-        <tr><td class="sn">S9</td><td><span class="b b2">B2</span></td><td>Profile 2-shot at the oven</td><td>C9 · across the bakehouse</td><td>both faces to the fire, no eyeline contest</td><td>She loads the peel; he only watches <em>the decision, played on his posture</em></td></tr>
-        <tr><td class="sn">S10</td><td><span class="b b3">B3</span></td><td>Mid 2-shot at threshold</td><td>C10 · street side, morning</td><td>hand to hand, crock centre-frame</td><td>Starter crock + keys change hands <em>whole story in one prop</em></td></tr>
-        <tr><td class="sn">S11</td><td><span class="b b3">B3</span></td><td>Interior reverse, through window</td><td>C11 · inside looking out</td><td>Marek to the street, back half-turned</td><td>OPEN flipped at dawn, chairs stacked <em>not his shift — his gift</em></td></tr>
-        <tr><td class="sn">S12</td><td><span class="b b3">B3</span></td><td>EXT hero wide, golden hour</td><td>C1 return position, warm grade</td><td>queue toward camera</td><td>CLARA'S — SAME BREAD; caption card <em>same angle as S1 — time passed, axis kept</em></td></tr>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="kick">04 · Frames</div>
-    <h2>The Storyboard</h2>
-    <p class="lead">All twelve frames generated in one Gemini thread with the locked prompts from section 06 — faces, wardrobe, sign copy and oven glow held constant across every generation. This is the deliverable: a board you can play as an animatic.</p>
+    <div class="kick rev">02 · The Board</div>
+    <h2 class="rev">12 Frames, One Thread</h2>
+    <p class="lead rev">All twelve frames generated in one Gemini thread with the locked prompts from section 07 — faces, wardrobe, sign copy and oven glow held constant across every generation. Click any frame to inspect it full-size.</p>
     <div class="board">
-      <div class="tile"><div class="img"><span class="tag g">S1 · ESTABLISHING</span><img src="frames/s1.jpg" alt="S1 establishing — Marek's Bakery at night"></div><div class="tinfo"><b>B1 · 00:00</b><p>The corner shop at night — steam, warm window, FINAL DAY card already in the glass. The audience reads the premise in one frame.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S2 · HANDS MACRO</span><img src="frames/s2.jpg" alt="S2 top-down hands kneading"></div><div class="tinfo"><b>B1 · 00:07</b><p>Theme frame: old knuckles and young wrists on one dough. No faces needed — the story is the rhythm.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S3 · THE SIGN</span><img src="frames/s3.jpg" alt="S3 Marek taping FINAL DAY sign"></div><div class="tinfo"><b>B1 · 00:14</b><p>Marek tapes the card his reflection already wrote: FINAL DAY — EVERYTHING MUST GO — THANK YOU FOR 50 YEARS. Sign copy locked verbatim.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S4 · LAST DAY</span><img src="frames/s4.jpg" alt="S4 crowd inside on the final day"></div><div class="tinfo"><b>B1 · 00:21</b><p>The neighbourhood floods in — kids, builders, phones up. Peak occupancy frame; every later shot must feel emptier than this.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S5 · THE REGULAR</span><img src="frames/s5.jpg" alt="S5 the regular buys the last loaf"></div><div class="tinfo"><b>B1 · 00:31</b><p>Flat cap, counted coins, the last loaf. Two men who never needed conversation — and today have none.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S6 · THE STRANGER</span><img src="frames/s6.jpg" alt="S6 Clara in the doorway"></div><div class="tinfo"><b>B2 · 00:42</b><p>Closing time. Clara stands in the doorway with her apron already on — she's not buying bread, she's asking for it.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S7 · TEACHING</span><img src="frames/s7.jpg" alt="S7 hands teaching hands"></div><div class="tinfo"><b>B2 · 00:52</b><p>The S2 frame returns, tighter: her hands under his, the fold correct, the phone face-down in the flour.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S8 · THE PHOTO</span><img src="frames/s8.jpg" alt="S8 Marek with the old photograph"></div><div class="tinfo"><b>B2 · 01:02</b><p>Back room. Marek and a curling photograph — him and his wife, forty years younger, in front of the same oven.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S9 · NIGHT SHIFT</span><img src="frames/s9.jpg" alt="S9 at the oven together"></div><div class="tinfo"><b>B2 · 01:10</b><p>Two silhouettes, one fire. She loads the peel; he watches and lets her. The whole decision, played on posture.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S10 · HANDOVER</span><img src="frames/s10.jpg" alt="S10 the starter crock changes hands"></div><div class="tinfo"><b>B3 · 01:24</b><p>At the threshold: the starter crock with its red ribbon — fifty years of sourdough — passed with the keys.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S11 · OPEN, ONCE MORE</span><img src="frames/s11.jpg" alt="S11 flipping the OPEN sign at dawn"></div><div class="tinfo"><b>B3 · 01:38</b><p>Dawn, chairs stacked, ovens warming. Marek flips the sign to OPEN one last time — for her.</p></div></div>
-      <div class="tile"><div class="img"><span class="tag g">S12 · TAG</span><img src="frames/s12.jpg" alt="S12 golden hour queue at Clara's"></div><div class="tinfo"><b>B3 · 01:50</b><p>Golden hour, queue to the corner, sign re-lettered: CLARA'S — SAME BREAD. Caption: some ovens don't go out.</p></div></div>
+      <div class="tile rev" data-i="0"><div class="img"><span class="tag g">S1 · ESTABLISHING</span><img src="frames/s1.jpg" alt="S1 establishing — Marek's Bakery at night"></div><div class="tinfo"><b>B1 · 00:00</b><p>The corner shop at night — steam, warm window, FINAL DAY card already in the glass. The audience reads the premise in one frame.</p></div></div>
+      <div class="tile rev" data-i="1"><div class="img"><span class="tag g">S2 · HANDS MACRO</span><img src="frames/s2.jpg" alt="S2 top-down hands kneading"></div><div class="tinfo"><b>B1 · 00:07</b><p>Theme frame: old knuckles and young wrists on one dough. No faces needed — the story is the rhythm.</p></div></div>
+      <div class="tile rev" data-i="2"><div class="img"><span class="tag g">S3 · THE SIGN</span><img src="frames/s3.jpg" alt="S3 Marek taping FINAL DAY sign"></div><div class="tinfo"><b>B1 · 00:14</b><p>Marek tapes the card his reflection already wrote: FINAL DAY — EVERYTHING MUST GO — THANK YOU FOR 50 YEARS. Sign copy locked verbatim.</p></div></div>
+      <div class="tile rev" data-i="3"><div class="img"><span class="tag g">S4 · LAST DAY</span><img src="frames/s4.jpg" alt="S4 crowd inside on the final day"></div><div class="tinfo"><b>B1 · 00:21</b><p>The neighbourhood floods in — kids, builders, phones up. Peak occupancy frame; every later shot must feel emptier than this.</p></div></div>
+      <div class="tile rev" data-i="4"><div class="img"><span class="tag g">S5 · THE REGULAR</span><img src="frames/s5.jpg" alt="S5 the regular buys the last loaf"></div><div class="tinfo"><b>B1 · 00:31</b><p>Flat cap, counted coins, the last loaf. Two men who never needed conversation — and today have none.</p></div></div>
+      <div class="tile rev" data-i="5"><div class="img"><span class="tag g">S6 · THE STRANGER</span><img src="frames/s6.jpg" alt="S6 Clara in the doorway"></div><div class="tinfo"><b>B2 · 00:42</b><p>Closing time. Clara stands in the doorway with her apron already on — she's not buying bread, she's asking for it.</p></div></div>
+      <div class="tile rev" data-i="6"><div class="img"><span class="tag g">S7 · TEACHING</span><img src="frames/s7.jpg" alt="S7 hands teaching hands"></div><div class="tinfo"><b>B2 · 00:52</b><p>The S2 frame returns, tighter: her hands under his, the fold correct, the phone face-down in the flour.</p></div></div>
+      <div class="tile rev" data-i="7"><div class="img"><span class="tag g">S8 · THE PHOTO</span><img src="frames/s8.jpg" alt="S8 Marek with the old photograph"></div><div class="tinfo"><b>B2 · 01:02</b><p>Back room. Marek and a curling photograph — him and his wife, forty years younger, in front of the same oven.</p></div></div>
+      <div class="tile rev" data-i="8"><div class="img"><span class="tag g">S9 · NIGHT SHIFT</span><img src="frames/s9.jpg" alt="S9 at the oven together"></div><div class="tinfo"><b>B2 · 01:10</b><p>Two silhouettes, one fire. She loads the peel; he watches and lets her. The whole decision, played on posture.</p></div></div>
+      <div class="tile rev" data-i="9"><div class="img"><span class="tag g">S10 · HANDOVER</span><img src="frames/s10.jpg" alt="S10 the starter crock changes hands"></div><div class="tinfo"><b>B3 · 01:24</b><p>At the threshold: the starter crock with its red ribbon — fifty years of sourdough — passed with the keys.</p></div></div>
+      <div class="tile rev" data-i="10"><div class="img"><span class="tag g">S11 · OPEN, ONCE MORE</span><img src="frames/s11.jpg" alt="S11 flipping the OPEN sign at dawn"></div><div class="tinfo"><b>B3 · 01:38</b><p>Dawn, chairs stacked, ovens warming. Marek flips the sign to OPEN one last time — for her.</p></div></div>
+      <div class="tile rev" data-i="11"><div class="img"><span class="tag g">S12 · TAG</span><img src="frames/s12.jpg" alt="S12 golden hour queue at Clara's"></div><div class="tinfo"><b>B3 · 01:50</b><p>Golden hour, queue to the corner, sign re-lettered: CLARA'S — SAME BREAD. Caption: some ovens don't go out.</p></div></div>
     </div>
     <div class="boardnote">frames/s1–s12.jpg · 1024×572 · one Gemini (Nano Banana) thread, seeds + edits logged per shot</div>
   </div>
 </section>
 
-<section>
+<!-- 03 SCRIPT -->
+<section id="script">
   <div class="wrap">
-    <div class="kick">05 · Blocking</div>
-    <h2>Overhead Layout &amp; Axis</h2>
-    <p class="lead">The framing logic behind the board: shop geometry fixed once, camera positions reused, and one hard rule — the counter axis runs north–south, so S1/S12 share an angle across time and S6's eyeline never flips screen direction between generations.</p>
-    <div class="blockwrap">
+    <div class="kick rev">03 · The Scene</div>
+    <h2 class="rev">Original Screenplay</h2>
+    <p class="lead rev">A closing chapter, not a cliffhanger — deliberately chosen to test the hardest AI continuity problem: one elderly face, one young face, one location, and props that must survive twelve generations (the sign, the crock, the tattoo). If the board holds, the pipeline holds.</p>
+    <p class="logline rev">On the last day of a fifty-year bakery, <b>Marek</b> meets the stranger who will bake tomorrow's bread — and lets the ovens change hands.</p>
+    <div class="sppaper rev">
+      <div class="sc-sl">EXT. MAREK'S BAKERY — NIGHT</div>
+      <div class="sc-act"><span class="sc-sn">S1</span>A green-and-gold corner shop holds its light against the dark. Steam sighs from the vent. Taped inside the window, a cardboard card: FINAL DAY — THANK YOU.</div>
+      <div class="sc-fade"><span class="sc-sn">S2</span>top-down, through flour — Two pairs of hands work one dough: old knuckles, young wrists, the same rhythm.</div>
+      <div class="sc-act"><span class="sc-sn">S3</span>MAREK (70s, white hair, flour-dusted apron) tapes the FINAL DAY card straight in the window glass. His reflection tapes it with him.</div>
+      <div class="sc-fade"><span class="sc-sn">S4</span>dissolve: the last day — The shop floods. Schoolkids, builders in hi-vis, phones held up. The neighbourhood says goodbye to a counter.</div>
+      <div class="sc-act"><span class="sc-sn">S5</span>The regular — a flat cap, counted-out coins — buys the last loaf Marek will ever sell him. Neither man makes a joke of it.</div>
+      <div class="sc-act"><span class="sc-sn">S6</span>Closing time. In the doorway stands CLARA (late 20s, apron on, arms at her sides). She is not here to buy bread.</div>
+      <div class="sc-dial"><div class="sc-ch">MAREK</div><div class="sc-par">measuring her</div><div class="sc-dl">We're finished.</div></div>
+      <div class="sc-dial"><div class="sc-ch">CLARA</div><div class="sc-par">not moving</div><div class="sc-dl">Not the ovens.</div></div>
+      <div class="sc-fade"><span class="sc-sn">S7</span>top-down insert — The old hands fold, the young hands learn. A phone lies face-down in the flour: nobody is looking at it.</div>
+      <div class="sc-act"><span class="sc-sn">S8</span>The back room. Marek, alone on a crate, reading glasses on, holds a curling photograph: himself and his wife, forty years younger, in front of this same oven.</div>
+      <div class="sc-act"><span class="sc-sn">S9</span>Night shift. Marek and Clara work the wood-fired oven in silence. She loads; he watches — and lets her.</div>
+      <div class="sc-act"><span class="sc-sn">S10</span>Morning, at the threshold. He passes her the STARTER CROCK — red ribbon, fifty years of sourdough — and the keys with it.</div>
+      <div class="sc-fade"><span class="sc-sn">S11</span>dawn, chairs still stacked — Marek flips the sign to OPEN one last time. Not his shift. His gift.</div>
+      <div class="sc-sl">EXT. — GOLDEN HOUR</div>
+      <div class="sc-act"><span class="sc-sn">S12</span>The queue is back. The sign reads: CLARA'S — SAME BREAD.</div>
+      <div class="sc-title">TITLE: Some ovens don't go out.<br>They just change hands.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 BEATS -->
+<section id="beats">
+  <div class="wrap">
+    <div class="kick rev">04 · Dramatic Beats</div>
+    <h2 class="rev">Beat Breakdown</h2>
+    <p class="lead rev">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches. Thumbnails jump to the frame.</p>
+    <div class="beats">
+      <div class="beat b1 rev"><div class="tc">00:00 – 00:40 · SHOTS S1–S5</div><h3>The Final Day</h3><p>The shop, the craft, the goodbye. Plant the three continuity props early — the FINAL DAY card, the flour, the oven glow — because every later generation must answer to them.</p><div class="strip"><img src="frames/s1.jpg" alt="S1" data-i="0"><img src="frames/s3.jpg" alt="S3" data-i="2"><img src="frames/s5.jpg" alt="S5" data-i="4"></div></div>
+      <div class="beat b2 rev d1"><div class="tc">00:40 – 01:20 · SHOTS S6–S9</div><h3>The Stranger</h3><p>No dialogue carries this beat: a doorway, hands teaching hands, a photograph of the dead, a shared night shift. Marek decides with his shoulders before he says a word.</p><div class="strip"><img src="frames/s6.jpg" alt="S6" data-i="5"><img src="frames/s7.jpg" alt="S7" data-i="6"><img src="frames/s9.jpg" alt="S9" data-i="8"></div></div>
+      <div class="beat b3 rev d2"><div class="tc">01:20 – 02:00 · SHOTS S10–S12</div><h3>Same Bread</h3><p>The crock and the keys cross the threshold at dawn — inheritance in one object. The sign changes name; the queue doesn't notice. Tag on the caption card.</p><div class="strip"><img src="frames/s10.jpg" alt="S10" data-i="9"><img src="frames/s11.jpg" alt="S11" data-i="10"><img src="frames/s12.jpg" alt="S12" data-i="11"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SHOT LIST -->
+<section id="shots">
+  <div class="wrap">
+    <div class="kick rev">05 · Shot List</div>
+    <h2 class="rev">12 Shots, 16:9</h2>
+    <p class="lead rev">Landscape compositions with the humans on the thirds; two top-down inserts carry the theme so faces are never asked to do exposition. One hard rule: the counter axis never flips, so screen direction stays stable across all twelve generations. Click a row to see the frame.</p>
+    <div class="tblwrap rev">
+      <table>
+        <tr><th></th><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / axis</th><th>Action</th></tr>
+        <tbody>
+        <tr data-i="0"><td class="th"><img src="frames/s1.jpg" alt="S1"></td><td class="sn">S1</td><td><span class="b b1">B1</span></td><td>EXT establishing, corner angle</td><td>C1 · across the junction, static</td><td>no faces — shop is the subject</td><td>Steam, lit sign, FINAL DAY card <em>plants the card + facade props</em></td></tr>
+        <tr data-i="1"><td class="th"><img src="frames/s2.jpg" alt="S2"></td><td class="sn">S2</td><td><span class="b b1">B1</span></td><td>Top-down macro, hands on dough</td><td>C2 · overhead 0.8m</td><td>n/a — hands only</td><td>Old + young hands, one dough <em>theme frame — bookends at S7</em></td></tr>
+        <tr data-i="2"><td class="th"><img src="frames/s3.jpg" alt="S3"></td><td class="sn">S3</td><td><span class="b b1">B1</span></td><td>Mid through window glass</td><td>C3 · sidewalk, reflections kept</td><td>Marek's reflection over his shoulder</td><td>Taping FINAL DAY — EVERYTHING MUST GO card <em>sign copy locked verbatim</em></td></tr>
+        <tr data-i="3"><td class="th"><img src="frames/s4.jpg" alt="S4"></td><td class="sn">S4</td><td><span class="b b1">B1</span></td><td>Wide interior, door side</td><td>C4 · by the bell, 24mm</td><td>crowd converges on counter</td><td>Last-day crowd, phones up <em>sets max occupancy for later empties</em></td></tr>
+        <tr data-i="4"><td class="th"><img src="frames/s5.jpg" alt="S5"></td><td class="sn">S5</td><td><span class="b b1">B1</span></td><td>Two-shot over counter</td><td>C5 · counter front, eye height</td><td>customer ↔ Marek, level</td><td>Coins counted, last loaf handed over <em>farewell without dialogue</em></td></tr>
+        <tr data-i="5"><td class="th"><img src="frames/s6.jpg" alt="S6"></td><td class="sn">S6</td><td><span class="b b2">B2</span></td><td>OTS over Marek to doorway</td><td>C6 · behind M's L shoulder</td><td>Clara's eyeline straight down counter axis</td><td>Clara in the doorway, apron on <em>the stranger is not a customer</em></td></tr>
+        <tr data-i="6"><td class="th"><img src="frames/s7.jpg" alt="S7"></td><td class="sn">S7</td><td><span class="b b2">B2</span></td><td>Top-down insert, tighter</td><td>C2 return · overhead 0.7m</td><td>n/a — hands only</td><td>Hands teaching hands; phone face-down <em>mirrors S2 — inheritance in miniature</em></td></tr>
+        <tr data-i="7"><td class="th"><img src="frames/s8.jpg" alt="S8"></td><td class="sn">S8</td><td><span class="b b2">B2</span></td><td>Medium, back room</td><td>C8 · static 50mm, window key</td><td>Marek down at the photograph</td><td>Photo of him and his wife at this oven <em>the reason he almost says no</em></td></tr>
+        <tr data-i="8"><td class="th"><img src="frames/s9.jpg" alt="S9"></td><td class="sn">S9</td><td><span class="b b2">B2</span></td><td>Profile 2-shot at the oven</td><td>C9 · across the bakehouse</td><td>both faces to the fire, no eyeline contest</td><td>She loads the peel; he only watches <em>the decision, played on his posture</em></td></tr>
+        <tr data-i="9"><td class="th"><img src="frames/s10.jpg" alt="S10"></td><td class="sn">S10</td><td><span class="b b3">B3</span></td><td>Mid 2-shot at threshold</td><td>C10 · street side, morning</td><td>hand to hand, crock centre-frame</td><td>Starter crock + keys change hands <em>whole story in one prop</em></td></tr>
+        <tr data-i="10"><td class="th"><img src="frames/s11.jpg" alt="S11"></td><td class="sn">S11</td><td><span class="b b3">B3</span></td><td>Interior reverse, through window</td><td>C11 · inside looking out</td><td>Marek to the street, back half-turned</td><td>OPEN flipped at dawn, chairs stacked <em>not his shift — his gift</em></td></tr>
+        <tr data-i="11"><td class="th"><img src="frames/s12.jpg" alt="S12"></td><td class="sn">S12</td><td><span class="b b3">B3</span></td><td>EXT hero wide, golden hour</td><td>C1 return position, warm grade</td><td>queue toward camera</td><td>CLARA'S — SAME BREAD; caption card <em>same angle as S1 — time passed, axis kept</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 06 BLOCKING -->
+<section id="blocking">
+  <div class="wrap">
+    <div class="kick rev">06 · Blocking</div>
+    <h2 class="rev">Overhead Layout &amp; Axis</h2>
+    <p class="lead rev">The framing logic behind the board: shop geometry fixed once, camera positions reused, and one hard rule — the counter axis runs north–south, so S1/S12 share an angle across time and S6's eyeline never flips screen direction between generations.</p>
+    <div class="blockwrap rev">
       <svg viewBox="0 0 420 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
         <rect x="0" y="0" width="420" height="440" fill="none"/>
-        <!-- shop box -->
         <rect x="90" y="60" width="240" height="240" fill="#161924" stroke="#2E3240" stroke-width="2"/>
         <text x="210" y="50" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">OVEN WALL (N) — wood fire, gold glow</text>
         <rect x="140" y="66" width="140" height="10" fill="#3A2E1C"/>
         <text x="210" y="92" fill="#8B8FA3" font-family="JetBrains Mono" font-size="9" text-anchor="middle">BRICK OVEN</text>
-        <!-- counter -->
         <rect x="210" y="110" width="16" height="150" fill="#D4A843" opacity=".85"/>
         <text x="248" y="190" fill="#8B8FA3" font-family="JetBrains Mono" font-size="9">COUNTER (E)</text>
-        <!-- back room -->
         <rect x="96" y="66" width="70" height="60" fill="#12141C" stroke="#23262F" stroke-width="1.5"/>
         <text x="131" y="100" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">BACK ROOM</text>
         <text x="131" y="112" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">(S8 photo)</text>
-        <!-- door + window south -->
         <rect x="150" y="298" width="60" height="8" fill="#D4A843"/>
         <text x="180" y="322" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">DOOR (S)</text>
         <rect x="230" y="298" width="70" height="8" fill="#2E3240"/>
         <text x="265" y="322" fill="#5A5E70" font-family="JetBrains Mono" font-size="8" text-anchor="middle">WINDOW + card</text>
-        <!-- street -->
         <rect x="60" y="340" width="300" height="70" fill="#12141C" stroke="#23262F" stroke-width="2"/>
         <text x="210" y="362" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">STREET — cobblestones, parked cars, street lamp</text>
         <text x="210" y="378" fill="#5A5E70" font-family="JetBrains Mono" font-size="9" text-anchor="middle">C1 (S1) = C12 (S12) — same angle, time passed</text>
-        <!-- 180 axis -->
-        <line x1="218" y1="100" x2="218" y2="298" stroke="#2299ff" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <line class="dw" pathLength="1" x1="218" y1="100" x2="218" y2="298" stroke="#2299ff" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="6 4"/>
         <text x="130" y="230" fill="#3E6FA8" font-family="JetBrains Mono" font-size="9" text-anchor="middle">180° AXIS (N–S)</text>
-        <!-- B1/B2 positions -->
         <circle cx="186" cy="170" r="11" fill="#E5484D"/><text x="186" y="174" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">M</text>
         <circle cx="186" cy="280" r="11" fill="#D4A843"/><text x="186" y="284" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="9" text-anchor="middle">C</text>
         <text x="150" y="260" fill="#F29CA0" font-family="JetBrains Mono" font-size="9">S5 counter</text>
         <text x="150" y="272" fill="#F29CA0" font-family="JetBrains Mono" font-size="9">S6 doorway</text>
-        <!-- oven positions -->
         <circle cx="150" cy="130" r="9" fill="#E5484D" opacity=".9"/><text x="150" y="134" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="8" text-anchor="middle">M</text>
         <circle cx="176" cy="130" r="9" fill="#D4A843" opacity=".9"/><text x="176" y="134" fill="#0A0B10" font-family="Archivo" font-weight="700" font-size="8" text-anchor="middle">C</text>
         <text x="163" y="118" fill="#F29CA0" font-family="JetBrains Mono" font-size="8" text-anchor="middle">S9 oven</text>
-        <!-- handover arrow -->
-        <path d="M 150 320 C 120 335, 120 350, 122 366" fill="none" stroke="#7A9BD6" stroke-width="2"/>
+        <path class="dw d2" pathLength="1" d="M 150 320 C 120 335, 120 350, 122 366" fill="none" stroke="#7A9BD6" stroke-width="2"/>
         <polygon points="122,374 116,362 128,362" fill="#7A9BD6"/>
         <text x="60" y="392" fill="#7A9BD6" font-family="JetBrains Mono" font-size="9">S10 crock + keys</text>
-        <!-- cameras -->
         <polygon points="360,300 372,308 360,316" fill="#D4A843"/><text x="378" y="312" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C1/C12</text>
         <polygon points="120,240 132,248 120,256" fill="#D4A843"/><text x="96" y="252" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C5</text>
         <polygon points="230,270 242,278 230,286" fill="#D4A843"/><text x="248" y="282" fill="#D4A843" font-family="JetBrains Mono" font-size="10">C6</text>
@@ -340,7 +459,7 @@ footer b{color:var(--mut)}
       </svg>
       <div class="legend">
         <div class="li"><span class="dot m"></span><span><b>Marek</b> — shop side of axis</span></div>
-        <div class="li"><span class="dot d" style="background:#D4A843"></span><span><b>Clara</b> — door / oven side</span></div>
+        <div class="li"><span class="dot" style="background:#D4A843"></span><span><b>Clara</b> — door / oven side</span></div>
         <div class="li"><span class="tri"></span><span><b>C#</b> — camera position (shot list)</span></div>
         <div class="li"><span class="dash"></span><span><b>Red dashed</b> — S6 eyeline, kept on-axis</span></div>
         <div class="li"><span class="arrow"></span><span><b>Blue</b> — S10 handover path at threshold</span></div>
@@ -350,62 +469,64 @@ footer b{color:var(--mut)}
   </div>
 </section>
 
-<section>
+<!-- 07 PROMPTS -->
+<section id="prompts">
   <div class="wrap">
-    <div class="kick">06 · AI Image Prompts</div>
-    <h2>Paste-Ready Prompts</h2>
-    <p class="lead">Every prompt is assembled from four locked blocks — style, character, location, then the shot. Paste as-is; no retouching needed. Changelog discipline below.</p>
-    <div class="locks">
+    <div class="kick rev">07 · AI Image Prompts</div>
+    <h2 class="rev">Paste-Ready Prompts</h2>
+    <p class="lead rev">Every prompt is assembled from four locked blocks — style, character, location, then the shot. Paste as-is; no retouching needed. Changelog discipline below.</p>
+    <div class="locks rev">
       <div class="lock"><h4>MAREK — CHARACTER LOCK</h4><p>Mid-70s, wavy white hair, ruddy cheeks, navy knit sweater with rolled sleeves under a flour-dusted cream canvas apron; wire reading glasses worn on his head or nose; thin scar on the right forearm.</p></div>
       <div class="lock"><h4>CLARA — CHARACTER LOCK</h4><p>Late 20s, dark brown hair tied back in a low bun, wheat-stalk tattoo on the left forearm, charcoal-olive t-shirt, cream canvas apron with keys hooked at the hip.</p></div>
       <div class="lock gold"><h4>LOCATION LOCK</h4><p>Corner bakery: dark green facade with gold serif sign "MAREK'S BAKERY", wicker baskets hanging in the window, black-and-white checkered tile floor, flour-scoured wooden counter, glowing brick wood-fired oven, brass bell over the door; outside — wet cobblestones, a blue street lamp.</p></div>
       <div class="lock gold"><h4>STYLE LOCK</h4><p>Cinematic photorealism, landscape 16:9, shallow DOF, 35mm, warm tungsten against cool dusk light, muted palette with deep green and gold accents, fine film grain. No watermark, no logo.</p></div>
     </div>
     <div class="plist">
-      <div class="pcard"><div class="phead"><span class="pt"><i>S1</i> — ESTABLISHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S1</i> — ESTABLISHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
 Exterior wide, corner angle across the junction at night: the bakery's dark green facade glowing against the dark, gold serif sign "MAREK'S BAKERY" lit, steam sighing from a roof vent, warm window light spilling onto wet cobblestones. A cardboard card taped inside the window reads "FINAL DAY, THANK YOU". Parked cars, one blue street lamp. No people. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S2</i> — HANDS MACRO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S2</i> — HANDS MACRO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
 Top-down macro over a flour-dusted dark wooden table: two pairs of hands kneading one ball of dough — an old man's weathered hands with a silver wristwatch, and a young woman's hands with a wheat-stalk tattoo on the forearm. Flour dust scattered in rays. Warm tungsten light. No faces. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S3</i> — THE SIGN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S3</i> — THE SIGN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
 Medium shot through the window glass from the sidewalk: Marek, apron dusted with flour, taping a cardboard sign inside the window. The card reads exactly "FINAL DAY — EVERYTHING MUST GO — THANK YOU FOR 50 YEARS" in handwriting. His reflection doubles him in the glass, the lit shop interior and hanging baskets behind, street fading to dusk outside. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S4</i> — LAST DAY CROWD</span><button class="copy" >copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S4</i> — LAST DAY CROWD</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
 Wide interior shot from the door: the small bakery crowded — schoolkids in uniform, builders in hi-vis vests, parents holding toddlers, one man photographing with his phone. An old woman in an olive jacket serves bread at the counter while Marek bags loaves at the till, smiling. Gold letters "MAREK'S BAKERY" on the back wall, brick oven glowing behind. Daylight. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S5</i> — THE REGULAR</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S5</i> — THE REGULAR</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
 Two-shot over the counter, eye height: an elderly customer in a flat cap and dark coat counts coins on the wooden counter while Marek hands him a paper-wrapped loaf across it. Quiet warmth, customers waiting blurred in the background, oven glow camera-left. Neither man smiling. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S6</i> — THE STRANGER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S6</i> — THE STRANGER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
 Over-the-shoulder shot from behind Marek's left shoulder (his blurred white hair and apron in the near foreground, right of frame): Clara stands in the open doorway in her cream apron over a dark t-shirt, hands at her sides, looking straight down the room at him. Cool blue street light behind her, warm interior ahead. Composition holds the tension between door and counter. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S7</i> — TEACHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S7</i> — TEACHING</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
 Top-down insert, tighter than S2: the old man's hands guiding the young woman's hands as they fold one dough together, her wheat-stalk tattoo visible, a smartphone lying face-down on the floury wood at frame right. Warm side light from the oven. No faces. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S8</i> — THE PHOTO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S8</i> — THE PHOTO</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span>
 Medium shot in the dusty back room: Marek sits on a wooden crate, reading glasses on, holding a curling old photograph — the photo shows a young couple (him and his wife) in aprons laughing in front of the same brick oven decades ago. Bookshelf, vintage radio, a coat on a hook, the oven's fire glowing through the doorway behind him. Window key light. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S9</i> — NIGHT SHIFT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S9</i> — NIGHT SHIFT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
 Profile two-shot across the bakehouse at night: Marek and Clara stand side by side at the glowing brick wood-fired oven, she in her cream apron loading bread with a wooden peel, he watching with his hands folded in front of him. Blue dusk in the street window behind them, fire gold on their faces. No dialogue, no watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S10</i> — HANDOVER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S10</i> — HANDOVER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[CLARA]</span> + <span class="lk">[LOCATION]</span>
 Medium two-shot at the open door in morning light: Marek passes a ceramic starter crock with a red ribbon around it into Clara's hands — both of their hands on the jar for a beat, his keys already on her hip. The glowing oven behind him, the grey street behind her. Solemn, ceremonial. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S11</i> — OPEN, ONCE MORE</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S11</i> — OPEN, ONCE MORE</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MAREK]</span> + <span class="lk">[LOCATION]</span>
 Interior shot looking out through the front window at dawn: Marek reaches up to flip the door sign to "OPEN", chairs still stacked on the tables, the bakery empty and warm, blue early light and one street lamp outside on the wet pavement. His posture quiet and final. No watermark.</div></div>
-      <div class="pcard"><div class="phead"><span class="pt"><i>S12</i> — TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S12</i> — TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
 Exterior hero wide, same corner angle as S1 but golden hour: the bakery facade now reads "CLARA'S BAKERY — SAME BREAD" in gold letters, warm light flooding the window, a queue of regular customers holding paper bags along the sidewalk, bicycles and cars passing. Same cobblestones, same street lamp. Subtitles at the bottom read "Some ovens don't go out. They just change hands." No watermark.</div></div>
     </div>
-    <div class="locks">
+    <div class="locks rev" style="margin-top:22px">
       <div class="lock"><h4>PROMPT CHANGELOG — SAMPLE</h4><p>S3 v1→v2: sign text garbled by the model — locked the card copy verbatim in quotes and re-gen. S6 v2→v3: Clara's tattoo moved to the left forearm to match S2/S7/S10; apron locked to cream. S12 v1→v2: facade re-lettered "CLARA'S — SAME BREAD" and queue density raised. Logged per shot — same record kept for every retake.</p></div>
       <div class="lock"><h4>RETAKES &amp; SEEDS</h4><p>One thread for all twelve frames, edits requested in place instead of fresh rolls; S3 and S12 carry the most history because sign text is the hardest continuity prop. Failed gens never re-rolled blind — the prompt moves first.</p></div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- 08 ABOUT -->
+<section id="about">
   <div class="wrap">
-    <div class="kick">07 · Who Made This</div>
-    <h2>Luka Tkemaladze</h2>
+    <div class="kick rev">08 · Who Made This</div>
+    <h2 class="rev">Luka Tkemaladze</h2>
     <div class="about">
-      <div>
+      <div class="rev">
         <p><b>This page is the job description, executed.</b> A script was broken into beats and shots, blocking was drawn against a hard axis rule, and every frame got a locked, paste-ready prompt derived from a continuity bible — then generated, checked against the locks, and re-prompted until the board held. Twelve frames, one thread, faces and props intact. That is the loop this role runs daily.</p>
         <p>My background: <b>Higher education in Computer Sciences and Systems</b> (academy diploma), freeCodeCamp certifications, hands-on prompt engineering with Claude and ChatGPT (RAG projects, PDF-to-Excel automation), and interactive 3D/portfolio work — I care about frames, light and where continuity breaks.</p>
         <p>Images: Google Gemini (Nano Banana) · Breakdown, blocking and prompt system: Claude. Ready to run the same process on your scripts — in your standards, with your reference locks, at production speed.</p>
         <p style="margin-top:18px">Portfolio: <a href="https://lukatkem.github.io" target="_blank">lukatkem.github.io</a> · GitHub: <a href="https://github.com/lukatkem" target="_blank">github.com/lukatkem</a></p>
       </div>
-      <div class="facts">
+      <div class="facts rev d1">
         <div><span>ROLE</span><b>EP-AI-003 · Storyboard &amp; Scene Breakdown Assistant</b></div>
         <div><span>ON-SITE</span><b>Vake, Tbilisi — available</b></div>
         <div><span>HARDWARE</span><b>Own reliable PC</b></div>
@@ -422,15 +543,177 @@ Exterior hero wide, same corner angle as S1 but golden hour: the bakery facade n
   <b>Luka Tkemaladze</b> · AI Storyboard &amp; Scene Breakdown — Work Sample · <a href="mailto:lukatyemaladze13@gmail.com">lukatyemaladze13@gmail.com</a>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lb" role="dialog" aria-label="Frame viewer">
+  <span class="lb-count" id="lbCount">S1 / 12</span>
+  <button class="lb-x" id="lbX" aria-label="Close">✕</button>
+  <img id="lbImg" src="frames/s1.jpg" alt="Frame">
+  <div class="lb-cap" id="lbCap"><b>S1 · ESTABLISHING</b>caption</div>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
 <script>
-document.querySelectorAll('.copy').forEach(function(b){
-  b.addEventListener('click',function(){
-    var t=b.closest('.pcard').querySelector('.pbody').innerText;
-    function done(){b.textContent='copied ✓';b.classList.add('ok');setTimeout(function(){b.textContent='copy';b.classList.remove('ok')},1800);}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallback()})}else{fallback()}
-    function fallback(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);done();}
+(function(){
+"use strict";
+var SHOTS=[
+ {n:1,label:"ESTABLISHING",tc:0,sd:7,cap:"The corner shop at night — steam, warm window, FINAL DAY card in the glass."},
+ {n:2,label:"HANDS MACRO",tc:7,sd:7,cap:"Old knuckles, young wrists, one dough. The theme frame."},
+ {n:3,label:"THE SIGN",tc:14,sd:7,cap:"Marek tapes the card his reflection already wrote."},
+ {n:4,label:"LAST DAY",tc:21,sd:10,cap:"The neighbourhood floods in to say goodbye to a counter."},
+ {n:5,label:"THE REGULAR",tc:31,sd:11,cap:"The regular counts out coins for the last loaf."},
+ {n:6,label:"THE STRANGER",tc:42,sd:10,cap:"Closing time. Clara is in the doorway — not here to buy."},
+ {n:7,label:"TEACHING",tc:52,sd:10,cap:"Her hands under his. The fold. The phone face-down in the flour."},
+ {n:8,label:"THE PHOTO",tc:62,sd:8,cap:"The back room. The photograph, forty years younger."},
+ {n:9,label:"NIGHT SHIFT",tc:70,sd:14,cap:"Two silhouettes, one fire. She loads; he lets her."},
+ {n:10,label:"HANDOVER",tc:84,sd:14,cap:"The starter crock and the keys cross the threshold."},
+ {n:11,label:"OPEN, ONCE MORE",tc:98,sd:12,cap:"Dawn. He flips the sign to OPEN — one last time, for her."},
+ {n:12,label:"TAG",tc:110,sd:10,cap:"The queue is back. CLARA'S — SAME BREAD."}
+];
+var FRAMES=SHOTS.map(function(s){return "frames/s"+s.n+".jpg"});
+var TOTAL=120;
+function fmt(s){s=Math.max(0,Math.min(TOTAL,Math.floor(s)));var m=Math.floor(s/60),r=s%60;return (m<10?"0":"")+m+":"+(r<10?"0":"")+r;}
+
+/* ---------- scroll: pbar + nav ---------- */
+var pbar=document.getElementById("pbar"),nav=document.getElementById("topnav");
+var ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(function(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    pbar.style.width=(h>0?(window.scrollY/h*100):0)+"%";
+    nav.classList.toggle("scrolled",window.scrollY>40);
+    ticking=false;
+  });
+}
+window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+
+/* ---------- reveals ---------- */
+var revs=[].slice.call(document.querySelectorAll(".rev"));
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+  revs.forEach(function(el){io.observe(el)});
+}else{revs.forEach(function(el){el.classList.add("in")});}
+
+/* ---------- animatic player ---------- */
+var frames=[].slice.call(document.querySelectorAll(".pfr"));
+var segsWrap=document.getElementById("psegs"),segs=[];
+SHOTS.forEach(function(s,i){
+  var d=document.createElement("div");d.className="seg";d.title="S"+s.n;
+  var f=document.createElement("i");d.appendChild(f);
+  d.addEventListener("click",function(){show(i);play();});
+  segsWrap.appendChild(d);segs.push(d);
+});
+var cur=0,playing=false,elapsed=0,lastTs=0,ended=false;
+var pPlay=document.getElementById("pPlay"),pcover=document.getElementById("pcover"),pcoverBtn=document.getElementById("pcoverBtn");
+var pshot=document.getElementById("pshot"),ptc=document.getElementById("ptc"),pcap=document.getElementById("pcap"),pNow=document.getElementById("pNow");
+function show(i){
+  cur=(i+SHOTS.length)%SHOTS.length;ended=false;
+  frames.forEach(function(f,k){f.classList.remove("on");});
+  var fr=frames[cur];void fr.offsetWidth;fr.classList.add("on");
+  segs.forEach(function(sg,k){sg.classList.toggle("done",k<cur);sg.firstChild.style.width=(k<cur?"100%":"0%");});
+  pshot.innerHTML="<i>S"+SHOTS[cur].n+"</i> · "+SHOTS[cur].label;
+  pcap.innerHTML="<b>S"+SHOTS[cur].n+"</b>"+SHOTS[cur].cap;
+  updateTc(0);
+}
+function updateTc(frac){
+  var s=SHOTS[cur];
+  var t=s.tc+Math.min(1,frac)*s.sd;
+  ptc.textContent=fmt(t);pNow.textContent=fmt(t);
+}
+function tick(ts){
+  if(!playing)return;
+  if(lastTs===0)lastTs=ts;
+  elapsed+=(ts-lastTs)/1000;lastTs=ts;
+  var d=SHOTS[cur].sd;
+  if(elapsed>=d){
+    elapsed=0;
+    if(cur>=SHOTS.length-1){
+      playing=false;setUI();show(0);return;
+    }
+    show(cur+1);
+  }else{
+    segs[cur].firstChild.style.width=(elapsed/d*100)+"%";
+    updateTc(elapsed/d);
+  }
+  requestAnimationFrame(tick);
+}
+function play(){
+  if(ended||cur===SHOTS.length-1&&elapsed===0){}
+  ended=false;
+  if(!playing){playing=true;lastTs=0;setUI();requestAnimationFrame(tick);}
+}
+function pause(){playing=false;setUI();}
+function toggle(){playing?pause():play();}
+function setUI(){
+  pPlay.textContent=playing?"❚❚":"▶";
+  pcoverBtn.textContent=(ended||(!playing&&cur===SHOTS.length-1&&elapsed===0))?"↺":"▶";
+  pcover.classList.toggle("off",playing);
+}
+pPlay.addEventListener("click",function(){if(cur===SHOTS.length-1&&!playing&&elapsed===0){show(0);}toggle();});
+pcoverBtn.addEventListener("click",function(e){e.stopPropagation();if(cur===SHOTS.length-1&&!playing){show(0);play();}else{toggle();}});
+document.getElementById("stage").addEventListener("click",toggle);
+document.getElementById("pPrev").addEventListener("click",function(){show(cur-1);});
+document.getElementById("pNext").addEventListener("click",function(){show(cur+1);});
+document.getElementById("ctaPlay").addEventListener("click",function(){
+  document.getElementById("animatic").scrollIntoView({behavior:"smooth"});
+  setTimeout(function(){play();},750);
+});
+/* keyboard when player in view */
+var playerVisible=false;
+if("IntersectionObserver" in window){
+  new IntersectionObserver(function(es){es.forEach(function(e){playerVisible=e.isIntersecting;});},{threshold:.35}).observe(document.querySelector(".player"));
+}
+/* ---------- lightbox ---------- */
+var lb=document.getElementById("lb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap"),lbCount=document.getElementById("lbCount"),lbOpen=false;
+function openLb(i){showLb(i);lb.classList.add("open");lbOpen=true;document.body.style.overflow="hidden";}
+function showLb(i){
+  curLb=(i+SHOTS.length)%SHOTS.length;
+  var s=SHOTS[curLb];
+  lbImg.src=FRAMES[curLb];
+  lbCap.innerHTML="<b>S"+s.n+" · "+s.label+"</b>"+s.cap;
+  lbCount.textContent="S"+s.n+" / 12";
+}
+var curLb=0;
+function closeLb(){lb.classList.remove("open");lbOpen=false;document.body.style.overflow="";}
+document.getElementById("lbX").addEventListener("click",closeLb);
+document.getElementById("lbPrev").addEventListener("click",function(){showLb(curLb-1);});
+document.getElementById("lbNext").addEventListener("click",function(){showLb(curLb+1);});
+lb.addEventListener("click",function(e){if(e.target===lb)closeLb();});
+document.querySelectorAll(".tile").forEach(function(t){
+  t.addEventListener("click",function(){openLb(parseInt(t.getAttribute("data-i"),10));});
+});
+document.querySelectorAll("tbody tr[data-i]").forEach(function(tr){
+  tr.addEventListener("click",function(){openLb(parseInt(tr.getAttribute("data-i"),10));});
+});
+document.querySelectorAll(".strip img").forEach(function(im){
+  im.addEventListener("click",function(e){e.stopPropagation();openLb(parseInt(im.getAttribute("data-i"),10));});
+});
+document.addEventListener("keydown",function(e){
+  if(lbOpen){
+    if(e.key==="Escape")closeLb();
+    else if(e.key==="ArrowLeft")showLb(curLb-1);
+    else if(e.key==="ArrowRight")showLb(curLb+1);
+    return;
+  }
+  if(playerVisible){
+    if(e.code==="Space"){e.preventDefault();toggle();}
+    else if(e.key==="ArrowLeft")show(cur-1);
+    else if(e.key==="ArrowRight")show(cur+1);
+  }
+});
+/* ---------- copy buttons ---------- */
+document.querySelectorAll(".copy").forEach(function(b){
+  b.addEventListener("click",function(){
+    var t=b.closest(".pcard").querySelector(".pbody").innerText;
+    function done(){b.textContent="copied ✓";b.classList.add("ok");setTimeout(function(){b.textContent="copy";b.classList.remove("ok");},1800);}
+    function fallback(){var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done();}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(fallback);}else{fallback();}
   });
 });
+})();
 </script>
 </body>
 </html>
