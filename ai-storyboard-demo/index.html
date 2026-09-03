@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Same Bread — AI Storyboard Work Sample — Luka Tkemaladze</title>
-<meta name="description" content="Work sample for the AI Storyboard and Scene Breakdown Assistant role (EP-AI-003): playable animatic, beat breakdown, shot list, blocking, AI image prompts and continuity bible — 12 frames, one thread.">
+<meta name="description" content="Work sample for the AI Storyboard and Scene Breakdown Assistant role (EP-AI-003): a 29s live-action film, beat breakdown, shot list, blocking, AI image prompts and continuity bible — 12 frames, one thread.">
 <link rel="icon" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,34 +79,9 @@ html.js .rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,tr
 html.js .rev.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-/* ============ ANIMATIC PLAYER ============ */
+/* ============ FILM PLAYER ============ */
 .player{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
 .stage{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;cursor:pointer}
-.pfr{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .55s ease;will-change:transform,opacity}
-.pfr.on{opacity:1;animation:kb 7.5s ease-out forwards}
-@keyframes kb{from{transform:scale(1.075)}to{transform:scale(1.015)}}
-.pcover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,9,.32);opacity:1;transition:opacity .3s;z-index:3}
-.pcover.off{opacity:0;pointer-events:none}
-.pcover button{width:88px;height:88px;border-radius:50%;background:rgba(10,11,16,.72);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:26px;cursor:pointer;backdrop-filter:blur(6px);transition:.2s;font-family:monospace}
-.pcover button:hover{transform:scale(1.07);border-color:var(--gold);color:var(--gold)}
-.pshot{position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;color:#fff;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.14);padding:5px 11px;border-radius:8px;backdrop-filter:blur(4px)}
-.pshot i{color:var(--gold);font-style:normal}
-.ptc{position:absolute;top:14px;right:14px;z-index:2;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fff;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.14);padding:5px 11px;border-radius:8px;backdrop-filter:blur(4px)}
-.ptc .rd{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.4s infinite}
-.psegs{display:flex;gap:4px;margin-top:14px}
-.seg{flex:1;height:6px;border-radius:3px;background:var(--line2);overflow:hidden;cursor:pointer;position:relative;transition:transform .15s}
-.seg:hover{transform:scaleY(1.5)}
-.seg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red))}
-.seg.done i{width:100%}
-.pctrl{display:flex;align-items:center;gap:10px;margin-top:14px}
-.pbtn{width:44px;height:44px;border-radius:11px;background:var(--panel2);border:1px solid var(--line2);color:var(--tx);font-size:15px;cursor:pointer;transition:.15s;font-family:monospace}
-.pbtn:hover{border-color:var(--gold);color:var(--gold)}
-.pbtn.big{width:54px;background:var(--red);border-color:rgba(255,255,255,.15);color:#fff;font-size:17px}
-.pbtn.big:hover{background:#F05A5F;color:#fff;border-color:#fff}
-.pmeta{margin-left:auto;text-align:right}
-.ptime{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold);font-weight:600}
-.ptime span{color:var(--dim);font-weight:400}
-.pnote{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.06em;margin-top:2px}
 .pcap{margin-top:12px;color:var(--mut);font-size:14.5px;min-height:22px}
 .pcap b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--gold);margin-right:10px}
 
@@ -247,8 +222,7 @@ footer b{color:var(--mut)}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .rev{opacity:1;transform:none;transition:none}
-  .pfr{animation:none!important}
-  body::after,.hero-foot span,.slate .rd,.ptc .rd{animation:none}
+  body::after,.hero-foot span,.slate .rd{animation:none}
   .dw{stroke-dashoffset:0;animation:none!important}
 }
 </style>
@@ -259,7 +233,7 @@ footer b{color:var(--mut)}
 <nav id="topnav">
   <span class="nv-word">SAME<i>BREAD</i></span>
     <div class="nv-links">
-    <a href="#film">Film</a><a href="#animatic">Animatic</a><a href="#board">Board</a><a href="#script">Script</a><a href="#beats">Beats</a><a href="#shots">Shots</a><a href="#blocking">Blocking</a><a href="#prompts">Prompts</a><a href="#about">Contact</a>
+    <a href="#film">Film</a><a href="#board">Board</a><a href="#script">Script</a><a href="#beats">Beats</a><a href="#shots">Shots</a><a href="#blocking">Blocking</a><a href="#prompts">Prompts</a><a href="#about">Contact</a>
   </div>
   <span class="nv-chip">EP-AI-003</span>
 </nav>
@@ -279,8 +253,7 @@ footer b{color:var(--mut)}
       <span><i>2</i> characters, 1 location</span>
     </div>
     <div class="ctas rev d3">
-      <button class="btnp" id="ctaPlay">▶ &nbsp;Play the animatic</button>
-      <a class="btng" href="#film">Watch the film · 29s</a>
+      <button class="btnp" id="ctaPlay">▶ &nbsp;Watch the film</button>
       <a class="btng" href="#board">Browse the board ↓</a>
     </div>
   </div>
@@ -291,61 +264,22 @@ footer b{color:var(--mut)}
 <section id="film">
   <div class="wrap">
     <div class="kick rev">00 · The Film</div>
-    <h2 class="rev">From Board to Screen</h2>
-    <p class="lead rev">The twelve locked boards, rendered as a 29-second live-action short — same shots, same beats, same continuity locks: the FINAL DAY sign, the starter crock's red ribbon, the queue, the title card. The board is the process; the film is the proof it holds on screen.</p>
+    <h2 class="rev">The Last Loaf</h2>
+    <p class="lead rev">The twelve boards, on screen — a 29-second cut of the full sequence with native sound: the night establishing, the hands, the sign, the last day, Clara, the starter hand-off, and the re-lettered window. Watch it first, then scroll through how it was built.</p>
     <div class="player rev">
       <div class="stage videostage">
         <video src="the-last-loaf.mp4" poster="frames/s1.jpg" controls playsinline preload="metadata"></video>
       </div>
-      <div class="pcap"><b>29s · NATIVE AUDIO</b>Full sequence — night establishing → hands macro → the sign → the last day → the regular → Clara → the starter hand-off → CLARA'S — SAME BREAD.</div>
+      <div class="pcap"><b>29s · NATIVE AUDIO</b>Every shot generated against the locked boards below — same continuity locks: the FINAL DAY card, the starter crock's red ribbon, the sign copy.</div>
     </div>
     <div class="boardnote">the-last-loaf.mp4 · 1280×720 · 29s · rendered from the locked boards</div>
   </div>
 </section>
 
-<!-- 01 ANIMATIC -->
-<section id="animatic">
-  <div class="wrap">
-    <div class="kick rev">01 · The Animatic</div>
-    <h2 class="rev">Play the Board</h2>
-    <p class="lead rev">The twelve frames cut together against the shot timings — the same review pass a director gets before production. Space toggles play, arrows step shots, or click any segment to jump.</p>
-    <div class="player rev">
-      <div class="stage" id="stage" title="Click to play / pause">
-        <img class="pfr on" src="frames/s1.jpg" alt="S1">
-        <img class="pfr" src="frames/s2.jpg" alt="S2">
-        <img class="pfr" src="frames/s3.jpg" alt="S3">
-        <img class="pfr" src="frames/s4.jpg" alt="S4">
-        <img class="pfr" src="frames/s5.jpg" alt="S5">
-        <img class="pfr" src="frames/s6.jpg" alt="S6">
-        <img class="pfr" src="frames/s7.jpg" alt="S7">
-        <img class="pfr" src="frames/s8.jpg" alt="S8">
-        <img class="pfr" src="frames/s9.jpg" alt="S9">
-        <img class="pfr" src="frames/s10.jpg" alt="S10">
-        <img class="pfr" src="frames/s11.jpg" alt="S11">
-        <img class="pfr" src="frames/s12.jpg" alt="S12">
-        <span class="pshot" id="pshot"><i>S1</i> · ESTABLISHING</span>
-        <span class="ptc"><span class="rd"></span>TC <span id="ptc">00:00</span></span>
-        <div class="pcover" id="pcover"><button id="pcoverBtn" aria-label="Play">▶</button></div>
-      </div>
-      <div class="psegs" id="psegs"></div>
-      <div class="pctrl">
-        <button class="pbtn big" id="pPlay" aria-label="Play / pause">▶</button>
-        <button class="pbtn" id="pPrev" aria-label="Previous shot">‹</button>
-        <button class="pbtn" id="pNext" aria-label="Next shot">›</button>
-        <div class="pmeta">
-          <div class="ptime"><span id="pNow">00:00</span> <span>/ 02:00</span></div>
-          <div class="pnote">TIMED TO THE FULL 2:00 CUT · PLAYED AT 2× FOR REVIEW</div>
-        </div>
-      </div>
-      <div class="pcap" id="pcap"><b>S1</b>The corner shop at night — steam, warm window, FINAL DAY card in the glass.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 BOARD -->
+<!-- 01 BOARD -->
 <section id="board">
   <div class="wrap">
-    <div class="kick rev">02 · The Board</div>
+    <div class="kick rev">01 · The Board</div>
     <h2 class="rev">12 Frames, One Thread</h2>
     <p class="lead rev">All twelve frames generated in one Gemini thread with the locked prompts from section 07 — faces, wardrobe, sign copy and oven glow held constant across every generation. Click any frame to inspect it full-size.</p>
     <div class="board">
@@ -369,7 +303,7 @@ footer b{color:var(--mut)}
 <!-- 03 SCRIPT -->
 <section id="script">
   <div class="wrap">
-    <div class="kick rev">03 · The Scene</div>
+    <div class="kick rev">02 · The Scene</div>
     <h2 class="rev">Original Screenplay</h2>
     <p class="lead rev">A closing chapter, not a cliffhanger — deliberately chosen to test the hardest AI continuity problem: one elderly face, one young face, one location, and props that must survive twelve generations (the sign, the crock, the tattoo). If the board holds, the pipeline holds.</p>
     <p class="logline rev">On the last day of a fifty-year bakery, <b>Marek</b> meets the stranger who will bake tomorrow's bread — and lets the ovens change hands.</p>
@@ -398,7 +332,7 @@ footer b{color:var(--mut)}
 <!-- 04 BEATS -->
 <section id="beats">
   <div class="wrap">
-    <div class="kick rev">04 · Dramatic Beats</div>
+    <div class="kick rev">03 · Dramatic Beats</div>
     <h2 class="rev">Beat Breakdown</h2>
     <p class="lead rev">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches. Thumbnails jump to the frame.</p>
     <div class="beats">
@@ -412,7 +346,7 @@ footer b{color:var(--mut)}
 <!-- 05 SHOT LIST -->
 <section id="shots">
   <div class="wrap">
-    <div class="kick rev">05 · Shot List</div>
+    <div class="kick rev">04 · Shot List</div>
     <h2 class="rev">12 Shots, 16:9</h2>
     <p class="lead rev">Landscape compositions with the humans on the thirds; two top-down inserts carry the theme so faces are never asked to do exposition. One hard rule: the counter axis never flips, so screen direction stays stable across all twelve generations. Click a row to see the frame.</p>
     <div class="tblwrap rev">
@@ -440,7 +374,7 @@ footer b{color:var(--mut)}
 <!-- 06 BLOCKING -->
 <section id="blocking">
   <div class="wrap">
-    <div class="kick rev">06 · Blocking</div>
+    <div class="kick rev">05 · Blocking</div>
     <h2 class="rev">Overhead Layout &amp; Axis</h2>
     <p class="lead rev">The framing logic behind the board: shop geometry fixed once, camera positions reused, and one hard rule — the counter axis runs north–south, so S1/S12 share an angle across time and S6's eyeline never flips screen direction between generations.</p>
     <div class="blockwrap rev">
@@ -495,7 +429,7 @@ footer b{color:var(--mut)}
 <!-- 07 PROMPTS -->
 <section id="prompts">
   <div class="wrap">
-    <div class="kick rev">07 · AI Image Prompts</div>
+    <div class="kick rev">06 · AI Image Prompts</div>
     <h2 class="rev">Paste-Ready Prompts</h2>
     <p class="lead rev">Every prompt is assembled from four locked blocks — style, character, location, then the shot. Paste as-is; no retouching needed. Changelog discipline below.</p>
     <div class="locks rev">
@@ -540,7 +474,7 @@ Exterior hero wide, same corner angle as S1 but golden hour: the bakery facade n
 <!-- 08 ABOUT -->
 <section id="about">
   <div class="wrap">
-    <div class="kick rev">08 · Who Made This</div>
+    <div class="kick rev">07 · Who Made This</div>
     <h2 class="rev">Luka Tkemaladze</h2>
     <div class="about">
       <div class="rev">
@@ -594,8 +528,6 @@ var SHOTS=[
  {n:12,label:"TAG",tc:110,sd:10,cap:"The queue is back. CLARA'S — SAME BREAD."}
 ];
 var FRAMES=SHOTS.map(function(s){return "frames/s"+s.n+".jpg"});
-var TOTAL=120;
-function fmt(s){s=Math.max(0,Math.min(TOTAL,Math.floor(s)));var m=Math.floor(s/60),r=s%60;return (m<10?"0":"")+m+":"+(r<10?"0":"")+r;}
 
 /* ---------- scroll: pbar + nav ---------- */
 var pbar=document.getElementById("pbar"),nav=document.getElementById("topnav");
@@ -620,68 +552,13 @@ if("IntersectionObserver" in window){
   revs.forEach(function(el){io.observe(el)});
 }else{revs.forEach(function(el){el.classList.add("in")});}
 
-/* ---------- animatic player ---------- */
-var frames=[].slice.call(document.querySelectorAll(".pfr"));
-var segsWrap=document.getElementById("psegs"),segs=[];
-SHOTS.forEach(function(s,i){
-  var d=document.createElement("div");d.className="seg";d.title="S"+s.n;
-  var f=document.createElement("i");d.appendChild(f);
-  d.addEventListener("click",function(){show(i);play();});
-  segsWrap.appendChild(d);segs.push(d);
-});
-var cur=0,playing=false,elapsed=0,lastNow=0,ended=false,timer=null;
-var pPlay=document.getElementById("pPlay"),pcover=document.getElementById("pcover"),pcoverBtn=document.getElementById("pcoverBtn");
-var pshot=document.getElementById("pshot"),ptc=document.getElementById("ptc"),pcap=document.getElementById("pcap"),pNow=document.getElementById("pNow");
-function show(i){
-  cur=(i+SHOTS.length)%SHOTS.length;ended=false;
-  frames.forEach(function(f,k){f.classList.remove("on");});
-  var fr=frames[cur];void fr.offsetWidth;fr.classList.add("on");
-  segs.forEach(function(sg,k){sg.classList.toggle("done",k<cur);sg.firstChild.style.width=(k<cur?"100%":"0%");});
-  pshot.innerHTML="<i>S"+SHOTS[cur].n+"</i> · "+SHOTS[cur].label;
-  pcap.innerHTML="<b>S"+SHOTS[cur].n+"</b>"+SHOTS[cur].cap;
-  updateTc(0);
-}
-function updateTc(frac){
-  var s=SHOTS[cur];
-  var t=s.tc+Math.min(1,frac)*s.sd;
-  ptc.textContent=fmt(t);pNow.textContent=fmt(t);
-}
-function tick(){
-  if(!playing)return;
-  var now=performance.now();
-  if(!lastNow)lastNow=now;
-  elapsed+=(now-lastNow)/1000;lastNow=now;
-  var d=SHOTS[cur].sd;
-  if(elapsed>=d){
-    elapsed=0;
-    if(cur>=SHOTS.length-1){playing=false;ended=true;lastNow=0;if(timer){clearInterval(timer);timer=null;}setUI();show(0);return;}
-    show(cur+1);
-  }else{
-    segs[cur].firstChild.style.width=(elapsed/d*100)+"%";
-    updateTc(elapsed/d);
-  }
-}
-function play(){
-  ended=false;
-  if(!playing){playing=true;lastNow=0;setUI();timer=setInterval(tick,200);}
-}
-function pause(){playing=false;lastNow=0;if(timer){clearInterval(timer);timer=null;}setUI();}
-function toggle(){playing?pause():play();}
-function setUI(){
-  pPlay.textContent=playing?"❚❚":"▶";
-  pcoverBtn.textContent=(ended||(!playing&&cur===SHOTS.length-1&&elapsed===0))?"↺":"▶";
-  pcover.classList.toggle("off",playing);
-}
-pPlay.addEventListener("click",function(){if(cur===SHOTS.length-1&&!playing&&elapsed===0){show(0);}toggle();});
-pcoverBtn.addEventListener("click",function(e){e.stopPropagation();if(cur===SHOTS.length-1&&!playing){show(0);play();}else{toggle();}});
-document.getElementById("stage").addEventListener("click",toggle);
-document.getElementById("pPrev").addEventListener("click",function(){show(cur-1);});
-document.getElementById("pNext").addEventListener("click",function(){show(cur+1);});
+/* ---------- film: hero CTA plays the video ---------- */
+var film=document.querySelector("#film video");
 document.getElementById("ctaPlay").addEventListener("click",function(){
-  document.getElementById("animatic").scrollIntoView({behavior:"smooth"});
-  setTimeout(function(){play();},750);
+  document.getElementById("film").scrollIntoView({behavior:"smooth"});
+  setTimeout(function(){if(film&&film.paused){var p=film.play();if(p&&p.catch)p.catch(function(){})}},750);
 });
-/* keyboard when player in view */
+/* keyboard: space/arrows drive the film when it's the visible player */
 var playerVisible=false;
 if("IntersectionObserver" in window){
   new IntersectionObserver(function(es){es.forEach(function(e){playerVisible=e.isIntersecting;});},{threshold:.35}).observe(document.querySelector(".player"));
@@ -719,9 +596,7 @@ document.addEventListener("keydown",function(e){
     return;
   }
   if(playerVisible){
-    if(e.code==="Space"){e.preventDefault();toggle();}
-    else if(e.key==="ArrowLeft")show(cur-1);
-    else if(e.key==="ArrowRight")show(cur+1);
+    if(e.code==="Space"){e.preventDefault();if(film){film.paused?film.play().catch(function(){}):film.pause();}}
   }
 });
 /* ---------- copy buttons ---------- */
