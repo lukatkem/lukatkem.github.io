@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Elevator — AI Storyboard Work Sample 3 — Luka Tkemaladze</title>
+<meta name="description" content="Third work sample for the AI Storyboard & Scene Breakdown Assistant role (EP-AI-003): THE LAST ELEVATOR, a vertical-drama cold open — 9 frames S1–S9, beat breakdown, shot list, overhead blocking and ChatGPT-ready locked prompts.">
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+:root{
+  --bg:#07060C;--panel:#100D18;--panel2:#151020;--line:#1C1828;--line2:#2A2440;
+  --tx:#EDEEF4;--mut:#908CA0;--dim:#5B5768;--gold:#D4A843;--vio:#8B7BFF;--red:#E5484D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Archivo',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--vio);color:#12042A}
+a{color:var(--vio);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+body::after{content:"";position:fixed;inset:0;z-index:3000;pointer-events:none;opacity:.05;
+background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");}
+
+#pbar{position:fixed;top:0;left:0;height:2px;width:0;z-index:1100;background:linear-gradient(90deg,var(--vio),var(--red))}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:22px;padding:14px 24px;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(7,6,12,.84);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+.nv-word{font-weight:900;letter-spacing:.06em;font-size:14px;color:var(--tx);text-transform:uppercase}
+.nv-word i{color:var(--vio);font-style:normal}
+nav .nv-links{display:flex;gap:16px;margin:0 auto}
+nav .nv-links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase}
+nav .nv-links a:hover{color:var(--vio);text-decoration:none}
+.nv-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:var(--vio);border:1px solid rgba(139,123,255,.35);border-radius:999px;padding:5px 12px;background:rgba(139,123,255,.06)}
+@media(max-width:900px){nav .nv-links{display:none}}
+
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.40;filter:saturate(1.05)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(7,6,12,.80) 0%,rgba(7,6,12,.34) 40%,rgba(7,6,12,.62) 70%,var(--bg) 96%),
+  radial-gradient(760px 420px at 78% 10%,rgba(139,123,255,.12),transparent 60%),
+  radial-gradient(600px 400px at 12% 85%,rgba(229,72,77,.07),transparent 60%)}
+.hero-in{position:relative;z-index:2;padding-top:110px;padding-bottom:90px}
+.slate{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:8px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mut);background:rgba(16,13,24,.7)}
+.slate b{color:var(--vio);font-weight:600}
+.slate .rd{width:8px;height:8px;border-radius:50%;background:var(--vio);animation:blink 1.7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(50px,9.5vw,112px);font-weight:900;line-height:.94;letter-spacing:-.02em;text-transform:uppercase;margin:30px 0 18px;text-shadow:0 4px 40px rgba(0,0,0,.65)}
+.hero h1 .v{color:var(--vio)}
+.hero .sub{color:#C4C1D2;font-size:clamp(15px,2vw,18px);max-width:640px;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.meta span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);border:1px solid rgba(255,255,255,.16);background:rgba(10,8,16,.6);border-radius:999px;padding:6px 13px;backdrop-filter:blur(4px)}
+.meta span i{color:var(--vio);font-style:normal}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btnp{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.06em;color:#12042A;background:var(--vio);border:1px solid var(--vio);border-radius:11px;padding:13px 26px;cursor:pointer;transition:.2s;box-shadow:0 6px 30px rgba(139,123,255,.28)}
+.btnp:hover{transform:translateY(-1px);box-shadow:0 10px 40px rgba(139,123,255,.4)}
+.btng{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--tx);border:1px solid var(--line2);border-radius:11px;padding:13px 26px;background:rgba(16,13,24,.6);transition:.2s}
+.btng:hover{border-color:var(--vio);color:var(--vio);text-decoration:none}
+.sample{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut)}
+.sample a{color:var(--gold)}
+.sample a:hover{color:var(--gold)}
+
+section{padding:88px 0;border-bottom:1px solid var(--line)}
+.kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--vio);text-transform:uppercase;margin-bottom:12px}
+h2{font-size:clamp(30px,4.6vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.08;margin-bottom:14px}
+.lead{color:var(--mut);max-width:720px;margin-bottom:34px;font-size:15.5px}
+
+/* vertical-drama board: tall tiles */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.board{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
+.tile:hover{transform:translateY(-3px);border-color:rgba(139,123,255,.5);box-shadow:0 14px 44px rgba(0,0,0,.45)}
+.tile .imgw{position:relative;aspect-ratio:9/16;background:#0A0810}
+.tile img{width:100%;height:100%;object-fit:cover;display:block}
+.tile .tag{position:absolute;left:10px;top:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#12042A;background:var(--vio);border-radius:7px;padding:3px 9px;font-weight:600}
+.tile .tc2{position:absolute;right:10px;top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--gold);background:rgba(7,6,12,.72);border:1px solid rgba(212,168,67,.3);border-radius:7px;padding:3px 8px}
+.tile .cap{padding:13px 15px 15px;font-size:13px;color:#C4C2CE;line-height:1.5}
+.tile .cap b{color:var(--tx)}
+.tile .cap i{color:var(--gold);font-style:normal}
+.boardnote{margin-top:18px;font-size:12.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+
+.beats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
+@media(max-width:900px){.beats{grid-template-columns:1fr}}
+.beat{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--vio);border-radius:13px;padding:18px 20px}
+.beat.b2{border-left-color:var(--red)}
+.beat.b3{border-left-color:var(--gold)}
+.beat h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--vio);text-transform:uppercase;margin-bottom:8px}
+.beat.b2 h4{color:var(--red)}
+.beat.b3 h4{color:var(--gold)}
+.beat .bt{font-weight:700;font-size:15px;margin-bottom:6px}
+.beat p{font-size:13.5px;color:var(--mut)}
+
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--vio);text-transform:uppercase;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:#C6C3D2}
+td b{color:var(--tx)}
+td .tc{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);white-space:nowrap}
+
+.blockwrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:16px}
+.blockwrap svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:16px}
+.legend span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut);display:flex;align-items:center;gap:9px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.dot.m{background:var(--vio)}
+.dot.d{background:#8A93A8}
+.axis{width:22px;height:0;border-top:2px dashed var(--red);display:inline-block;flex:none}
+.exit{width:22px;height:0;border-top:2px solid var(--gold);display:inline-block;flex:none}
+.blocknote{font-size:13px;color:var(--dim);margin-top:14px;font-style:italic}
+
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:22px}
+.lock{background:var(--panel2);border:1px dashed var(--line2);border-radius:13px;padding:17px;transition:.2s}
+.lock:hover{border-color:rgba(139,123,255,.45)}
+.lock h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--vio);margin-bottom:8px}
+.lock.gold h4{color:var(--gold)}
+.lock p{font-size:13.5px;color:#C2BFD0}
+.plist{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:14px}
+@media(max-width:1020px){.plist{grid-template-columns:1fr}}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s}
+.pcard:hover{border-color:var(--line2)}
+.phead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.phead .pt{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;color:var(--tx)}
+.phead .pt i{color:var(--vio);font-style:normal;font-weight:600}
+.copy{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);background:var(--panel2);border:1px solid var(--line2);border-radius:7px;padding:5px 11px;cursor:pointer;transition:.15s}
+.copy:hover{color:var(--vio);border-color:var(--vio)}
+.pbody{padding:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;color:#B9B6C9;white-space:pre-wrap}
+.lk{color:var(--vio);font-weight:600}
+
+footer{padding:44px 0;text-align:center;color:var(--dim);font-size:13px}
+footer b{color:var(--mut)}
+footer a{color:var(--vio)}
+
+#lb{position:fixed;inset:0;z-index:4000;background:rgba(5,4,9,.94);display:none;align-items:center;justify-content:center;flex-direction:column;padding:40px}
+#lb.open{display:flex}
+#lb img{max-width:min(560px,92vw);max-height:80vh;border-radius:10px;border:1px solid var(--line2);box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.lb-count{position:absolute;top:22px;left:26px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vio);letter-spacing:.14em}
+.lb-x{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--mut);font-size:26px;cursor:pointer;padding:8px}
+.lb-x:hover{color:#fff}
+.lb-cap{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#C6C3D2;text-align:center;max-width:800px}
+.lb-cap b{color:var(--vio)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(16,13,24,.7);border:1px solid var(--line2);color:var(--tx);font-size:26px;width:52px;height:52px;border-radius:50%;cursor:pointer;transition:.15s}
+.lb-nav:hover{border-color:var(--vio);color:var(--vio)}
+.lb-prev{left:22px}.lb-next{right:22px}
+
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+html:not(.js) .rev{opacity:1;transform:none}
+.rev.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}.slate .rd{animation:none}}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+<nav id="nv">
+  <span class="nv-word">THE&nbsp;LAST<i>/</i>ELEVATOR</span>
+  <div class="nv-links">
+    <a href="#board">Board</a>
+    <a href="#breakdown">Breakdown</a>
+    <a href="#prompts">Prompts</a>
+    <a href="https://lukatkem.github.io/ai-storyboard-demo">Same Bread →</a>
+  </div>
+  <span class="nv-chip">EP-AI-003 · WS-3</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"><img src="elevator/s8.jpg" alt=""></div>
+  <div class="hero-in wrap">
+    <div class="slate rev"><span class="rd"></span>COLD OPEN · EPISODE 1 · <b>S1–S9</b></div>
+    <h1 class="rev d1">THE LAST <span class="v">ELEVATOR</span></h1>
+    <p class="sub rev d2">A vertical-drama cold open in 9 frames. On the night of her engagement party, Mia learns who her fiancé really is — from a message preview in an elevator mirror. One location, two faces, one phone: the cheapest scene to keep consistent across AI generations, and the hardest to fake continuity in. That trade-off is the point.</p>
+    <div class="meta rev d3">
+      <span><i>9</i> frames</span>
+      <span><i>~65s</i> sequence</span>
+      <span><i>9:16</i> vertical drama</span>
+      <span><i>2</i> characters, 1 location</span>
+      <span>Gemini · Nano Banana</span>
+    </div>
+    <div class="ctas rev d3">
+      <button class="btnp" id="ctaBoard">▣ &nbsp;Open the board</button>
+      <a class="btng" href="#prompts">ChatGPT-ready prompts ↓</a>
+    </div>
+    <div class="sample rev d3">work sample 1: <a href="https://lukatkem.github.io/ai-storyboard-demo">Same Bread — 12-frame film "The Last Loaf"</a> &nbsp;·&nbsp; work sample 2: <a href="phantom.html">Phantom Protocol — cyberpunk heist</a></div>
+  </div>
+</header>
+
+<!-- 01 BOARD -->
+<section id="board">
+  <div class="wrap">
+    <div class="kick rev">01 · The Board</div>
+    <h2 class="rev">Nine Frames, Vertical</h2>
+    <p class="lead rev">Framing chosen for vertical drama: tall compositions, eyelines readable at thumbnail size, one macro insert carries the plot. Click any frame to inspect it full-size.</p>
+    <div class="board">
+      <div class="tile rev" data-i="0"><div class="imgw"><img src="elevator/s1.jpg" alt="S1 high wide — doors close on the couple" loading="lazy"><span class="tag">S1</span><span class="tc2">B1 · 00:00</span></div><div class="cap"><b>HIGH WIDE, CORNER.</b> Doors close on Mia and Daniel; coupe hand-off. Mirror behind them — the scene's weapon, planted early.</div></div>
+      <div class="tile rev d1" data-i="1"><div class="imgw"><img src="elevator/s2.jpg" alt="S2 mirror insert — phone buzzes" loading="lazy"><span class="tag">S2</span><span class="tc2">B1 · 00:08</span></div><div class="cap"><b>MIRROR INSERT.</b> Phone buzzes face-up. In the mirror, Mia's reflection locks onto it before he notices.</div></div>
+      <div class="tile rev d2" data-i="2"><div class="imgw"><img src="elevator/s3.jpg" alt="S3 OTS over Daniel — phone flipped" loading="lazy"><span class="tag">S3</span><span class="tc2">B1 · 00:15</span></div><div class="cap"><b>OTS OVER DANIEL.</b> Daniel flips the phone away — he thinks he's safe. He's reading the wrong audience.</div></div>
+      <div class="tile rev" data-i="3"><div class="imgw"><img src="elevator/s4.jpg" alt="S4 close-up Mia — smile intact, eyes gone" loading="lazy"><span class="tag">S4</span><span class="tc2">B2 · 00:24</span></div><div class="cap"><b>CU MIA.</b> The key acting frame: smile fully intact, eyes gone. Most retakes budgeted here.</div></div>
+      <div class="tile rev d1" data-i="4"><div class="imgw"><img src="elevator/s5.jpg" alt="S5 macro — the message reveal" loading="lazy"><span class="tag">S5</span><span class="tc2">B2 · 00:31</span></div><div class="cap"><b>MACRO.</b> The reveal insert — "V: I'm at the party." The only frame allowed to prioritize text legibility.</div></div>
+      <div class="tile rev d2" data-i="5"><div class="imgw"><img src="elevator/s6.jpg" alt="S6 close-up Daniel — jaw tight" loading="lazy"><span class="tag">S6</span><span class="tc2">B2 · 00:39</span></div><div class="cap"><b>CU DANIEL.</b> Jaw tight. Composition mirrored against S4 — the couple now framed as opposites.</div></div>
+      <div class="tile rev" data-i="6"><div class="imgw"><img src="elevator/s7.jpg" alt="S7 two-shot — doors open on gold light" loading="lazy"><span class="tag">S7</span><span class="tc2">B3 · 00:48</span></div><div class="cap"><b>DING — DOORS OPEN.</b> Applause and gold light. Lighting flips warm — the continuity cut point.</div></div>
+      <div class="tile rev d1" data-i="7"><div class="imgw"><img src="elevator/s8.jpg" alt="S8 low hero — Mia fixes the collar" loading="lazy"><span class="tag">S8</span><span class="tc2">B3 · 00:55</span></div><div class="cap"><b>LOW HERO.</b> "Not here." — collar fix, perfect smile. Power transfers to Mia in one low-angle push.</div></div>
+      <div class="tile rev d2" data-i="8"><div class="imgw"><img src="elevator/s9.jpg" alt="S9 empty elevator — coupe on the rail" loading="lazy"><span class="tag">S9</span><span class="tc2">B3 · 01:02</span></div><div class="cap"><b>TAG.</b> Empty cabin, the coupe left on the rail, doors sealing the gold light out. She's already ahead.</div></div>
+    </div>
+    <div class="boardnote rev">S1–S9 · sequence total ≈ 65s · generated in one Gemini (Nano Banana) thread from the locked prompt set below</div>
+  </div>
+</section>
+
+<!-- 02 BEATS -->
+<section id="beats">
+  <div class="wrap">
+    <div class="kick rev">02 · Dramatic Beats</div>
+    <h2 class="rev">Beat Breakdown</h2>
+    <p class="lead rev">Each beat is a generation unit: one emotional state per beat keeps faces, wardrobe and lighting coherent when images are produced in batches.</p>
+    <div class="beats rev">
+      <div class="beat b1"><h4>00:00 – 00:22 · Beat 1</h4><div class="bt">The Ascent</div><p>Flirty banter, champagne, celebration. A phone buzzes and is silenced — read as party logistics. Plant: Mia sees everything in the mirror before we ever cut wide on it.</p></div>
+      <div class="beat b2"><h4>00:22 – 00:48 · Beat 2</h4><div class="bt">The Message</div><p>The reveal lands in three images: mirror watch → eyes hold → macro on the screen. No dialogue. The smile stays; the eyes leave.</p></div>
+      <div class="beat b3"><h4>00:48 – 01:05 · Beat 3</h4><div class="bt">The Smile</div><p>Doors open, applause, gold light. Mia takes control of the frame — collar fix, "Not here." — and exits first. Tag on the abandoned coupe: she's already three moves ahead.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SHOT LIST -->
+<section id="breakdown">
+  <div class="wrap">
+    <div class="kick rev">03 · Shot List</div>
+    <h2 class="rev">9 Shots, One Axis</h2>
+    <p class="lead rev">Framing, camera position and the 180° line for every shot — the board stays cuttable because screen direction never flips.</p>
+    <div class="tw">
+    <table>
+      <tr><th>#</th><th>Beat</th><th>Framing</th><th>Camera</th><th>Eyeline / 180°</th><th>Action</th></tr>
+      <tr><td class="tc">S1</td><td class="tc">B1</td><td><b>High wide, corner</b></td><td>C1 · NW corner, ~2.1m, static</td><td>M and D face door then each other; Mia screen-left, Daniel screen-right — line on N–S axis</td><td>Doors close; coupe hand-off establishes geography + mirror position</td></tr>
+      <tr><td class="tc">S2</td><td class="tc">B1</td><td><b>Mirror insert</b></td><td>C2 · W wall, aimed at mirror</td><td>Mia's reflected eyeline → phone in D's hand</td><td>Phone buzzes face-up — audience learns with Mia</td></tr>
+      <tr><td class="tc">S3</td><td class="tc">B1</td><td><b>OTS over Daniel</b></td><td>C2 +8cm, over D's R shoulder</td><td>Mia (reflection) holds smile at Daniel</td><td>D flips phone to himself — the miss; he thinks he's safe</td></tr>
+      <tr><td class="tc">S4</td><td class="tc">B2</td><td><b>CU Mia, eye-line thirds</b></td><td>C2 zoom, eye height</td><td>Eyes shift to mirror-phone, screen-right of frame</td><td>Smile intact, eyes move — key acting frame, most retakes here</td></tr>
+      <tr><td class="tc">S5</td><td class="tc">B2</td><td><b>Macro on phone screen</b></td><td>C5 · 30cm insert lens</td><td>n/a — text legible, no face</td><td>Message preview fills frame — only frame allowed to break style for legibility</td></tr>
+      <tr><td class="tc">S6</td><td class="tc">B2</td><td><b>CU Daniel</b></td><td>C2 mirrored, eye height</td><td>Down-left at phone; mirrors S4 composition</td><td>Jaw tightens — bookend symmetry with S4</td></tr>
+      <tr><td class="tc">S7</td><td class="tc">B3</td><td><b>2-shot, doors opening</b></td><td>C7 · S of door, 1.4m, static</td><td>Both face camera, then past it</td><td>Gold bloom, off-screen applause — lighting flips warm, continuity cut point</td></tr>
+      <tr><td class="tc">S8</td><td class="tc">B3</td><td><b>Low hero on Mia</b></td><td>C8 · 0.9m low, slight push</td><td>Mia down at Daniel (hand on collar)</td><td>Collar fix, "Not here." — power transfer to Mia</td></tr>
+      <tr><td class="tc">S9</td><td class="tc">B3</td><td><b>Empty elevator, doors closing</b></td><td>C9 · inside, N wall by mirror</td><td>no faces</td><td>Coupe on the rail, slit of light — tag: consequence, not dialogue</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- 04 BLOCKING -->
+<section id="blocking">
+  <div class="wrap">
+    <div class="kick rev">04 · Blocking</div>
+    <h2 class="rev">One Room, One Axis</h2>
+    <p class="lead rev">Overhead plan of the cabin: every camera position, Mia's mirror eyeline and the B3 exit — drawn before a single frame was generated.</p>
+    <div class="blockwrap rev">
+      <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overhead blocking diagram">
+        <rect x="0" y="0" width="420" height="520" fill="none"/>
+        <rect x="110" y="40" width="200" height="210" fill="#161924" stroke="#2A2440" stroke-width="2"/>
+        <text x="210" y="30" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">MIRROR WALL (N)</text>
+        <line x1="110" y1="46" x2="310" y2="46" stroke="#D4A843" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="210" y="70" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ELEVATOR 2.0 × 2.1 m</text>
+        <line x1="304" y1="60" x2="304" y2="240" stroke="#2A2440" stroke-width="4"/>
+        <text x="352" y="150" fill="#5A5E70" font-family="JetBrains Mono" font-size="9">RAIL (E)</text>
+        <rect x="150" y="248" width="120" height="8" fill="#D4A843"/>
+        <text x="210" y="276" fill="#8B8FA3" font-family="JetBrains Mono" font-size="10" text-anchor="middle">DOORS (S)</text>
+        <rect x="60" y="300" width="300" height="150" fill="#12141C" stroke="#23262F" stroke-width="2"/>
+        <text x="210" y="325" fill="#5A5E70" font-family="JetBrains Mono" font-size="10" text-anchor="middle">LANDING — PARTY BEYOND (GOLD)</text>
+        <circle cx="170" cy="180" r="13" fill="#8B7BFF"/>
+        <text x="170" y="184" fill="#12042A" font-family="JetBrains Mono" font-size="10" font-weight="bold" text-anchor="middle">M</text>
+        <circle cx="250" cy="180" r="13" fill="#8A93A8"/>
+        <text x="250" y="184" fill="#12042A" font-family="JetBrains Mono" font-size="10" font-weight="bold" text-anchor="middle">D</text>
+        <path d="M 170 167 L 170 90" stroke="#E5484D" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+        <path d="M 170 90 L 250 158" stroke="#E5484D" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+        <text x="128" y="108" fill="#E5484D" font-family="JetBrains Mono" font-size="9">MIA EYELINE (MIRROR)</text>
+        <path d="M 170 193 L 150 300 L 200 430" stroke="#D4A843" stroke-width="2.5" fill="none"/>
+        <text x="80" y="420" fill="#D4A843" font-family="JetBrains Mono" font-size="9">MIA EXIT · B3</text>
+        <path d="M 250 193 L 260 300 L 250 420" stroke="#4A5060" stroke-width="2" stroke-dasharray="2 5" fill="none"/>
+        <text x="285" y="405" fill="#5A5E70" font-family="JetBrains Mono" font-size="9">DANIEL HOLDS</text>
+        <text x="210" y="500" fill="#3A3F4E" font-family="JetBrains Mono" font-size="9" text-anchor="middle">CAMERA POSITIONS C1–C9 PER SHOT LIST</text>
+      </svg>
+      <div class="legend">
+        <span><i class="dot m"></i>Mia — screen-left of axis</span>
+        <span><i class="dot d"></i>Daniel — screen-right</span>
+        <span><i class="axis"></i>Red dashed — Mia's eyeline via mirror</span>
+        <span><i class="exit"></i>Gold — exit blocking, B3</span>
+      </div>
+      <p class="blocknote">Camera never crosses the axis — screen direction stays stable for every generated frame.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROMPTS -->
+<section id="prompts">
+  <div class="wrap">
+    <div class="kick rev">05 · AI Image Prompts</div>
+    <h2 class="rev">ChatGPT-Ready Prompts</h2>
+    <p class="lead rev">Every prompt is assembled from four locked blocks — style, two character locks, location — then the shot. All nine frames were generated from these; paste-ready.</p>
+    <div class="locks rev">
+      <div class="lock"><h4>MIA — CHARACTER LOCK</h4><p>Late 20s, shoulder-length dark brown hair tucked behind her left ear, small mole below her left eye, red satin slip dress, thin gold hoop earrings.</p></div>
+      <div class="lock"><h4>DANIEL — CHARACTER LOCK</h4><p>Early 30s, short black hair, clean-shaven, strong jaw, charcoal suit, white shirt with open collar, black leather watch.</p></div>
+      <div class="lock gold"><h4>LOCATION LOCK</h4><p>Luxury apartment elevator: black marble, gold trim, full-height mirror on the back wall, brass rail. Beyond the doors: cream roses, warm gold string lights.</p></div>
+      <div class="lock gold"><h4>STYLE LOCK</h4><p>Cinematic photorealism, vertical 9:16, shallow DOF, 35mm, soft contrast, muted palette with a deep red accent, fine film grain.</p></div>
+    </div>
+    <div class="plist">
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S1</i> — HIGH WIDE, CORNER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+High-angle wide shot from the elevator's northwest corner looking down: Mia screen-left facing Daniel screen-right, champagne coupe mid hand-off between them, both reflected small in the mirror wall behind. Doors at frame bottom. Warm single ceiling spotlight, cold marble tones. No text, no watermark, faces identical to character locks.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S2</i> — MIRROR INSERT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Medium insert aimed at the mirror wall: in the reflection, Daniel's right hand holds a matte black phone face-up, screen glowing; behind and left, Mia's reflected face turning toward the phone, eyes locked on it. Shallow DOF, phone sharpest element. Same elevator, same wardrobe. No readable text yet, no watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S3</i> — OTS OVER DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Over-the-shoulder from behind Daniel's right shoulder (dark blurred charcoal suit in frame left edge), Mia facing him — real, not reflection — raising her champagne coupe, warm smile. Her eyes angled slightly to frame right where the mirror sits. Composition mirrors S2. No text, no watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S4</i> — CU MIA, EYES</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[LOCATION]</span>
+Extreme close-up on Mia's face filling upper frame thirds, eyes on the upper horizontal third line. The smile is fully intact; only her eyes have shifted hard to frame right. Gold hoop catching the ceiling spotlight, mole below her left eye visible. Cold elevator light. No text, no watermark, face identical to character lock.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S5</i> — MACRO, THE REVEAL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span>
+Macro insert, 30cm from the phone screen held in a man's hand (black leather watch visible at frame edge): a messaging app preview fills the screen — sender "V", text reads "You told her I was your assistant. I'm at the party." Slight screen glow on surrounding darkness, background fully black. Crisp legible type, no watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S6</i> — CU DANIEL</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Extreme close-up on Daniel, composition mirrored against S4: eyes down-left toward his phone, jaw visibly tight, lips pressed. Same cold elevator light as S4. No text, no watermark, face identical to character lock.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S7</i> — 2-SHOT, DOORS OPEN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Static two-shot from the landing facing the open elevator doors: Mia and Daniel side by side in the doorway, silhouettes rimmed by warm gold light blooming from the party behind camera, blurred string lights and cream roses in background bokeh. Both faces catch gold; her smile returns, his doesn't. Lighting flips warm — wardrobe unchanged. No text, no watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S8</i> — LOW HERO, MIA</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[MIA]</span> + <span class="lk">[DANIEL]</span> + <span class="lk">[LOCATION]</span>
+Low-angle hero shot, camera at 0.9m: Mia dominant in frame, one hand fixing Daniel's collar (his blurred shoulder at frame right), her expression a perfect, controlled smile, chin slightly down. Warm gold landing light, red satin catching it. Authority in the posture. No text, no watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>S9</i> — EMPTY ELEVATOR TAG</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Static frame from inside the elevator by the mirror wall: the elevator now empty except a half-full champagne coupe resting on the brass rail, doors sliding closed leaving a narrowing slit of warm gold light from the landing. Cold marble, single spotlight. No people, no text, no watermark.</div></div>
+    </div>
+    <div class="locks rev" style="margin-top:22px">
+      <div class="lock"><h4>CONTINUITY DISCIPLINE</h4><p>One Gemini thread for all nine frames — Mia's mole + tucked hair + red satin and Daniel's watch + open collar locked in words and re-checked on every gen; the mirror, brass rail and gold doors kept as fixed geography; retakes logged per shot (S4 key light moved to kill a double reflection in the hoops).</p></div>
+      <div class="lock gold"><h4>WHAT THIS SHOWS</h4><p>A third format (vertical drama vs 16:9 film and graphic-novel action), a two-hander acting scene with no dialogue to hide behind, and the hardest AI constraint set: two recurring faces in one mirrored room across nine generations.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>Luka Tkemaladze</b> · AI Storyboard &amp; Scene Breakdown — Work Sample 3 · <a href="mailto:lukatyemaladze13@gmail.com">lukatyemaladze13@gmail.com</a> · <a href="https://lukatkem.github.io/ai-storyboard-demo">Same Bread (WS-1)</a> · <a href="phantom.html">Phantom Protocol (WS-2)</a>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb" role="dialog" aria-label="Frame viewer">
+  <span class="lb-count" id="lbCount">S1 / 9</span>
+  <button class="lb-x" id="lbX" aria-label="Close">✕</button>
+  <img id="lbImg" src="elevator/s1.jpg" alt="Frame">
+  <div class="lb-cap" id="lbCap"><b>S1 · HIGH WIDE, CORNER</b>caption</div>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+var PANELS=[
+ {n:"S1",label:"HIGH WIDE, CORNER",cap:"Doors close on Mia and Daniel; coupe hand-off. Mirror planted early. (B1 · 00:00)"},
+ {n:"S2",label:"MIRROR INSERT",cap:"Phone buzzes face-up — Mia's reflection locks onto it before he notices. (B1 · 00:08)"},
+ {n:"S3",label:"OTS OVER DANIEL",cap:"Daniel flips the phone away — he thinks he's safe. (B1 · 00:15)"},
+ {n:"S4",label:"CU MIA",cap:"The key acting frame: smile fully intact, eyes gone. (B2 · 00:24)"},
+ {n:"S5",label:"MACRO, THE REVEAL",cap:"\"V: I'm at the party.\" The only frame allowed to prioritize text legibility. (B2 · 00:31)"},
+ {n:"S6",label:"CU DANIEL",cap:"Jaw tight — composition mirrored against S4. (B2 · 00:39)"},
+ {n:"S7",label:"DING — DOORS OPEN",cap:"Applause and gold light — lighting flips warm, the continuity cut point. (B3 · 00:48)"},
+ {n:"S8",label:"LOW HERO",cap:"\"Not here.\" — collar fix, perfect smile. Power transfers to Mia. (B3 · 00:55)"},
+ {n:"S9",label:"TAG",cap:"Empty cabin, the coupe left on the rail. She's already ahead. (B3 · 01:02)"}
+];
+/* pbar + nav */
+var pbar=document.getElementById("pbar"),nv=document.getElementById("nv");
+addEventListener("scroll",function(){
+  var h=document.documentElement;
+  pbar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+  nv.classList.toggle("scrolled",h.scrollTop>30);
+},{passive:true});
+/* reveals */
+var revs=document.querySelectorAll(".rev");
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+  },{threshold:.12});
+  revs.forEach(function(r){io.observe(r);});
+}else{revs.forEach(function(r){r.classList.add("in");});}
+/* lightbox */
+var lb=document.getElementById("lb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap"),lbCount=document.getElementById("lbCount"),cur=0;
+function openLb(i){
+  cur=(i+PANELS.length)%PANELS.length;
+  lbImg.src="elevator/s"+(cur+1)+".jpg";
+  lbCap.innerHTML="<b>"+PANELS[cur].n+" · "+PANELS[cur].label+"</b> — "+PANELS[cur].cap;
+  lbCount.textContent=PANELS[cur].n+" / 9";
+  lb.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeLb(){lb.classList.remove("open");document.body.style.overflow="";}
+document.querySelectorAll(".tile").forEach(function(t){
+  t.addEventListener("click",function(){openLb(parseInt(t.dataset.i,10));});
+});
+document.getElementById("lbX").addEventListener("click",closeLb);
+document.getElementById("lbPrev").addEventListener("click",function(e){e.stopPropagation();openLb(cur-1);});
+document.getElementById("lbNext").addEventListener("click",function(e){e.stopPropagation();openLb(cur+1);});
+lb.addEventListener("click",function(e){if(e.target===lb)closeLb();});
+addEventListener("keydown",function(e){
+  if(!lb.classList.contains("open"))return;
+  if(e.key==="Escape")closeLb();
+  if(e.key==="ArrowLeft")openLb(cur-1);
+  if(e.key==="ArrowRight")openLb(cur+1);
+});
+/* copy buttons */
+document.querySelectorAll(".pcard").forEach(function(c){
+  var b=c.querySelector(".copy"),body=c.querySelector(".pbody");
+  b.addEventListener("click",function(){
+    var txt=body.innerText;
+    function done(){b.textContent="copied ✓";setTimeout(function(){b.textContent="copy";},1800);}
+    function fallback(){
+      var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();
+      try{document.execCommand("copy");done();}catch(err){}
+      document.body.removeChild(ta);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback();});}else{fallback();}
+  });
+});
+/* hero CTA */
+document.getElementById("ctaBoard").addEventListener("click",function(){
+  document.getElementById("board").scrollIntoView({behavior:"smooth"});
+});
+})();
+</script>
+</body>
+</html>
