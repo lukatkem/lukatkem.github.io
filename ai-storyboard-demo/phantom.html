@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phantom Protocol — AI Storyboard Work Sample 2 — Luka Tkemaladze</title>
-<meta name="description" content="Second work sample for the AI Storyboard & Scene Breakdown Assistant role (EP-AI-003): PHANTOM PROTOCOL, a cyberpunk heist sequence — 9 panels P28–P36 with shot types, durations, SFX and continuity notes.">
+<meta name="description" content="Second work sample for the AI Storyboard & Scene Breakdown Assistant role (EP-AI-003): PHANTOM PROTOCOL, a complete cyberpunk heist — all 36 panels P1–P36 across three acts, with shot types, durations, SFX and continuity notes.">
 <link rel="icon" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,13 +61,31 @@ nav .nv-links a:hover{color:var(--cy);text-decoration:none}
 .btnp:hover{transform:translateY(-1px);box-shadow:0 10px 40px rgba(61,224,168,.4)}
 .btng{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--tx);border:1px solid var(--line2);border-radius:11px;padding:13px 26px;background:rgba(13,17,23,.6);transition:.2s}
 .btng:hover{border-color:var(--cy);color:var(--cy);text-decoration:none}
-.sample{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut)}
+.sample{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut)}
 .sample a{color:var(--gold)}
+.sample a:hover{color:var(--gold)}
 
 section{padding:88px 0;border-bottom:1px solid var(--line)}
 .kick{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--cy);text-transform:uppercase;margin-bottom:12px}
 h2{font-size:clamp(30px,4.6vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.08;margin-bottom:14px}
 .lead{color:var(--mut);max-width:720px;margin-bottom:34px;font-size:15.5px}
+
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
+@media(max-width:900px){.acts{grid-template-columns:1fr}}
+.act{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--vio);border-radius:13px;padding:18px 20px}
+.act.a2{border-left-color:var(--red)}
+.act.a3{border-left-color:var(--cy)}
+.act h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--vio);text-transform:uppercase;margin-bottom:8px}
+.act.a2 h4{color:var(--red)}
+.act.a3 h4{color:var(--cy)}
+.act .bt{font-weight:700;font-size:15px;margin-bottom:6px}
+.act p{font-size:13.5px;color:var(--mut)}
+
+.ah{display:flex;align-items:baseline;gap:14px;margin:46px 0 18px}
+.ah:first-of-type{margin-top:0}
+.ah h3{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.2em;color:var(--cy);text-transform:uppercase}
+.ah span{font-size:12px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.ah::after{content:"";flex:1;height:1px;background:var(--line2)}
 
 .board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
@@ -83,11 +101,12 @@ h2{font-size:clamp(30px,4.6vw,46px);font-weight:900;letter-spacing:-.01em;line-h
 .boardnote{margin-top:18px;font-size:12.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
 
 .tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
 th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--cy);text-transform:uppercase;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
-td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:#C6CAD6}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:#C6CAD6}
 td b{color:var(--tx)}
 td .tc{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);white-space:nowrap}
+tr.actrow td{background:var(--panel2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;padding:8px 12px;border-bottom:1px solid var(--line2)}
 
 .locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:22px}
 .lock{background:var(--panel2);border:1px dashed var(--line2);border-radius:13px;padding:17px;transition:.2s}
@@ -144,16 +163,17 @@ html:not(.js) .rev{opacity:1;transform:none}
 </nav>
 
 <header class="hero">
-  <div class="hero-bg"><img src="panels/p31.jpg" alt=""></div>
+  <div class="hero-bg"><img src="panels/p1.jpg" alt=""></div>
   <div class="hero-in wrap">
-    <div class="slate rev"><span class="rd"></span>SCENE 3 · SERVER CORE RUN · <b>P28–P36</b></div>
+    <div class="slate rev"><span class="rd"></span>CYBERPUNK HEIST · 3 ACTS · <b>P1–P36</b></div>
     <h1 class="rev d1">PHANTOM <span class="g">PROTOCOL</span></h1>
-    <p class="sub rev d2">A cyberpunk heist in 9 panels — Sarah and Spike move a sealed data packet through a biometric lock into a green-lit server core. Second AI-storyboard work sample: every panel generated from a locked prompt set, every shot timed, SFX-marked and continuity-checked.</p>
+    <p class="sub rev d2">A complete cyberpunk heist in 36 panels — a detective tracks a glowing artifact through neon rain, meets the hacker Spike, hacks a biometric vault and pulls the data core. Second AI-storyboard work sample: every panel generated from a locked prompt set, every shot timed, SFX-marked and continuity-checked across three acts.</p>
     <div class="meta rev d3">
-      <span><i>9</i> panels</span>
-      <span><i>~24s</i> sequence</span>
+      <span><i>36</i> panels</span>
+      <span><i>3</i> acts</span>
+      <span><i>~80s</i> sequence</span>
       <span><i>2</i> characters</span>
-      <span><i>1</i> location</span>
+      <span><i>4</i> locations</span>
       <span>Gemini · Nano Banana</span>
     </div>
     <div class="ctas rev d3">
@@ -164,85 +184,168 @@ html:not(.js) .rev{opacity:1;transform:none}
   </div>
 </header>
 
-<!-- 01 BOARD -->
-<section id="board">
+<!-- 01 ACTS -->
+<section id="acts">
   <div class="wrap">
-    <div class="kick rev">01 · The Board</div>
-    <h2 class="rev">Nine Frames, One Run</h2>
-    <p class="lead rev">Sequence 3 of PHANTOM PROTOCOL — the server-core run. Click any frame to inspect it full-size.</p>
-    <div class="board">
-      <div class="tile rev" data-i="0"><div class="imgw"><img src="panels/p28.jpg" alt="P28" loading="lazy"><span class="tag">P28</span></div><div class="cap"><b>MEDIUM CLOSE-UP, BIOMETRIC INTERFACE.</b> Lock confirmation — biometric scan converts the data packet into a physical key. <i>*CLICK* *HISS*</i> (2s)</div></div>
-      <div class="tile rev d1" data-i="1"><div class="imgw"><img src="panels/p29.jpg" alt="P29" loading="lazy"><span class="tag">P29</span></div><div class="cap"><b>EXTREME CLOSE-UP, KEY INSERTION.</b> Insert shot — key physically engaged, security layers bypass. <i>*MECHANICAL UNLOCK*</i> (1.5s)</div></div>
-      <div class="tile rev d2" data-i="2"><div class="imgw"><img src="panels/p30.jpg" alt="P30" loading="lazy"><span class="tag">P30</span></div><div class="cap"><b>OVER-THE-SHOULDER, SARAH.</b> Stepping into the new space — cold green light, total silhouette. (2.5s)</div></div>
-      <div class="tile rev" data-i="3"><div class="imgw"><img src="panels/p31.jpg" alt="P31" loading="lazy"><span class="tag">P31</span></div><div class="cap"><b>WIDE ANGLE, FULL SHOT.</b> The heart of the network — central sphere activates with green light. (5s)</div></div>
-      <div class="tile rev d1" data-i="4"><div class="imgw"><img src="panels/p32.jpg" alt="P32" loading="lazy"><span class="tag">P32</span></div><div class="cap"><b>MEDIUM CLOSE-UP, SPIKE.</b> Spike checks the signal: <i>"It's close."</i> Red and green light play. (2s)</div></div>
-      <div class="tile rev d2" data-i="5"><div class="imgw"><img src="panels/p33.jpg" alt="P33" loading="lazy"><span class="tag">P33</span></div><div class="cap"><b>POV INSERT, DEVICE.</b> Initial connection — device is integrated, holographic sync. <i>*CLICK* *UNLOCK*</i> (2.5s)</div></div>
-      <div class="tile rev" data-i="6"><div class="imgw"><img src="panels/p34.jpg" alt="P34" loading="lazy"><span class="tag">P34</span></div><div class="cap"><b>WIDE SHOT, ESTABLISHING.</b> Tracking through the central node — data flows like rain. (4s)</div></div>
-      <div class="tile rev d1" data-i="7"><div class="imgw"><img src="panels/p35.jpg" alt="P35" loading="lazy"><span class="tag">P35</span></div><div class="cap"><b>MEDIUM SHOT, DUAL FOCUS.</b> The destination confirmed — time is running. Text: <i>"ACCESS GRANTED… 00:03"</i> (3s)</div></div>
-      <div class="tile rev d2" data-i="8"><div class="imgw"><img src="panels/p36.jpg" alt="P36" loading="lazy"><span class="tag">P36</span></div><div class="cap"><b>WIDE SHOT, REVERSE ANGLE.</b> The duo leaves the scene, walking towards a new path. SFX: fading conversation and city hum. (5s)</div></div>
+    <div class="kick rev">01 · The Story</div>
+    <h2 class="rev">Three Acts, One Run</h2>
+    <p class="lead rev">The sequence is cut into three acts, each a generation block with its own location and emotional state — the same unit structure used to keep AI frames coherent in batches.</p>
+    <div class="acts rev">
+      <div class="act a1"><h4>P1 – P18 · Act 1</h4><div class="bt">The Tracking</div><p>Rain-soaked neon alleys. A lone detective follows a glowing magenta artifact through the city — standoff, chase, and the first contact: the artifact thieves have a name for her already.</p></div>
+      <div class="act a2"><h4>P19 – P27 · Act 2</h4><div class="bt">The Infiltration</div><p>Sarah's AR interface locks the target. Through a night market crowd to the vault door: biometric scans, device sync, the complex lock identified — Sarah primes the final transfer.</p></div>
+      <div class="act a3"><h4>P28 – P36 · Act 3</h4><div class="bt">The Core</div><p>Inside the server vault: the biometric key turns, the green data core wakes, "ACCESS GRANTED… 00:03" — and the duo walks out toward a new path with the packet.</p></div>
     </div>
-    <div class="boardnote rev">P28–P36 · sequence total ≈ 24s · generated in one Gemini thread from the locked prompt set below</div>
   </div>
 </section>
 
-<!-- 02 BREAKDOWN -->
+<!-- 02 BOARD -->
+<section id="board">
+  <div class="wrap">
+    <div class="kick rev">02 · The Board</div>
+    <h2 class="rev">36 Panels, Start to Finish</h2>
+    <p class="lead rev">The complete sequence in story order. Click any panel to inspect it full-size.</p>
+
+    <div class="ah rev"><h3>Act 1 · The Tracking</h3><span>P1–P18 · neon alleys</span></div>
+    <div class="board">
+      <div class="tile rev" data-i="0"><div class="imgw"><img src="panels/p1.jpg" alt="P1" loading="lazy"><span class="tag">P1</span></div><div class="cap"><b>EXTREME WIDE — CRANE RISE.</b> Neon city, rain. A lone figure mid-30s under the signs. <i>(4s)</i></div></div>
+      <div class="tile rev d1" data-i="1"><div class="imgw"><img src="panels/p2.jpg" alt="P2" loading="lazy"><span class="tag">P2</span></div><div class="cap"><b>MEDIUM — TRACKING.</b> The detective moves through the light — coat, gun, purpose. <i>(2s)</i></div></div>
+      <div class="tile rev d2" data-i="2"><div class="imgw"><img src="panels/p3.jpg" alt="P3" loading="lazy"><span class="tag">P3</span></div><div class="cap"><b>CLOSE-UP — SHALLOW DEPTH.</b> Her face against the neon: eyes on the target. <i>(2s)</i></div></div>
+      <div class="tile rev" data-i="3"><div class="imgw"><img src="panels/p4.jpg" alt="P4" loading="lazy"><span class="tag">P4</span></div><div class="cap"><b>ONE-POINT PERSPECTIVE.</b> A moody figure stands at the alley's end. Wary hold-and-shake. <i>(3s)</i></div></div>
+      <div class="tile rev d1" data-i="4"><div class="imgw"><img src="panels/p5.jpg" alt="P5" loading="lazy"><span class="tag">P5</span></div><div class="cap"><b>HARD RIM LIGHT.</b> The pistol drawn from under the rim light — frozen mid-fall, maximum tension. <i>(2s)</i></div></div>
+      <div class="tile rev d2" data-i="5"><div class="imgw"><img src="panels/p6.jpg" alt="P6" loading="lazy"><span class="tag">P6</span></div><div class="cap"><b>TWO-SHOT — STANDOFF.</b> Both figures opposite — the standoff holds. <i>(3s)</i></div></div>
+      <div class="tile rev" data-i="6"><div class="imgw"><img src="panels/p7.jpg" alt="P7" loading="lazy"><span class="tag">P7</span></div><div class="cap"><b>DUTCH TILT.</b> Phone raised against the rain — unease in the angle. <i>(2s)</i></div></div>
+      <div class="tile rev d1" data-i="7"><div class="imgw"><img src="panels/p8.jpg" alt="P8" loading="lazy"><span class="tag">P8</span></div><div class="cap"><b>WHIP PAN — ACTION.</b> She dives behind the dumpster — the exchange erupts. <i>(2.5s)</i></div></div>
+      <div class="tile rev d2" data-i="8"><div class="imgw"><img src="panels/p9.jpg" alt="P9" loading="lazy"><span class="tag">P9</span></div><div class="cap"><b>EXTREME WIDE — STILLNESS.</b> Only the empty, quiet alley is the resolution mood. <i>(3s)</i></div></div>
+      <div class="tile rev" data-i="9"><div class="imgw"><img src="panels/p10.jpg" alt="P10" loading="lazy"><span class="tag">P10</span></div><div class="cap"><b>LOW ANGLE.</b> The detective lowers her gun, breath misting. <i>*CRACKLE OF NEON* *RAINDROPS*</i> The alley is still. <i>(2s)</i></div></div>
+      <div class="tile rev d1" data-i="10"><div class="imgw"><img src="panels/p11.jpg" alt="P11" loading="lazy"><span class="tag">P11</span></div><div class="cap"><b>INSERT — THE ARTIFACT.</b> A drop splashes off the glowing magenta device. <i>*DRIP* *DRIP*</i> Hummable pulse. <i>(1.5s)</i></div></div>
+      <div class="tile rev d2" data-i="11"><div class="imgw"><img src="panels/p12.jpg" alt="P12" loading="lazy"><span class="tag">P12</span></div><div class="cap"><b>OVER-THE-SHOULDER.</b> She picks the object up. A new figure watches — the tablet glows blue. <i>(3s)</i></div></div>
+      <div class="tile rev" data-i="12"><div class="imgw"><img src="panels/p13.jpg" alt="P13" loading="lazy"><span class="tag">P13</span></div><div class="cap"><b>POV — HOLOGRAPHIC UI.</b> The artifact projects its interface. Text: <i>"SYS-LOG 0903."</i> <i>*HIGH-PITCH DATA-SYNC*</i> <i>(2.5s)</i></div></div>
+      <div class="tile rev d1" data-i="13"><div class="imgw"><img src="panels/p14.jpg" alt="P14" loading="lazy"><span class="tag">P14</span></div><div class="cap"><b>TWO-SHOT — GUN DRAWN.</b> The detective spins. Character 2 stands. <i>"You're late."</i> <i>(2s)</i></div></div>
+      <div class="tile rev d2" data-i="14"><div class="imgw"><img src="panels/p15.jpg" alt="P15" loading="lazy"><span class="tag">P15</span></div><div class="cap"><b>CLOSE-UP — SPIKE.</b> Face split by red and blue light: <i>"And that thing isn't yours."</i> <i>*DIGITAL STATIC*</i> <i>(2.5s)</i></div></div>
+      <div class="tile rev" data-i="15"><div class="imgw"><img src="panels/p16.jpg" alt="P16" loading="lazy"><span class="tag">P16</span></div><div class="cap"><b>CONVERSATION.</b> Spike makes the proposition: <i>"I can get you in."</i> <i>(4s)</i></div></div>
+      <div class="tile rev d1" data-i="16"><div class="imgw"><img src="panels/p17.jpg" alt="P17" loading="lazy"><span class="tag">P17</span></div><div class="cap"><b>INSERT — HANDS.</b> Spike holds the artifact, tablet verifies. Text: <i>"VERIFIED."</i> <i>(1.5s)</i></div></div>
+      <div class="tile rev d2" data-i="17"><div class="imgw"><img src="panels/p18.jpg" alt="P18" loading="lazy"><span class="tag">P18</span></div><div class="cap"><b>WIDE — THE DEAL.</b> The duo leaves together, walking toward a new path. <i>*FADING CONVERSATION + CITY HUM*</i> <i>(5s)</i></div></div>
+    </div>
+
+    <div class="ah rev"><h3>Act 2 · The Infiltration</h3><span>P19–P27 · night market → vault door</span></div>
+    <div class="board">
+      <div class="tile rev" data-i="18"><div class="imgw"><img src="panels/p19.jpg" alt="P19" loading="lazy"><span class="tag">P19</span></div><div class="cap"><b>POV — AR INTERFACE.</b> Sarah's HUD: code extraction in progress. <i>TARGET: CODE [X]</i> <i>(2.5s)</i></div></div>
+      <div class="tile rev d1" data-i="19"><div class="imgw"><img src="panels/p20.jpg" alt="P20" loading="lazy"><span class="tag">P20</span></div><div class="cap"><b>TRACKING — NIGHT MARKET.</b> Through the crowd: food stalls, intense neon. <i>(4s)</i></div></div>
+      <div class="tile rev d2" data-i="20"><div class="imgw"><img src="panels/p21.jpg" alt="P21" loading="lazy"><span class="tag">P21</span></div><div class="cap"><b>CLOSE-UP — SPIKE.</b> Signal check: <i>"It's close."</i> Red and green light play. <i>*BEEP BEEP*</i> <i>(2s)</i></div></div>
+      <div class="tile rev" data-i="21"><div class="imgw"><img src="panels/p22.jpg" alt="P22" loading="lazy"><span class="tag">P22</span></div><div class="cap"><b>OTS — SARAH.</b> The destination: a complex lock interface, visible. <i>(3s)</i></div></div>
+      <div class="tile rev d1" data-i="22"><div class="imgw"><img src="panels/p23.jpg" alt="P23" loading="lazy"><span class="tag">P23</span></div><div class="cap"><b>POV INSERT — DEVICE.</b> Spike hacks the lock. System: <i>"UNLOCKED."</i> <i>*CLICK* *UNLOCK*</i> <i>(1.5s)</i></div></div>
+      <div class="tile rev d2" data-i="23"><div class="imgw"><img src="panels/p24.jpg" alt="P24" loading="lazy"><span class="tag">P24</span></div><div class="cap"><b>REVERSE TWO-SHOT — SILHOUETTE.</b> Stepping into the new space. Cold cyan light. <i>*HISS* (door)</i> <i>(2.5s)</i></div></div>
+      <div class="tile rev" data-i="24"><div class="imgw"><img src="panels/p25.jpg" alt="P25" loading="lazy"><span class="tag">P25</span></div><div class="cap"><b>WIDE — ESTABLISHING.</b> The server room: blue and purple lights, endless racks. <i>(5s)</i></div></div>
+      <div class="tile rev d1" data-i="25"><div class="imgw"><img src="panels/p26.jpg" alt="P26" loading="lazy"><span class="tag">P26</span></div><div class="cap"><b>POV INSERT — SERVERS.</b> Initial connection. Device integrated, holographic sync. <i>(2s)</i></div></div>
+      <div class="tile rev d2" data-i="26"><div class="imgw"><img src="panels/p27.jpg" alt="P27" loading="lazy"><span class="tag">P27</span></div><div class="cap"><b>MED CLOSE-UP — SARAH'S HAND.</b> Biometric scan initiated — she primes the final transfer. <i>SCANNING…</i> <i>(3s)</i></div></div>
+    </div>
+
+    <div class="ah rev"><h3>Act 3 · The Core</h3><span>P28–P36 · server vault</span></div>
+    <div class="board">
+      <div class="tile rev" data-i="27"><div class="imgw"><img src="panels/p28.jpg" alt="P28" loading="lazy"><span class="tag">P28</span></div><div class="cap"><b>MEDIUM CLOSE-UP, BIOMETRIC INTERFACE.</b> Lock confirmation — biometric scan converts the data packet into a physical key. <i>*CLICK* *HISS*</i> (2s)</div></div>
+      <div class="tile rev d1" data-i="28"><div class="imgw"><img src="panels/p29.jpg" alt="P29" loading="lazy"><span class="tag">P29</span></div><div class="cap"><b>EXTREME CLOSE-UP, KEY INSERTION.</b> Insert shot — key physically engaged, security layers bypass. <i>*MECHANICAL UNLOCK*</i> (1.5s)</div></div>
+      <div class="tile rev d2" data-i="29"><div class="imgw"><img src="panels/p30.jpg" alt="P30" loading="lazy"><span class="tag">P30</span></div><div class="cap"><b>OVER-THE-SHOULDER, SARAH.</b> Stepping into the new space — cold green light, total silhouette. (2.5s)</div></div>
+      <div class="tile rev" data-i="30"><div class="imgw"><img src="panels/p31.jpg" alt="P31" loading="lazy"><span class="tag">P31</span></div><div class="cap"><b>WIDE ANGLE, FULL SHOT.</b> The heart of the network — central sphere activates with green light. (5s)</div></div>
+      <div class="tile rev d1" data-i="31"><div class="imgw"><img src="panels/p32.jpg" alt="P32" loading="lazy"><span class="tag">P32</span></div><div class="cap"><b>MEDIUM CLOSE-UP, SPIKE.</b> Spike checks the signal: <i>"It's close."</i> Red and green light play. (2s)</div></div>
+      <div class="tile rev d2" data-i="32"><div class="imgw"><img src="panels/p33.jpg" alt="P33" loading="lazy"><span class="tag">P33</span></div><div class="cap"><b>POV INSERT, DEVICE.</b> Initial connection — device is integrated, holographic sync. <i>*CLICK* *UNLOCK*</i> (2.5s)</div></div>
+      <div class="tile rev" data-i="33"><div class="imgw"><img src="panels/p34.jpg" alt="P34" loading="lazy"><span class="tag">P34</span></div><div class="cap"><b>WIDE SHOT, ESTABLISHING.</b> Tracking through the central node — data flows like rain. (4s)</div></div>
+      <div class="tile rev d1" data-i="34"><div class="imgw"><img src="panels/p35.jpg" alt="P35" loading="lazy"><span class="tag">P35</span></div><div class="cap"><b>MEDIUM SHOT, DUAL FOCUS.</b> The destination confirmed — time is running. Text: <i>"ACCESS GRANTED… 00:03"</i> (3s)</div></div>
+      <div class="tile rev d2" data-i="35"><div class="imgw"><img src="panels/p36.jpg" alt="P36" loading="lazy"><span class="tag">P36</span></div><div class="cap"><b>WIDE SHOT, REVERSE ANGLE.</b> The duo leaves the scene, walking towards a new path. SFX: fading conversation and city hum. (5s)</div></div>
+    </div>
+    <div class="boardnote rev">P1–P36 · 3 acts · sequence total ≈ 80s · generated in Gemini (Nano Banana) threads from the locked prompt set below</div>
+  </div>
+</section>
+
+<!-- 03 BREAKDOWN -->
 <section id="breakdown">
   <div class="wrap">
-    <div class="kick rev">02 · Shot Breakdown</div>
+    <div class="kick rev">03 · Shot Breakdown</div>
     <h2 class="rev">Panel-by-Panel</h2>
     <p class="lead rev">Shot type, story duration and sound design for each panel — exactly how the sequence was generated and timed.</p>
     <div class="tw">
     <table>
       <tr><th>Panel</th><th>Shot</th><th>Action / SFX</th><th>Time</th></tr>
-      <tr><td class="tc">P28</td><td><b>MED CLOSE-UP</b> — biometric interface</td><td>Lock confirmation. Biometric scan converts data packet into physical key. <i>*CLICK* *HISS*</i></td><td class="tc">2s</td></tr>
-      <tr><td class="tc">P29</td><td><b>EXTREME CLOSE-UP</b> — key insertion</td><td>Insert. Key physically engaged, security layers bypass. <i>*MECHANICAL UNLOCK*</i></td><td class="tc">1.5s</td></tr>
-      <tr><td class="tc">P30</td><td><b>OVER-THE-SHOULDER</b> — Sarah</td><td>Stepping into the new space. Cold green light, total silhouette.</td><td class="tc">2.5s</td></tr>
-      <tr><td class="tc">P31</td><td><b>WIDE ANGLE</b> — full shot</td><td>The heart of the network. Central sphere activates, green light.</td><td class="tc">5s</td></tr>
-      <tr><td class="tc">P32</td><td><b>MED CLOSE-UP</b> — Spike</td><td>Spike checks the signal: <i>"It's close."</i> Red/green light play on his face.</td><td class="tc">2s</td></tr>
-      <tr><td class="tc">P33</td><td><b>POV INSERT</b> — device</td><td>Initial connection, holographic sync. <i>*CLICK* *UNLOCK*</i> — "READY FOR TRANSFER 58%".</td><td class="tc">2.5s</td></tr>
-      <tr><td class="tc">P34</td><td><b>WIDE, TRACKING</b> — establishing</td><td>Tracking through the central node — data flows like rain, duo at the sphere.</td><td class="tc">4s</td></tr>
-      <tr><td class="tc">P35</td><td><b>MEDIUM, DUAL FOCUS</b> — Sarah + Spike</td><td>Destination confirmed, time is running. Screen text: <i>"ACCESS GRANTED… 00:03"</i>.</td><td class="tc">3s</td></tr>
-      <tr><td class="tc">P36</td><td><b>WIDE, REVERSE ANGLE</b> — exit</td><td>The duo leaves the scene toward a new path. SFX: fading conversation, city hum.</td><td class="tc">5s</td></tr>
+      <tr class="actrow"><td colspan="4">ACT 1 · THE TRACKING · P1–P18</td></tr>
+      <tr><td class="tc">P1</td><td><b>EXTREME WIDE</b> — crane rise</td><td>Neon city, rain; the lone detective under the signs.</td><td class="tc">4s</td></tr>
+      <tr><td class="tc">P2</td><td><b>MEDIUM</b> — tracking move</td><td>The detective at the light, coat and gun in frame.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P3</td><td><b>CLOSE-UP</b> — shallow depth</td><td>Her face against the neon; eyes locked ahead.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P4</td><td><b>ONE-POINT PERSP.</b> — alley end</td><td>Moody standing figure; wary hold-and-shake.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P5</td><td><b>HARD RIM LIGHT</b> — gun draw</td><td>Pistol drawn from under the rim light, frozen mid-fall.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P6</td><td><b>TWO-SHOT</b> — standoff</td><td>Both figures face off across the alley.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P7</td><td><b>DUTCH TILT</b> — phone</td><td>Phone raised in the rain; angle conveys unease.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P8</td><td><b>WHIP PAN</b> — action</td><td>She dives behind the dumpster; the exchange erupts.</td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P9</td><td><b>EXTREME WIDE</b> — still</td><td>Empty quiet alley — the resolution mood.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P10</td><td><b>LOW ANGLE</b> — détente</td><td>Gun lowered, breath misting. <i>*CRACKLE OF NEON* *RAINDROPS*</i></td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P11</td><td><b>INSERT</b> — artifact</td><td>Glowing magenta device in a puddle. <i>*DRIP* *DRIP*</i></td><td class="tc">1.5s</td></tr>
+      <tr><td class="tc">P12</td><td><b>OTS</b> — pickup</td><td>She picks up the object; a new figure watches, tablet glowing blue.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P13</td><td><b>POV</b> — holo interface</td><td>Artifact projects UI. <i>"SYS-LOG 0903" · *HIGH-PITCH DATA-SYNC*</i></td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P14</td><td><b>TWO-SHOT</b> — gun drawn</td><td>She spins on Character 2. <i>"You're late."</i></td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P15</td><td><b>CLOSE-UP</b> — Spike</td><td>Face split red/blue. <i>"And that thing isn't yours." · *DIGITAL STATIC*</i></td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P16</td><td><b>MEDIUM</b> — conversation</td><td>Spike's proposition: <i>"I can get you in."</i></td><td class="tc">4s</td></tr>
+      <tr><td class="tc">P17</td><td><b>INSERT</b> — verification</td><td>Hands, artifact, tablet. Text: <i>"VERIFIED."</i></td><td class="tc">1.5s</td></tr>
+      <tr><td class="tc">P18</td><td><b>WIDE</b> — exit together</td><td>The duo walks toward a new path. <i>*FADING CONVERSATION + CITY HUM*</i></td><td class="tc">5s</td></tr>
+      <tr class="actrow"><td colspan="4">ACT 2 · THE INFILTRATION · P19–P27</td></tr>
+      <tr><td class="tc">P19</td><td><b>POV</b> — AR interface</td><td>Sarah's HUD; code extraction. <i>TARGET: CODE [X]</i></td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P20</td><td><b>TRACKING</b> — night market</td><td>Crowds, food stalls, intense neon.</td><td class="tc">4s</td></tr>
+      <tr><td class="tc">P21</td><td><b>CLOSE-UP</b> — Spike</td><td>Signal check. <i>"It's close." · *BEEP BEEP*</i></td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P22</td><td><b>OTS</b> — Sarah</td><td>Destination identified; complex lock interface visible.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P23</td><td><b>POV INSERT</b> — device</td><td>Spike hacks the lock. <i>"UNLOCKED" · *CLICK* *UNLOCK*</i></td><td class="tc">1.5s</td></tr>
+      <tr><td class="tc">P24</td><td><b>REVERSE 2-SHOT</b> — silhouette</td><td>Into the new space, cold cyan light. <i>*HISS* (door)</i></td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P25</td><td><b>WIDE</b> — server room</td><td>Blue and purple lights, endless racks.</td><td class="tc">5s</td></tr>
+      <tr><td class="tc">P26</td><td><b>POV INSERT</b> — servers</td><td>Initial connection; holographic sync.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P27</td><td><b>MED CLOSE-UP</b> — Sarah's hand</td><td>Biometric scan initiated; final transfer primed. <i>SCANNING…</i></td><td class="tc">3s</td></tr>
+      <tr class="actrow"><td colspan="4">ACT 3 · THE CORE · P28–P36</td></tr>
+      <tr><td class="tc">P28</td><td><b>MED CLOSE-UP</b> — biometric interface</td><td>Lock confirmation; scan converts packet into physical key. <i>*CLICK* *HISS*</i></td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P29</td><td><b>EXTREME CLOSE-UP</b> — key insertion</td><td>Key engaged, security layers bypass. <i>*MECHANICAL UNLOCK*</i></td><td class="tc">1.5s</td></tr>
+      <tr><td class="tc">P30</td><td><b>OVER-THE-SHOULDER</b> — Sarah</td><td>Threshold; cold green light, total silhouette.</td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P31</td><td><b>WIDE ANGLE</b> — full shot</td><td>The heart of the network; central sphere activates.</td><td class="tc">5s</td></tr>
+      <tr><td class="tc">P32</td><td><b>MED CLOSE-UP</b> — Spike</td><td>Signal check. <i>"It's close."</i> Red/green light play.</td><td class="tc">2s</td></tr>
+      <tr><td class="tc">P33</td><td><b>POV INSERT</b> — device</td><td>Holographic sync. <i>*CLICK* *UNLOCK* — "READY FOR TRANSFER 58%"</i></td><td class="tc">2.5s</td></tr>
+      <tr><td class="tc">P34</td><td><b>WIDE, TRACKING</b> — establishing</td><td>Through the central node — data flows like rain.</td><td class="tc">4s</td></tr>
+      <tr><td class="tc">P35</td><td><b>MEDIUM, DUAL FOCUS</b> — duo</td><td>Time running out. Screen text: <i>"ACCESS GRANTED… 00:03"</i>.</td><td class="tc">3s</td></tr>
+      <tr><td class="tc">P36</td><td><b>WIDE, REVERSE ANGLE</b> — exit</td><td>The duo leaves toward a new path. SFX: fading conversation, city hum.</td><td class="tc">5s</td></tr>
     </table>
     </div>
   </div>
 </section>
 
-<!-- 03 PROMPTS -->
+<!-- 04 PROMPTS -->
 <section id="prompts">
   <div class="wrap">
-    <div class="kick rev">03 · AI Image Prompts</div>
+    <div class="kick rev">04 · AI Image Prompts</div>
     <h2 class="rev">Locked Prompt Set</h2>
     <p class="lead rev">Same discipline as Same Bread: four locked blocks — style, two character locks, location — then the shot. Every panel generated from these; paste-ready.</p>
     <div class="locks rev">
-      <div class="lock"><h4>SARAH — CHARACTER LOCK</h4><p>Early 30s woman, black bob with straight bangs, clear glasses, long camel trench coat over dark turtleneck, black gloves, calm focused expression, carries a slim tablet device.</p></div>
+      <div class="lock"><h4>SARAH — CHARACTER LOCK</h4><p>Woman detective, mid-30s, black bob with straight bangs, clear glasses, long camel trench coat over dark turtleneck, black gloves, calm focused expression, carries a slim tablet device.</p></div>
       <div class="lock"><h4>SPIKE — CHARACTER LOCK</h4><p>Late 20s man, short platinum-blond undercut, dark leather-synth coat over grey hoodie, black fingerless gloves, cocky half-smile, carries a slate tablet, lean build.</p></div>
-      <div class="lock gold"><h4>LOCATION LOCK</h4><p>High-security server vault: towering black server racks with green status lights lining a long corridor, glass biometric lock panel with red/green circuit traces, central glowing green data sphere in a circular chamber, cold volumetric green haze, dark metal floor grates.</p></div>
+      <div class="lock gold"><h4>LOCATION LOCK</h4><p>Rain-soaked neon cyberpunk alleys (magenta/cyan signs), a crowded night market, and a high-security server vault: towering black racks with green status lights, glass biometric lock panel, central glowing green data sphere, cold volumetric haze.</p></div>
       <div class="lock gold"><h4>STYLE LOCK</h4><p>Comic-book storyboard style, landscape 16:9, bold ink outlines, teal-green and magenta duotone lighting, cold cyberpunk palette, cinematic composition, halftone shading. No watermark, no logo.</p></div>
     </div>
     <div class="plist">
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P1</i> — NEON CITY, CRANE RISE</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Extreme wide establishing shot, 16:9: a rain-soaked cyberpunk alley under towering magenta and cyan neon signs, a lone woman detective (camel trench coat, black bob) small in frame at street level, reflections shimmering in wet asphalt, crane-rise vertical energy. Bold ink outlines, duotone teal/magenta, halftone shading. No watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P5</i> — GUN DRAW, RIM LIGHT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[LOCATION]</span>
+Medium close-up, hard rim light: the detective's black-gloved hand drawing a pistol from under her camel coat, backlit edge glow carving her silhouette out of the rainy neon dark, frozen mid-draw at maximum tension. Bold ink outlines, duotone, halftone shading. No watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P11</i> — THE ARTIFACT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
+Insert shot: a glowing magenta artifact device lying in a wet alley puddle, neon reflections rippling around it, a single raindrop splashing off its surface, sound-effect lettering "*DRIP* *DRIP*" in white comic caps. Bold ink outlines, duotone teal/magenta, halftone shading. No watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P15</i> — SPIKE PROPER</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
+Close-up of Spike: late-20s man with short platinum-blond undercut, dark leather-synth coat, face split by red light on one side and blue on the other, cocky half-smile, neon bokeh behind. Bold ink outlines, duotone red/blue, halftone shading. No watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P20</i> — NIGHT MARKET</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
+Tracking shot through a crowded cyberpunk night market: food-stall steam, hanging neon signs in magenta and cyan, Sarah (camel coat, black bob) and Spike (platinum undercut, tablet) pushing through the crowd, motion energy in the framing. Bold ink outlines, duotone, halftone shading. No watermark.</div></div>
+      <div class="pcard rev"><div class="phead"><span class="pt"><i>P24</i> — THE THRESHOLD</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
+Reverse two-shot, full silhouettes: Sarah and Spike framed in an open vault doorway, stepping from warm neon into cold cyan light, sound-effect lettering "*HISS*" for the door, dramatic rim outlines on both figures. Bold ink outlines, duotone, halftone. No watermark.</div></div>
       <div class="pcard rev"><div class="phead"><span class="pt"><i>P28</i> — BIOMETRIC LOCK</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
 Extreme graphic-novel panel, 16:9: biometric lock interface — a physical key materializing from a horizontal beam of teal light inside a dark wall panel, sound-effect lettering "*CLICK*" and "*HISS*" in white comic caps, bold ink outlines, teal-green and magenta duotone, halftone shading. No watermark.</div></div>
-      <div class="pcard rev"><div class="phead"><span class="pt"><i>P29</i> — KEY INSERTION</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[LOCATION]</span>
-Extreme close-up insert, 16:9: a black-gloved hand inserting a physical key into a mechanical lock set in a dark metal panel with red and green circuit traces, warm security LEDs, "*MECHANICAL UNLOCK*" energy, bold ink outlines, duotone teal/magenta, halftone shading. No watermark.</div></div>
-      <div class="pcard rev"><div class="phead"><span class="pt"><i>P30</i> — THRESHOLD</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[LOCATION]</span>
-Over-the-shoulder from behind Sarah (black bob, glasses, camel coat — near foreground silhouette right of frame): she steps through an open vault door into the server vault, total silhouette against cold green light, tower racks receding down the corridor. Bold ink outlines, duotone, halftone. No watermark.</div></div>
       <div class="pcard rev"><div class="phead"><span class="pt"><i>P31</i> — THE CORE</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
 Wide-angle full shot, 16:9: the heart of the network — Sarah and Spike as small figures at the end of a symmetrical corridor of towering black server racks with green status lights, a huge glowing green central sphere activating ahead of them, volumetric green haze, dark reflective floor. Bold ink outlines, duotone, halftone. No watermark.</div></div>
-      <div class="pcard rev"><div class="phead"><span class="pt"><i>P32</i> — SIGNAL CHECK</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
-Medium close-up of Spike checking his tablet: short platinum-blond undercut, dark coat, red and green light playing across his face from the device, faint smirk — "It's close." Rack lights bokeh behind. Bold ink outlines, duotone teal/magenta, halftone. No watermark.</div></div>
-      <div class="pcard rev"><div class="phead"><span class="pt"><i>P33</i> — DEVICE SYNC</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[LOCATION]</span>
-POV insert of a tablet device in gloved hands: holographic teal wireframe polyhedron spinning above the screen, text "READY FOR TRANSFER… 58%" glowing on the glass, "*CLICK* *UNLOCK*" lettering in white comic caps, green rack glow around the frame edges. Bold ink outlines, duotone, halftone. No watermark.</div></div>
-      <div class="pcard rev"><div class="phead"><span class="pt"><i>P34</i> — DATA RAIN</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
-Wide establishing shot inside the circular core chamber: Sarah and Spike standing before a giant translucent green data-sphere while streams of glowing code rain down the surrounding walls, one hooded silhouette of a scientist watching from a raised platform. Volumetric light, bold ink outlines, duotone, halftone. No watermark.</div></div>
       <div class="pcard rev"><div class="phead"><span class="pt"><i>P35</i> — ACCESS GRANTED</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
 Medium two-shot, dual focus: Sarah (left, black bob + glasses, pointing at a wall display) and Spike (right, platinum undercut, reading his tablet) — the display shows a progress bar and the text "ACCESS GRANTED… 00:03" in glowing teal, magenta accent light from the left. Bold ink outlines, duotone, halftone. No watermark.</div></div>
       <div class="pcard rev"><div class="phead"><span class="pt"><i>P36</i> — EXIT</span><button class="copy">copy</button></div><div class="pbody"><span class="lk">[STYLE]</span> + <span class="lk">[SARAH]</span> + <span class="lk">[SPIKE]</span> + <span class="lk">[LOCATION]</span>
 Wide reverse-angle shot, 16:9: Sarah and Spike walking away down the server corridor toward a warm orange-lit exit doorway at the end, backs to camera, server racks with green lights receding behind, fading conversation and city hum implied by empty foreground. Bold ink outlines, teal/orange duotone, halftone. No watermark.</div></div>
     </div>
     <div class="locks rev" style="margin-top:22px">
-      <div class="lock"><h4>CONTINUITY DISCIPLINE</h4><p>One Gemini thread for all nine panels — Sarah's bob+glasses+camel coat and Spike's platinum undercut locked in words and re-checked on every gen; the green sphere and rack corridor kept as fixed geography; SFX lettering specified per panel so the model never invents its own.</p></div>
-      <div class="lock gold"><h4>WHAT THIS SHOWS</h4><p>A different genre (cyberpunk action), a different visual style (graphic-novel vs photoreal), same locked-prompt workflow — the loop transfers to whatever script your production brings.</p></div>
+      <div class="lock"><h4>CONTINUITY DISCIPLINE</h4><p>Gemini threads with Sarah's bob+glasses+camel coat and Spike's platinum undercut locked in words and re-checked on every gen; the artifact's magenta glow, the rain and the rack corridor kept as fixed geography; SFX lettering specified per panel so the model never invents its own. 36 panels across 4 locations with zero character drift.</p></div>
+      <div class="lock gold"><h4>WHAT THIS SHOWS</h4><p>A different genre (cyberpunk action), a different visual style (graphic-novel vs photoreal), a full three-act story arc instead of a single scene — same locked-prompt workflow at 3× the scale. The loop transfers to whatever script your production brings.</p></div>
     </div>
   </div>
 </section>
@@ -253,10 +356,10 @@ Wide reverse-angle shot, 16:9: Sarah and Spike walking away down the server corr
 
 <!-- LIGHTBOX -->
 <div id="lb" role="dialog" aria-label="Panel viewer">
-  <span class="lb-count" id="lbCount">P28 / 9</span>
+  <span class="lb-count" id="lbCount">P1 / 36</span>
   <button class="lb-x" id="lbX" aria-label="Close">✕</button>
-  <img id="lbImg" src="panels/p28.jpg" alt="Panel">
-  <div class="lb-cap" id="lbCap"><b>P28 · BIOMETRIC LOCK</b>caption</div>
+  <img id="lbImg" src="panels/p1.jpg" alt="Panel">
+  <div class="lb-cap" id="lbCap"><b>P1 · NEON CITY</b>caption</div>
   <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
   <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
 </div>
@@ -265,8 +368,35 @@ Wide reverse-angle shot, 16:9: Sarah and Spike walking away down the server corr
 (function(){
 "use strict";
 var PANELS=[
- {n:"P28",label:"BIOMETRIC LOCK",cap:"Lock confirmation — biometric scan converts the data packet into a physical key. *CLICK* *HISS* (2s)"},
- {n:"P29",label:"KEY INSERTION",cap:"Insert shot — key physically engaged, security layers bypass. *MECHANICAL UNLOCK* (1.5s)"},
+ {n:"P1",label:"NEON CITY, CRANE RISE",cap:"Neon city, rain — the lone detective under the signs. (4s)"},
+ {n:"P2",label:"TRACKING",cap:"The detective moves through the light — coat, gun, purpose. (2s)"},
+ {n:"P3",label:"CLOSE-UP",cap:"Her face against the neon: eyes on the target. (2s)"},
+ {n:"P4",label:"ONE-POINT PERSPECTIVE",cap:"A moody figure at the alley's end. Wary hold-and-shake. (3s)"},
+ {n:"P5",label:"GUN DRAW",cap:"Pistol drawn from under the rim light — frozen mid-fall. (2s)"},
+ {n:"P6",label:"STANDOFF",cap:"Both figures opposite — the standoff holds. (3s)"},
+ {n:"P7",label:"DUTCH TILT",cap:"Phone raised against the rain — unease in the angle. (2s)"},
+ {n:"P8",label:"WHIP PAN",cap:"She dives behind the dumpster — the exchange erupts. (2.5s)"},
+ {n:"P9",label:"STILLNESS",cap:"Only the empty, quiet alley is the resolution mood. (3s)"},
+ {n:"P10",label:"LOW ANGLE",cap:"Gun lowered, breath misting. *CRACKLE OF NEON* (2s)"},
+ {n:"P11",label:"THE ARTIFACT",cap:"A drop splashes off the glowing magenta device. *DRIP* (1.5s)"},
+ {n:"P12",label:"THE PICKUP",cap:"She picks the object up — a new figure watches. (3s)"},
+ {n:"P13",label:"HOLO INTERFACE",cap:"The artifact projects its UI. \"SYS-LOG 0903\" (2.5s)"},
+ {n:"P14",label:"GUN DRAWN",cap:"The detective spins. \"You're late.\" (2s)"},
+ {n:"P15",label:"SPIKE",cap:"Face split by red and blue light: \"And that thing isn't yours.\" (2.5s)"},
+ {n:"P16",label:"THE PROPOSITION",cap:"Spike: \"I can get you in.\" (4s)"},
+ {n:"P17",label:"VERIFIED",cap:"Spike holds the artifact, tablet verifies: \"VERIFIED.\" (1.5s)"},
+ {n:"P18",label:"THE DEAL",cap:"The duo leaves together toward a new path. (5s)"},
+ {n:"P19",label:"AR INTERFACE",cap:"Sarah's HUD: code extraction in progress. (2.5s)"},
+ {n:"P20",label:"NIGHT MARKET",cap:"Through the crowd: food stalls, intense neon. (4s)"},
+ {n:"P21",label:"SIGNAL CHECK",cap:"Spike: \"It's close.\" Red and green light play. (2s)"},
+ {n:"P22",label:"THE DESTINATION",cap:"The complex lock interface, visible. (3s)"},
+ {n:"P23",label:"THE HACK",cap:"Spike hacks the lock: \"UNLOCKED.\" (1.5s)"},
+ {n:"P24",label:"THRESHOLD",cap:"Silhouettes stepping into cold cyan light. (2.5s)"},
+ {n:"P25",label:"SERVER ROOM",cap:"Blue and purple lights, endless racks. (5s)"},
+ {n:"P26",label:"INITIAL CONNECTION",cap:"Device integrated, holographic sync. (2s)"},
+ {n:"P27",label:"SCANNING",cap:"Sarah primes the final transfer. \"SCANNING…\" (3s)"},
+ {n:"P28",label:"BIOMETRIC LOCK",cap:"Lock confirmation — the packet becomes a physical key. *CLICK* *HISS* (2s)"},
+ {n:"P29",label:"KEY INSERTION",cap:"Key engaged, security layers bypass. *MECHANICAL UNLOCK* (1.5s)"},
  {n:"P30",label:"THRESHOLD",cap:"Stepping into the new space — cold green light, total silhouette. (2.5s)"},
  {n:"P31",label:"THE CORE",cap:"The heart of the network — central sphere activates with green light. (5s)"},
  {n:"P32",label:"SIGNAL CHECK",cap:"Spike checks the signal: \"It's close.\" Red and green light play. (2s)"},
@@ -294,9 +424,9 @@ if("IntersectionObserver" in window){
 var lb=document.getElementById("lb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap"),lbCount=document.getElementById("lbCount"),cur=0;
 function openLb(i){
   cur=(i+PANELS.length)%PANELS.length;
-  lbImg.src="panels/p"+(28+cur)+".jpg";
+  lbImg.src="panels/p"+(cur+1)+".jpg";
   lbCap.innerHTML="<b>"+PANELS[cur].n+" · "+PANELS[cur].label+"</b> — "+PANELS[cur].cap;
-  lbCount.textContent=PANELS[cur].n+" / 9";
+  lbCount.textContent=PANELS[cur].n+" / 36";
   lb.classList.add("open");
   document.body.style.overflow="hidden";
 }
