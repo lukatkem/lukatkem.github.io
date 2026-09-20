@@ -1,0 +1,17 @@
+# Generated outputs stay out of the image.
+*.clean.txt
+*report*.md
+!README.md
+
+# Python clutter
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Repo plumbing
+.git/
+.github/
+Dockerfile
+.dockerignore

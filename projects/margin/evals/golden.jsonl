@@ -1,0 +1,70 @@
+{"id": "q001", "question": "What is the profit target for Phase 1 of the evaluation?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": ["8%"], "type": "factual"}
+{"id": "q002", "question": "What is the profit target in Phase 2?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": ["5%"], "type": "factual"}
+{"id": "q003", "question": "What is the maximum daily loss on a HydrogenProp account?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": ["5%"], "type": "factual"}
+{"id": "q004", "question": "What is the maximum total drawdown during the evaluation?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": ["10%", ["static", "fixed"]], "type": "factual"}
+{"id": "q005", "question": "How many minimum trading days do I need in each evaluation phase?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": [["3 days", "three days", "three trading days"]], "type": "factual"}
+{"id": "q006", "question": "Is there a time limit to complete the evaluation phases?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": [["30", "thirty"], ["60", "sixty"]], "type": "factual"}
+{"id": "q007", "question": "How is the daily loss limit calculated \u2014 balance or equity?", "gold_doc": "rules/03-daily-drawdown.md", "must_contain": ["equity"], "type": "factual"}
+{"id": "q008", "question": "When does the daily loss counter reset?", "gold_doc": "rules/03-daily-drawdown.md", "must_contain": ["00:00 UTC"], "type": "factual"}
+{"id": "q009", "question": "On a $50,000 account, how much can I lose in one day before failing?", "gold_doc": "rules/03-daily-drawdown.md", "must_contain": ["$2,500"], "type": "factual"}
+{"id": "q010", "question": "Can an open floating loss trigger the daily loss breach even if I haven't closed the trade?", "gold_doc": "rules/03-daily-drawdown.md", "must_contain": ["floating", "equity"], "type": "reasoning"}
+{"id": "q011", "question": "Do realized profits from earlier in the day increase my daily loss allowance?", "gold_doc": "rules/03-daily-drawdown.md", "must_contain": ["no"], "type": "reasoning"}
+{"id": "q012", "question": "What is the difference between the static drawdown in evaluation and the trailing drawdown on funded accounts?", "gold_doc": "rules/04-max-drawdown.md", "must_contain": ["static", "trailing"], "type": "reasoning"}
+{"id": "q013", "question": "After my first payout, does the trailing drawdown follow intraday peaks or end-of-day balances?", "gold_doc": "rules/04-max-drawdown.md", "must_contain": ["end-of-day"], "type": "factual"}
+{"id": "q014", "question": "What caps the trailing drawdown level after payouts on a funded account?", "gold_doc": "rules/04-max-drawdown.md", "must_contain": ["6%", "starting balance"], "type": "factual"}
+{"id": "q015", "question": "What consistency rule do I need to satisfy to pass the evaluation?", "gold_doc": "rules/05-consistency-rule.md", "must_contain": ["40%"], "type": "factual"}
+{"id": "q016", "question": "My best trading day made 56% of my total profit. Does that fail my account?", "gold_doc": "rules/05-consistency-rule.md", "must_contain": [["no", "not fail", "delay", "blocked", "withheld"]], "type": "reasoning"}
+{"id": "q017", "question": "If my total profit is $8,000 and my best day is $4,500, how much total profit do I need to satisfy the consistency rule?", "gold_doc": "rules/05-consistency-rule.md", "must_contain": ["$11,250"], "type": "math"}
+{"id": "q018", "question": "Can I trade during red-tier news events on an evaluation account?", "gold_doc": "rules/06-news-trading.md", "must_contain": ["2 minutes", "no"], "type": "factual"}
+{"id": "q019", "question": "What happens if I open a trade 1 minute before a high-impact news release on my evaluation account?", "gold_doc": "rules/06-news-trading.md", "must_contain": [["warning"], ["removed", "profit"]], "type": "reasoning"}
+{"id": "q020", "question": "Is news trading allowed on funded accounts?", "gold_doc": "rules/06-news-trading.md", "must_contain": ["yes", "funded"], "type": "factual"}
+{"id": "q021", "question": "How many news warnings does it take to fail an evaluation account?", "gold_doc": "rules/06-news-trading.md", "must_contain": ["three"], "type": "factual"}
+{"id": "q022", "question": "Can I hold positions over the weekend?", "gold_doc": "rules/07-weekend-holding.md", "must_contain": [["no", "not", "swing"], ["swing"]], "type": "factual"}
+{"id": "q023", "question": "By what time must I close positions on Friday on a standard account?", "gold_doc": "rules/07-weekend-holding.md", "must_contain": ["21:45"], "type": "factual"}
+{"id": "q024", "question": "What happens if the firm detects a weekend-held position on a non-swing account?", "gold_doc": "rules/07-weekend-holding.md", "must_contain": [["$50", "admin fee"], ["closed", "force", "forced"]], "type": "factual"}
+{"id": "q025", "question": "Is martingale trading allowed?", "gold_doc": "rules/08-prohibited-practices.md", "must_contain": [["no", "not allowed", "prohibited", "hard-prohibited", "fail"]], "type": "factual"}
+{"id": "q026", "question": "Can I copy trades from my live broker account into my evaluation?", "gold_doc": "rules/08-prohibited-practices.md", "must_contain": [["no", "not allowed", "prohibited"], ["fail", "prohibited", "violation", "hard"]], "type": "factual"}
+{"id": "q027", "question": "Can I run the same trades across multiple HydrogenProp accounts I own?", "gold_doc": "rules/08-prohibited-practices.md", "must_contain": ["internal copier", "5"], "type": "factual"}
+{"id": "q028", "question": "Can I use an expert advisor or trading bot on my account?", "gold_doc": "rules/09-expert-advisors.md", "must_contain": ["yes", "own"], "type": "factual"}
+{"id": "q029", "question": "Do I need to disclose my EA to the firm before using it?", "gold_doc": "rules/09-expert-advisors.md", "must_contain": ["register", "dashboard"], "type": "factual"}
+{"id": "q030", "question": "What counts as HFT and is it allowed?", "gold_doc": "rules/09-expert-advisors.md", "must_contain": ["800ms", "50"], "type": "factual"}
+{"id": "q031", "question": "How does the account scaling plan work?", "gold_doc": "rules/10-account-scaling.md", "must_contain": [["10%", "ten percent"], ["25%", "25", "twenty-five"]], "type": "factual"}
+{"id": "q032", "question": "How often can my funded account be scaled up?", "gold_doc": "rules/10-account-scaling.md", "must_contain": [["14 days", "14 calendar days", "two weeks", "fourteen", "every 14"]], "type": "factual"}
+{"id": "q033", "question": "A $50,000 account makes $5,000 profit. What happens to its size?", "gold_doc": "rules/10-account-scaling.md", "must_contain": ["$62,500"], "type": "math"}
+{"id": "q034", "question": "How often can I request payouts?", "gold_doc": "rules/11-payouts.md", "must_contain": ["bi-weekly", "14"], "type": "factual"}
+{"id": "q035", "question": "What is the minimum profit to request a payout on a $50k account?", "gold_doc": "rules/11-payouts.md", "must_contain": ["$500"], "type": "factual"}
+{"id": "q036", "question": "What profit split do I start on?", "gold_doc": "rules/11-payouts.md", "must_contain": ["80%"], "type": "factual"}
+{"id": "q037", "question": "How do I reach the 90% profit split?", "gold_doc": "rules/11-payouts.md", "must_contain": ["90%", "payouts"], "type": "reasoning"}
+{"id": "q038", "question": "Is there a cap on my first payout?", "gold_doc": "rules/11-payouts.md", "must_contain": ["50%"], "type": "factual"}
+{"id": "q039", "question": "What payout methods are available?", "gold_doc": "rules/12-payout-processor.md", "must_contain": ["USDC", "bank wire"], "type": "factual"}
+{"id": "q040", "question": "What is the fastest payout method and how fast is it?", "gold_doc": "rules/12-payout-processor.md", "must_contain": ["USDC", "same day"], "type": "factual"}
+{"id": "q041", "question": "Does HydrogenProp withhold taxes on payouts?", "gold_doc": "rules/12-payout-processor.md", "must_contain": ["no", "1099"], "type": "factual"}
+{"id": "q042", "question": "What KYC documents do I need before my first payout?", "gold_doc": "rules/13-kyc-aml.md", "must_contain": ["ID", "proof of address"], "type": "factual"}
+{"id": "q043", "question": "How many funded accounts can one trader hold?", "gold_doc": "rules/13-kyc-aml.md", "must_contain": ["5"], "type": "factual"}
+{"id": "q044", "question": "Is the evaluation fee refundable?", "gold_doc": "rules/14-refunds.md", "must_contain": ["first payout", "refund"], "type": "factual"}
+{"id": "q045", "question": "If I fail my evaluation, do I get a free retry?", "gold_doc": "rules/14-refunds.md", "must_contain": [["free reset", "free retry", "one free", "reset"], ["14 days", "two weeks", "14-day"]], "type": "factual"}
+{"id": "q046", "question": "What commission do I pay per round-turn lot on forex majors?", "gold_doc": "ops/15-execution-spreads.md", "must_contain": ["$6.00"], "type": "factual"}
+{"id": "q047", "question": "What is the tick value of one MNQ micro contract?", "gold_doc": "education/18-glossary-instruments.md", "must_contain": ["$0.50"], "type": "factual"}
+{"id": "q048", "question": "What is the tick value of one ES mini contract?", "gold_doc": "education/18-glossary-instruments.md", "must_contain": ["$12.50"], "type": "factual"}
+{"id": "q049", "question": "What platforms can I trade on?", "gold_doc": "ops/16-platforms.md", "must_contain": ["MT5", "cTrader"], "type": "factual"}
+{"id": "q050", "question": "Is TradingView execution available on funded accounts?", "gold_doc": "ops/16-platforms.md", "must_contain": ["no"], "type": "factual"}
+{"id": "q051", "question": "What risk per trade does the firm's risk playbook recommend?", "gold_doc": "education/17-risk-management-basics.md", "must_contain": ["0.5", "1%"], "type": "factual"}
+{"id": "q052", "question": "With a $1,000 risk and a 20-tick stop on MNQ, how many micro contracts can I trade?", "gold_doc": "education/17-risk-management-basics.md", "must_contain": ["25"], "type": "math"}
+{"id": "q053", "question": "What is the recommended personal daily stop before the firm's 5% limit?", "gold_doc": "education/17-risk-management-basics.md", "must_contain": ["2%"], "type": "factual"}
+{"id": "q054", "question": "What is swap and when is triple swap charged?", "gold_doc": "education/20-swap-overnight.md", "must_contain": [["wednesday"], ["3", "three", "triple", "3\u00d7"]], "type": "factual"}
+{"id": "q055", "question": "What happens if I break a rule on a funded account?", "gold_doc": "ops/22-breach-penalties.md", "must_contain": ["closed", "payout"], "type": "reasoning"}
+{"id": "q056", "question": "Can support override a drawdown breach?", "gold_doc": "ops/21-support-sla.md", "must_contain": [["no", "cannot", "can't", "can not", "not"], ["immutable", "override", "never", "replayable"]], "type": "factual"}
+{"id": "q057", "question": "Is there an API to read my account metrics?", "gold_doc": "ops/24-data-api-policy.md", "must_contain": [["read-only", "read only"], ["60", "rate limit", "requests/minute"]], "type": "factual"}
+{"id": "q058", "question": "Can third-party tools place orders for me?", "gold_doc": "ops/24-data-api-policy.md", "must_contain": ["no"], "type": "factual"}
+{"id": "q059", "question": "What is the no-consistency badge and what does it remove?", "gold_doc": "ops/23-upgrade-paths.md", "must_contain": [["$99", "99"], ["40%", "best-day", "consistency", "best day"]], "type": "factual"}
+{"id": "q060", "question": "What is the rollover window when spreads widen?", "gold_doc": "education/20-swap-overnight.md", "must_contain": ["21:55", "23:05"], "type": "factual"}
+{"id": "q061", "question": "What is the overnight margin for one MNQ micro contract?", "gold_doc": "education/18-glossary-instruments.md", "must_contain": ["$1,500"], "type": "factual"}
+{"id": "q062", "question": "How fast is the firm's median round-trip latency from the NY4 region?", "gold_doc": "ops/15-execution-spreads.md", "must_contain": ["12ms"], "type": "factual"}
+{"id": "q063", "question": "Can family members share payout methods between their accounts?", "gold_doc": "rules/13-kyc-aml.md", "must_contain": ["no"], "type": "factual"}
+{"id": "q064", "question": "What happens to my profit if I scale my account up?", "gold_doc": "rules/10-account-scaling.md", "must_contain": [["until", "not paid"], ["profit", "scale", "scaled"]], "type": "reasoning"}
+{"id": "q065", "question": "What is the median spread on MNQ?", "gold_doc": "ops/15-execution-spreads.md", "must_contain": ["1 tick"], "type": "factual"}
+{"id": "q066", "question": "Do limit orders get negative slippage?", "gold_doc": "ops/15-execution-spreads.md", "must_contain": ["no"], "type": "factual"}
+{"id": "q067", "question": "How many consecutive profitable payouts do I need before the split rises to 85%?", "gold_doc": "rules/01-overview.md", "must_contain": ["3"], "type": "factual"}
+{"id": "q068", "question": "What is the largest account size HydrogenProp offers?", "gold_doc": "rules/01-overview.md", "must_contain": ["$200,000"], "type": "factual"}
+{"id": "q069", "question": "Does holding a position with no activity count as a trading day?", "gold_doc": "rules/02-evaluation-phases.md", "must_contain": [["no", "does not", "doesn't", "only", "at least"], ["0.5%", "0.5"]], "type": "factual"}
+{"id": "q070", "question": "What happens if a weekend gap breaches my trailing drawdown on a swing account?", "gold_doc": "rules/07-weekend-holding.md", "must_contain": ["fail", "no gap waiver"], "type": "reasoning"}

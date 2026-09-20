@@ -1,0 +1,23 @@
+# ── secrets: never commit ──
+.env
+*.key
+secrets/
+
+# ── python ──
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# ── heavy artifacts (rebuildable, not source) ──
+projects/hydro1/checkpoints/
+projects/hydro1/corpus/*.txt
+*.db
+*.sqlite3
+uploads/
+
+# ── misc ──
+.DS_Store
+nohup.out
+*.log

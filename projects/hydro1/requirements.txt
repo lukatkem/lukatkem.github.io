@@ -1,0 +1,9 @@
+# Hydro-1 — training, serving and eval dependencies (unpinned on purpose).
+# Note: CPU wheels for torch suffice — training runs on-device and the CPU
+# index-url in the Dockerfile / CI keeps installs small (no CUDA download).
+torch
+numpy
+fastapi
+uvicorn
+httpx
+pytest

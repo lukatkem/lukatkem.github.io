@@ -1,0 +1,21 @@
+# Heavy, rebuildable artifacts and local state stay out of the image.
+checkpoints/
+corpus/*.txt
+
+# Local config and environment — never baked into an image.
+.env
+.env.*
+*.key
+
+# Python clutter
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Repo plumbing (the image only needs the package + web UI)
+.git/
+.github/
+Dockerfile
+.dockerignore

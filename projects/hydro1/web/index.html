@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hydro-1 — a GPT trained from scratch, X-rayed live</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='14' fill='%23f5a623'/><ellipse cx='32' cy='32' rx='28' ry='11' fill='none' stroke='%237aa5ff' stroke-width='3' transform='rotate(-30 32 32)'/></svg>">
+<style>
+:root {
+  --bg: #0a0b10; --panel: #12141c; --panel2: #181b26; --border: #262b3a;
+  --text: #e8eaf1; --muted: #8b93a7; --amber: #f5a623; --violet: #9b6bff;
+  --blue: #4f8cff; --green: #3ddc97; --red: #ff6b6b; --radius: 12px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--blue); text-decoration: none; }
+
+header { display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; border-bottom: 1px solid var(--border); background: var(--panel); }
+.brand { font-weight: 700; font-size: 17px; display: flex; gap: 10px; align-items: center; }
+.atom { width: 26px; height: 26px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+
+.layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 55px); }
+.col { padding: 18px; }
+
+/* left: the model talking */
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
+.panel h2 { margin: 0 0 12px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+textarea { width: 100%; min-height: 64px; background: var(--panel2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px; font: inherit; resize: vertical; }
+textarea:focus { outline: none; border-color: var(--amber); }
+.btnrow { display: flex; gap: 8px; margin-top: 10px; align-items: center; }
+button.primary { background: var(--amber); color: #111; font-weight: 700; border: none;
+  border-radius: 8px; padding: 10px 18px; cursor: pointer; }
+button.primary:disabled { opacity: .5; cursor: wait; }
+button.ghost { background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+input[type=range] { accent-color: var(--amber); flex: 1; }
+.ctl { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 13px; }
+.ctl .val { width: 44px; text-align: right; color: var(--amber); font-variant-numeric: tabular-nums; }
+.output { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px; min-height: 120px; white-space: pre-wrap; font-size: 15px; line-height: 1.6; }
+.output .cursor { display: inline-block; width: 8px; height: 16px; background: var(--amber);
+  vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.stat { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+.stat .n { font-size: 18px; font-weight: 700; color: var(--amber); }
+.stat .l { font-size: 11px; color: var(--muted); }
+
+/* right: the X-ray */
+.tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.tab { padding: 8px 14px; border-radius: 8px 8px 0 0; border: 1px solid var(--border);
+  border-bottom: none; background: var(--panel); color: var(--muted); cursor: pointer; }
+.tab.active { color: var(--text); border-color: var(--amber); }
+.xray { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+canvas { width: 100%; border-radius: 8px; display: block; }
+.heatwrap { overflow: auto; max-height: 460px; border: 1px solid var(--border); border-radius: 8px; }
+select { background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 8px; }
+.chars { font-family: ui-monospace, monospace; font-size: 13px; line-height: 2; user-select: none; }
+.chars span { padding: 2px 3px; border-radius: 4px; cursor: pointer; }
+.chars span:hover { outline: 1px solid var(--amber); }
+.probbar { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+.probbar .lbl { width: 24px; text-align: center; font-family: ui-monospace, monospace;
+  background: var(--panel2); border: 1px solid var(--border); border-radius: 4px; }
+.probbar .bar { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--violet), var(--amber)); }
+.probbar .p { font-size: 11px; color: var(--muted); width: 52px; font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+#pop { position: fixed; display: none; background: var(--panel2); border: 1px solid var(--amber);
+  border-radius: 10px; padding: 10px; width: 230px; z-index: 50; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+.notrained { padding: 60px; text-align: center; color: var(--muted); }
+
+/* academy */
+#tab-academy input { background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px; font: inherit; }
+#tab-academy input:focus { outline: none; border-color: var(--violet); }
+#tab-academy input[type=number] { width: 84px; }
+button.danger { background: transparent; color: var(--red); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.pbar { height: 10px; background: var(--panel2); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+.pbar > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--violet), var(--amber)); transition: width .6s; }
+.log { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 10px;
+  font: 11px/1.6 ui-monospace, SFMono-Regular, monospace; max-height: 190px; overflow: auto;
+  white-space: pre-wrap; color: var(--muted); margin: 10px 0 0; }
+.acstep { border-top: 1px dashed var(--border); }
+.acstep .num { color: var(--violet); font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg class="atom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="12" fill="#f5a623"/><ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="#7aa5ff" stroke-width="3" transform="rotate(-30 32 32)"/><ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="#9b6bff" stroke-width="3" transform="rotate(30 32 32)"/></svg>
+    Hydro-1 <span class="muted" style="font-weight:400;font-size:13px">a GPT trained from scratch — every weight born on this machine</span>
+  </div>
+  <nav><a href="#" id="netlink" target="_blank" rel="noopener">how transformers work ↗</a></nav>
+</header>
+
+<div class="layout" id="app">
+  <div class="col" style="border-right:1px solid var(--border)">
+    <div class="panel">
+      <h2>Make it speak</h2>
+      <textarea id="prompt">Once upon a time</textarea>
+      <div class="ctl">temperature <input type="range" id="temp" min="0.1" max="1.5" step="0.05" value="0.8"><span class="val" id="tempv">0.80</span></div>
+      <div class="ctl">top-k <input type="range" id="topk" min="1" max="60" step="1" value="40"><span class="val" id="topkv">40</span></div>
+      <div class="ctl">length <input type="range" id="len" min="50" max="600" step="10" value="250"><span class="val" id="lenv">250</span></div>
+      <div class="btnrow">
+        <button class="primary" id="gen">Generate</button>
+        <button class="ghost" id="stop">Stop</button>
+      </div>
+      <div class="output" id="output" style="margin-top:12px">Loading checkpoint…</div>
+    </div>
+    <div class="panel">
+      <h2>Training DNA</h2>
+      <canvas id="loss" width="620" height="200"></canvas>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--amber)"></span>train loss</span>
+        <span><span class="swatch" style="background:var(--violet)"></span>val loss</span>
+        <span id="steps-label" class="muted"></span>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="xray">
+      <div class="tabs">
+        <button class="tab active" data-tab="attn">Attention X-ray</button>
+        <button class="tab" data-tab="pred">Next-token brain</button>
+        <button class="tab" data-tab="arena">Arena</button>
+        <button class="tab" data-tab="academy">Academy</button>
+      </div>
+
+      <div id="tab-attn">
+        <p class="muted small">Which characters does the model look at when predicting? Pick a layer and head. Bright = strong attention. Causal mask: it can only look left.</p>
+        <div class="ctl">layer <select id="layer"></select> head <select id="head"></select>
+          <span class="muted small" style="margin-left:auto">hover the matrix</span></div>
+        <div class="heatwrap" style="margin-top:10px"><canvas id="heat" width="1200" height="620"></canvas></div>
+        <div class="legend"><span>rows = position predicting</span><span>columns = position being looked at</span></div>
+      </div>
+
+      <div id="tab-pred" style="display:none">
+        <p class="muted small">Type or edit text, press <b>Analyze</b>. Hover any character to see the model's top predictions for what comes next — its raw probability brain. Red background = high surprisal (the model was surprised).</p>
+        <textarea id="inspect-text">Once upon a time, there was a little girl named Lily.</textarea>
+        <div class="btnrow"><button class="primary" id="analyze">Analyze</button><span class="muted small" id="inspect-status"></span></div>
+        <div class="chars" id="charstrip" style="margin-top:14px"></div>
+        <div id="pop"></div>
+      </div>
+
+      <div id="tab-arena" style="display:none">
+        <p class="muted small">Same prompt → the locally-born student vs frontier teachers. Teachers run in the cloud (nothing downloads, no local VRAM); <b>Hydro-1</b> is the model this Mac trained from zero. After distillation the student closes the gap — that's the whole story of modern small models.</p>
+        <div class="btnrow">
+          <input id="arena-prompt" type="text" value="Once upon a time" style="flex:1;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px">
+          <button class="primary" id="arena-go">Run arena</button>
+        </div>
+        <div id="arena-setup" class="muted small" style="margin-top:8px"></div>
+        <div id="arena-results" style="margin-top:14px"></div>
+      </div>
+
+      <div id="tab-academy" style="display:none">
+        <p class="muted small">The school where frontier models teach Hydro-1. Paste an API key once (stored only in <code>hydro1/.env</code> on this Mac) — teachers run in the cloud, nothing downloads. Then <b>Distill</b> has them write and grade a textbook, and <b>Retrain</b> bakes it into the student. The playground hot-reloads the stronger student automatically.</p>
+
+        <div class="panel" style="margin-top:12px">
+          <h2><span class="num">1</span> · Teacher key</h2>
+          <div class="btnrow" style="flex-wrap:wrap">
+            <input id="ac-key" type="password" placeholder="paste key (sk-or-… OpenRouter · nvapi-… NVIDIA · any)" style="flex:1;min-width:220px" autocomplete="off">
+            <input id="ac-base" type="text" placeholder="https://api.z.ai/api/paas/v4" style="width:280px">
+          </div>
+          <div class="btnrow">
+            <button class="primary" id="ac-save">Save &amp; test</button>
+            <button class="ghost" id="ac-remove" style="display:none">Remove key</button>
+            <span class="muted small" id="ac-key-status"></span>
+          </div>
+          <div id="ac-probes" class="muted small" style="margin-top:6px"></div>
+        </div>
+
+        <div class="panel acstep">
+          <h2><span class="num">2</span> · Distill — the teachers write the textbook</h2>
+          <div class="btnrow">
+            <span class="muted small">stories</span>
+            <input id="ac-stories" type="number" value="200" min="5" max="500">
+            <button class="primary" id="ac-distill">Distill</button>
+            <span class="muted small" id="ac-corpus"></span>
+          </div>
+          <p class="muted small">A cloud teacher writes short children's stories, then grades its own work — only stories that pass become the student's new textbook. 200 stories ≈ 10–30 min of cloud time, cents of tokens, a few KB of text on disk.</p>
+        </div>
+
+        <div class="panel acstep">
+          <h2><span class="num">3</span> · Retrain the student on the textbook</h2>
+          <div class="btnrow">
+            <button class="primary" id="ac-train">Retrain (8000 steps ≈ 2.5 h)</button>
+            <button class="ghost" id="ac-stop">Stop job</button>
+          </div>
+          <p class="muted small">Trains on the distilled textbook only — same trainer that built the base student, nothing else changes. The moment it finishes, the Arena fields the upgraded student.</p>
+          <div id="ac-progresswrap" style="display:none;margin-top:10px">
+            <div class="pbar"><div id="ac-bar"></div></div>
+            <div class="muted small" id="ac-stage" style="margin-top:6px"></div>
+            <div class="log" id="ac-log"></div>
+          </div>
+        </div>
+
+        <div class="panel acstep">
+          <h2><span class="num">4</span> · Active student</h2>
+          <div class="btnrow">
+            <span class="muted small" id="ac-roster" style="flex:1"></span>
+            <button class="danger" id="ac-reset">Remove distilled student (back to base)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
