@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Luka Tkemaladze — All Projects</title>
+    <meta
+      name="description"
+      content="Every Luka Tkemaladze project with details — AI systems built from scratch, RAG copilots, LLM training, demo websites, content tools, automation and 3D."
+    />
+    <meta name="theme-color" content="#0C0C0C" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: #0c0c0c;
+        color: #d7e2ea;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .kanit { font-family: "Kanit", sans-serif; }
+
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+      /* ---- top bar ---- */
+      .top {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 28px 0 8px;
+      }
+      .top a.brand { color: #d7e2ea; text-decoration: none; font-weight: 600; letter-spacing: .08em; font-size: .95rem; }
+      .pill {
+        display: inline-block; text-decoration: none;
+        border: 2px solid #d7e2ea; color: #d7e2ea; border-radius: 999px;
+        padding: 10px 26px; font-weight: 500; letter-spacing: .18em;
+        text-transform: uppercase; font-size: .8rem;
+        transition: background .2s ease, color .2s ease;
+      }
+      .pill:hover { background: #d7e2ea; color: #0c0c0c; }
+
+      /* ---- giant title, same gradient treatment as the main site ---- */
+      .giant {
+        text-align: center;
+        font-family: "Kanit", sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: .95;
+        font-size: clamp(4rem, 16vw, 13rem);
+        letter-spacing: -0.01em;
+        background: linear-gradient(180deg, #f2f6f9 0%, #98a2ae 55%, #5c6672 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 40px 0 10px;
+        user-select: none;
+      }
+      .tagline {
+        text-align: center; color: #646973;
+        text-transform: uppercase; letter-spacing: .3em;
+        font-size: clamp(.7rem, 1.4vw, .85rem);
+        margin-bottom: 70px;
+      }
+
+      /* ---- cards ---- */
+      .card {
+        border: 1px solid rgba(215, 226, 234, .16);
+        border-radius: 32px;
+        background: #0c0c0c;
+        padding: clamp(28px, 5vw, 56px);
+        margin-bottom: 40px;
+        scroll-margin-top: 40px;
+      }
+      .num {
+        font-family: "Kanit", sans-serif; font-weight: 900; line-height: 1;
+        font-size: clamp(3.4rem, 8vw, 6.5rem);
+        background: linear-gradient(180deg, #f2f6f9 0%, #8b95a1 100%);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        user-select: none;
+      }
+      .cat {
+        margin-top: 14px;
+        color: #646973; text-transform: uppercase;
+        letter-spacing: .28em; font-size: .78rem; font-weight: 600;
+      }
+      .card h2 {
+        font-family: "Kanit", sans-serif; font-weight: 700;
+        color: #f2f6f9;
+        font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+        margin-top: 10px; line-height: 1.15;
+      }
+      .card p {
+        color: rgba(215, 226, 234, .6);
+        margin-top: 14px; max-width: 62ch;
+        font-size: clamp(.9rem, 1.6vw, 1.05rem);
+        line-height: 1.65;
+      }
+      .card img {
+        display: block; width: 100%; max-width: 880px;
+        border-radius: 18px; margin-top: 26px;
+        border: 1px solid rgba(215, 226, 234, .12);
+      }
+      .card .pill { margin-top: 28px; }
+
+      footer {
+        text-align: center; color: #646973;
+        padding: 40px 0 70px; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+      }
+      footer a { color: #d7e2ea; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <a class="brand" href="/">LUKA&nbsp;TKEMALADZE</a>
+        <a class="pill" href="/">← Portfolio</a>
+      </div>
+
+      <h1 class="giant kanit">Projects</h1>
+      <p class="tagline">Every project · with details</p>
+
+      <div class="card" id="p01">
+        <div class="num">01</div>
+        <div class="cat">AI System · RAG</div>
+        <h2>Rulebook Copilot</h2>
+        <p>A RAG copilot that answers only from your documents: markdown-aware chunking feeds BM25 + learned vectors, fused with reciprocal-rank fusion. Forced [n] citations on every claim, token streaming with early citations, auth, quotas and request tracing. Golden-set evaluations wired as a CI gate — 23 tests.</p>
+        <img loading="lazy" src="/img/streaming.png" alt="Rulebook Copilot streaming chat with numbered citations" />
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/margin" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p02">
+        <div class="num">02</div>
+        <div class="cat">AI System · Trained From Zero</div>
+        <h2>Hydro-1 — a GPT from scratch</h2>
+        <p>A decoder-only transformer written in ~180 lines of PyTorch — 10.7M parameters, 6 layers × 6 heads, character-level, trained on this machine. Live interpretability playground: attention heatmap per layer/head, per-character probability brain, surprisal highlighting. Academy: frontier cloud teachers (GLM 5.3, DeepSeek V4) write + grade a textbook — 168 graded stories — and the student retrains on it with one click.</p>
+        <img loading="lazy" src="/img/academy.png" alt="Hydro-1 Academy — teachers write and grade a textbook" />
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/hydro1" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p03">
+        <div class="num">03</div>
+        <div class="cat">Data Tool · Pure Stdlib</div>
+        <h2>Refinery — corpus data refinery</h2>
+        <p>Raw, dirty text in — a training-grade corpus out. MinHash + banded LSH + union-find near-duplicate detection; PII and secret scrubbing (API keys, JWTs, emails → [REDACTED]); language and quality gates with a named reason on every drop. Demo funnel: 100 dirty documents → 53 clean. Six tests, zero dependencies.</p>
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/refinery" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p04">
+        <div class="num">04</div>
+        <div class="cat">Protocol · No SDK</div>
+        <h2>MCP server from scratch</h2>
+        <p>The Model Context Protocol, hand-written: JSON-RPC 2.0 over stdio, framed and dispatched by hand — no SDK. Exposes corpus tools to any MCP client. Protocol-level checks against the spec's own examples — 14 tests, including a real subprocess handshake.</p>
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/mcpserver" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p05">
+        <div class="num">05</div>
+        <div class="cat">Infrastructure · Resilience</div>
+        <h2>Resilient LLM gateway</h2>
+        <p>One endpoint over many LLM providers — routing that degrades gracefully instead of failing loudly: ordered fallback chains, per-provider circuit breakers and token-bucket rate limits, USD budget ledger per key, live health dashboard. 15 tests on mocked transports.</p>
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/gateway" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p06">
+        <div class="num">06</div>
+        <div class="cat">Algorithm · From First Principles</div>
+        <h2>HNSW vector index</h2>
+        <p>Hierarchical navigable small-world graphs, built and searched by hand — no faiss, no vector library: multi-layer graphs, greedy descent, heuristic neighbor pruning, tombstones, JSON persistence. Benchmarked against brute-force ground truth: recall@10 = 0.996 at ef=64, 0.5 ms mean. 13 tests.</p>
+        <a class="pill" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/hnsw" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p07">
+        <div class="num">07</div>
+        <div class="cat">Web Product · Sellable Demo</div>
+        <h2>Dental Clinic Website</h2>
+        <p>Complete mobile-first marketing site: 20+ pages covering services and the first-visit flow, hand-drawn SVG logo, motion &amp; animation system, AI-generated hero video.</p>
+        <a class="pill" href="https://lukatkem.github.io/dental-sector-demo" target="_blank" rel="noreferrer">Live Site</a>
+      </div>
+
+      <div class="card" id="p08">
+        <div class="num">08</div>
+        <div class="cat">Creative AI · End-to-End</div>
+        <h2>AI Storyboard Platform</h2>
+        <p>Three complete work samples produced end-to-end: script → shot lists → AI-generated frames → final edited video — including "Phantom Protocol," a 36-panel three-act heist storyboard.</p>
+        <a class="pill" href="https://lukatkem.github.io/ai-storyboard-demo" target="_blank" rel="noreferrer">Live Site</a>
+      </div>
+
+      <div class="card" id="p09">
+        <div class="num">09</div>
+        <div class="cat">Automation Tool</div>
+        <h2>PDF → Excel Extraction</h2>
+        <p>Python pipeline that parses invoices, sales orders and multi-page business documents into clean, filtered Excel registers — with validation and custom output formatting. Live on Fiverr.</p>
+        <img loading="lazy" src="/project-pdfexcel.png" alt="PDF to Excel extraction tool" />
+        <a class="pill" href="https://www.fiverr.com/s/X0RYQzZ" target="_blank" rel="noreferrer">Live Gig</a>
+      </div>
+
+      <div class="card" id="p10">
+        <div class="num">10</div>
+        <div class="cat">Full-Stack App</div>
+        <h2>TaskFlow</h2>
+        <p>Complete task-management application: React + TypeScript + Tailwind CSS frontend, Express + TypeScript REST API with Swagger docs, SQLite database. Built end-to-end.</p>
+        <img loading="lazy" src="/project-taskflow.png" alt="TaskFlow task management application" />
+        <a class="pill" href="https://github.com/lukatkem/taskflow" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p11">
+        <div class="num">11</div>
+        <div class="cat">Research System</div>
+        <h2>Algo Trading Research</h2>
+        <p>Full-cycle research platform for futures markets: genetic-algorithm strategy evolution across 2.5 years of historical data, risk guards, real-time Streamlit dashboard and Telegram alerts.</p>
+        <img loading="lazy" src="/project-trading.png" alt="Algorithmic trading research dashboard" />
+        <a class="pill" href="https://github.com/lukatkem" target="_blank" rel="noreferrer">View Code</a>
+      </div>
+
+      <div class="card" id="p12">
+        <div class="num">12</div>
+        <div class="cat">Design</div>
+        <h2>UI/UX &amp; Brand Design</h2>
+        <p>Mobile-first interfaces, user flows and brand identities — designed in Figma from wireframe to high-fidelity, ready for developers. Includes 3D product visualization and social media graphics.</p>
+        <img loading="lazy" src="/project-design.png" alt="UI/UX and brand design work" />
+      </div>
+
+      <div class="card" id="p13">
+        <div class="num">13</div>
+        <div class="cat">AI Tool</div>
+        <h2>AI Content Assistant</h2>
+        <p>Tool that uses AI to generate, rewrite, and refine text content automatically.</p>
+      </div>
+
+      <div class="card" id="p14">
+        <div class="num">14</div>
+        <div class="cat">3D</div>
+        <h2>3D Visualization Portfolio</h2>
+        <p>Collection of modeled and rendered scenes showcasing realistic lighting and materials.</p>
+      </div>
+    </div>
+
+    <footer>
+      <a href="/">← Back to portfolio</a>
+    </footer>
+  </body>
+</html>

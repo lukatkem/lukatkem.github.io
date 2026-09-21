@@ -1,196 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Luka Tkemaladze — AI systems, built from scratch</title>
-  <meta name="description" content="Six AI engineering projects covering the full modern stack — retrieval, training, data curation, protocols, resilience — with every core algorithm implemented by hand and every project under test.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <div class="glow" aria-hidden="true"></div>
-
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>Luka&nbsp;Tkemaladze</a>
-      <nav class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="https://github.com/lukatkem" class="gh">GitHub&nbsp;↗</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top">
-
-    <!-- ─────────────────────────── hero ─────────────────────────── -->
-    <section class="hero container">
-      <p class="eyebrow">Luka Tkemaladze · AI &amp; Python developer · six builds · zero downloads</p>
-      <h1>AI systems,<br><span class="grad">built from scratch.</span></h1>
-      <p class="subline">
-        Six projects covering the full modern AI engineering stack — retrieval,
-        training, data curation, protocols, resilience — with every core
-        algorithm implemented by hand and every project under test. The code
-        lives in <a href="https://github.com/lukatkem/lukatkem.github.io">this very repository</a>.
-      </p>
-      <ul class="stats" role="list">
-        <li><strong>6</strong><span>projects</span></li>
-        <li><strong>80</strong><span>tests, all green</span></li>
-        <li><strong>6</strong><span>CI pipelines</span></li>
-        <li><strong>0</strong><span>model downloads</span></li>
-      </ul>
-    </section>
-
-    <!-- ────────────────────────── projects ────────────────────────── -->
-    <section id="projects" class="projects container">
-      <div class="section-head">
-        <h2>The projects</h2>
-        <p class="section-sub">Every algorithm lives in the repo — not behind someone else&rsquo;s API. Source for each card is one click away.</p>
-      </div>
-
-      <div class="grid">
-
-        <!-- 01 · Rulebook Copilot -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">01</span>
-            <h3>Rulebook Copilot</h3>
-          </header>
-          <p class="promise">A rulebook you can interrogate — every answer backed by a citation you can audit.</p>
-          <ul class="points" role="list">
-            <li>Markdown-aware chunking feeds BM25 + learned vectors, fused with reciprocal-rank fusion</li>
-            <li>Forced <span class="mono">[n]</span> citations — golden-set evals wired as a CI gate</li>
-            <li>Auth, quotas &amp; plans, request tracing, token streaming with early citations</li>
-            <li>Voice in and out; ships as a Docker image</li>
-          </ul>
-          <figure class="shot">
-            <img src="img/streaming.png" alt="Rulebook Copilot streaming chat UI — numbered citations with retrieval scores">
-          </figure>
-          <div class="chips">
-            <span>Python</span><span>FastAPI</span><span>RAG</span><span>BM25 + vectors</span><span>RRF</span><span>Streaming</span><span>Docker</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>23 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/margin">source&nbsp;↗</a></footer>
-        </article>
-
-        <!-- 02 · Hydro-1 -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">02</span>
-            <h3>Hydro-1 — a GPT from zero</h3>
-          </header>
-          <p class="promise">A decoder-only transformer written line-by-line and trained from random noise — on a MacBook, not in a datacenter.</p>
-          <ul class="points" role="list">
-            <li>~180 lines of PyTorch — 10.7M parameters, 6 layers × 6 heads, character-level</li>
-            <li>Live interpretability playground: attention heatmap per layer/head, per-char probability brain, surprisal highlighting</li>
-            <li>Academy: frontier cloud teachers (GLM&nbsp;5.3, DeepSeek&nbsp;V4) wrote and graded a 168-story textbook — the student retrained on it automatically, a full distillation loop with zero downloads</li>
-          </ul>
-          <figure class="shot">
-            <img src="img/academy.png" alt="Hydro-1 Academy tab — cloud teachers write and grade a textbook, then the student retrains">
-          </figure>
-          <div class="chips">
-            <span>PyTorch</span><span>Transformer</span><span>FastAPI</span><span>Interpretability</span><span>Distillation</span><span>Docker</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>9 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/hydro1">source&nbsp;↗</a></footer>
-        </article>
-
-        <!-- 03 · Refinery -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">03</span>
-            <h3>Refinery — corpus data refinery</h3>
-          </header>
-          <p class="promise">Raw, dirty text in — a training-grade corpus out.</p>
-          <ul class="points" role="list">
-            <li>MinHash + banded LSH + union-find near-duplicate detection</li>
-            <li>PII / secret scrubbing — API keys, JWTs, emails → <span class="mono">[REDACTED]</span></li>
-            <li>Language and quality gates with a named reason on every drop</li>
-            <li>Stage-by-stage funnel reports with receipts. Pure standard library.</li>
-          </ul>
-          <div class="chips">
-            <span>Python</span><span>Stdlib only</span><span>MinHash</span><span>LSH</span><span>Union-find</span><span>Data curation</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>6 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/refinery">source&nbsp;↗</a></footer>
-        </article>
-
-        <!-- 04 · MCP server -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">04</span>
-            <h3>MCP server from scratch</h3>
-          </header>
-          <p class="promise">The Model Context Protocol, hand-written — corpus tools for any MCP client.</p>
-          <ul class="points" role="list">
-            <li>JSON-RPC over stdio, framed and dispatched by hand — no SDK</li>
-            <li>initialize / tools/list / tools/call with the spec&rsquo;s error model</li>
-            <li>Protocol-level tests spawn the real server and talk to it</li>
-          </ul>
-          <div class="chips">
-            <span>JSON-RPC</span><span>stdio</span><span>MCP</span><span>Protocols</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>14 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/mcpserver">source&nbsp;↗</a></footer>
-        </article>
-
-        <!-- 05 · LLM gateway -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">05</span>
-            <h3>Resilient LLM gateway</h3>
-          </header>
-          <p class="promise">One endpoint over many providers — routing that degrades gracefully instead of failing loudly.</p>
-          <ul class="points" role="list">
-            <li>Multi-provider routing with ordered fallback chains and retries</li>
-            <li>Per-provider circuit breakers and token-bucket limits</li>
-            <li>USD budgets per key, TTL cache, live health dashboard</li>
-          </ul>
-          <div class="chips">
-            <span>FastAPI</span><span>Circuit breakers</span><span>Token bucket</span><span>Observability</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>15 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/gateway">source&nbsp;↗</a></footer>
-        </article>
-
-        <!-- 06 · HNSW -->
-        <article class="card">
-          <header class="card-head">
-            <span class="idx" aria-hidden="true">06</span>
-            <h3>HNSW vector index</h3>
-          </header>
-          <p class="promise">Hierarchical navigable small-world graphs — approximate nearest neighbors from first principles.</p>
-          <ul class="points" role="list">
-            <li>Multi-layer graph built and searched by hand — no faiss, no vector library</li>
-            <li>recall@10 = 0.996 at 0.5&nbsp;ms average query (2k vectors, dim 64) — ~4× faster than brute force</li>
-            <li>Recall / latency benchmarks against brute-force ground truth, persisted in the repo</li>
-          </ul>
-          <div class="chips">
-            <span>ANN</span><span>Graphs</span><span>HNSW</span><span>Benchmarks</span>
-          </div>
-          <footer class="card-foot"><span class="dot ok" aria-hidden="true"></span>13 tests · CI ·
-            <a class="srclink" href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/hnsw">source&nbsp;↗</a></footer>
-        </article>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- ─────────────────────────── footer ─────────────────────────── -->
-  <footer class="site-foot">
-    <div class="container">
-      <p class="creed">
-        Every weight, index, and protocol in these projects was written from first
-        principles. Zero AI model downloads — teachers and embeddings live in the cloud,
-        keys live in git-ignored env files, and every repo pass runs a secret scan.
-      </p>
-      <div class="foot-row">
-        <span class="fine">© 2026 Luka Tkemaladze · <a href="/v1/">classic site ↗</a> · pure HTML/CSS, no frameworks</span>
-        <a href="https://github.com/lukatkem" class="gh">GitHub&nbsp;↗</a>
-      </div>
-    </div>
-  </footer>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Luka Tkemaladze -- Google Ads Certified | AI & Python Developer</title>
+    <meta
+      name="description"
+      content="Luka Tkemaladze — UI/UX & graphic designer, Google Ads certified specialist, and AI & Python developer based in Tbilisi, Georgia. From product design to full working systems: design, development, and growth."
+    />
+    <meta name="theme-color" content="#0C0C0C" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lukatkem.github.io/" />
+    <meta property="og:title" content="Luka Tkemaladze -- Google Ads Certified | AI & Python Developer" />
+    <meta
+      property="og:description"
+      content="UI/UX & graphic design, Google Ads management, and AI & Python development. Based in Tbilisi, Georgia."
+    />
+    <meta property="og:image" content="https://lukatkem.github.io/head.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+    ></script>
+    <script type="module" crossorigin src="/assets/index-BhiCS4-L.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DE85XZHs.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
