@@ -47,10 +47,10 @@ export class HydroEngine {
       k: new Float32Array(this.Tmax * this.H * this.dh),
       v: new Float32Array(this.Tmax * this.H * this.dh),
     }));
-    this.pos = 0; this.ids = [];
+    this.pos = 0; this.ids = []; this.lastLogits = null;
   }
 
-  reset() { this.pos = 0; this.ids = []; }
+  reset() { this.pos = 0; this.ids = []; this.lastLogits = null; }
 
   ln(x, out, w, b) {
     let m = 0; for (let i = 0; i < this.d; i++) m += x[i]; m /= this.d;
@@ -131,6 +131,7 @@ export class HydroEngine {
       for (let i = 0; i < d; i++) s += xf[i] * this.w["tok_emb.weight"][row + i];
       logits[v] = s;
     }
+    this.lastLogits = logits;   // distribution for the NEXT token
     return logits;
   }
 
@@ -151,19 +152,32 @@ export class HydroEngine {
 // it becomes the first input of the generation loop (never feed it twice).
 export async function generate(engine, prompt, n, onChar, temperature = 0.8) {
   engine.reset();
+  await feed(engine, prompt);
+  await run(engine, n, onChar, temperature);
+}
+
+// Multi-turn: feed ONLY the new text (the KV cache already holds the earlier
+// conversation), then generate — no re-warming, no O(history) cost per message.
+export async function generateIncremental(engine, newText, n, onChar, temperature = 0.8) {
+  await feed(engine, newText);
+  await run(engine, n, onChar, temperature);
+}
+
+async function feed(engine, prompt) {
   const cs = [...prompt];
-  let tok = 0;
   for (let i = 0; i < cs.length; i++) {
-    tok = engine.stoi[cs[i]] ?? 0;
-    if (i < cs.length - 1) {
-      engine.forward(tok);
-      await new Promise(r => setTimeout(r, 0));   // keep the tab responsive
-    }
+    const tok = engine.stoi[cs[i]] ?? 0;
+    engine.forward(tok);
+    if (i % 4 === 3) await new Promise(r => setTimeout(r, 0));   // keep the tab responsive
   }
+}
+
+async function run(engine, n, onChar, temperature) {
   for (let i = 0; i < n; i++) {
-    const logits = engine.forward(tok);
-    tok = engine.sample(logits, temperature);
+    if (!engine.lastLogits) break;
+    const tok = engine.sample(engine.lastLogits, temperature);
     onChar(engine.chars[tok] ?? "");
+    engine.forward(tok);   // feeds the sampled token; its logits serve the next step
     if (i % 4 === 3) await new Promise(r => setTimeout(r, 0));
   }
 }

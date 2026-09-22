@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hydro-1 — chat with a model trained from scratch, in your browser</title>
-<meta name="description" content="Hydro-1 is a ~10.7M-parameter language model trained from scratch on a laptop. This page downloads its weights and runs the whole transformer in YOUR browser — no server, no API, nothing leaves your device.">
+<title>Hydro-1 — chat in your browser: from-scratch GPT + bring-your-own-key real AI</title>
+<meta name="description" content="Two brains, zero servers: Hydro-1 — a ~10.7M-parameter GPT trained from scratch on a laptop — runs in your browser, and you can add a real frontier model with your own free API key (it stays on your device).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -15,22 +15,24 @@
   body { background:#0c0c0c; color:#d7e2ea;
          font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
          -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
-  .kanit { font-family:"Kanit",sans-serif; }
 
   header { display:flex; justify-content:space-between; align-items:center;
            padding:14px 22px; border-bottom:1px solid rgba(215,226,234,.14); }
   .brand { font-family:"Kanit",sans-serif; font-weight:600; letter-spacing:.08em; font-size:.95rem; color:#d7e2ea; text-decoration:none; }
   .brand span { color:#646973; font-weight:400; }
-  header nav a { color:#d7e2ea; opacity:.75; text-decoration:none; margin-left:18px; font-size:.85rem; }
-  header nav a:hover { opacity:1; }
+  header nav a, header nav button { color:#d7e2ea; opacity:.75; text-decoration:none; margin-left:18px;
+    font-size:.85rem; background:none; border:none; cursor:pointer; font-family:inherit; }
+  header nav a:hover, header nav button:hover { opacity:1; }
 
   #chat { flex:1; overflow-y:auto; padding:26px 18px 12px; }
   .wrap { max-width:760px; margin:0 auto; }
   .msg { margin-bottom:18px; display:flex; }
   .msg.you { justify-content:flex-end; }
-  .bubble { max-width:82%; padding:12px 16px; border-radius:18px; line-height:1.55; font-size:.95rem; white-space:pre-wrap; }
+  .bubble { max-width:82%; padding:12px 16px; border-radius:18px; line-height:1.55;
+            font-size:.95rem; white-space:pre-wrap; }
   .msg.you .bubble { background:#d7e2ea; color:#0c0c0c; border-bottom-right-radius:6px; }
   .msg.bot .bubble { background:#15181c; border:1px solid rgba(215,226,234,.16); border-bottom-left-radius:6px; }
+  .msg.tiny .bubble { border-style:dashed; }
   .msg.bot .who, .msg.you .who { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
                                  color:#646973; margin-bottom:6px; font-family:"Kanit",sans-serif; }
   .cursor { display:inline-block; width:.55em; height:1em; background:#d7e2ea; vertical-align:-0.15em;
@@ -50,30 +52,42 @@
                 padding:0 22px; font-weight:600; cursor:pointer; font-size:.9rem; }
   button.send:disabled { opacity:.4; cursor:default; }
 
-  /* ---------- terms gate ---------- */
-  #gate { position:fixed; inset:0; background:rgba(6,6,8,.92); backdrop-filter:blur(6px);
-          display:flex; align-items:center; justify-content:center; z-index:50; padding:20px; }
-  #gate.hidden { display:none; }
-  .gate-card { max-width:560px; background:#101216; border:1px solid rgba(215,226,234,.18);
-               border-radius:24px; padding:34px 34px 28px; }
-  .gate-card h1 { font-family:"Kanit",sans-serif; font-weight:900; font-size:1.6rem;
-                  color:#f2f6f9; margin-bottom:6px; }
-  .gate-card h1 em { font-style:normal; color:#8b95a1; }
-  .gate-card .sub { color:#646973; font-size:.85rem; margin-bottom:18px; line-height:1.5; }
-  .gate-card ul { list-style:none; margin-bottom:20px; }
-  .gate-card li { font-size:.86rem; color:#a9bccb; line-height:1.5; padding:8px 0 8px 26px;
-                  border-bottom:1px solid rgba(215,226,234,.08); position:relative; }
-  .gate-card li::before { content:"→"; position:absolute; left:2px; color:#646973; }
-  .gate-card b { color:#d7e2ea; }
-  .gate-actions { display:flex; gap:12px; }
+  /* ---------- modals ---------- */
+  .modal { position:fixed; inset:0; background:rgba(6,6,8,.92); backdrop-filter:blur(6px);
+           display:flex; align-items:center; justify-content:center; z-index:50; padding:20px; }
+  .modal.hidden { display:none; }
+  .card { max-width:580px; width:100%; background:#101216; border:1px solid rgba(215,226,234,.18);
+          border-radius:24px; padding:34px 34px 28px; max-height:88vh; overflow-y:auto; }
+  .card h1 { font-family:"Kanit",sans-serif; font-weight:900; font-size:1.6rem; color:#f2f6f9; margin-bottom:6px; }
+  .card h1 em { font-style:normal; color:#8b95a1; }
+  .card .sub { color:#646973; font-size:.85rem; margin-bottom:18px; line-height:1.5; }
+  .card ul { list-style:none; margin-bottom:20px; }
+  .card li { font-size:.86rem; color:#a9bccb; line-height:1.5; padding:8px 0 8px 26px;
+             border-bottom:1px solid rgba(215,226,234,.08); position:relative; }
+  .card li::before { content:"→"; position:absolute; left:2px; color:#646973; }
+  .card b { color:#d7e2ea; }
+  .gate-actions { display:flex; gap:12px; margin-top:6px; }
   .btn { border-radius:999px; padding:12px 24px; font-size:.88rem; cursor:pointer;
-         border:2px solid #d7e2ea; text-decoration:none; text-align:center; }
+         border:2px solid #d7e2ea; text-decoration:none; text-align:center; font-family:inherit; }
   .btn.accept { background:#d7e2ea; color:#0c0c0c; font-weight:600; flex:1; }
   .btn.decline { background:none; color:#646973; border-color:rgba(215,226,234,.25); }
   #loadwrap { display:none; margin-top:18px; }
   .pbar { height:8px; border-radius:4px; background:#1b2027; overflow:hidden; }
   #loadbar { height:100%; width:0%; background:linear-gradient(90deg,#8b95a1,#f2f6f9); transition:width .2s; }
   #loadtext { font-size:.78rem; color:#646973; margin-top:8px; }
+
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+                 color:#646973; margin-bottom:6px; font-family:"Kanit",sans-serif; }
+  .field input, .field select { width:100%; background:#15181c; border:1px solid rgba(215,226,234,.25);
+          color:#d7e2ea; border-radius:12px; padding:11px 14px; font-size:.9rem; outline:none; }
+  .field input:focus { border-color:#d7e2ea; }
+  .hint { font-size:.78rem; color:#646973; line-height:1.45; margin-top:6px; }
+  .hint a { color:#8b95a1; }
+  .seg { display:flex; gap:8px; margin-bottom:16px; }
+  .seg button { flex:1; background:none; border:1px solid rgba(215,226,234,.25); color:#a9bccb;
+                border-radius:12px; padding:10px 8px; cursor:pointer; font-size:.82rem; }
+  .seg button.on { background:#d7e2ea; color:#0c0c0c; border-color:#d7e2ea; font-weight:600; }
 </style>
 </head>
 <body>
@@ -81,6 +95,7 @@
 <header>
   <a class="brand" href="/">LUKA&nbsp;TKEMALADZE <span>· hydro-1</span></a>
   <nav>
+    <button id="settingsBtn">⚙ settings</button>
     <a href="https://github.com/lukatkem/lukatkem.github.io/tree/main/projects/hydro1">source ↗</a>
     <a href="/">portfolio ↗</a>
   </nav>
@@ -96,24 +111,24 @@
 </div>
 
 <form id="f" autocomplete="off">
-  <input id="in" placeholder="Ask Hydro-1 something…" maxlength="300">
+  <input id="in" placeholder="Ask something…" maxlength="500">
   <button class="send" id="send" type="submit">Send</button>
 </form>
 
 <!-- ---------- terms gate ---------- -->
-<div id="gate">
-  <div class="gate-card">
-    <h1>Hydro-1 <em>· in your browser</em></h1>
-    <p class="sub">A language model trained from scratch — no pretrained weights, no APIs. Before it loads, the terms:</p>
+<div id="gate" class="modal">
+  <div class="card">
+    <h1>Hydro-1 <em>· two brains, zero servers</em></h1>
+    <p class="sub">Before anything loads, the terms:</p>
     <ul>
-      <li><b>It is tiny, on purpose.</b> ~10.7M parameters (ChatGPT-class models: hundreds of billions). Expect charming nonsense, spelling slips and wandering stories — not facts.</li>
-      <li><b>Everything runs on your machine.</b> The ~21&nbsp;MB of weights download once and the transformer computes locally. Your messages never leave your device — there is no server to send them to.</li>
-      <li><b>Don't type personal information.</b> It's a demo, and it wouldn't go anywhere — but build the habit.</li>
-      <li><b>Output may be wrong or odd.</b> The model is educational — it shows what a from-scratch GPT honestly looks like at this scale.</li>
+      <li><b>The tiny brain is the point.</b> Hydro-1 is a ~10.7M-parameter GPT trained from scratch on a laptop. It babbles charmingly — that's what from-scratch looks like at this scale, and it's the lesson.</li>
+      <li><b>Real answers are optional and are yours.</b> Add your own free API key (Google AI Studio or Groq — 30-second signups) and the page calls that provider directly from your browser. The key is saved in <b>your browser's local storage only</b> and is sent nowhere except the provider you chose.</li>
+      <li><b>This site has no server and collects nothing.</b> No cookies, no analytics, no backend. Your messages exist on your device.</li>
+      <li><b>Don't type personal information.</b> It's a demo — build the habit.</li>
     </ul>
     <div class="gate-actions">
       <a class="btn decline" href="/">← Back</a>
-      <button class="btn accept" id="accept">I understand — load the model</button>
+      <button class="btn accept" id="accept">I understand — continue</button>
     </div>
     <div id="loadwrap">
       <div class="pbar"><div id="loadbar"></div></div>
@@ -122,36 +137,103 @@
   </div>
 </div>
 
+<!-- ---------- settings ---------- -->
+<div id="settings" class="modal hidden">
+  <div class="card">
+    <h1>Settings</h1>
+    <div class="seg">
+      <button id="mTiny">🧠 tiny brain (Hydro-1)</button>
+      <button id="mReal">⚡ real AI (your key)</button>
+    </div>
+    <div id="realFields">
+      <div class="field">
+        <label>provider</label>
+        <select id="provider">
+          <option value="gemini">Google AI Studio (Gemini) — free tier</option>
+          <option value="groq">Groq — free tier</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>your api key — stored in this browser only</label>
+        <input id="key" type="password" placeholder="paste your key…">
+        <div class="hint">Free keys: <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> (starts with AQ. or AIza) · <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a> (starts with gsk_). The key lives in your browser's localStorage and goes only to the provider you picked.</div>
+      </div>
+      <div class="field">
+        <label>model</label>
+        <input id="model" type="text">
+      </div>
+    </div>
+    <div id="tinyNote" style="display:none" class="hint">Tiny brain mode: the from-scratch 10.7M model answers locally. Slow-ish and wonderfully confused — that's the honest artifact.</div>
+    <div class="gate-actions">
+      <button class="btn decline" id="closeSettings">close</button>
+      <button class="btn accept" id="saveSettings">save</button>
+    </div>
+  </div>
+</div>
+
 <script type="module">
 import { HydroEngine, generate } from "./engine.js";
 
-const gate = document.getElementById("gate"), log = document.getElementById("log"),
-      chat = document.getElementById("chat"), input = document.getElementById("in"),
-      send = document.getElementById("send"), chips = document.getElementById("chips");
+const $ = id => document.getElementById(id);
+const gate = $("gate"), settings = $("settings"), log = $("log"), chat = $("chat"),
+      input = $("in"), send = $("send"), chips = $("chips");
 let engine = null, busy = false;
+let cfg = JSON.parse(localStorage.getItem("hydro1-cfg") || "{}");
+cfg = { mode: "tiny", provider: "gemini", key: "", model: "", ...cfg };
 
-document.getElementById("accept").onclick = async () => {
-  document.getElementById("loadwrap").style.display = "block";
+const DEFAULTS = {
+  gemini: { model: "gemini-3.6-flash", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" },
+  groq:   { model: "openai/gpt-oss-120b", url: "https://api.groq.com/openai/v1/chat/completions" },
+};
+
+function paintMode() {
+  $("mTiny").classList.toggle("on", cfg.mode === "tiny");
+  $("mReal").classList.toggle("on", cfg.mode === "real");
+  $("realFields").style.display = cfg.mode === "real" ? "block" : "none";
+  $("tinyNote").style.display = cfg.mode === "tiny" ? "block" : "none";
+}
+$("settingsBtn").onclick = () => { paintMode(); $("key").value = cfg.key; $("model").value = cfg.model || DEFAULTS[cfg.provider].model; settings.classList.remove("hidden"); };
+$("closeSettings").onclick = () => settings.classList.add("hidden");
+$("mTiny").onclick = () => { cfg.mode = "tiny"; paintMode(); };
+$("mReal").onclick = () => { cfg.mode = "real"; paintMode(); };
+$("provider").onchange = () => { cfg.provider = $("provider").value; $("model").value = DEFAULTS[cfg.provider].model; };
+$("saveSettings").onclick = () => {
+  cfg.key = $("key").value.trim();
+  cfg.model = $("model").value.trim() || DEFAULTS[cfg.provider].model;
+  localStorage.setItem("hydro1-cfg", JSON.stringify(cfg));
+  settings.classList.add("hidden");
+  if (cfg.mode === "real" && !cfg.key) alert("Add your free API key first (or switch back to tiny brain).");
+};
+
+// ---------- terms gate + tiny-brain load ----------
+$("accept").onclick = async () => {
+  $("loadwrap").style.display = "block";
+  paintMode();
+  if (cfg.mode === "real" && cfg.key) { gate.classList.add("hidden"); chips.style.display = "flex"; input.focus(); return; }
   try {
-    const r = await fetch("model.json");
-    const manifest = await r.json();
-    const bin = await fetchWithProgress("model.bin", frac => {
-      document.getElementById("loadbar").style.width = (frac * 100).toFixed(1) + "%";
-      document.getElementById("loadtext").textContent =
-        "downloading weights… " + (frac * 100).toFixed(0) + "%";
+    const manifest = await (await fetch("model.json")).json();
+    const bin = await fetchWithProgress("model.bin", f => {
+      $("loadbar").style.width = (f * 100).toFixed(1) + "%";
+      $("loadtext").textContent = "downloading weights… " + (f * 100).toFixed(0) + "%";
     });
     engine = new HydroEngine(manifest, bin);
-    document.getElementById("loadtext").textContent = "ready — computed on your device";
+    $("loadtext").textContent = "ready — computed on your device";
     gate.classList.add("hidden");
     chips.style.display = "flex";
     input.focus();
-    botSay("Loaded. I am Hydro-1 — a tiny GPT trained from scratch on a laptop, " +
-           "running entirely inside your browser. Ask me about cybersecurity, " +
-           "python, how computers work — or ask for a story.");
+    if (cfg.mode === "tiny") botIntro();
+    else botSay("Real-AI mode is on with your own key — it never left your browser. " +
+      "The tiny from-scratch brain is one click away in ⚙ settings.");
   } catch (e) {
-    document.getElementById("loadtext").textContent = "could not load the model: " + e.message;
+    $("loadtext").textContent = "could not load the model: " + e.message;
   }
 };
+
+function botIntro() {
+  botSay("Loaded. I am Hydro-1 — a tiny GPT trained from scratch on a laptop, " +
+    "running entirely inside your browser. I babble. For real answers open ⚙ settings " +
+    "and add your own free key — or ask me for a story and enjoy the chaos.");
+}
 
 async function fetchWithProgress(url, onFrac) {
   const res = await fetch(url);
@@ -169,49 +251,100 @@ async function fetchWithProgress(url, onFrac) {
   return out.buffer;
 }
 
+// ---------- chat plumbing ----------
 function addMsg(cls, who, text) {
   const m = document.createElement("div"); m.className = "msg " + cls;
   m.innerHTML = `<div class="bubble"><div class="who">${who}</div><span></span></div>`;
   m.querySelector("span").textContent = text;
   log.appendChild(m); chat.scrollTop = chat.scrollHeight;
-  return m.querySelector("span");
+  return { span: m.querySelector("span"), whoEl: m.querySelector(".who") };
 }
+function botSay(text) { addMsg("bot", "hydro-1", text); }
 
-function botSay(text) { addMsg("bot", "hydro-1 · 10.7M params · in your browser", text); }
-
-document.querySelectorAll("#chips button").forEach(b => b.onclick = () => {
-  input.value = b.dataset.t; submit();
-});
-
-document.getElementById("f").onsubmit = e => { e.preventDefault(); submit(); };
-
+let tinyHist = "";   // running conversation for the char-level model
 async function submit() {
   const text = input.value.trim();
-  if (!text || busy || !engine) return;
+  if (!text || busy) return;
+  if (cfg.mode === "real" && !cfg.key) { openSettingsWithHint(); return; }
   busy = true; send.disabled = true; input.value = "";
   addMsg("you", "you", text);
-  const span = addMsg("bot", "hydro-1 · thinking…", "");
+
+  if (cfg.mode === "real") await answerReal(text);
+  else await answerTiny(text);
+  busy = false; send.disabled = false; input.focus();
+}
+
+async function answerReal(text) {
+  const d = DEFAULTS[cfg.provider];
+  const { span, whoEl } = addMsg("bot", (cfg.provider === "gemini" ? "gemini" : "groq") + " · your key · streaming", "");
   span.innerHTML = '<span class="cursor"></span>';
   const cur = span.querySelector(".cursor");
+  const hist = [...log.querySelectorAll(".bubble span")].map(s => s.textContent).slice(-6);
+  const messages = [...hist.slice(0, -1).map(t => ({ role: "assistant", content: t })),
+                    { role: "user", content: text }];
+  try {
+    const res = await fetch(d.url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + cfg.key },
+      body: JSON.stringify({ model: cfg.model || d.model, messages, stream: true, max_tokens: 700 }),
+    });
+    if (!res.ok) throw new Error((await res.text()).slice(0, 160));
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", acc = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const line of lines) {
+        const s = line.trim();
+        if (!s.startsWith("data:")) continue;
+        const payload = s.slice(5).trim();
+        if (payload === "[DONE]") continue;
+        try {
+          const delta = JSON.parse(payload).choices?.[0]?.delta?.content || "";
+          if (delta) { acc += delta; span.textContent = acc; span.appendChild(cur); chat.scrollTop = chat.scrollHeight; }
+        } catch {}
+      }
+    }
+    if (!acc) acc = "(empty response)";
+  } catch (e) {
+    acc = "⚠ " + e.message + " — check your key/model in ⚙ settings (the key never left your browser).";
+  }
+  cur.remove();
+  span.textContent = acc;
+  if (whoEl) whoEl.textContent = (cfg.provider === "gemini" ? "gemini" : "groq") + " · your key · stays in your browser";
+}
 
-  // conversation tail as context (char-level model — keep it inside 256 chars)
-  const hist = log.querySelectorAll(".bubble span");
-  let ctx = "";
-  hist.forEach(s => { ctx += s.textContent + "\n"; });
-  ctx = ctx.slice(-180);
-
+async function answerTiny(text) {
+  if (!engine) {  // tiny brain chosen after reload without weights
+    const manifest = await (await fetch("model.json")).json();
+    engine = new HydroEngine(manifest, await (await fetch("model.bin")).arrayBuffer());
+  }
+  const { span, whoEl } = addMsg("bot", "hydro-1 · thinking…", "");
+  span.innerHTML = '<span class="cursor"></span>';
+  const cur = span.querySelector(".cursor");
+  tinyHist += "\n" + text + "\n";
+  const ctx = tinyHist.slice(-170);
   let acc = "";
-  const label = span.parentElement.querySelector(".who");
-  await generate(engine, ctx + "\n", 230, c => {
+  await generate(engine, ctx, 230, c => {
     acc += c;
     span.textContent = acc;
     span.appendChild(cur);
     chat.scrollTop = chat.scrollHeight;
   }, 0.8);
   cur.remove();
-  if (label) label.textContent = "hydro-1 · 10.7M params · in your browser";
-  busy = false; send.disabled = false; input.focus();
+  tinyHist += acc;
+  span.textContent = acc;
+  whoEl.textContent = "hydro-1 · 10.7M params · in your browser";
 }
+
+function openSettingsWithHint() {
+  settings.classList.remove("hidden"); paintMode();
+}
+
+document.querySelectorAll("#chips button").forEach(b => b.onclick = () => { input.value = b.dataset.t; submit(); });
+document.getElementById("f").onsubmit = e => { e.preventDefault(); submit(); };
 </script>
 </body>
 </html>
