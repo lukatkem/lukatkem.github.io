@@ -1,0 +1,7 @@
+[project]
+name = "weightsmith"
+version = "1.0.0"
+description = "Post-training weight quantization from scratch — int8 per-tensor/row/channel with provable quality, pure stdlib"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["weightsmith/tests"]
