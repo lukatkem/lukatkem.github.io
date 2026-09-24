@@ -1,0 +1,7 @@
+[project]
+name = "promptkit"
+version = "1.0.0"
+description = "Prompts as versioned, tested code — regression suites that run offline"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
