@@ -1,0 +1,7 @@
+[project]
+name = "ctxpack"
+version = "1.0.0"
+description = "Pack maximum document value into a context window — greedy, density, and exact knapsack"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
