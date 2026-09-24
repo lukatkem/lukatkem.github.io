@@ -1,0 +1,7 @@
+[project]
+name = "gradia"
+version = "1.0.0"
+description = "Reverse-mode automatic differentiation from scratch — pure stdlib, deterministic, scalar-only"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["gradia/tests"]
