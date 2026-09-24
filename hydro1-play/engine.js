@@ -37,8 +37,19 @@ export class HydroEngine {
       const dims = []; for (let i = 0; i < ndim; i++) { dims.push(dv.getInt32(off, true)); off += 4; }
       const n = dims.reduce((a, b) => a * b, 1);
       const f32 = new Float32Array(n);
-      for (let i = 0; i < n; i++) f32[i] = f16to32(dv.getUint16(off + 2 * i, true));
-      off += 2 * n;
+      const q = manifest.tensors[name] && manifest.tensors[name].q;
+      if (q === "row8") {
+        // per-output-row int8: [f16 scales × rows][i8 data × n] — dequantize to fp32
+        const rows = dims[0], rowW = n / rows;
+        const scales = new Float32Array(rows);
+        for (let r = 0; r < rows; r++) scales[r] = f16to32(dv.getUint16(off + 2 * r, true));
+        off += 2 * rows;
+        for (let i = 0; i < n; i++) f32[i] = dv.getInt8(off + i) * scales[(i / rowW) | 0];
+        off += n;
+      } else {
+        for (let i = 0; i < n; i++) f32[i] = f16to32(dv.getUint16(off + 2 * i, true));
+        off += 2 * n;
+      }
       raw[name] = { f32, dims };
       if (onProgress) onProgress(off / binBuffer.byteLength);
     }
