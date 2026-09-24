@@ -1,0 +1,7 @@
+[project]
+name = "evalforge"
+version = "1.0.0"
+description = "Documents to golden-set eval pairs, offline and deterministic"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
