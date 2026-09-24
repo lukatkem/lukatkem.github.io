@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentcore"
+version = "1.0.0"
+description = "An LLM agent loop from first principles — tools, parsing, guards — zero dependencies, zero network."
+requires-python = ">=3.8"
+
+[tool.pytest.ini_options]
+testpaths = ["agentcore/tests"]
