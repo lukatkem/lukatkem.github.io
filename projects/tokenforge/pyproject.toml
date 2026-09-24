@@ -1,0 +1,7 @@
+[project]
+name = "tokenforge"
+version = "1.0.0"
+description = "Byte-pair encoding trained from scratch — pure stdlib, deterministic, lossless"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
