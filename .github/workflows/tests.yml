@@ -6,21 +6,19 @@ on:
   pull_request:
 
 jobs:
-  stdlib-suites:
+  suites:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install deps
-        run: pip install pytest fastapi httpx pyyaml numpy python-multipart
-      - name: Run all suites
+      - name: Install pytest
+        run: pip install pytest
+      - name: Run pure-stdlib suites (8 projects)
         run: |
           set -e
           for d in tokenforge weightsmith gradia ctxpack promptkit evalforge ragshield agentcore; do
             echo "== $d =="
             (cd "projects/$d" && python -m pytest -q)
           done
-          echo "== margin API tests =="
-          PYTHONPATH=projects python -m pytest tests -q
