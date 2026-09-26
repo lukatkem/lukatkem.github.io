@@ -20,7 +20,7 @@ jobs:
           set -e
           for d in tokenforge weightsmith gradia ctxpack promptkit evalforge ragshield agentcore; do
             echo "== $d =="
-            (cd "$d" && python -m pytest -q)
+            (cd "projects/$d" && python -m pytest -q)
           done
           echo "== margin API tests =="
           PYTHONPATH=projects python -m pytest tests -q
