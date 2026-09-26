@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install deps
-        run: pip install pytest fastapi httpx pyyaml
+        run: pip install pytest fastapi httpx pyyaml numpy
       - name: Run all suites
         run: |
           set -e
