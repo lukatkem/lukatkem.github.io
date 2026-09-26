@@ -1,0 +1,1296 @@
+{
+  "example": false,
+  "generated_at": "2026-09-26T13:42:42Z",
+  "summary": {
+    "n": 70,
+    "recall_at_5": 0.9285714285714286,
+    "precision_at_3": 0.9142857142857143,
+    "mrr": 0.7552380952380953,
+    "median_latency_ms": 7.0,
+    "answer_accuracy": 0.7857142857142857,
+    "by_type": {
+      "factual": {
+        "n": 58,
+        "recall_at_5": 0.9137931034482759,
+        "answer_accuracy": 0.7758620689655172
+      },
+      "math": {
+        "n": 3,
+        "recall_at_5": 1.0,
+        "answer_accuracy": 1.0
+      },
+      "reasoning": {
+        "n": 9,
+        "recall_at_5": 1.0,
+        "answer_accuracy": 0.7777777777777778
+      }
+    },
+    "thresholds": {
+      "recall_at_5": 0.8,
+      "answer_accuracy": 0.75
+    },
+    "passed": true
+  },
+  "results": [
+    {
+      "id": "q001",
+      "question": "What is the profit target for Phase 1 of the evaluation?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md",
+        "ops/22-breach-penalties.md",
+        "rules/14-refunds.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 44.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q002",
+      "question": "What is the profit target in Phase 2?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/02-evaluation-phases.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md",
+        "rules/02-evaluation-phases.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q003",
+      "question": "What is the maximum daily loss on a HydrogenProp account?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "rules/04-max-drawdown.md",
+        "rules/01-overview.md",
+        "rules/08-prohibited-practices.md",
+        "rules/03-daily-drawdown.md"
+      ],
+      "recall5": 0.0,
+      "precision3": 0.0,
+      "mrr": 0.0,
+      "latency_ms": 7.3,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q004",
+      "question": "What is the maximum total drawdown during the evaluation?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/04-max-drawdown.md",
+        "rules/04-max-drawdown.md",
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.3333333333333333,
+      "latency_ms": 6.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q005",
+      "question": "How many minimum trading days do I need in each evaluation phase?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md",
+        "ops/22-breach-penalties.md",
+        "rules/05-consistency-rule.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q006",
+      "question": "Is there a time limit to complete the evaluation phases?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md",
+        "rules/04-max-drawdown.md",
+        "ops/22-breach-penalties.md",
+        "ops/23-upgrade-paths.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.1,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q007",
+      "question": "How is the daily loss limit calculated \u2014 balance or equity?",
+      "gold_doc": "rules/03-daily-drawdown.md",
+      "retrieved": [
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md",
+        "education/19-glossary-trading-terms.md",
+        "rules/04-max-drawdown.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q008",
+      "question": "When does the daily loss counter reset?",
+      "gold_doc": "rules/03-daily-drawdown.md",
+      "retrieved": [
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md",
+        "rules/12-payout-processor.md",
+        "ops/22-breach-penalties.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q009",
+      "question": "On a $50,000 account, how much can I lose in one day before failing?",
+      "gold_doc": "rules/03-daily-drawdown.md",
+      "retrieved": [
+        "rules/04-max-drawdown.md",
+        "rules/01-overview.md",
+        "rules/10-account-scaling.md",
+        "rules/04-max-drawdown.md",
+        "_user/1-my-notes.md"
+      ],
+      "recall5": 0.0,
+      "precision3": 0.0,
+      "mrr": 0.0,
+      "latency_ms": 7.0,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q010",
+      "question": "Can an open floating loss trigger the daily loss breach even if I haven't closed the trade?",
+      "gold_doc": "rules/03-daily-drawdown.md",
+      "retrieved": [
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md",
+        "_user/1-my-notes.md",
+        "ops/22-breach-penalties.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q011",
+      "question": "Do realized profits from earlier in the day increase my daily loss allowance?",
+      "gold_doc": "rules/03-daily-drawdown.md",
+      "retrieved": [
+        "rules/03-daily-drawdown.md",
+        "_user/1-my-notes.md",
+        "education/19-glossary-trading-terms.md",
+        "rules/05-consistency-rule.md",
+        "rules/10-account-scaling.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q012",
+      "question": "What is the difference between the static drawdown in evaluation and the trailing drawdown on funded accounts?",
+      "gold_doc": "rules/04-max-drawdown.md",
+      "retrieved": [
+        "rules/04-max-drawdown.md",
+        "rules/04-max-drawdown.md",
+        "education/19-glossary-trading-terms.md",
+        "rules/02-evaluation-phases.md",
+        "ops/23-upgrade-paths.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q013",
+      "question": "After my first payout, does the trailing drawdown follow intraday peaks or end-of-day balances?",
+      "gold_doc": "rules/04-max-drawdown.md",
+      "retrieved": [
+        "rules/04-max-drawdown.md",
+        "education/19-glossary-trading-terms.md",
+        "rules/04-max-drawdown.md",
+        "rules/02-evaluation-phases.md",
+        "rules/11-payouts.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q014",
+      "question": "What caps the trailing drawdown level after payouts on a funded account?",
+      "gold_doc": "rules/04-max-drawdown.md",
+      "retrieved": [
+        "rules/04-max-drawdown.md",
+        "rules/04-max-drawdown.md",
+        "rules/02-evaluation-phases.md",
+        "education/19-glossary-trading-terms.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q015",
+      "question": "What consistency rule do I need to satisfy to pass the evaluation?",
+      "gold_doc": "rules/05-consistency-rule.md",
+      "retrieved": [
+        "rules/05-consistency-rule.md",
+        "education/17-risk-management-basics.md",
+        "rules/05-consistency-rule.md",
+        "rules/01-overview.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.3,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q016",
+      "question": "My best trading day made 56% of my total profit. Does that fail my account?",
+      "gold_doc": "rules/05-consistency-rule.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/05-consistency-rule.md",
+        "rules/05-consistency-rule.md",
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q017",
+      "question": "If my total profit is $8,000 and my best day is $4,500, how much total profit do I need to satisfy the consistency rule?",
+      "gold_doc": "rules/05-consistency-rule.md",
+      "retrieved": [
+        "rules/05-consistency-rule.md",
+        "_user/1-my-notes.md",
+        "rules/05-consistency-rule.md",
+        "rules/02-evaluation-phases.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 8.0,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q018",
+      "question": "Can I trade during red-tier news events on an evaluation account?",
+      "gold_doc": "rules/06-news-trading.md",
+      "retrieved": [
+        "rules/06-news-trading.md",
+        "rules/06-news-trading.md",
+        "_user/1-my-notes.md",
+        "ops/23-upgrade-paths.md",
+        "ops/23-upgrade-paths.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q019",
+      "question": "What happens if I open a trade 1 minute before a high-impact news release on my evaluation account?",
+      "gold_doc": "rules/06-news-trading.md",
+      "retrieved": [
+        "rules/06-news-trading.md",
+        "rules/06-news-trading.md",
+        "_user/1-my-notes.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q020",
+      "question": "Is news trading allowed on funded accounts?",
+      "gold_doc": "rules/06-news-trading.md",
+      "retrieved": [
+        "rules/06-news-trading.md",
+        "rules/08-prohibited-practices.md",
+        "rules/06-news-trading.md",
+        "ops/23-upgrade-paths.md",
+        "ops/23-upgrade-paths.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.5,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q021",
+      "question": "How many news warnings does it take to fail an evaluation account?",
+      "gold_doc": "rules/06-news-trading.md",
+      "retrieved": [
+        "rules/02-evaluation-phases.md",
+        "ops/22-breach-penalties.md",
+        "rules/06-news-trading.md",
+        "rules/04-max-drawdown.md",
+        "education/17-risk-management-basics.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.3333333333333333,
+      "latency_ms": 7.0,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q022",
+      "question": "Can I hold positions over the weekend?",
+      "gold_doc": "rules/07-weekend-holding.md",
+      "retrieved": [
+        "rules/07-weekend-holding.md",
+        "rules/07-weekend-holding.md",
+        "_user/1-my-notes.md",
+        "education/20-swap-overnight.md",
+        "rules/09-expert-advisors.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q023",
+      "question": "By what time must I close positions on Friday on a standard account?",
+      "gold_doc": "rules/07-weekend-holding.md",
+      "retrieved": [
+        "rules/07-weekend-holding.md",
+        "rules/07-weekend-holding.md",
+        "ops/22-breach-penalties.md",
+        "education/20-swap-overnight.md",
+        "education/20-swap-overnight.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.0,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q024",
+      "question": "What happens if the firm detects a weekend-held position on a non-swing account?",
+      "gold_doc": "rules/07-weekend-holding.md",
+      "retrieved": [
+        "rules/07-weekend-holding.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md",
+        "rules/07-weekend-holding.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q025",
+      "question": "Is martingale trading allowed?",
+      "gold_doc": "rules/08-prohibited-practices.md",
+      "retrieved": [
+        "rules/08-prohibited-practices.md",
+        "rules/06-news-trading.md",
+        "rules/08-prohibited-practices.md",
+        "rules/09-expert-advisors.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q026",
+      "question": "Can I copy trades from my live broker account into my evaluation?",
+      "gold_doc": "rules/08-prohibited-practices.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/09-expert-advisors.md",
+        "rules/08-prohibited-practices.md",
+        "ops/22-breach-penalties.md",
+        "education/17-risk-management-basics.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.3333333333333333,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q027",
+      "question": "Can I run the same trades across multiple HydrogenProp accounts I own?",
+      "gold_doc": "rules/08-prohibited-practices.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/08-prohibited-practices.md",
+        "rules/09-expert-advisors.md",
+        "rules/01-overview.md",
+        "rules/13-kyc-aml.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q028",
+      "question": "Can I use an expert advisor or trading bot on my account?",
+      "gold_doc": "rules/09-expert-advisors.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/09-expert-advisors.md",
+        "rules/09-expert-advisors.md",
+        "rules/02-evaluation-phases.md",
+        "rules/07-weekend-holding.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q029",
+      "question": "Do I need to disclose my EA to the firm before using it?",
+      "gold_doc": "rules/09-expert-advisors.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/06-news-trading.md",
+        "rules/01-overview.md",
+        "rules/13-kyc-aml.md",
+        "rules/05-consistency-rule.md"
+      ],
+      "recall5": 0.0,
+      "precision3": 0.0,
+      "mrr": 0.0,
+      "latency_ms": 7.0,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q030",
+      "question": "What counts as HFT and is it allowed?",
+      "gold_doc": "rules/09-expert-advisors.md",
+      "retrieved": [
+        "rules/09-expert-advisors.md",
+        "rules/08-prohibited-practices.md",
+        "rules/09-expert-advisors.md",
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q031",
+      "question": "How does the account scaling plan work?",
+      "gold_doc": "rules/10-account-scaling.md",
+      "retrieved": [
+        "rules/10-account-scaling.md",
+        "rules/10-account-scaling.md",
+        "rules/01-overview.md",
+        "rules/05-consistency-rule.md",
+        "rules/04-max-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.7,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q032",
+      "question": "How often can my funded account be scaled up?",
+      "gold_doc": "rules/10-account-scaling.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/10-account-scaling.md",
+        "rules/05-consistency-rule.md",
+        "rules/10-account-scaling.md",
+        "rules/04-max-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.5,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q033",
+      "question": "A $50,000 account makes $5,000 profit. What happens to its size?",
+      "gold_doc": "rules/10-account-scaling.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "rules/10-account-scaling.md",
+        "rules/04-max-drawdown.md",
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q034",
+      "question": "How often can I request payouts?",
+      "gold_doc": "rules/11-payouts.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/05-consistency-rule.md",
+        "rules/04-max-drawdown.md",
+        "ops/23-upgrade-paths.md",
+        "rules/04-max-drawdown.md"
+      ],
+      "recall5": 0.0,
+      "precision3": 0.0,
+      "mrr": 0.0,
+      "latency_ms": 6.4,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q035",
+      "question": "What is the minimum profit to request a payout on a $50k account?",
+      "gold_doc": "rules/11-payouts.md",
+      "retrieved": [
+        "rules/11-payouts.md",
+        "rules/05-consistency-rule.md",
+        "rules/01-overview.md",
+        "rules/10-account-scaling.md",
+        "rules/11-payouts.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q036",
+      "question": "What profit split do I start on?",
+      "gold_doc": "rules/11-payouts.md",
+      "retrieved": [
+        "rules/10-account-scaling.md",
+        "_user/1-my-notes.md",
+        "rules/01-overview.md",
+        "ops/24-data-api-policy.md",
+        "rules/01-overview.md"
+      ],
+      "recall5": 0.0,
+      "precision3": 0.0,
+      "mrr": 0.0,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q037",
+      "question": "How do I reach the 90% profit split?",
+      "gold_doc": "rules/11-payouts.md",
+      "retrieved": [
+        "rules/10-account-scaling.md",
+        "rules/11-payouts.md",
+        "rules/01-overview.md",
+        "_user/1-my-notes.md",
+        "rules/01-overview.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.6,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q038",
+      "question": "Is there a cap on my first payout?",
+      "gold_doc": "rules/11-payouts.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/11-payouts.md",
+        "rules/05-consistency-rule.md",
+        "rules/01-overview.md",
+        "rules/14-refunds.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q039",
+      "question": "What payout methods are available?",
+      "gold_doc": "rules/12-payout-processor.md",
+      "retrieved": [
+        "rules/12-payout-processor.md",
+        "rules/12-payout-processor.md",
+        "ops/22-breach-penalties.md",
+        "rules/07-weekend-holding.md",
+        "rules/01-overview.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q040",
+      "question": "What is the fastest payout method and how fast is it?",
+      "gold_doc": "rules/12-payout-processor.md",
+      "retrieved": [
+        "rules/05-consistency-rule.md",
+        "rules/12-payout-processor.md",
+        "rules/12-payout-processor.md",
+        "rules/04-max-drawdown.md",
+        "rules/03-daily-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q041",
+      "question": "Does HydrogenProp withhold taxes on payouts?",
+      "gold_doc": "rules/12-payout-processor.md",
+      "retrieved": [
+        "rules/12-payout-processor.md",
+        "rules/01-overview.md",
+        "rules/01-overview.md",
+        "ops/24-data-api-policy.md",
+        "rules/02-evaluation-phases.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q042",
+      "question": "What KYC documents do I need before my first payout?",
+      "gold_doc": "rules/13-kyc-aml.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/13-kyc-aml.md",
+        "rules/13-kyc-aml.md",
+        "ops/23-upgrade-paths.md",
+        "ops/24-data-api-policy.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.7,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q043",
+      "question": "How many funded accounts can one trader hold?",
+      "gold_doc": "rules/13-kyc-aml.md",
+      "retrieved": [
+        "rules/13-kyc-aml.md",
+        "rules/01-overview.md",
+        "rules/07-weekend-holding.md",
+        "rules/07-weekend-holding.md",
+        "rules/05-consistency-rule.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q044",
+      "question": "Is the evaluation fee refundable?",
+      "gold_doc": "rules/14-refunds.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "rules/14-refunds.md",
+        "ops/22-breach-penalties.md",
+        "rules/07-weekend-holding.md",
+        "rules/01-overview.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.4,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q045",
+      "question": "If I fail my evaluation, do I get a free retry?",
+      "gold_doc": "rules/14-refunds.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "rules/14-refunds.md",
+        "ops/22-breach-penalties.md",
+        "rules/14-refunds.md",
+        "rules/06-news-trading.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q046",
+      "question": "What commission do I pay per round-turn lot on forex majors?",
+      "gold_doc": "ops/15-execution-spreads.md",
+      "retrieved": [
+        "ops/15-execution-spreads.md",
+        "education/19-glossary-trading-terms.md",
+        "education/18-glossary-instruments.md",
+        "_user/1-my-notes.md",
+        "education/20-swap-overnight.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q047",
+      "question": "What is the tick value of one MNQ micro contract?",
+      "gold_doc": "education/18-glossary-instruments.md",
+      "retrieved": [
+        "education/18-glossary-instruments.md",
+        "education/17-risk-management-basics.md",
+        "education/18-glossary-instruments.md",
+        "education/20-swap-overnight.md",
+        "ops/15-execution-spreads.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.9,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q048",
+      "question": "What is the tick value of one ES mini contract?",
+      "gold_doc": "education/18-glossary-instruments.md",
+      "retrieved": [
+        "education/18-glossary-instruments.md",
+        "education/18-glossary-instruments.md",
+        "ops/15-execution-spreads.md",
+        "education/17-risk-management-basics.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q049",
+      "question": "What platforms can I trade on?",
+      "gold_doc": "ops/16-platforms.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md",
+        "ops/21-support-sla.md",
+        "ops/16-platforms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 0.0,
+      "mrr": 0.2,
+      "latency_ms": 6.4,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q050",
+      "question": "Is TradingView execution available on funded accounts?",
+      "gold_doc": "ops/16-platforms.md",
+      "retrieved": [
+        "ops/16-platforms.md",
+        "rules/07-weekend-holding.md",
+        "rules/10-account-scaling.md",
+        "ops/23-upgrade-paths.md",
+        "rules/06-news-trading.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q051",
+      "question": "What risk per trade does the firm's risk playbook recommend?",
+      "gold_doc": "education/17-risk-management-basics.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "education/17-risk-management-basics.md",
+        "education/17-risk-management-basics.md",
+        "rules/03-daily-drawdown.md",
+        "_user/1-my-notes.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 6.8,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q052",
+      "question": "With a $1,000 risk and a 20-tick stop on MNQ, how many micro contracts can I trade?",
+      "gold_doc": "education/17-risk-management-basics.md",
+      "retrieved": [
+        "education/17-risk-management-basics.md",
+        "education/18-glossary-instruments.md",
+        "_user/1-my-notes.md",
+        "education/18-glossary-instruments.md",
+        "rules/04-max-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q053",
+      "question": "What is the recommended personal daily stop before the firm's 5% limit?",
+      "gold_doc": "education/17-risk-management-basics.md",
+      "retrieved": [
+        "education/17-risk-management-basics.md",
+        "education/17-risk-management-basics.md",
+        "rules/03-daily-drawdown.md",
+        "_user/1-my-notes.md",
+        "ops/15-execution-spreads.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q054",
+      "question": "What is swap and when is triple swap charged?",
+      "gold_doc": "education/20-swap-overnight.md",
+      "retrieved": [
+        "education/20-swap-overnight.md",
+        "education/20-swap-overnight.md",
+        "rules/07-weekend-holding.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.0,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q055",
+      "question": "What happens if I break a rule on a funded account?",
+      "gold_doc": "ops/22-breach-penalties.md",
+      "retrieved": [
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md",
+        "rules/01-overview.md",
+        "_user/1-my-notes.md",
+        "rules/10-account-scaling.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.8,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q056",
+      "question": "Can support override a drawdown breach?",
+      "gold_doc": "ops/21-support-sla.md",
+      "retrieved": [
+        "ops/21-support-sla.md",
+        "ops/22-breach-penalties.md",
+        "rules/14-refunds.md",
+        "rules/04-max-drawdown.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 8.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q057",
+      "question": "Is there an API to read my account metrics?",
+      "gold_doc": "ops/24-data-api-policy.md",
+      "retrieved": [
+        "ops/24-data-api-policy.md",
+        "ops/24-data-api-policy.md",
+        "_user/1-my-notes.md",
+        "rules/08-prohibited-practices.md",
+        "rules/07-weekend-holding.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q058",
+      "question": "Can third-party tools place orders for me?",
+      "gold_doc": "ops/24-data-api-policy.md",
+      "retrieved": [
+        "ops/16-platforms.md",
+        "ops/24-data-api-policy.md",
+        "ops/24-data-api-policy.md",
+        "rules/13-kyc-aml.md",
+        "education/17-risk-management-basics.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 7.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q059",
+      "question": "What is the no-consistency badge and what does it remove?",
+      "gold_doc": "ops/23-upgrade-paths.md",
+      "retrieved": [
+        "ops/23-upgrade-paths.md",
+        "rules/02-evaluation-phases.md",
+        "rules/01-overview.md",
+        "ops/23-upgrade-paths.md",
+        "ops/24-data-api-policy.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 8.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q060",
+      "question": "What is the rollover window when spreads widen?",
+      "gold_doc": "education/20-swap-overnight.md",
+      "retrieved": [
+        "rules/07-weekend-holding.md",
+        "education/20-swap-overnight.md",
+        "rules/03-daily-drawdown.md",
+        "ops/22-breach-penalties.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 7.0,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q061",
+      "question": "What is the overnight margin for one MNQ micro contract?",
+      "gold_doc": "education/18-glossary-instruments.md",
+      "retrieved": [
+        "education/20-swap-overnight.md",
+        "education/18-glossary-instruments.md",
+        "education/18-glossary-instruments.md",
+        "rules/01-overview.md",
+        "education/17-risk-management-basics.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.5,
+      "latency_ms": 7.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q062",
+      "question": "How fast is the firm's median round-trip latency from the NY4 region?",
+      "gold_doc": "ops/15-execution-spreads.md",
+      "retrieved": [
+        "ops/15-execution-spreads.md",
+        "ops/16-platforms.md",
+        "rules/09-expert-advisors.md",
+        "ops/23-upgrade-paths.md",
+        "rules/06-news-trading.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.5,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q063",
+      "question": "Can family members share payout methods between their accounts?",
+      "gold_doc": "rules/13-kyc-aml.md",
+      "retrieved": [
+        "rules/13-kyc-aml.md",
+        "rules/12-payout-processor.md",
+        "rules/12-payout-processor.md",
+        "rules/06-news-trading.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.3,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q064",
+      "question": "What happens to my profit if I scale my account up?",
+      "gold_doc": "rules/10-account-scaling.md",
+      "retrieved": [
+        "_user/1-my-notes.md",
+        "ops/22-breach-penalties.md",
+        "rules/10-account-scaling.md",
+        "rules/08-prohibited-practices.md",
+        "ops/22-breach-penalties.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.3333333333333333,
+      "latency_ms": 7.3,
+      "answer_hit": 0.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q065",
+      "question": "What is the median spread on MNQ?",
+      "gold_doc": "ops/15-execution-spreads.md",
+      "retrieved": [
+        "ops/15-execution-spreads.md",
+        "ops/15-execution-spreads.md",
+        "education/18-glossary-instruments.md",
+        "education/18-glossary-instruments.md",
+        "ops/16-platforms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.1,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q066",
+      "question": "Do limit orders get negative slippage?",
+      "gold_doc": "ops/15-execution-spreads.md",
+      "retrieved": [
+        "rules/06-news-trading.md",
+        "education/19-glossary-trading-terms.md",
+        "ops/15-execution-spreads.md",
+        "ops/24-data-api-policy.md",
+        "ops/16-platforms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 0.3333333333333333,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q067",
+      "question": "How many consecutive profitable payouts do I need before the split rises to 85%?",
+      "gold_doc": "rules/01-overview.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "rules/11-payouts.md",
+        "rules/10-account-scaling.md",
+        "rules/06-news-trading.md",
+        "_user/1-my-notes.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q068",
+      "question": "What is the largest account size HydrogenProp offers?",
+      "gold_doc": "rules/01-overview.md",
+      "retrieved": [
+        "rules/01-overview.md",
+        "rules/08-prohibited-practices.md",
+        "rules/01-overview.md",
+        "rules/08-prohibited-practices.md",
+        "rules/07-weekend-holding.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 6.7,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q069",
+      "question": "Does holding a position with no activity count as a trading day?",
+      "gold_doc": "rules/02-evaluation-phases.md",
+      "retrieved": [
+        "rules/02-evaluation-phases.md",
+        "rules/07-weekend-holding.md",
+        "rules/03-daily-drawdown.md",
+        "rules/03-daily-drawdown.md",
+        "education/19-glossary-trading-terms.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.3,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    },
+    {
+      "id": "q070",
+      "question": "What happens if a weekend gap breaches my trailing drawdown on a swing account?",
+      "gold_doc": "rules/07-weekend-holding.md",
+      "retrieved": [
+        "rules/07-weekend-holding.md",
+        "ops/22-breach-penalties.md",
+        "ops/22-breach-penalties.md",
+        "rules/07-weekend-holding.md",
+        "rules/03-daily-drawdown.md"
+      ],
+      "recall5": 1.0,
+      "precision3": 1.0,
+      "mrr": 1.0,
+      "latency_ms": 7.2,
+      "answer_hit": 1.0,
+      "model": "extractive"
+    }
+  ]
+}
