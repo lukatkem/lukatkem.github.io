@@ -13,14 +13,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest
-      - name: Pure-stdlib suites + API tests
+      - name: Install deps
+        run: pip install pytest fastapi httpx pyyaml
+      - name: Run all suites
         run: |
-          pip install pytest
-          fails=0
+          set -e
           for d in tokenforge weightsmith gradia ctxpack promptkit evalforge ragshield agentcore; do
             echo "== $d =="
-            (cd "$d" && python -m pytest -q) || fails=1
+            (cd "$d" && python -m pytest -q)
           done
-          python -m pytest tests -q || fails=1
-          exit $fails
+          echo "== margin API tests =="
+          PYTHONPATH=projects python -m pytest tests -q
