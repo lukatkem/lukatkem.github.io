@@ -90,7 +90,8 @@ def _extractive(question: str, hits: list[Hit]) -> str:
     lines = ["I couldn't reach a local LLM, so here are the most relevant rulebook passages:"]
     for i, h in enumerate(hits[:3], 1):
         snippet = h.text[:400].replace("\n", " ")
-        lines.append(f"[{i}] {h.label}: {snippet}…")
+        label = " — ".join(x for x in (h.title, h.heading) if x) or h.doc
+        lines.append(f"[{i}] {label}: {snippet}…")
     return "\n\n".join(lines)
 
 

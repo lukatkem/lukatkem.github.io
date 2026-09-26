@@ -27,6 +27,7 @@ LangChain. FastAPI + a standard library core.
 | `POST /api/chat` | Ask the rulebook (auth + plan quotas enforced) |
 | `POST /api/chat/stream` | Same, as a torn-packet-safe NDJSON stream |
 | `POST /api/ingest` | Rebuild the index from the corpus directory |
+| `GET /api/evals` | Latest golden-set eval report as JSON (auth required) |
 | `GET /api/health` | Index size, embedder, LLM, billing status |
 | `/` | Web UI: streaming chat with numbered, scored citations |
 
@@ -46,7 +47,26 @@ make eval            # retrieval + answer quality report
 Docker: `docker build -t margin-copilot . && docker run -p 8000:8000 margin-copilot`
 (fly.toml included for Fly.io).
 
-## Tests — 23, all offline
+## Evaluations
+
+`evals/golden.jsonl` (repo root) holds the golden set — 70 prop-firm questions,
+each with a gold document and the exact strings a correct answer must contain.
+`make eval` runs `margin.evals` over the set and exits non-zero when recall@5
+or answer accuracy fall below threshold (80% / 75% by default), which blocks
+the PR in CI.
+
+A run produces two report files:
+
+- `evals/report.md` — human-readable scorecard: metrics, per-type breakdown,
+  failing questions.
+- `margin/evals/report.json` — structured snapshot (`example`, `generated_at`,
+  `summary`, per-question `results`) written by `evals.save_report()` and
+  served by `GET /api/evals` (auth required; 404 with "run make eval first"
+  if absent). A committed `"example": true` snapshot ships with the app so
+  the endpoint works out of the box; the next real run replaces it with
+  `"example": false`.
+
+## Tests — 26, all offline
 
 ```bash
 python -m pytest tests tests_root -q     # when run from a checkout with tests_root

@@ -18,7 +18,7 @@ import time
 from collections import defaultdict
 from pathlib import Path
 
-from .config import EVAL_ANSWER_THRESHOLD, EVAL_RECALL_THRESHOLD, GOLDEN_PATH
+from .config import EVAL_ANSWER_THRESHOLD, EVAL_RECALL_THRESHOLD, EVALS_REPORT_PATH, GOLDEN_PATH
 from .generate import answer
 from .retrieve import Retriever
 
@@ -144,6 +144,24 @@ def write_report(report: dict, path: Path) -> None:
     path.write_text("\n".join(lines) + "\n")
 
 
+def save_report(report: dict) -> Path:
+    """Persist the structured run report for GET /api/evals.
+
+    Writes {example: false, generated_at, summary, results} to
+    margin/evals/report.json (EVALS_REPORT_PATH). The human-readable markdown
+    report written by write_report()/--report is unaffected — call both from
+    main() to get the full pair.
+    """
+    payload = {
+        "example": False,
+        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        **report,
+    }
+    EVALS_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    EVALS_REPORT_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    return EVALS_REPORT_PATH
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Margin eval harness")
     ap.add_argument("--retrieval-only", action="store_true", help="skip LLM answer grading (fast, deterministic — CI mode)")
@@ -155,6 +173,8 @@ def main() -> None:
     report = run(retrieval_only=args.retrieval_only, limit=args.limit, verbose=not args.quiet)
     s = report["summary"]
     print(json.dumps({k: v for k, v in s.items() if k != "by_type"}, indent=2))
+    json_path = save_report(report)  # structured snapshot → GET /api/evals
+    print(f"json report → {json_path}")
     if args.report:
         write_report(report, Path(args.report))
         print(f"report → {args.report}")

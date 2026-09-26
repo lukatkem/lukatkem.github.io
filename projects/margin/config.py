@@ -24,6 +24,11 @@ RRF_K = int(os.environ.get("MARGIN_RRF_K", "60"))
 # Evals — CI gate
 EVAL_RECALL_THRESHOLD = float(os.environ.get("MARGIN_EVAL_RECALL", "0.80"))
 EVAL_ANSWER_THRESHOLD = float(os.environ.get("MARGIN_EVAL_ANSWER", "0.75"))
+# Structured eval snapshot served by GET /api/evals (written by save_report;
+# lives inside the margin package so it ships with the code).
+EVALS_REPORT_PATH = Path(
+    os.environ.get("MARGIN_EVAL_REPORT", Path(__file__).resolve().parent / "evals" / "report.json")
+)
 
 # SaaS plans: (monthly query quota, price_usd)
 PLANS = {

@@ -8,12 +8,14 @@ Routes:
   POST /api/auth/*        — signup/login/logout/me
   POST /api/keys          — create API key · GET /api/keys · DELETE /api/keys/{prefix}
   GET  /api/usage         — quota state
+  GET  /api/evals         — latest golden-set eval report (auth)
   POST /api/billing/*     — checkout + Stripe webhook (simulated without keys)
   GET  /admin/traces      — observability JSON (admin token)
   GET  /api/health
 """
 from __future__ import annotations
 
+import json
 import os
 import time
 from pathlib import Path
@@ -24,7 +26,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from . import auth, billing, tracing
-from .config import ADMIN_TOKEN, ANON_DAILY_LIMIT, CHAT_MODEL, CORPUS_DIR, PLANS, WEB_DIR
+from .config import ADMIN_TOKEN, ANON_DAILY_LIMIT, CHAT_MODEL, CORPUS_DIR, EVALS_REPORT_PATH, PLANS, WEB_DIR
 from .generate import answer, build_messages, ollama_available, stream_chunks
 from .ingest import MARKDOWN_EXTS
 from .retrieve import Retriever
@@ -406,6 +408,21 @@ def admin_traces(request: Request):
     if ADMIN_TOKEN and request.headers.get("x-admin-token") != ADMIN_TOKEN:
         raise HTTPException(403, "bad admin token")
     return tracing.stats()
+
+
+@app.get("/api/evals")
+def evals_report(request: Request):
+    """Latest golden-set evaluation summary, as written by `make eval`
+    (margin.evals.save_report → margin/evals/report.json)."""
+    user = _bearer_user(request) or _session_user(request)
+    if not user:
+        raise HTTPException(401, "auth required")
+    if not EVALS_REPORT_PATH.exists():
+        raise HTTPException(404, "no eval report yet — run make eval first")
+    try:
+        return json.loads(EVALS_REPORT_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        raise HTTPException(500, "eval report is unreadable — run make eval again")
 
 
 @app.get("/api/plans")
