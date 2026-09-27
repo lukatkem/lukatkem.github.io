@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>evalboard — evaluation dashboard</title>
+<style>
+:root{--bg:#0c0c0c;--panel:#12161b;--panel2:#0e1216;--border:#232b33;--text:#d7e2ea;--muted:#6d7a86;--faint:#465059;--loss:#8ab4d8;--val:#e0a458;--ok:#7fc98f;--bad:#e07f7f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:Kanit,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:300;line-height:1.55;padding:48px 20px 64px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto}
+.masthead{margin-bottom:34px}
+.brand{font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1{font-size:34px;font-weight:600;letter-spacing:-.01em;margin-top:6px}
+.sub{color:var(--muted);font-size:14px;margin-top:2px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:26px 28px;margin-bottom:24px}
+.card-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.card-head h2{font-size:22px;font-weight:600}
+.badge{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:3px 11px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-weight:500}
+.badge-rag{color:var(--loss);border-color:rgba(138,180,216,.45)}
+.badge-training{color:var(--val);border-color:rgba(224,164,88,.45)}
+.src{color:var(--faint);font-size:12.5px;margin-bottom:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile-value{font-size:26px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.tile-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.unit{font-size:14px;font-weight:500;color:var(--muted);margin-left:3px}
+.meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.pill{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:3px 12px;border-radius:999px}
+.pill-ok{color:var(--ok);border:1px solid rgba(127,201,143,.45);background:rgba(127,201,143,.08)}
+.pill-bad{color:var(--bad);border:1px solid rgba(224,127,127,.45);background:rgba(224,127,127,.08)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 11px;white-space:nowrap}
+.chip b{color:var(--text);font-weight:500}
+.chips.config{margin-top:14px}
+table.breakdown{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0 4px}
+.breakdown th{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:6px 10px;border-bottom:1px solid var(--border)}
+.breakdown td{padding:7px 10px;border-bottom:1px solid rgba(35,43,51,.55)}
+.breakdown tr:last-child td{border-bottom:none}
+.breakdown .num,.breakdown th.num{text-align:right;font-variant-numeric:tabular-nums}
+.subhead{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px;font-weight:500}
+.weak ul{list-style:none}
+.weak li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(35,43,51,.55);font-size:13.5px}
+.weak li:last-child{border-bottom:none}
+.weak code{color:var(--loss);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;flex:none}
+.weak .q{color:var(--text);flex:1;min-width:0}
+.weak .score{color:var(--muted);font-size:12px;flex:none;font-variant-numeric:tabular-nums}
+figure.chart{margin:18px 0 4px}
+svg.losschart{width:100%;height:auto;display:block}
+svg .grid{stroke:#1b222a;stroke-width:1}
+svg .tick{stroke:#2a333c;stroke-width:1}
+svg .axis{fill:#5b6875;font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+svg .axis.cap{letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+svg .anno{fill:var(--text);font-size:11.5px;font-weight:500;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+svg .line-loss{fill:none;stroke:var(--loss);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg .line-val{fill:none;stroke:var(--val);stroke-width:2;stroke-dasharray:6 4;stroke-linejoin:round;stroke-linecap:round}
+svg .dot-loss{fill:var(--loss)}
+svg .dot-val{fill:var(--val)}
+.legend{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin:10px 0 2px}
+.legend .key{width:18px;height:3px;border-radius:2px;display:inline-block;margin-left:14px}
+.legend .key:first-child{margin-left:0}
+.key-loss{background:var(--loss)}
+.key-val{background:var(--val)}
+figcaption{color:var(--faint);font-size:12.5px;margin-top:4px}
+.chart-empty{color:var(--muted);font-size:13.5px;margin:14px 0}
+blockquote.sample{margin-top:16px;border-left:2px solid var(--border);padding:2px 0 2px 16px}
+.sample-meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.sample p{color:#b8c7d2;font-size:13.5px;font-style:italic}
+pre.json{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;color:#b8c7d2;margin-top:12px;max-height:520px}
+.card.empty h2{font-size:20px;margin-bottom:6px}
+.card.empty p{color:var(--muted);font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--faint);font-size:12.5px;border-top:1px solid var(--border);padding-top:16px;flex-wrap:wrap}
+.foot .cap{color:var(--muted)}
+@media (max-width:640px){h1{font-size:26px}.card{padding:20px 18px}.tile-value{font-size:22px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="masthead"><div class="brand">evalboard</div><h1>Evaluation dashboard</h1><p class="sub">one static page · zero dependencies · zero javascript</p></header>
+<section class="card" id="card-margin"><header class="card-head"><h2>margin</h2><span class="badge badge-rag">rag</span></header><div class="tiles"><div class="tile"><div class="tile-value">92.9<span class="unit">%</span></div><div class="tile-label">recall@5</div></div><div class="tile"><div class="tile-value">91.4<span class="unit">%</span></div><div class="tile-label">precision@3</div></div><div class="tile"><div class="tile-value">78.6<span class="unit">%</span></div><div class="tile-label">answer accuracy</div></div><div class="tile"><div class="tile-value">0.755</div><div class="tile-label">MRR</div></div><div class="tile"><div class="tile-value">70</div><div class="tile-label">questions</div></div><div class="tile"><div class="tile-value">7.0<span class="unit">ms</span></div><div class="tile-label">median latency</div></div></div><div class="meta-row"><span class="pill pill-ok">passed</span><span class="chips"><span class="chip">answer accuracy ≥ 0.75</span><span class="chip">recall at 5 ≥ 0.8</span></span></div><p class="src">eval generated 2026-09-26T13:42:42Z · 70 scored questions</p><table class="breakdown"><thead><tr><th>type</th><th class="num">n</th><th class="num">recall@5</th><th class="num">answer acc</th></tr></thead><tbody><tr><td>factual</td><td class="num">58</td><td class="num">91.4%</td><td class="num">77.6%</td></tr><tr><td>reasoning</td><td class="num">9</td><td class="num">100.0%</td><td class="num">77.8%</td></tr><tr><td>math</td><td class="num">3</td><td class="num">100.0%</td><td class="num">100.0%</td></tr></tbody></table><div class="weak"><div class="subhead">hardest questions</div><ul><li><code>q003</code><span class="q">What is the maximum daily loss on a HydrogenProp account?</span><span class="score">recall@5 0.0%</span></li><li><code>q009</code><span class="q">On a $50,000 account, how much can I lose in one day before failing?</span><span class="score">recall@5 0.0%</span></li><li><code>q029</code><span class="q">Do I need to disclose my EA to the firm before using it?</span><span class="score">recall@5 0.0%</span></li><li><code>q034</code><span class="q">How often can I request payouts?</span><span class="score">recall@5 0.0%</span></li><li><code>q036</code><span class="q">What profit split do I start on?</span><span class="score">recall@5 0.0%</span></li></ul></div></section><section class="card" id="card-hydro1"><header class="card-head"><h2>hydro1</h2><span class="badge badge-training">training</span></header><div class="tiles"><div class="tile"><div class="tile-value">4.7613</div><div class="tile-label">initial loss</div></div><div class="tile"><div class="tile-value">0.7691</div><div class="tile-label">final loss</div></div><div class="tile"><div class="tile-value">83.8<span class="unit">%</span></div><div class="tile-label">train loss drop</div></div><div class="tile"><div class="tile-value">1.4575</div><div class="tile-label">best val loss (step 2000)</div></div><div class="tile"><div class="tile-value">1.4806</div><div class="tile-label">final val (step 2500)</div></div><div class="tile"><div class="tile-value">2500</div><div class="tile-label">training steps</div></div></div><figure class="chart"><svg viewBox="0 0 720 300" class="losschart" role="img" aria-label="training and validation loss over training steps"><line class="grid" x1="52.00" y1="266.00" x2="702.00" y2="266.00"/><text class="axis" x="44.00" y="269.50" text-anchor="end">0.35</text><line class="grid" x1="52.00" y1="204.50" x2="702.00" y2="204.50"/><text class="axis" x="44.00" y="208.00" text-anchor="end">1.53</text><line class="grid" x1="52.00" y1="143.00" x2="702.00" y2="143.00"/><text class="axis" x="44.00" y="146.50" text-anchor="end">2.72</text><line class="grid" x1="52.00" y1="81.50" x2="702.00" y2="81.50"/><text class="axis" x="44.00" y="85.00" text-anchor="end">3.90</text><line class="grid" x1="52.00" y1="20.00" x2="702.00" y2="20.00"/><text class="axis" x="44.00" y="23.50" text-anchor="end">5.09</text><line class="tick" x1="52.00" y1="266.00" x2="52.00" y2="270.00"/><text class="axis" x="52.00" y="284.00" text-anchor="middle">1</text><line class="tick" x1="214.50" y1="266.00" x2="214.50" y2="270.00"/><text class="axis" x="214.50" y="284.00" text-anchor="middle">626</text><line class="tick" x1="377.00" y1="266.00" x2="377.00" y2="270.00"/><text class="axis" x="377.00" y="284.00" text-anchor="middle">1250</text><line class="tick" x1="539.50" y1="266.00" x2="539.50" y2="270.00"/><text class="axis" x="539.50" y="284.00" text-anchor="middle">1875</text><line class="tick" x1="702.00" y1="266.00" x2="702.00" y2="270.00"/><text class="axis" x="702.00" y="284.00" text-anchor="middle">2500</text><text class="axis cap" x="377.00" y="296.00" text-anchor="middle">step</text><text class="axis cap" x="12" y="14.00">loss</text><polyline class="line-loss" points="52.00,36.97 54.34,103.76 56.94,121.77 59.54,139.44 62.14,146.79 64.75,153.76 67.35,156.18 69.95,159.85 72.55,159.88 75.15,161.48 77.75,161.73 80.35,162.44 82.95,165.58 85.55,163.18 88.15,164.43 90.76,170.13 93.36,173.12 95.96,170.63 98.56,175.08 101.16,177.75 103.76,180.35 106.36,182.36 108.96,183.55 111.56,188.26 114.16,183.76 116.77,194.76 119.37,187.59 121.97,196.33 124.57,196.40 127.17,197.35 129.77,197.63 132.37,201.26 134.97,201.55 137.57,208.56 140.18,208.51 142.78,207.16 145.38,207.00 147.98,209.10 150.58,212.20 153.18,207.83 155.78,212.10 158.38,213.14 160.98,210.34 163.58,215.84 166.19,214.56 168.79,214.97 171.39,219.85 173.99,216.55 176.59,213.64 179.19,216.45 181.79,215.23 184.39,219.35 186.99,214.56 189.60,219.43 192.20,219.27 194.80,218.52 197.40,218.27 200.00,220.34 202.60,221.83 205.20,223.43 207.80,221.63 210.40,223.20 213.00,225.88 215.61,225.73 218.21,227.42 220.81,222.66 223.41,225.17 226.01,227.93 228.61,223.54 231.21,225.13 233.81,224.96 236.41,226.34 239.01,227.18 241.62,226.23 244.22,226.33 246.82,230.09 249.42,227.59 252.02,228.67 254.62,224.97 257.22,223.68 259.82,227.50 262.42,231.41 265.03,229.51 267.63,226.75 270.23,228.71 272.83,229.94 275.43,228.83 278.03,233.86 280.63,235.02 283.23,235.31 285.83,228.08 288.43,228.95 291.04,234.28 293.64,228.45 296.24,228.87 298.84,230.95 301.44,233.63 304.04,229.40 306.64,230.48 309.24,231.22 311.84,231.62 314.44,233.01 317.05,237.37 319.65,227.94 322.25,232.10 324.85,234.92 327.45,236.55 330.05,232.38 332.65,234.32 335.25,234.50 337.85,230.28 340.46,233.23 343.06,233.19 345.66,235.62 348.26,235.69 350.86,236.62 353.46,233.55 356.06,234.49 358.66,231.05 361.26,235.71 363.86,234.65 366.47,238.60 369.07,233.19 371.67,234.51 374.27,237.52 376.87,236.30 379.47,238.00 382.07,236.07 384.67,232.70 387.27,237.99 389.88,237.41 392.48,238.59 395.08,242.48 397.68,241.45 400.28,238.14 402.88,236.56 405.48,241.73 408.08,238.78 410.68,233.06 413.28,238.13 415.89,238.83 418.49,234.61 421.09,237.84 423.69,239.63 426.29,239.95 428.89,235.01 431.49,241.34 434.09,238.55 436.69,241.16 439.29,238.31 441.90,241.17 444.50,236.86 447.10,234.26 449.70,240.35 452.30,238.46 454.90,242.73 457.50,238.93 460.10,237.56 462.70,240.20 465.31,241.35 467.91,239.03 470.51,236.77 473.11,240.66 475.71,237.60 478.31,241.16 480.91,239.64 483.51,240.49 486.11,240.21 488.71,243.52 491.32,243.48 493.92,241.33 496.52,238.46 499.12,241.60 501.72,240.74 504.32,242.02 506.92,240.11 509.52,238.21 512.12,239.05 514.73,241.41 517.33,240.29 519.93,239.84 522.53,244.90 525.13,241.68 527.73,241.12 530.33,241.07 532.93,242.15 535.53,243.53 538.13,244.31 540.74,241.95 543.34,240.88 545.94,243.62 548.54,239.44 551.14,240.47 553.74,238.26 556.34,243.86 558.94,246.54 561.54,244.40 564.14,242.12 566.75,237.21 569.35,242.94 571.95,244.87 574.55,240.27 577.15,244.53 579.75,239.95 582.35,243.78 584.95,246.13 587.55,246.32 590.16,240.96 592.76,242.69 595.36,240.32 597.96,240.91 600.56,242.19 603.16,239.92 605.76,241.96 608.36,246.89 610.96,241.86 613.56,242.15 616.17,239.52 618.77,245.43 621.37,244.79 623.97,243.50 626.57,242.74 629.17,244.69 631.77,244.97 634.37,249.03 636.97,244.69 639.58,243.54 642.18,241.37 644.78,244.93 647.38,245.85 649.98,243.52 652.58,242.49 655.18,245.15 657.78,245.91 660.38,241.95 662.98,240.95 665.59,242.42 668.19,246.21 670.79,244.90 673.39,244.67 675.99,244.99 678.59,244.75 681.19,243.14 683.79,242.74 686.39,248.42 688.99,242.93 691.60,244.60 694.20,240.71 696.80,244.97 699.40,244.89 702.00,244.14"/><circle class="dot-loss" cx="52.00" cy="36.97" r="3"/><text class="anno" x="52.00" y="29.97" text-anchor="start">4.7613</text><circle class="dot-loss" cx="702.00" cy="244.14" r="3"/><text class="anno" x="702.00" y="237.14" text-anchor="end">0.7691</text><polyline class="line-val" points="181.79,187.27 311.84,199.56 441.90,203.28 571.95,208.41 702.00,207.21"/><circle class="dot-val" cx="571.95" cy="208.41" r="3"/><text class="anno" x="571.95" y="201.41" text-anchor="end">best val 1.4575 @ step 2000</text><circle class="dot-val" cx="702.00" cy="207.21" r="3"/><text class="anno" x="702.00" y="200.21" text-anchor="end">final val 1.4806</text></svg><div class="legend"><span class="key key-loss"></span>train loss<span class="key key-val"></span>val loss</div><figcaption>train vs val loss over 2500 steps · best val 1.4575</figcaption></figure><div class="chips config"><span class="chip">batch_size <b>32</b></span><span class="chip">block_size <b>256</b></span><span class="chip">d_model <b>512</b></span><span class="chip">device <b>mps</b></span><span class="chip">dropout <b>0.0</b></span><span class="chip">lr <b>0.0006</b></span><span class="chip">n_heads <b>8</b></span><span class="chip">n_layers <b>8</b></span><span class="chip">steps <b>2500</b></span><span class="chip">vocab_size <b>126</b></span></div><blockquote class="sample"><div class="sample-meta">sample generation · step 2000 · val 1.4575</div><p>Once upon a time, there was a little girl named Lily. She loved to wear all all day long. One day, she found a shiny coin to play with her blocks. She said, &quot;These are my friend&#x27;s instruction playing with my family&quot;.</p></blockquote></section>
+<footer class="foot"><span>generated 2026-09-27 09:14:14Z</span><span class="cap">Luka Tkemaladze — 14 builds · 276 tests · everything from scratch</span><span>pure python stdlib · inline svg · works offline</span></footer>
+</main>
+</body>
+</html>
