@@ -36,4 +36,6 @@ computers 0.02 weakest → targeted distill commissioned.
 **Eval data:** [real 70-question golden set](projects/margin/evals/report.json) —
 recall@5 92.9% · MRR 0.755 · accuracy 78.6%. Dashboard: [evalboard](evalboard/dashboard.html).
 
+| [faultline](https://github.com/lukatkem/faultline) — agent chaos harness | inject failures, measure recovery, catch silent failures | 20 |
+
 License: MIT. Built and maintained by Luka Tkemaladze — [profile](https://github.com/lukatkem).
