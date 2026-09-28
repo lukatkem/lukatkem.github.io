@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "model": "HttpModel(http://127.0.0.1:8001)",
+ "target": 0.6,
+ "max_iterations": 1,
+ "iterations": [
+  {
+   "n": 1,
+   "started_at": "2026-09-28T08:02:15+00:00",
+   "domain_scores": {
+    "cybersecurity": 0.0667,
+    "python": 0.05,
+    "computers": 0.0167,
+    "stories": 0.3167
+   },
+   "ranked": [
+    [
+     "computers",
+     0.0167
+    ],
+    [
+     "python",
+     0.05
+    ],
+    [
+     "cybersecurity",
+     0.0667
+    ],
+    [
+     "stories",
+     0.3167
+    ]
+   ],
+   "weakest": "computers",
+   "plan_mode": "study",
+   "plan": [
+    {
+     "domain": "computers",
+     "texts": [
+      "The internet splits a message into packets and routers forward each packet across the network.",
+      "A server waits for requests and responds to them, often storing the data too.",
+      "DNS translates a domain name into the IP address numbers that identify a device on the internet.",
+      "The CPU computes by following instructions in small fast steps."
+     ]
+    },
+    {
+     "domain": "python",
+     "texts": [
+      "A function is a reusable piece of code that you call by name and it can return a value.",
+      "A dictionary stores key and value pairs and looks up a value by its key.",
+      "A loop repeats a block of code once for every item in a list.",
+      "A variable is a name that stores a value so the code can use it later."
+     ]
+    },
+    {
+     "domain": "cybersecurity",
+     "texts": [
+      "A firewall filters network traffic between trusted and untrusted networks and blocks unsafe connections.",
+      "Two-factor authentication adds a second layer of security beyond the password by requiring a code or device."
+     ]
+    },
+    {
+     "domain": "stories",
+     "texts": [
+      "The lost mitten was found in the snow and the bakery cat slept on it, warm at last.",
+      "A paper boat sailed down the river and floated past the sleepy town."
+     ]
+    }
+   ],
+   "reasons": {
+    "computers": "rank 1/4 \u00b7 score 0.02 (below target 0.60) \u00b7 vs strongest 0.32 \u2192 self-study seed list (4)",
+    "python": "rank 2/4 \u00b7 score 0.05 (below target 0.60) \u00b7 vs strongest 0.32 \u2192 self-study seed list (4)",
+    "cybersecurity": "rank 3/4 \u00b7 score 0.07 (below target 0.60) \u00b7 vs strongest 0.32 \u2192 self-study seed list (2)",
+    "stories": "rank 4/4 \u00b7 score 0.32 (below target 0.60) \u00b7 vs strongest 0.32 \u2192 self-study seed list (2)"
+   },
+   "trained": false
+  }
+ ]
+}

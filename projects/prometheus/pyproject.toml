@@ -1,0 +1,7 @@
+[project]
+name = "prometheus"
+version = "0.1.0"
+description = "The model that writes its own curriculum — measure, target, distill, retrain, repeat"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
