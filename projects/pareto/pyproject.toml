@@ -1,0 +1,7 @@
+[project]
+name = "pareto"
+version = "1.0.0"
+description = "Route each request to the cheapest model that provably meets your quality floor"
+requires-python = ">=3.8"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
